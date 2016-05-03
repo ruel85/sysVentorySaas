@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/snmp4j-2.4.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/snmp4j-2.4.3-javadoc.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sysVentorySaaS-App"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

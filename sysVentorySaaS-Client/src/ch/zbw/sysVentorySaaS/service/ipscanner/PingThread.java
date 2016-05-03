@@ -6,19 +6,21 @@ import java.net.UnknownHostException;
 
 public class PingThread implements Runnable {
 	private String ipv4;
-	private int pingTime;
+	private String hostname;
+	private int timeout;
 	private volatile boolean reachable;
 
-	public PingThread(String ip, int pingTime) {
-		this.ipv4 = ip;
-		this.pingTime = pingTime;
+	public PingThread(String ipv4, int timeout) {
+		this.ipv4 = ipv4;
+		this.timeout = timeout;
 	}
 
 	@Override
 	public void run() {
 		try {
 			InetAddress inet = InetAddress.getByName(ipv4);
-			reachable = inet.isReachable(pingTime);
+			reachable = inet.isReachable(timeout);
+			hostname = inet.getHostName();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,5 +36,9 @@ public class PingThread implements Runnable {
 
 	public String getIpv4() {
 		return ipv4;
+	}
+	
+	public String getHostname() {
+		return hostname;
 	}
 }

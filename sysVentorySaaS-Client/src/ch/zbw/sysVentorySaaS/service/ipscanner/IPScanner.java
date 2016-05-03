@@ -1,28 +1,30 @@
 package ch.zbw.sysVentorySaaS.service.ipscanner;
 
 import java.util.ArrayList;
+
+import ch.zbw.sysVentorySaaS.model.Device;
 import net.ripe.commons.ip.Ipv4;
 import net.ripe.commons.ip.Ipv4Range;
 
 public class IPScanner {
-	private String IPmin;
-	private String IPmax;
+	private String ipMin;
+	private String ipMax;
 	private int pingTime;
 
-	public IPScanner(String IPmin, String IPmax, int pingTime) {
-		this.IPmin = IPmin;
-		this.IPmax = IPmax;
+	public IPScanner(String ipMin, String ipMax, int pingTime) {
+		this.ipMin = ipMin;
+		this.ipMax = ipMax;
 		this.pingTime = pingTime;
 	}
 
-	public ArrayList<String> getReachableIPs() {
+	public ArrayList<Device> getReachableIPs() {
 		ArrayList<String> ipList = new ArrayList<>();
-		for (Ipv4 ipv4 : Ipv4Range.parse(IPmin + "-" + IPmax)) {
+		for (Ipv4 ipv4 : Ipv4Range.parse(ipMin + "-" + ipMax)) {
 			ipList.add(ipv4.toString());
 		}
 		ArrayList<Thread> threads = new ArrayList<>();
 		ArrayList<PingThread> pingThreads = new ArrayList<>();
-		ArrayList<String> onlineIPs = new ArrayList<>();
+		ArrayList<Device>  onlineIPs = new ArrayList<>();
 		for (String ipv4 : ipList) {
 			PingThread pt = new PingThread(ipv4, pingTime);
 			pingThreads.add(pt);
@@ -40,7 +42,10 @@ public class IPScanner {
 		}
 		for (PingThread pt : pingThreads) {
 			if (pt.isReachable()) {
-				onlineIPs.add(pt.getIpv4());
+				Device d = new Device("");
+				d.setIpAdress(pt.getIpv4());
+				d.setName(pt.getHostname());
+				onlineIPs.add(d);
 			}
 		}
 		return onlineIPs;
