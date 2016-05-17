@@ -15,7 +15,7 @@ public class IPScannerTest {
 		IPScanner ips = new IPScanner("192.168.1.1", "192.168.1.254", 10000);
 		ArrayList<Device> ipList = ips.getReachableIPs();
 		for(Device device : ipList) {
-			System.out.println("IP=" + device.getIpAdress() + ", NAME=" + device.getName());
+			System.out.println(device.toString());
 		}
 	}
 

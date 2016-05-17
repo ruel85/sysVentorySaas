@@ -39,4 +39,10 @@ public class Device {
 		this.manufacturer = manufacturer;
 	}
 
+	@Override
+	public String toString() {
+		return "Device [name=" + name + ", macAdress=" + macAdress + ", ipAdress=" + ipAdress + ", manufacturer="
+				+ manufacturer + "]";
+	}
+
 }

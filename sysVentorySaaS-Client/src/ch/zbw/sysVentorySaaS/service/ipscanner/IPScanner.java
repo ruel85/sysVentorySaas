@@ -42,7 +42,7 @@ public class IPScanner {
 		}
 		for (PingThread pt : pingThreads) {
 			if (pt.isReachable()) {
-				Device d = new Device("");
+				Device d = new Device(pt.getMacAddress());
 				d.setIpAdress(pt.getIpv4());
 				d.setName(pt.getHostname());
 				onlineIPs.add(d);

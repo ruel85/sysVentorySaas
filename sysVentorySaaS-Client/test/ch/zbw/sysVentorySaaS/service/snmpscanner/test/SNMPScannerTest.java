@@ -13,7 +13,7 @@ public class SNMPScannerTest {
 		SNMPScanner ips = new SNMPScanner("192.168.1.1", "192.168.1.254", 500);
 		ArrayList<Device> devices = ips.getSNMPDevices();
 		for (Device d : devices) {
-			System.out.println("IP=" + d.getIpAdress() + ", NAME=" + d.getName() + ", MAC=" + d.getMacAdress());
+			System.out.println(d.toString());
 		}
 	}
 
