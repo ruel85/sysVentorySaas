@@ -8,7 +8,6 @@ import ch.zbw.sysVentorySaaS.service.scanController.ScanController;
 
 public class ScanControllerTest {
 
-
 	@Test
 	public void test() throws IOException {
 		ScanController sc = new ScanController("172.16.4.1", "172.16.4.254", 10000, 500);
