@@ -1,11 +1,14 @@
 package ch.zbw.sysVentorySaas.App2.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
-public class Software {
+public class Software implements Serializable{
 	
 	@Id
+	@GeneratedValue
 	@Column(name="idSoftware")
 	private int idSoftware;
 	
@@ -17,7 +20,16 @@ public class Software {
 	private String version;
 	
 	
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public Software(){
+		
+	}
+	
+	public Software(String name, String manufacturer, String version){
+		this.name = name;
+		this.manufacturer = manufacturer;
+		this.version = version;
+	}
+	
 	public int getId_software() {
 		return idSoftware;
 	}
