@@ -8,20 +8,29 @@
 		<id name="idSoftware" type="int" column="idsoftware">
 			<generator class="identity"/>
 		</id>
-
 		<property name="name" column="name" type="string"/>
 		<property name="manufacturer" column="manufacturer" type="string"/>
 		<property name="version" column="version" type="string"/>
 	</class>
 	
-		<class name="ch.zbw.sysVentorySaas.App2.model.OperatingSystem" table="operatingsystem">
+	<class name="ch.zbw.sysVentorySaas.App2.model.OperatingSystem" table="operatingsystem">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Betriebssystem</meta>
 		<id name="idOperatingSystem" type="int" column="idoperatingsystem">
 			<generator class="identity"/>
 		</id>
-
 		<property name="name" column="name" type="string"/>
 		<property name="manufacturer" column="manufacturer" type="string"/>
 		<property name="architecture" column="architecture" type="string"/>
+	</class>
+
+	<class name="ch.zbw.sysVentorySaas.App2.model.Processor" table="processor">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Prozessor</meta>
+		<id name="idProcessor" type="int" column="idprocessor">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+		<property name="manufacturer" column="manufacturer" type="string"/>
+		<property name="cores" column="cores" type="int"/>
+		<property name="frequency" column="frequency" type="string"/>
 	</class>
 </hibernate-mapping>
