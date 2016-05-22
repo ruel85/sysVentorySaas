@@ -18,8 +18,10 @@
         <property name="hibernate.current_session_context_class">thread</property>
 <!--         <property name="hibernate.c3p0.unreturnedConnectionTimeout">30</property> -->
 <!--         <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces">true</property> -->
-
-        <mapping class="ch.zbw.sysVentorySaas.App2.model.Software"/>
+<!--         <mapping class="ch.zbw.sysVentorySaas.App2.model.Software"/> -->
+        
+        <!-- Mapping files -->
+        <mapping resource="HibernateEntityMappings.hbm.xml"/> 
 
     </session-factory>
 

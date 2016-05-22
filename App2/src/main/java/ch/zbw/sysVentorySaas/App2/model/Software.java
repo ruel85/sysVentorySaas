@@ -2,46 +2,35 @@ package ch.zbw.sysVentorySaas.App2.model;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
-
-@Entity
 public class Software implements Serializable{
 	
-	@Id
-	@GeneratedValue
-	@Column(name="idSoftware")
 	private int idSoftware;
-	
-	@Column(name="name")
-	private String name;
-	@Column(name="manufacturer")
+	private String softwareName;
 	private String manufacturer;
-	@Column(name="version")
 	private String version;
-	
 	
 	public Software(){
 		
 	}
 	
 	public Software(String name, String manufacturer, String version){
-		this.name = name;
+		this.softwareName = name;
 		this.manufacturer = manufacturer;
 		this.version = version;
 	}
 	
-	public int getId_software() {
+	public int getIdSoftware() {
 		return idSoftware;
 	}
-	public void setId_software(int id_software) {
-		this.idSoftware = id_software;
+	public void setIdSoftware(int idSoftware) {
+		this.idSoftware = idSoftware;
 	}
 	
-	public String getName() {
-		return name;
+	public String getSoftwareName() {
+		return softwareName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setSoftwareName(String name) {
+		this.softwareName = name;
 	}
 	public String getManufacturer() {
 		return manufacturer;

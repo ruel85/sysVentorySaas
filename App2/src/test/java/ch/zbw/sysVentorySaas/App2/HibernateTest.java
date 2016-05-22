@@ -60,10 +60,12 @@ public class HibernateTest {
 		softwareDAO.createSoftware(software);
 		
 		assertEquals("Microsoft Windows", softwareDAO.getSoftwarebyId(1).getManufacturer());
-		assertEquals("Windows", softwareDAO.getSoftwarebyId(1).getName());
+		assertEquals("Windows", softwareDAO.getSoftwarebyId(1).getSoftwareName());
 		assertEquals("10", softwareDAO.getSoftwarebyId(1).getVersion());
 		
 		softwareDAO.deleteSoftware(softwareDAO.getSoftwarebyId(1));
 		assertNull(softwareDAO.getSoftwarebyId(1));	
 	}
+	
+
 }
