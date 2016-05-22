@@ -22,12 +22,14 @@ import ch.zbw.sysVentorySaas.App2.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.SoftwareDAO;
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.UserDAO;
 import ch.zbw.sysVentorySaas.App2.model.Device;
 import ch.zbw.sysVentorySaas.App2.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App2.model.Printer;
 import ch.zbw.sysVentorySaas.App2.model.Processor;
 import ch.zbw.sysVentorySaas.App2.model.Software;
+import ch.zbw.sysVentorySaas.App2.model.User;
 
 public class HibernateTest {
 	private String user;
@@ -148,7 +150,22 @@ public class HibernateTest {
 		assertEquals("50-1A-C5-F4-C7-BB", devSelected.getMacAddress());
 		assertEquals("192.168.2.21", devSelected.getIpAddress());
 		
-		//devDAO.deleteDevice(devDAO.getDeviceById(1));
-		//assertNull(devDAO.getDeviceById(1));
+		devDAO.deleteDevice(devDAO.getDeviceById(1));
+		assertNull(devDAO.getDeviceById(1));
+	}
+	
+	@Test
+	public void TestUser_CRUD(){
+		User user = new User("ruel85", "12345", "ruel.holderegger@gmx.ch");
+		UserDAO userDAO = new UserDAO();
+		userDAO.createUser(user);
+		
+		User userSelected = userDAO.getUserbyId(1);
+		assertEquals("ruel85", userSelected.getUsername());
+		assertEquals("12345", userSelected.getPassword());
+		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
+		
+		userDAO.deleteUser(userDAO.getUserbyId(1));
+		assertNull(userDAO.getUserbyId(1));
 	}
 }

@@ -51,7 +51,7 @@
 		<property name="name" column="name" type="string"/>
 	</class>
 	
-		<class name="ch.zbw.sysVentorySaas.App2.model.Device" table="device">
+	<class name="ch.zbw.sysVentorySaas.App2.model.Device" table="device">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Gerät (Device)</meta>
 		<id name="idDevice" type="int" column="idDevice">
 			<generator class="identity"/>
@@ -60,5 +60,15 @@
 		<property name="manufacturer" column="manufacturer" type="string"/>
 		<property name="macAddress" column="macAddress" type="string"/>
 		<property name="ipAddress" column="ipAddress" type="string"/>
+	</class>
+	
+	<class name="ch.zbw.sysVentorySaas.App2.model.User" table="user">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem User</meta>
+		<id name="idUser" type="int" column="idUser">
+			<generator class="identity"/>
+		</id>
+		<property name="username" column="username" type="string"/>
+		<property name="password" column="password" type="string"/>
+		<property name="email" column="email" type="string"/>
 	</class>
 </hibernate-mapping>
