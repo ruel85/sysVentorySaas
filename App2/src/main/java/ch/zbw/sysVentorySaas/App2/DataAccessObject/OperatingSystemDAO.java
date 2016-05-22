@@ -4,31 +4,31 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App2.helpers.HibernateUtil;
+import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App2.model.Software;
 
-public class SoftwareDAO {
-
-	public void createSoftware(Software software){
+public class OperatingSystemDAO {
+	public void createOperatingSystem(OperatingSystem operatingSystem){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		session.saveOrUpdate(software);
+		session.saveOrUpdate(operatingSystem);
 		transaction.commit();
 	}
 	
-	public Software getSoftwarebyId(int id){
-		Software sEmpty = new Software();
+	public OperatingSystem getOperatingSystemById(int id){
+		OperatingSystem sEmpty = new OperatingSystem();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		sEmpty = (Software) session.get(Software.class, id);
+		sEmpty = (OperatingSystem) session.get(OperatingSystem.class, id);
 		transaction.commit();
 		return sEmpty;
 	}
 	
-	public void deleteSoftware(Software software)
+	public void deleteOperatingSystem(OperatingSystem operatingSystem)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		session.delete(software);
+		session.delete(operatingSystem);
 		transaction.commit();
 	}
 }

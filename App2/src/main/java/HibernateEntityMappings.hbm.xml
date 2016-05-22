@@ -3,14 +3,25 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="ch.zbw.sysVentorySaas.App2.model.Software" table="Software">
-	<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Software.</meta>
-	<id name="idSoftware" type="int" column="idSoftware">
-		<generator class="identity"/>
-	</id>
+	<class name="ch.zbw.sysVentorySaas.App2.model.Software" table="software">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Software.</meta>
+		<id name="idSoftware" type="int" column="idsoftware">
+			<generator class="identity"/>
+		</id>
 
-	<property name="softwareName" column="softwareName" type="string"/>
-	<property name="manufacturer" column="manufacturer" type="string"/>
-	<property name="version" column="version" type="string"/>
+		<property name="name" column="name" type="string"/>
+		<property name="manufacturer" column="manufacturer" type="string"/>
+		<property name="version" column="version" type="string"/>
+	</class>
+	
+		<class name="ch.zbw.sysVentorySaas.App2.model.OperatingSystem" table="operatingsystem">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Betriebssystem</meta>
+		<id name="idOperatingSystem" type="int" column="idoperatingsystem">
+			<generator class="identity"/>
+		</id>
+
+		<property name="name" column="name" type="string"/>
+		<property name="manufacturer" column="manufacturer" type="string"/>
+		<property name="architecture" column="architecture" type="string"/>
 	</class>
 </hibernate-mapping>

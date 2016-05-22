@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Software implements Serializable{
 	
 	private int idSoftware;
-	private String softwareName;
+	private String name;
 	private String manufacturer;
 	private String version;
 	
@@ -14,7 +14,7 @@ public class Software implements Serializable{
 	}
 	
 	public Software(String name, String manufacturer, String version){
-		this.softwareName = name;
+		this.name = name;
 		this.manufacturer = manufacturer;
 		this.version = version;
 	}
@@ -26,11 +26,11 @@ public class Software implements Serializable{
 		this.idSoftware = idSoftware;
 	}
 	
-	public String getSoftwareName() {
-		return softwareName;
+	public String getName() {
+		return name;
 	}
-	public void setSoftwareName(String name) {
-		this.softwareName = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getManufacturer() {
 		return manufacturer;
