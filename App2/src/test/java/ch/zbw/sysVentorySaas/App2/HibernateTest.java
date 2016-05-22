@@ -16,11 +16,13 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.DeviceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.SoftwareDAO;
+import ch.zbw.sysVentorySaas.App2.model.Device;
 import ch.zbw.sysVentorySaas.App2.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App2.model.Printer;
@@ -132,5 +134,21 @@ public class HibernateTest {
 		
 		niDAO.deleteNetworkInterface(niSelected);
 		assertNull(niDAO.getNetworkInterfaceById(1));
+	}
+	
+	@Test
+	public void TestDevice_CRUD(){
+		Device dev = new Device("Desktop PC", "DELL", "50-1A-C5-F4-C7-BB", "192.168.2.21");
+		DeviceDAO devDAO = new DeviceDAO();
+		devDAO.createDevice(dev);
+		
+		Device devSelected = devDAO.getDeviceById(1);
+		assertEquals("Desktop PC", devSelected.getName());
+		assertEquals("DELL", devSelected.getManufacturer());
+		assertEquals("50-1A-C5-F4-C7-BB", devSelected.getMacAddress());
+		assertEquals("192.168.2.21", devSelected.getIpAddress());
+		
+		//devDAO.deleteDevice(devDAO.getDeviceById(1));
+		//assertNull(devDAO.getDeviceById(1));
 	}
 }

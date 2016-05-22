@@ -1,14 +1,33 @@
 package ch.zbw.sysVentorySaas.App2.model;
 
 public class Device {
+	private int idDevice;
 	private String name;
-	private String macAdress;
-	private String ipAdress;
+	private String macAddress;
+	private String ipAddress;
 	private String manufacturer;
 
+	public Device(String macAddress) {
+		this.macAddress = macAddress;
+	}
 
-	public Device(String macAdress) {
-		this.macAdress = macAdress;
+	public Device(String name, String manufacturer, String macAddress, String ipAddress) {
+		this.name=name;
+		this.manufacturer=manufacturer;
+		this.macAddress=macAddress;
+		this.ipAddress=ipAddress;
+	}
+	
+	public Device()
+	{
+	}
+
+	public int getIdDevice() {
+		return idDevice;
+	}
+
+	public void setIdDevice(int idDevice) {
+		this.idDevice = idDevice;
 	}
 
 	public String getName() {
@@ -19,16 +38,20 @@ public class Device {
 		this.name = name;
 	}
 
-	public String getIpAdress() {
-		return ipAdress;
+	public String getIpAddress() {
+		return ipAddress;
 	}
 
-	public void setIpAdress(String ipAdress) {
-		this.ipAdress = ipAdress;
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
+	}
+	
+	public void setMacAddress(String macAddress) {
+		this.macAddress = macAddress;
 	}
 
-	public String getMacAdress() {
-		return macAdress;
+	public String getMacAddress() {
+		return macAddress;
 	}
 	
 	public String getManufacturer() {
@@ -41,7 +64,7 @@ public class Device {
 
 	@Override
 	public String toString() {
-		return "Device [name=" + name + ", macAdress=" + macAdress + ", ipAdress=" + ipAdress + ", manufacturer="
+		return "Device [name=" + name + ", macAdress=" + macAddress + ", ipAdress=" + ipAddress + ", manufacturer="
 				+ manufacturer + "]";
 	}
 
