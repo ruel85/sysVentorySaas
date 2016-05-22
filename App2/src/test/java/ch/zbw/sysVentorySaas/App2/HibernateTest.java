@@ -16,10 +16,12 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.SoftwareDAO;
+import ch.zbw.sysVentorySaas.App2.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App2.model.Printer;
 import ch.zbw.sysVentorySaas.App2.model.Processor;
@@ -117,5 +119,18 @@ public class HibernateTest {
 		
 		pDAO.deleteProcessor(pSelected);
 		assertNull(pDAO.getPrinterById(1));
+	}
+	
+	@Test
+	public void TestNetworkInterface_CRUD(){
+		NetworkInterface ni = new NetworkInterface("Marvell AVASTAR Wireless-AC Network Controller");
+		NetworkInterfaceDAO niDAO = new NetworkInterfaceDAO();
+		niDAO.createNetworkInterface(ni);
+		
+		NetworkInterface niSelected = niDAO.getNetworkInterfaceById(1);
+		assertEquals("Marvell AVASTAR Wireless-AC Network Controller", niSelected.getName());
+		
+		niDAO.deleteNetworkInterface(niSelected);
+		assertNull(niDAO.getNetworkInterfaceById(1));
 	}
 }

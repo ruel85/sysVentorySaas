@@ -42,4 +42,12 @@
 		<property name="name" column="name" type="string"/>
 		<property name="description" column="description" type="string"/>
 	</class>
+	
+	<class name="ch.zbw.sysVentorySaas.App2.model.NetworkInterface" table="networkinterface">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Netzwerk-Interface</meta>
+		<id name="idNetworkInterface" type="int" column="idnetworkinterface">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+	</class>	
 </hibernate-mapping>
