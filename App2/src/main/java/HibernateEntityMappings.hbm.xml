@@ -71,4 +71,12 @@
 		<property name="password" column="password" type="string"/>
 		<property name="email" column="email" type="string"/>
 	</class>
+
+	<class name="ch.zbw.sysVentorySaas.App2.model.Group" table="gruppe">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Gruppe</meta>
+		<id name="idGroup" type="int" column="idGroup">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+	</class>
 </hibernate-mapping>

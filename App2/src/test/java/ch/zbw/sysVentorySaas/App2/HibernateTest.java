@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.DeviceDAO;
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.GroupDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
@@ -24,6 +25,7 @@ import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.UserDAO;
 import ch.zbw.sysVentorySaas.App2.model.Device;
+import ch.zbw.sysVentorySaas.App2.model.Group;
 import ch.zbw.sysVentorySaas.App2.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App2.model.Printer;
@@ -167,5 +169,18 @@ public class HibernateTest {
 		
 		userDAO.deleteUser(userDAO.getUserbyId(1));
 		assertNull(userDAO.getUserbyId(1));
+	}
+	
+	@Test
+	public void TestGroup_CRUD(){
+		Group group = new Group("Administratoren");
+		GroupDAO groupDAO = new GroupDAO();
+		groupDAO.createGroup(group);
+		
+		Group groupSelected = groupDAO.getGroupById(1);
+		assertEquals("Administratoren", groupSelected.getName());
+		
+		groupDAO.deleteGroup(groupDAO.getGroupById(1));
+		assertNull(groupDAO.getGroupById(1));
 	}
 }
