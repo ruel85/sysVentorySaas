@@ -17,9 +17,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.OperatingSystemDAO;
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
+import ch.zbw.sysVentorySaas.App2.model.Printer;
 import ch.zbw.sysVentorySaas.App2.model.Processor;
 import ch.zbw.sysVentorySaas.App2.model.Software;
 
@@ -101,5 +103,19 @@ public class HibernateTest {
 		
 		prDAO.deleteProcessor(prSelected);
 		assertNull(prDAO.getProcessorById(1));
+	}
+	
+	@Test
+	public void TestPrinter_CRUD(){
+		Printer p = new Printer("Canon", "Farbdrucker Zimmer links");
+		PrinterDAO pDAO = new PrinterDAO();
+		pDAO.createPrinter(p);
+		
+		Printer pSelected = pDAO.getPrinterById(1);
+		assertEquals("Canon", pSelected.getName());
+		assertEquals("Farbdrucker Zimmer links", pSelected.getDescription());
+		
+		pDAO.deleteProcessor(pSelected);
+		assertNull(pDAO.getPrinterById(1));
 	}
 }

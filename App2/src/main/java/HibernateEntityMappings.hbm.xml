@@ -33,4 +33,13 @@
 		<property name="cores" column="cores" type="int"/>
 		<property name="frequency" column="frequency" type="string"/>
 	</class>
+
+	<class name="ch.zbw.sysVentorySaas.App2.model.Printer" table="printer">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Drucker</meta>
+		<id name="idPrinter" type="int" column="idprinter">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+		<property name="description" column="description" type="string"/>
+	</class>
 </hibernate-mapping>
