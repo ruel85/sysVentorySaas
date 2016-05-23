@@ -122,4 +122,14 @@
 		<property name="startTime" column="startTime" type="string"/>
 		<property name="intervallHours" column="intervallHours" type="int"/>
 	</class>
+
+	<class name="ch.zbw.sysVentorySaas.App2.model.ScanJob" table="scanjob">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Scan-Job</meta>
+		<id name="idScanJob" type="int" column="idScanJob">
+			<generator class="identity"/>
+		</id>
+		<property name="startTime" column="startTime" type="string"/>
+		<property name="endTime" column="endTime" type="string"/>
+<!-- 		<property name="status" column="status" type="Enum"/> -->
+	</class>
 </hibernate-mapping>

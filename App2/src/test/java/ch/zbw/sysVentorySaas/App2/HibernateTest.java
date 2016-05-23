@@ -20,6 +20,7 @@ import ch.zbw.sysVentorySaas.App2.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.ScanJobDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ScanSettingDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ScanStatusDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ServiceDAO;
@@ -32,6 +33,7 @@ import ch.zbw.sysVentorySaas.App2.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App2.model.Printer;
 import ch.zbw.sysVentorySaas.App2.model.Processor;
+import ch.zbw.sysVentorySaas.App2.model.ScanJob;
 import ch.zbw.sysVentorySaas.App2.model.ScanSetting;
 import ch.zbw.sysVentorySaas.App2.model.ScanStatus;
 import ch.zbw.sysVentorySaas.App2.model.Service;
@@ -250,5 +252,20 @@ public class HibernateTest {
 		
 		scanSDAO.deleteScanSettings(scanSDAO.getScanSettingById(1));
 		assertNull(scanSDAO.getScanSettingById(1));	
+	}
+	
+	@Test
+	public void TestScanJob(){
+		ScanJob scanJ = new ScanJob("07:00", "07:30", new ScanStatus("Erledigt", "Irgendeine Beschreibung"));
+		ScanJobDAO scanJobDAO = new ScanJobDAO();
+		scanJobDAO.createScanJob(scanJ);
+		
+		ScanJob scanJobSelected = scanJobDAO.getScanJobById(1);
+		assertEquals("07:00", scanJobSelected.getStartTime());
+		assertEquals("07:30", scanJobSelected.getEndTime());
+		//assertEquals("Erledigt", scanJobSelected.getStatus().getName());
+		
+		scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
+		assertNull(scanJobDAO.getScanJobById(1));
 	}
 }
