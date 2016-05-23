@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App2.model.Software" table="software">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Software.</meta>
@@ -91,5 +91,14 @@
 		<property name="houseNumberAdd" column="houseNumberAdd" type="string"/>
 		<property name="zipCode" column="zipCode" type="string"/>
 		<property name="city" column="city" type="string"/>
+	</class>
+
+	<class name="ch.zbw.sysVentorySaas.App2.model.Service" table="service">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Service</meta>
+		<id name="idService" type="int" column="idService">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+		<property name="enabled" column="enabled" type="boolean"/>
 	</class>
 </hibernate-mapping>

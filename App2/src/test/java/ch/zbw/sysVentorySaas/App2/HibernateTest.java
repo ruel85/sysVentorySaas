@@ -8,11 +8,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,6 +18,7 @@ import ch.zbw.sysVentorySaas.App2.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.ServiceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.UserDAO;
 import ch.zbw.sysVentorySaas.App2.model.Company;
@@ -32,6 +28,7 @@ import ch.zbw.sysVentorySaas.App2.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App2.model.Printer;
 import ch.zbw.sysVentorySaas.App2.model.Processor;
+import ch.zbw.sysVentorySaas.App2.model.Service;
 import ch.zbw.sysVentorySaas.App2.model.Software;
 import ch.zbw.sysVentorySaas.App2.model.User;
 
@@ -200,7 +197,21 @@ public class HibernateTest {
 		assertEquals("9015", compSelected.getZipCode());
 		assertEquals("St. Gallen", compSelected.getCity());
 		
-		//compDAO.deleteCompany(compDAO.getCompanyById(1));
-		//assertNull(compDAO.getCompanyById(1));
+		compDAO.deleteCompany(compDAO.getCompanyById(1));
+		assertNull(compDAO.getCompanyById(1));
+	}
+	
+	@Test
+	public void TestService_CRUD(){
+		Service serv = new Service("MyService", true);
+		ServiceDAO servDAO = new ServiceDAO();
+		servDAO.createService(serv);
+		
+		Service servSelected = servDAO.getServiceById(1);
+		assertEquals("MyService", servSelected.getName());
+		assertEquals(true, servSelected.getEnabled());
+		
+		servDAO.deleteCompany(servDAO.getServiceById(1));
+		assertNull(servDAO.getServiceById(1));
 	}
 }

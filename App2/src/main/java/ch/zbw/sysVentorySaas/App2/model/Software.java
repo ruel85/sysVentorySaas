@@ -1,8 +1,6 @@
 package ch.zbw.sysVentorySaas.App2.model;
 
-import java.io.Serializable;
-
-public class Software implements Serializable{
+public class Software{
 	
 	private int idSoftware;
 	private String name;
