@@ -16,6 +16,7 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.CompanyDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.DeviceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.GroupDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.NetworkInterfaceDAO;
@@ -24,6 +25,7 @@ import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.UserDAO;
+import ch.zbw.sysVentorySaas.App2.model.Company;
 import ch.zbw.sysVentorySaas.App2.model.Device;
 import ch.zbw.sysVentorySaas.App2.model.Group;
 import ch.zbw.sysVentorySaas.App2.model.NetworkInterface;
@@ -182,5 +184,23 @@ public class HibernateTest {
 		
 		groupDAO.deleteGroup(groupDAO.getGroupById(1));
 		assertNull(groupDAO.getGroupById(1));
+	}
+	
+	@Test
+	public void TestCompany_CRUD(){
+		Company comp = new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen");
+		CompanyDAO compDAO = new CompanyDAO();
+		compDAO.createCompany(comp);
+		
+		Company compSelected = compDAO.getCompanyById(1);
+		assertEquals("InnoSolv AG", compSelected.getName());
+		assertEquals("Ikarusstrasse", compSelected.getStreet());
+		assertEquals("9", compSelected.getHouseNumber());
+		assertEquals(null, compSelected.getHouseNumberAdd());
+		assertEquals("9015", compSelected.getZipCode());
+		assertEquals("St. Gallen", compSelected.getCity());
+		
+		//compDAO.deleteCompany(compDAO.getCompanyById(1));
+		//assertNull(compDAO.getCompanyById(1));
 	}
 }
