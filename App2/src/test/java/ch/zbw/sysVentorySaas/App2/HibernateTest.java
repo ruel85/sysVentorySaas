@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +20,8 @@ import ch.zbw.sysVentorySaas.App2.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ProcessorDAO;
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.ScanSettingDAO;
+import ch.zbw.sysVentorySaas.App2.DataAccessObject.ScanStatusDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.ServiceDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App2.DataAccessObject.UserDAO;
@@ -28,6 +32,8 @@ import ch.zbw.sysVentorySaas.App2.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App2.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App2.model.Printer;
 import ch.zbw.sysVentorySaas.App2.model.Processor;
+import ch.zbw.sysVentorySaas.App2.model.ScanSetting;
+import ch.zbw.sysVentorySaas.App2.model.ScanStatus;
 import ch.zbw.sysVentorySaas.App2.model.Service;
 import ch.zbw.sysVentorySaas.App2.model.Software;
 import ch.zbw.sysVentorySaas.App2.model.User;
@@ -213,5 +219,36 @@ public class HibernateTest {
 		
 		servDAO.deleteCompany(servDAO.getServiceById(1));
 		assertNull(servDAO.getServiceById(1));
+	}
+	
+	@Test
+	public void TestScanStatus (){
+		ScanStatus scanStatus = new ScanStatus("Vorbereitet", "Der Scan ist vorbereitet und kann verarbeitet werden.");
+		ScanStatusDAO scanStatusDAO = new ScanStatusDAO();
+		scanStatusDAO.createScanStatus(scanStatus);
+		
+		ScanStatus scanStatusSelected = scanStatusDAO.getScanStatusById(1);
+		assertEquals("Vorbereitet", scanStatusSelected.getName());
+		assertEquals("Der Scan ist vorbereitet und kann verarbeitet werden.", scanStatusSelected.getDescription());
+		
+		scanStatusDAO.deleteScanStatus(scanStatusDAO.getScanStatusById(1));
+		assertNull(scanStatusDAO.getScanStatusById(1));
+	}
+	
+	@Test
+	public void TestScanSetting(){
+		ScanSetting scanS= new ScanSetting("HOLDEREGGER", "192.168.1.1", "192.168.1.35", "07:00", 1);
+		ScanSettingDAO scanSDAO = new ScanSettingDAO();
+		scanSDAO.createScanSetting(scanS);
+		
+		ScanSetting scanSettingSelected = scanSDAO.getScanSettingById(1);
+		assertEquals("HOLDEREGGER", scanSettingSelected.getNetworkName());
+		assertEquals("192.168.1.1", scanSettingSelected.getIpStart());
+		assertEquals("192.168.1.35", scanSettingSelected.getIpEnd());
+		assertEquals("07:00", scanSettingSelected.getStartTime());
+		assertEquals(1, scanSettingSelected.getIntervallHours());
+		
+		scanSDAO.deleteScanSettings(scanSDAO.getScanSettingById(1));
+		assertNull(scanSDAO.getScanSettingById(1));	
 	}
 }

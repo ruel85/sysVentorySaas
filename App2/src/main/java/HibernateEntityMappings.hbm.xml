@@ -101,4 +101,25 @@
 		<property name="name" column="name" type="string"/>
 		<property name="enabled" column="enabled" type="boolean"/>
 	</class>
+	
+	<class name="ch.zbw.sysVentorySaas.App2.model.ScanStatus" table="scanstatus">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Scanstatus</meta>
+		<id name="idScanStatus" type="int" column="idScanScanstatus">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+		<property name="description" column="enabled" type="string"/>
+	</class>
+	
+	<class name="ch.zbw.sysVentorySaas.App2.model.ScanSetting" table="scansetting">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Scan-Einstellung</meta>
+		<id name="idScanSetting" type="int" column="idScanSetting">
+			<generator class="identity"/>
+		</id>
+		<property name="networkName" column="networkName" type="string"/>
+		<property name="ipStart" column="ipStart" type="string"/>
+		<property name="ipEnd" column="ipEnd" type="string"/>
+		<property name="startTime" column="startTime" type="string"/>
+		<property name="intervallHours" column="intervallHours" type="int"/>
+	</class>
 </hibernate-mapping>
