@@ -3,10 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/commons-ip-math-1.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/snmp4j-2.4.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/snmp4j-2.4.3-javadoc.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sysVentorySaaS-App"/>
+	<classpathentry kind="lib" path="Files/resources/commons-ip-math-1.23.jar"/>
+	<classpathentry kind="lib" path="Files/resources/snmp4j-2.4.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="Files/resources/snmp4j-2.4.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
