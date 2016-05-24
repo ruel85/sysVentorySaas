@@ -2,12 +2,11 @@ package ch.zbw.sysVentorySaaS.service.scanController;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
-import ch.zbw.sysVentorySaaS.model.Device;
 import ch.zbw.sysVentorySaaS.service.ipscanner.IPScanner;
 import ch.zbw.sysVentorySaaS.service.snmp.SNMPScanner;
+import ch.zbw.sysVentorySaas.App2.model.Device;
 
 public class ScanController {
 	private ArrayList<Device> allNetworkDevices;
@@ -27,7 +26,7 @@ public class ScanController {
 			Iterator<Device> it = ipList.iterator();
 			while(it.hasNext()) {
 				Device ipDevice = it.next();
-				if(snmpDevice.getIpAdress().equals(ipDevice.getIpAdress())){
+				if(snmpDevice.getIpAddress().equals(ipDevice.getIpAddress())){
 					allNetworkDevices.add(snmpDevice);
 				} else {
 					allNetworkDevices.add(ipDevice);

@@ -2,7 +2,7 @@ package ch.zbw.sysVentorySaaS.service.ipscanner;
 
 import java.util.ArrayList;
 
-import ch.zbw.sysVentorySaaS.model.Device;
+import ch.zbw.sysVentorySaas.App2.model.Device;
 import net.ripe.commons.ip.Ipv4;
 import net.ripe.commons.ip.Ipv4Range;
 
@@ -43,7 +43,7 @@ public class IPScanner {
 		for (PingThread pt : pingThreads) {
 			if (pt.isReachable()) {
 				Device d = new Device(pt.getMacAddress());
-				d.setIpAdress(pt.getIpv4());
+				d.setIpAddress(pt.getIpv4());
 				d.setName(pt.getHostname());
 				onlineIPs.add(d);
 			}

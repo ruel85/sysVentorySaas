@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import ch.zbw.sysVentorySaaS.model.Device;
 import ch.zbw.sysVentorySaaS.service.ipscanner.IPScanner;
+import ch.zbw.sysVentorySaas.App2.model.Device;
 
 public class IPScannerTest {
 

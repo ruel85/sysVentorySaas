@@ -3,7 +3,7 @@ package ch.zbw.sysVentorySaaS.service.snmp;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.snmp4j.smi.OID;
-import ch.zbw.sysVentorySaaS.model.Device;
+import ch.zbw.sysVentorySaas.App2.model.Device;
 import net.ripe.commons.ip.Ipv4;
 import net.ripe.commons.ip.Ipv4Range;
 
@@ -47,7 +47,7 @@ public class SNMPScanner {
 				String macAdress = st.getAsString(new OID(".1.3.6.1.2.1.2.2.1.6." + macAdressIndex));
 				Device snmpDevice = new Device(macAdress);
 				String deviceName = st.getAsString(new OID(".1.3.6.1.2.1.1.5.0"));
-				snmpDevice.setIpAdress(st.getIpv4());
+				snmpDevice.setIpAddress(st.getIpv4());
 				snmpDevice.setName(deviceName);
 				snmpDevices.add(snmpDevice);
 			}

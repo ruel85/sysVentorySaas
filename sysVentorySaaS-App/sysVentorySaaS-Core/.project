@@ -3,6 +3,7 @@
 	<name>sysVentorySaaS-Core</name>
 	<comment></comment>
 	<projects>
+		<project>sysVentorySaaS-Client</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -2,9 +2,11 @@ package ch.zbw.sysVentorySaaS.service.snmpscanner.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import org.junit.Test;
-import ch.zbw.sysVentorySaaS.model.Device;
+
 import ch.zbw.sysVentorySaaS.service.snmp.SNMPScanner;
+import ch.zbw.sysVentorySaas.App2.model.Device;
 
 public class SNMPScannerTest {
 
