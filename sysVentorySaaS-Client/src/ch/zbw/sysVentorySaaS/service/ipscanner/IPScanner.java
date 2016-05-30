@@ -2,7 +2,7 @@ package ch.zbw.sysVentorySaaS.service.ipscanner;
 
 import java.util.ArrayList;
 
-import ch.zbw.sysVentorySaas.App2.model.Device;
+import ch.zbw.sysVentorySaas.App.model.Device;
 import net.ripe.commons.ip.Ipv4;
 import net.ripe.commons.ip.Ipv4Range;
 

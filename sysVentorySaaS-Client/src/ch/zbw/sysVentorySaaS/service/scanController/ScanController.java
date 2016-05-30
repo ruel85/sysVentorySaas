@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 import ch.zbw.sysVentorySaaS.service.ipscanner.IPScanner;
 import ch.zbw.sysVentorySaaS.service.snmp.SNMPScanner;
-import ch.zbw.sysVentorySaas.App2.model.Device;
+import ch.zbw.sysVentorySaas.App.model.Device;
 
 public class ScanController {
 	private ArrayList<Device> allNetworkDevices;

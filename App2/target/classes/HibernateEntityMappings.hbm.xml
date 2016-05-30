@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="ch.zbw.sysVentorySaas.App2.model.Software" table="software">
+	<class name="ch.zbw.sysVentorySaas.App.model.Software" table="software">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Software.</meta>
 		<id name="idSoftware" type="int" column="idsoftware">
 			<generator class="identity"/>
@@ -13,7 +13,7 @@
 		<property name="version" column="version" type="string"/>
 	</class>
 	
-	<class name="ch.zbw.sysVentorySaas.App2.model.OperatingSystem" table="operatingsystem">
+	<class name="ch.zbw.sysVentorySaas.App.model.OperatingSystem" table="operatingsystem">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Betriebssystem</meta>
 		<id name="idOperatingSystem" type="int" column="idoperatingsystem">
 			<generator class="identity"/>
@@ -23,7 +23,7 @@
 		<property name="architecture" column="architecture" type="string"/>
 	</class>
 
-	<class name="ch.zbw.sysVentorySaas.App2.model.Processor" table="processor">
+	<class name="ch.zbw.sysVentorySaas.App.model.Processor" table="processor">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Prozessor</meta>
 		<id name="idProcessor" type="int" column="idprocessor">
 			<generator class="identity"/>
@@ -34,7 +34,7 @@
 		<property name="frequency" column="frequency" type="string"/>
 	</class>
 
-	<class name="ch.zbw.sysVentorySaas.App2.model.Printer" table="printer">
+	<class name="ch.zbw.sysVentorySaas.App.model.Printer" table="printer">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Drucker</meta>
 		<id name="idPrinter" type="int" column="idprinter">
 			<generator class="identity"/>
@@ -43,7 +43,7 @@
 		<property name="description" column="description" type="string"/>
 	</class>
 	
-	<class name="ch.zbw.sysVentorySaas.App2.model.NetworkInterface" table="networkinterface">
+	<class name="ch.zbw.sysVentorySaas.App.model.NetworkInterface" table="networkinterface">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Netzwerk-Interface</meta>
 		<id name="idNetworkInterface" type="int" column="idnetworkinterface">
 			<generator class="identity"/>
@@ -51,7 +51,7 @@
 		<property name="name" column="name" type="string"/>
 	</class>
 	
-	<class name="ch.zbw.sysVentorySaas.App2.model.Device" table="device">
+	<class name="ch.zbw.sysVentorySaas.App.model.Device" table="device">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Gerät (Device)</meta>
 		<id name="idDevice" type="int" column="idDevice">
 			<generator class="identity"/>
@@ -62,7 +62,7 @@
 		<property name="ipAddress" column="ipAddress" type="string"/>
 	</class>
 	
-	<class name="ch.zbw.sysVentorySaas.App2.model.User" table="user">
+	<class name="ch.zbw.sysVentorySaas.App.model.User" table="user">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem User</meta>
 		<id name="idUser" type="int" column="idUser">
 			<generator class="identity"/>
@@ -72,7 +72,7 @@
 		<property name="email" column="email" type="string"/>
 	</class>
 
-	<class name="ch.zbw.sysVentorySaas.App2.model.Group" table="gruppe">
+	<class name="ch.zbw.sysVentorySaas.App.model.Group" table="gruppe">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Gruppe</meta>
 		<id name="idGroup" type="int" column="idGroup">
 			<generator class="identity"/>
@@ -80,7 +80,7 @@
 		<property name="name" column="name" type="string"/>
 	</class>
 	
-	<class name="ch.zbw.sysVentorySaas.App2.model.Company" table="company">
+	<class name="ch.zbw.sysVentorySaas.App.model.Company" table="company">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Firma</meta>
 		<id name="idCompany" type="int" column="idCompany">
 			<generator class="identity"/>
@@ -93,7 +93,7 @@
 		<property name="city" column="city" type="string"/>
 	</class>
 
-	<class name="ch.zbw.sysVentorySaas.App2.model.Service" table="service">
+	<class name="ch.zbw.sysVentorySaas.App.model.Service" table="service">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Service</meta>
 		<id name="idService" type="int" column="idService">
 			<generator class="identity"/>
@@ -102,7 +102,7 @@
 		<property name="enabled" column="enabled" type="boolean"/>
 	</class>
 	
-	<class name="ch.zbw.sysVentorySaas.App2.model.ScanStatus" table="scanstatus">
+	<class name="ch.zbw.sysVentorySaas.App.model.ScanStatus" table="scanstatus">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Scanstatus</meta>
 		<id name="idScanStatus" type="int" column="idScanScanstatus">
 			<generator class="identity"/>
@@ -111,7 +111,7 @@
 		<property name="description" column="enabled" type="string"/>
 	</class>
 	
-	<class name="ch.zbw.sysVentorySaas.App2.model.ScanSetting" table="scansetting">
+	<class name="ch.zbw.sysVentorySaas.App.model.ScanSetting" table="scansetting">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Scan-Einstellung</meta>
 		<id name="idScanSetting" type="int" column="idScanSetting">
 			<generator class="identity"/>
@@ -123,7 +123,7 @@
 		<property name="intervallHours" column="intervallHours" type="int"/>
 	</class>
 
-	<class name="ch.zbw.sysVentorySaas.App2.model.ScanJob" table="scanjob">
+	<class name="ch.zbw.sysVentorySaas.App.model.ScanJob" table="scanjob">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Scan-Job</meta>
 		<id name="idScanJob" type="int" column="idScanJob">
 			<generator class="identity"/>
