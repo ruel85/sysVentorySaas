@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ch.zbw.sysVentorySaaS.service.ipscanner.IPScanner;
-import ch.zbw.sysVentorySaaS.service.snmp.SNMPScanner;
+import ch.zbw.sysVentorySaaS.service.ipScanner.IPScanner;
+import ch.zbw.sysVentorySaaS.service.snmpscanner.SNMPScanner;
 import ch.zbw.sysVentorySaas.App.model.Device;
 
 public class ScanController {

@@ -1,4 +1,4 @@
-package ch.zbw.sysVentorySaaS.powershellExecuter;
+package ch.zbw.sysVentorySaaS.service.powershellExecuter;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

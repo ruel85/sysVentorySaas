@@ -1,8 +1,9 @@
-package ch.zbw.sysVentorySaaS.service.ipscanner.test;
+package ch.zbw.sysVentorySaaS.service.ipScanner.test;
 
 import java.util.ArrayList;
 import org.junit.Test;
-import ch.zbw.sysVentorySaaS.service.ipscanner.IPScanner;
+
+import ch.zbw.sysVentorySaaS.service.ipScanner.IPScanner;
 import ch.zbw.sysVentorySaas.App.model.Device;
 
 public class IPScannerTest {

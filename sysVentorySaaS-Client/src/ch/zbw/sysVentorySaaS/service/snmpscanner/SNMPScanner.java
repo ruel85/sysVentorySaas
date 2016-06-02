@@ -1,4 +1,4 @@
-package ch.zbw.sysVentorySaaS.service.snmp;
+package ch.zbw.sysVentorySaaS.service.snmpscanner;
 
 import java.io.IOException;
 import java.util.ArrayList;

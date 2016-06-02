@@ -1,4 +1,4 @@
-package ch.zbw.sysVentorySaaS.service.ipscanner.test;
+package ch.zbw.sysVentorySaaS.service.powershellExecuter.test;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import ch.zbw.sysVentorySaaS.powershellExecuter.PowershellExecuter;
+import ch.zbw.sysVentorySaaS.service.powershellExecuter.PowershellExecuter;
 
 public class PowershelleExecuterTest {
 

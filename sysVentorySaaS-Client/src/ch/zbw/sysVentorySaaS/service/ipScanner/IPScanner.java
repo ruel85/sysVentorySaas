@@ -1,4 +1,4 @@
-package ch.zbw.sysVentorySaaS.service.ipscanner;
+package ch.zbw.sysVentorySaaS.service.ipScanner;
 
 import java.util.ArrayList;
 
