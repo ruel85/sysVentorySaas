@@ -1,7 +1,5 @@
 package ch.zbw.sysVentorySaaS.service.launcher;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,23 +10,27 @@ import org.xml.sax.SAXException;
 
 import ch.zbw.sysVentorySaaS.service.configManager.DOMReader;
 import ch.zbw.sysVentorySaaS.service.configManager.FileManager;
+import ch.zbw.sysVentorySaaS.service.powershellExecuter.PowershellExecuter;
 
 public class Main {
 	private final String dataPath = System.getenv("APPDATA").toString() + "\\SysVentory";
 	private final String configPath = dataPath + "\\PutHereConfigFile";
 	private final String reportPath = dataPath + "\\ScanResults";
 	private final String configXmlPath = configPath + "\\config.xml";
-	private final String configXsdPath = "Files/config.xsd";
+	private final String configXsdPath = configPath + "\\config.xsd";
 	private String userId;
 	private String server;
 
 	private DOMReader domReader;
 
 	private FileManager fm;
+	private PowershellExecuter pe;
 
 	public Main() {
 		initDirectory();
 		readConfig();
+		getSettingsFromServer();
+		executePowershell();
 	}
 
 	public static void main(String[] args) {
@@ -63,6 +65,27 @@ public class Main {
 				System.out.println("[ERROR]");
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 			System.out.println("[ERROR]");
+			e.printStackTrace();
+		}
+	}
+
+	public void getSettingsFromServer() {
+		
+	}
+
+	public void executePowershell() {
+		System.out.print("executing powershell-job ... ");
+		pe = new PowershellExecuter();
+		String path = configPath + "\\scanjob.ps1";
+		try {
+			String fileContent = pe.readFile(path);
+			pe.execute(fileContent);
+			if (!pe.getSucceedMessage().isEmpty() && pe.getFailedMessage().isEmpty()) {
+				System.out.println("[OK]");
+			} else {
+				System.out.println("[ERROR]");
+			}
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
