@@ -5,9 +5,9 @@
         <title>sysVentorySaaS</title>
     </head>
     <body>
-        <h1><p align="center">Login SysVentorySaaS</p></h1>
+        <h1><p align="center">Login SysVentorySaaS-App</p></h1>
         <center>
-            <form action="/sysVentorySaas-App/Login.jsp" method="post">
+            <form action="Login.jsp" method="post">
             <br/>Username:<input type="text" name="uname">
             <br/>Password:<input type="password" name="pass">
             <br/><input type="submit" value="Login">
