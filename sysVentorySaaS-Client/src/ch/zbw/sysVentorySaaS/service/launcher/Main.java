@@ -2,7 +2,9 @@ package ch.zbw.sysVentorySaaS.service.launcher;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Timer;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -20,9 +22,17 @@ public class Main {
 	private final String dataPath = System.getenv("APPDATA").toString() + "\\SysVentory";
 	private final String configPath = dataPath + "\\PutHereConfigFile";
 	private final String reportPath = dataPath + "\\ScanResults";
+	private final String logPath = dataPath + "\\Logs";
 	private final String configXmlPath = configPath + "\\config.xml";
 	private final String configXsdPath = configPath + "\\config.xsd";
-	private final String loggingPath = dataPath + "\\last_log.txt";
+	private final String loggingPath = logPath + "\\log.txt";
+	private final String xmlRootElementConfig = "SysVentoryConfig";
+	private final String xmlRootElementJob = "SysVentoryJob";
+	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "Server");
+	private final List<String> xmlElementsJob = Arrays.asList("UserId", "JobAvailable");
+
+
+	private final int checkIntervall = 10000; 
 	private String userId;
 	private String server;
 
@@ -40,9 +50,17 @@ public class Main {
 		getSettingsFromServer();
 	}
 
-	public static void main(String[] args) {
+	
+	public static void main(String argv[])
+	{
 		new Main();
 	}
+
+	public static void stop()
+	{
+	   
+	} 
+	
 
 	public void initDirectory() {
 		
@@ -50,6 +68,7 @@ public class Main {
 		fm.createDirectory(dataPath, false);
 		fm.createDirectory(configPath, false);
 		fm.createDirectory(reportPath, false);
+		fm.createDirectory(logPath, false);
 		logger = Logger.getLogger("Logger"); 
 		try {
 			fh = new FileHandler(loggingPath);
@@ -74,7 +93,7 @@ public class Main {
 			domReader.isValidateXSD(configXmlPath, configXsdPath);
 			logger.info("config.xml is valid [OK]\n");
 			logger.info("reading config from file ");
-			HashMap<String, String> xmlContent = domReader.getHashMap(configXmlPath);
+			HashMap<String, String> xmlContent = domReader.getHashMap(configXmlPath, xmlRootElementConfig, xmlElementsConfig);
 			userId = xmlContent.get("UserId");
 			server = xmlContent.get("Server");
 			if (!server.isEmpty() && !userId.isEmpty())
@@ -89,12 +108,7 @@ public class Main {
 	public void getSettingsFromServer() {
 		ScanTimerTask myTask = new ScanTimerTask(this);
 		Timer myTimer = new Timer();
-		myTimer.schedule(myTask, 0, 10000);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			logger.warning(e.getMessage() + "\n");
-		}
+		myTimer.schedule(myTask, 0, checkIntervall);
 	}
 
 	public void executePowershell() {
@@ -118,7 +132,86 @@ public class Main {
 	public Logger getLogger() {
 		return logger;
 	}
-	
+
+
+	public String getDataPath() {
+		return dataPath;
+	}
+
+
+	public String getConfigPath() {
+		return configPath;
+	}
+
+
+	public String getReportPath() {
+		return reportPath;
+	}
+
+
+	public String getConfigXmlPath() {
+		return configXmlPath;
+	}
+
+
+	public String getConfigXsdPath() {
+		return configXsdPath;
+	}
+
+
+	public String getLoggingPath() {
+		return loggingPath;
+	}
+
+
+	public String getXmlRootElementConfig() {
+		return xmlRootElementConfig;
+	}
+
+
+	public List<String> getXmlElementsConfig() {
+		return xmlElementsConfig;
+	}
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public String getServer() {
+		return server;
+	}
+
+
+	public DOMReader getDomReader() {
+		return domReader;
+	}
+
+
+	public FileManager getFm() {
+		return fm;
+	}
+
+
+	public PowershellExecuter getPe() {
+		return pe;
+	}
+
+
+	public FileHandler getFh() {
+		return fh;
+	}
+
+
+	public String getXmlRootElementJob() {
+		return xmlRootElementJob;
+	}
+
+
+	public List<String> getXmlElementsJob() {
+		return xmlElementsJob;
+	}
 	
 
 }

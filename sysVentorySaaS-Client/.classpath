@@ -16,5 +16,11 @@
 		path="C:/Users/Alpha0/Desktop/snmp4j-2.4.3.jar" />
 	<classpathentry kind="lib"
 		path="C:/Users/Alpha0/Desktop/snmp4j-2.4.3-javadoc.jar" />
+	<classpathentry kind="lib"
+		path="C:/Users/Alpha0/Desktop/httpcomponents/httpclient-4.5.2.jar" />
+	<classpathentry kind="lib"
+		path="C:/Users/Alpha0/Desktop/httpcomponents/commons-logging-1.2.jar" />
+	<classpathentry kind="lib"
+		path="C:/Users/Alpha0/Desktop/httpcomponents/httpcore-4.4.4.jar" />
 	<classpathentry kind="output" path="bin" />
 </classpath>
