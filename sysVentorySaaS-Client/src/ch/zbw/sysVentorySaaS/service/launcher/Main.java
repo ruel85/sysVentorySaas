@@ -27,9 +27,12 @@ public class Main {
 	private final String configXsdPath = configPath + "\\config.xsd";
 	private final String loggingPath = logPath + "\\log.txt";
 	private final String xmlRootElementConfig = "SysVentoryConfig";
-	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "Server");
 	private final String xmlRootElementJob = "SysVentoryJob";
+	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "Server");
 	private final List<String> xmlElementsJob = Arrays.asList("UserId", "JobAvailable");
+
+
+	private final int checkIntervall = 10000; 
 	private String userId;
 	private String server;
 
@@ -105,12 +108,7 @@ public class Main {
 	public void getSettingsFromServer() {
 		ScanTimerTask myTask = new ScanTimerTask(this);
 		Timer myTimer = new Timer();
-		myTimer.schedule(myTask, 0, 10000);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			logger.warning(e.getMessage() + "\n");
-		}
+		myTimer.schedule(myTask, 0, checkIntervall);
 	}
 
 	public void executePowershell() {
