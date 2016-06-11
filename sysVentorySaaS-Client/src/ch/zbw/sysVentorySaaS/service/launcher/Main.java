@@ -93,7 +93,7 @@ public class Main {
 			if (!server.isEmpty() && !userId.isEmpty())
 				logger.info("config was reading successfully [OK]\n");
 			else
-				logger.warning("config cant be reading successfully [ERROR]\n");
+				logger.warning("config can not be reading successfully [ERROR]\n");
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 			logger.warning(e.getMessage() + "\n");
 		}
