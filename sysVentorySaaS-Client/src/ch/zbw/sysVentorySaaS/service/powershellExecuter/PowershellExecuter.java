@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.profesorfalken.jpowershell.PowerShell;
+import com.profesorfalken.jpowershell.PowerShellNotAvailableException;
+
 public class PowershellExecuter {
 	private String succeedMessage;
 	private String failedMessage;
@@ -30,10 +33,11 @@ public class PowershellExecuter {
 		return command;
 	}
 
-	public void execute(String command) throws IOException {
+	public void execute_method1(String command) throws IOException {
 		succeedMessage = "";
 		failedMessage = "";
 		command = "powershell.exe " + command;
+		System.out.println(command);
 		Process powerShellProcess = Runtime.getRuntime().exec(command);
 		powerShellProcess.getOutputStream().close();
 		String line;
@@ -47,6 +51,15 @@ public class PowershellExecuter {
 			failedMessage = failedMessage.concat(line);
 		}
 		stderr.close();
+	}
+
+	public boolean execute_method2(String command) throws PowerShellNotAvailableException {
+		succeedMessage = "";
+		failedMessage = "";
+		PowerShell powerShell = PowerShell.openSession();
+		boolean successfully = !powerShell.executeCommand(command).isError();
+		powerShell.close();
+		return successfully;
 	}
 
 	public String getSucceedMessage() {

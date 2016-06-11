@@ -14,11 +14,11 @@ public class PowershelleExecuterTest {
 	public void test() throws IOException {
 		PowershellExecuter pe = new PowershellExecuter();
 		String fileContent = pe.readFile("Files//Test_HelloWorld.ps1");
-		pe.execute(fileContent);
+		pe.execute_method1(fileContent);
 		assertEquals("Hello World!", pe.getSucceedMessage());
 		assertEquals("", pe.getFailedMessage());
 		String fileContentFail = pe.readFile("Files//Test_HelloWorldFail.ps1");
-		pe.execute(fileContentFail);
+		pe.execute_method1(fileContentFail);
 		assertEquals("", pe.getSucceedMessage());
 		assertFalse(pe.getFailedMessage().equals(""));
 	}

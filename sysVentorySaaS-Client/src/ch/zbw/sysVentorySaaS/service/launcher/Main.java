@@ -30,19 +30,15 @@ public class Main {
 	private final String xmlRootElementJob = "SysVentoryJob";
 	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "Server");
 	private final List<String> xmlElementsJob = Arrays.asList("UserId", "JobAvailable");
+	private final int checkIntervall = 10000;
 
-
-	private final int checkIntervall = 10000; 
 	private String userId;
 	private String server;
-
 	private DOMReader domReader;
-
 	private FileManager fm;
 	private PowershellExecuter pe;
-	
-    Logger logger;
-    FileHandler fh;
+	private Logger logger;
+	private FileHandler fh;
 
 	public Main() {
 		initDirectory();
@@ -50,37 +46,34 @@ public class Main {
 		getSettingsFromServer();
 	}
 
-	
-	public static void main(String argv[])
-	{
+	public static void main(String argv[]) {
 		new Main();
 	}
 
-	public static void stop()
-	{
-	   
-	} 
-	
+	public static void stop() {
+
+	}
 
 	public void initDirectory() {
-		
+
 		fm = new FileManager();
 		fm.createDirectory(dataPath, false);
 		fm.createDirectory(configPath, false);
 		fm.createDirectory(reportPath, false);
 		fm.createDirectory(logPath, false);
-		logger = Logger.getLogger("Logger"); 
+		logger = Logger.getLogger("Logger");
 		try {
 			fh = new FileHandler(loggingPath);
 			logger.addHandler(fh);
-	        SimpleFormatter formatter = new SimpleFormatter();  
-	        fh.setFormatter(formatter);  
+			SimpleFormatter formatter = new SimpleFormatter();
+			fh.setFormatter(formatter);
 		} catch (SecurityException | IOException e) {
 			e.printStackTrace();
 			logger.warning(e.getMessage() + "\n");
-		} 
+		}
 		logger.info("check if data directories exists");
-		if (new File(dataPath).exists() && new File(configPath).exists() && new File(reportPath).exists())
+		if (new File(dataPath).exists() && new File(configPath).exists() && new File(reportPath).exists()
+				&& new File(logPath).exists())
 			logger.info("directories exists [OK]\n");
 		else
 			logger.info("directories does not exists [ERROR]\n");
@@ -93,7 +86,8 @@ public class Main {
 			domReader.isValidateXSD(configXmlPath, configXsdPath);
 			logger.info("config.xml is valid [OK]\n");
 			logger.info("reading config from file ");
-			HashMap<String, String> xmlContent = domReader.getHashMap(configXmlPath, xmlRootElementConfig, xmlElementsConfig);
+			HashMap<String, String> xmlContent = domReader.getHashMap(configXmlPath, xmlRootElementConfig,
+					xmlElementsConfig);
 			userId = xmlContent.get("UserId");
 			server = xmlContent.get("Server");
 			if (!server.isEmpty() && !userId.isEmpty())
@@ -114,11 +108,12 @@ public class Main {
 	public void executePowershell() {
 		String path = configPath + "\\scanjob.ps1";
 		logger.info("executing powershell-job (" + path + ") ");
+		boolean successfully = false;
 		pe = new PowershellExecuter();
 		try {
 			String fileContent = pe.readFile(path);
-			pe.execute(fileContent);
-			if (!pe.getSucceedMessage().isEmpty() && pe.getFailedMessage().isEmpty()) {
+			successfully = pe.execute_method2(fileContent);
+			if (successfully) {
 				logger.info("powershell was successfully executed [OK]\n");
 			} else {
 				logger.warning("powershell was not executed successfully [ERROR]\n");
@@ -133,85 +128,68 @@ public class Main {
 		return logger;
 	}
 
-
 	public String getDataPath() {
 		return dataPath;
 	}
-
 
 	public String getConfigPath() {
 		return configPath;
 	}
 
-
 	public String getReportPath() {
 		return reportPath;
 	}
-
 
 	public String getConfigXmlPath() {
 		return configXmlPath;
 	}
 
-
 	public String getConfigXsdPath() {
 		return configXsdPath;
 	}
-
 
 	public String getLoggingPath() {
 		return loggingPath;
 	}
 
-
 	public String getXmlRootElementConfig() {
 		return xmlRootElementConfig;
 	}
-
 
 	public List<String> getXmlElementsConfig() {
 		return xmlElementsConfig;
 	}
 
-
 	public String getUserId() {
 		return userId;
 	}
-
 
 	public String getServer() {
 		return server;
 	}
 
-
 	public DOMReader getDomReader() {
 		return domReader;
 	}
-
 
 	public FileManager getFm() {
 		return fm;
 	}
 
-
 	public PowershellExecuter getPe() {
 		return pe;
 	}
-
 
 	public FileHandler getFh() {
 		return fh;
 	}
 
-
 	public String getXmlRootElementJob() {
 		return xmlRootElementJob;
 	}
 
-
 	public List<String> getXmlElementsJob() {
 		return xmlElementsJob;
 	}
-	
 
 }
