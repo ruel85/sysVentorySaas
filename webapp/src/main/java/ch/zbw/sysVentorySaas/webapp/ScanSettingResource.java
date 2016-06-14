@@ -1,4 +1,6 @@
-package ch.zbw.sysVentorySaas.App.resource;
+package ch.zbw.sysVentorySaas.webapp;
+
+
 
 import java.util.List;
 
@@ -10,22 +12,19 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 import ch.zbw.sysVentorySaas.App.services.ScanSettingService;
 
-@Path("/scansettings")
+@Path("scansettings")
 public class ScanSettingResource {
-
-	ScanSettingDAO scanSettingDAO = new ScanSettingDAO();
 	ScanSettingService scanSettingService = new ScanSettingService();
 	
-	@GET
+	/*@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public ScanSetting getScanSetting(){
 		return scanSettingDAO.getScanSettingById(1);
-	}
+	}*/
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	public List<ScanSetting> getMessages(){
+	public List<ScanSetting> geScanSettings(){
 		return scanSettingService.getAllScanSettings();
 	}
-
 }
