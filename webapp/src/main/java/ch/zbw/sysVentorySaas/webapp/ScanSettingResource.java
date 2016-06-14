@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
@@ -24,7 +25,18 @@ public class ScanSettingResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	public List<ScanSetting> geScanSettings(){
+	public List<ScanSetting> getScanSettings(){
 		return scanSettingService.getAllScanSettings();
+	}
+	
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_XML)
+	public ScanSetting getScanSettingByUID(){		
+		
+		ScanSetting sEmty = new ScanSetting();
+		ScanSettingDAO dao = new ScanSettingDAO();
+		sEmty = dao.getScanSettingById(1);	
+		return sEmty;
 	}
 }

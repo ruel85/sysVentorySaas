@@ -31,4 +31,11 @@ public class ScanSettingDAO {
 		session.delete(scanSetting);
 		transaction.commit();
 	}
+
+	public ScanSetting getScanSettingByUID(Integer uID) {
+
+
+		
+		return null;
+	}
 }
