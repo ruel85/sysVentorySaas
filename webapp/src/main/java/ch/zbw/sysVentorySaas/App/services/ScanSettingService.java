@@ -15,5 +15,6 @@ public class ScanSettingService {
 		ScanSetting scanS2 = new ScanSetting("DJURANOVIC", "192.168.1.1", "192.168.1.35", "08:00", 1, false);		
 		lst.add(scanS2);
 		return null;
+		
 	}
 }
