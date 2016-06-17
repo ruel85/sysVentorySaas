@@ -22,11 +22,23 @@
         <property name="hibernate.current_session_context_class">thread</property>
 <!--         <mapping class="ch.zbw.sysVentorySaas.App2.model.Software"/> -->
         
-        <!-- Mapping files -->
-        <mapping resource="HibernateEntityMappings.hbm.xml"/> 
+        <!-- Mapping files --> 
         <mapping resource="HibernateCompanyMapping.hbm.xml"/> 
         <mapping resource="HibernateScanSettingMapping.hbm.xml"/>
         <mapping resource="HibernateUserMapping.hbm.xml"/>
+        
+        <mapping resource="HibernateDeviceMapping.hbm.xml"/>
+        <mapping resource="HibernateGroupMapping.hbm.xml"/>
+        <mapping resource="HibernateNetworkInterfaceMapping.hbm.xml"/>
+        <mapping resource="HibernateOperatingSystemMapping.hbm.xml"/>
+        <mapping resource="HibernatePrinterMapping.hbm.xml"/>
+        <mapping resource="HibernateProcessorMapping.hbm.xml"/>
+        <mapping resource="HibernateScanJobMapping.hbm.xml"/>
+        <mapping resource="HibernateScanStatusMapping.hbm.xml"/>
+        <mapping resource="HibernateServiceMapping.hbm.xml"/>
+        <mapping resource="HibernateSoftwareMapping.hbm.xml"/>
+        <mapping resource="HibernateScanJobMapping.hbm.xml"/>
+        
         
     </session-factory>
 </hibernate-configuration>

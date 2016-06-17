@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<class name="ch.zbw.sysVentorySaas.App.model.NetworkInterface" table="networkinterface">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Netzwerk-Interface</meta>
+		<id name="idNetworkInterface" type="int" column="idnetworkinterface">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+	</class>

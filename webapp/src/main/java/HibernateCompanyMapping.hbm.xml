@@ -8,6 +8,7 @@
 		<id name="idCompany" type="int" column="idCompany">
 			<generator class="identity"/>
 		</id>
+		<one-to-one name="scanSetting" class="ch.zbw.sysVentorySaas.App.model.ScanSetting" constrained="true" cascade="all"></one-to-one>
 		<property name="name" column="name" type="string"/>
 		<property name="street" column="street" type="string"/>
 		<property name="houseNumber" column="houseNumber" type="string"/>

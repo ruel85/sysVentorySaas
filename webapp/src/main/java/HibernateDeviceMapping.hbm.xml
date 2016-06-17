@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<class name="ch.zbw.sysVentorySaas.App.model.Device" table="device">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Gerät (Device)</meta>
+		<id name="idDevice" type="int" column="idDevice">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+		<property name="manufacturer" column="manufacturer" type="string"/>
+		<property name="macAddress" column="macAddress" type="string"/>
+		<property name="ipAddress" column="ipAddress" type="string"/>
+	</class>

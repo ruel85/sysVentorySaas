@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<class name="ch.zbw.sysVentorySaas.App.model.ScanStatus" table="scanstatus">
+		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Scanstatus</meta>
+		<id name="idScanStatus" type="int" column="idScanScanstatus">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="string"/>
+		<property name="description" column="enabled" type="string"/>
+	</class>
