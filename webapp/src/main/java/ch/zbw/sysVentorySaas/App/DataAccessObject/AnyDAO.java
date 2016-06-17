@@ -4,31 +4,34 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
-import ch.zbw.sysVentorySaas.App.model.Device;
+import ch.zbw.sysVentorySaas.App.model.Company;
 
-public class DeviceDAO {
-	public Device createDevice(Device device){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		session.saveOrUpdate(device);
-		transaction.commit();
-		return device;
+public class AnyDAO<T> {
+	final AnyDAO<T> typeParameterClass;
+	
+	public AnyDAO(AnyDAO<T> typeParameterClass){
+	this.typeParameterClass = typeParameterClass;	
 	}
 	
-	public Device getDeviceById(int id){
-		Device newObject = new Device();
+	public AnyDAO<T> createAnyEntity(AnyDAO<T> dao){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		newObject = (Device) session.get(Device.class, id);
+		session.saveOrUpdate(dao);
 		transaction.commit();
-		return newObject;
+		return dao;
 	}
 	
-	public Device deleteDevice(Device device){
+	public AnyDAO<T> getAnyEntityById(int id){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		return (AnyDAO<T>) session.get(typeParameterClass.getClass(), id);
+	}
+	
+	public AnyDAO<T> deleteCompany(AnyDAO<T> anyDao)
+	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		session.delete(device);
+		session.delete(anyDao);
 		transaction.commit();
-		return device;
+		return anyDao;
 	}
 }

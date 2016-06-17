@@ -16,6 +16,7 @@ import java.sql.Statement;
 import org.junit.Before;
 import org.junit.Test;
 
+import ch.zbw.sysVentorySaas.App.DataAccessObject.AnyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.DeviceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.GroupDAO;
@@ -80,16 +81,18 @@ public class HibernateTest {
 	@Test
 	public void TestSoftware_CRUD()
 	{
-		Software software = new Software("NEST/IS-E", "InnoSolv AG", "2016.6");
 		SoftwareDAO softwareDAO = new SoftwareDAO();
-		softwareDAO.createSoftware(software);
+		Software newSoftware = softwareDAO.createSoftware(new Software("NEST/IS-E", "InnoSolv AG", "2016.6"));
 		
-		assertEquals("InnoSolv AG", softwareDAO.getSoftwarebyId(1).getManufacturer());
-		assertEquals("NEST/IS-E", softwareDAO.getSoftwarebyId(1).getName());
-		assertEquals("2016.6", softwareDAO.getSoftwarebyId(1).getVersion());
+		assertEquals("InnoSolv AG", newSoftware.getManufacturer());
+		assertEquals("NEST/IS-E", newSoftware.getName());
+		assertEquals("2016.6", newSoftware.getVersion());
 		
-		softwareDAO.deleteSoftware(softwareDAO.getSoftwarebyId(1));
-		assertNull(softwareDAO.getSoftwarebyId(1));	
+		Software softwareSelected = softwareDAO.getSoftwarebyId(newSoftware.getIdSoftware());
+		assertEquals(newSoftware.getIdSoftware(), softwareSelected.getIdSoftware());
+		
+		softwareDAO.deleteSoftware(newSoftware);
+		assertNull(softwareDAO.getSoftwarebyId(newSoftware.getIdSoftware()));	
 	}
 	
 	@Test
@@ -103,8 +106,8 @@ public class HibernateTest {
 		assertEquals("Microsoft Windows", opDAO.getOperatingSystemById(1).getManufacturer());
 		assertEquals("64-bit", opDAO.getOperatingSystemById(1).getArchitecture());
 		
-		//opDAO.deleteOperatingSystem(opDAO.getOperatingSystemById(1));
-		//assertNull(opDAO.getOperatingSystemById(1));		
+		opDAO.deleteOperatingSystem(opDAO.getOperatingSystemById(1));
+		assertNull(opDAO.getOperatingSystemById(1));		
 	}
 	
 	@Test
@@ -169,59 +172,67 @@ public class HibernateTest {
 	
 	@Test
 	public void TestUser_CRUD(){
-		User user = null;
+		User newUser = null;
 		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
-
-		//user = new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch");
-		user = new User("ruel85", "12345", "ruel.holderegger@gmx.ch");
 		
 		UserDAO userDAO = new UserDAO();
-		userDAO.createUser(user);
+		newUser = userDAO.createUser(new User("ruel85", "12345", "ruel.holderegger@gmx.ch"));
+		//newUser = userDAO.createUser(new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch"));
+				
+		User userSelected = userDAO.getUserByIdUser(newUser.getIdUser());
+		assertEquals(newUser.getuID(), userSelected.getuID());
 		
-		User userSelected = userDAO.getUserByIdUser(0);
-		assertEquals("ruel85", userSelected.getUsername());
-		assertEquals("12345", userSelected.getPassword());
-		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
+		assertEquals("ruel85", newUser.getUsername());
+		assertEquals("12345", newUser.getPassword());
+		assertEquals("ruel.holderegger@gmx.ch", newUser.getEmail());
 		
-		userDAO.deleteUser(userDAO.getUserByIdUser(0));
-		assertNull(userDAO.getUserByIdUser(1));
+		//userDAO.deleteUser(newUser);
+		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
 	}
 	
 	@Test
 	public void TestGroup_CRUD(){
-		Group group = new Group("Administratoren");
-		GroupDAO groupDAO = new GroupDAO();
-		groupDAO.createGroup(group);
 		
-		Group groupSelected = groupDAO.getGroupById(1);
+		GroupDAO groupDAO = new GroupDAO();
+		Group newGroup = groupDAO.createGroup( new Group("Administratoren"));
+		
+		Group groupSelected = groupDAO.getGroupById(newGroup.getIdGroup());
+		assertEquals(groupSelected.getIdGroup(), newGroup.getIdGroup());
 		assertEquals("Administratoren", groupSelected.getName());
 		
-		groupDAO.deleteGroup(groupDAO.getGroupById(1));
-		assertNull(groupDAO.getGroupById(1));
+		groupDAO.deleteGroup(newGroup);
+		assertNull(groupDAO.getGroupById(newGroup.getIdGroup()));
 	}
 	
 	@Test
 	public void TestCompany_CRUD_AND_TestScanSetting(){
-		Company comp = new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen");
 		CompanyDAO compDAO = new CompanyDAO();
-
-		ScanSetting scanSetting = new ScanSetting("Holderegger", "192.168.1.1", "192.168.1.30", "17:00", 3, false);
-		ScanSettingDAO scDAO = new ScanSettingDAO();
-		scDAO.createScanSetting(scanSetting);
+		ScanSettingDAO scanSDAO = new ScanSettingDAO();
+		ScanSetting newScanSetting = scanSDAO.createScanSetting(
+				new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", "17:00", 1, false));
 		
-		comp.setScanSetting(scanSetting);
-		compDAO.createCompany(comp);
+		Company newComp = compDAO.createCompany(new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen"));
 		
-		Company compSelected = compDAO.getCompanyById(1);
+		Company compSelected = compDAO.getCompanyById(newComp.getIdCompany());
+		assertEquals(compSelected.getIdCompany(), newComp.getIdCompany());
 		assertEquals("InnoSolv AG", compSelected.getName());
 		assertEquals("Ikarusstrasse", compSelected.getStreet());
 		assertEquals("9", compSelected.getHouseNumber());
 		assertEquals(null, compSelected.getHouseNumberAdd());
 		assertEquals("9015", compSelected.getZipCode());
-		assertEquals("St. Gallen", compSelected.getCity());		
+		assertEquals("St. Gallen", compSelected.getCity());
 		
-		//compDAO.deleteCompany(compDAO.getCompanyById(1));
-		//assertNull(compDAO.getCompanyById(1));
+		ScanSetting scanSettingSelected = scanSDAO.getScanSettingById(newScanSetting.getIdScanSetting());
+		assertEquals(scanSettingSelected.getIdScanSetting(), newScanSetting.getIdScanSetting());
+		assertEquals("DonRaul", scanSettingSelected.getNetworkName());
+		assertEquals("192.168.1.1", scanSettingSelected.getIpStart());
+		assertEquals("192.168.1.35", scanSettingSelected.getIpEnd());
+		assertEquals("17:00", scanSettingSelected.getStartTime());
+		assertEquals(1, scanSettingSelected.getIntervallHours());
+		assertEquals(false, scanSettingSelected.getTimeToScan());
+		
+		compDAO.deleteCompany(newComp);
+		assertNull(compDAO.getCompanyById(newComp.getIdCompany()));
 	}
 	
 	@Test

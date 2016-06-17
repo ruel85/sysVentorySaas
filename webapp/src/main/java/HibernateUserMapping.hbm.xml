@@ -3,9 +3,9 @@
 	<class name="ch.zbw.sysVentorySaas.App.model.User" table="user">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem User</meta>
 		<id name="idUser" type="int" column="iduser">
-			<generator class="assigned"/>
+			<generator class="identity"/>
 		</id>
-		<property name="uID" column="uid" type="byte[]"/>
+		<property name="uID" column="uid" type="binary"/>
 		<property name="username" column="username" type="string"/>
 		<property name="password" column="password" type="string"/>
 		<property name="email" column="email" type="string"/>

@@ -7,27 +7,29 @@ import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.model.Group;
 
 public class GroupDAO {
-	public void createGroup(Group group){
+	public Group createGroup(Group group){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(group);
 		transaction.commit();
+		return group;
 	}
 	
 	public Group getGroupById(int id){
-		Group sEmpty = new Group();
+		Group newObject = new Group();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		sEmpty = (Group) session.get(Group.class, id);
+		newObject = (Group) session.get(Group.class, id);
 		transaction.commit();
-		return sEmpty;
+		return newObject;
 	}
 	
-	public void deleteGroup(Group group)
+	public Group deleteGroup(Group group)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(group);
 		transaction.commit();
+		return group;
 	}
 }

@@ -8,27 +8,29 @@ import ch.zbw.sysVentorySaas.App.model.ScanStatus;
 
 public class ScanStatusDAO {
 
-	public void createScanStatus(ScanStatus scanStatus){
+	public ScanStatus createScanStatus(ScanStatus scanStatus){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(scanStatus);
 		transaction.commit();
+		return scanStatus;
 	}
 	
 	public ScanStatus getScanStatusById(int id){
-		ScanStatus sEmpty = new ScanStatus();
+		ScanStatus newObject = new ScanStatus();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		sEmpty = (ScanStatus) session.get(ScanStatus.class, id);
+		newObject = (ScanStatus) session.get(ScanStatus.class, id);
 		transaction.commit();
-		return sEmpty;
+		return newObject;
 	}
 	
-	public void deleteScanStatus(ScanStatus scanStatus)
+	public ScanStatus deleteScanStatus(ScanStatus scanStatus)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(scanStatus);
 		transaction.commit();
+		return scanStatus;
 	}
 }

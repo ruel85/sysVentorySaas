@@ -7,27 +7,30 @@ import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.model.Printer;
 
 public class PrinterDAO {
-	public void createPrinter(Printer printer){
+	
+	public Printer createPrinter(Printer printer){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(printer);
 		transaction.commit();
+		return printer;
 	}
 	
 	public Printer getPrinterById(int id){
-		Printer sEmpty = new Printer();
+		Printer newObject = new Printer();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		sEmpty = (Printer) session.get(Printer.class, id);
+		newObject = (Printer) session.get(Printer.class, id);
 		transaction.commit();
-		return sEmpty;
+		return newObject;
 	}
 	
-	public void deleteProcessor(Printer printer)
+	public Printer deleteProcessor(Printer printer)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(printer);
 		transaction.commit();
+		return printer;
 	}
 }

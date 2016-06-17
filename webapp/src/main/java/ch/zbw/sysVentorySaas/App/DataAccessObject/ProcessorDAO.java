@@ -15,12 +15,12 @@ public class ProcessorDAO {
 	}
 	
 	public Processor getProcessorById(int id){
-		Processor sEmpty = new Processor();
+		Processor newObject = new Processor();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		sEmpty = (Processor) session.get(Processor.class, id);
+		newObject = (Processor) session.get(Processor.class, id);
 		transaction.commit();
-		return sEmpty;
+		return newObject;
 	}
 	
 	public void deleteProcessor(Processor processor)
