@@ -9,6 +9,8 @@ public class Company {
 	private String houseNumberAdd;
 	private String zipCode;
 	private String city;
+	// Für 1 zu 1 Beziehung
+	private ScanSetting scanSetting;
 	
 	public Company(String name, String street, String houseNumber, String houseNumberAdd, String zipCode, String city) {
 		this.name=name;
@@ -76,5 +78,13 @@ public class Company {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public ScanSetting getScanSetting() {
+		return scanSetting;
+	}
+
+	public void setScanSetting(ScanSetting scanSetting) {
+		this.scanSetting = scanSetting;
 	}
 }

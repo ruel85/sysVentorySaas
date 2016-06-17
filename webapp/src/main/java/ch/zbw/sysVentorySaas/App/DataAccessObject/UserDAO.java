@@ -15,15 +15,6 @@ public class UserDAO {
 		transaction.commit();
 	}
 	
-	public User getUserbyId(int id){
-		User sEmpty = new User();
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		sEmpty = (User) session.get(User.class, id);
-		transaction.commit();
-		return sEmpty;
-	}
-	
 	public void deleteUser(User user)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -32,12 +23,20 @@ public class UserDAO {
 		transaction.commit();
 	}
 
-	public User getUserByUID(String uID) {
+	public User getUserByUID(byte[] uID) {
 		User sEmpty = new User();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		sEmpty = (User) session.get(User.class, uID);
-		
+		transaction.commit();
+		return sEmpty;
+	}
+	
+	public User getUserByIdUser(int idUser) {
+		User sEmpty = new User();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		sEmpty = (User) session.get(User.class, idUser);
 		transaction.commit();
 		return sEmpty;
 	}

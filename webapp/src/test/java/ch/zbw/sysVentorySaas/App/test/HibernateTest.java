@@ -1,11 +1,13 @@
-package ch.zbw.sysVentorySaas.App.Test;
+package ch.zbw.sysVentorySaas.App.test;
 
-import static org.junit.Assert.*;
+
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,8 +16,33 @@ import java.sql.Statement;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.zbw.sysVentorySaas.App.DataAccessObject.*;
-import ch.zbw.sysVentorySaas.App.model.*;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.DeviceDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.GroupDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.NetworkInterfaceDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.OperatingSystemDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ProcessorDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanStatusDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ServiceDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.SoftwareDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
+import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
+import ch.zbw.sysVentorySaas.App.model.Company;
+import ch.zbw.sysVentorySaas.App.model.Device;
+import ch.zbw.sysVentorySaas.App.model.Group;
+import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
+import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
+import ch.zbw.sysVentorySaas.App.model.Printer;
+import ch.zbw.sysVentorySaas.App.model.Processor;
+import ch.zbw.sysVentorySaas.App.model.ScanJob;
+import ch.zbw.sysVentorySaas.App.model.ScanSetting;
+import ch.zbw.sysVentorySaas.App.model.ScanStatus;
+import ch.zbw.sysVentorySaas.App.model.Service;
+import ch.zbw.sysVentorySaas.App.model.Software;
+import ch.zbw.sysVentorySaas.App.model.User;
 
 public class HibernateTest {
 	private String user;
@@ -76,8 +103,8 @@ public class HibernateTest {
 		assertEquals("Microsoft Windows", opDAO.getOperatingSystemById(1).getManufacturer());
 		assertEquals("64-bit", opDAO.getOperatingSystemById(1).getArchitecture());
 		
-		opDAO.deleteOperatingSystem(opDAO.getOperatingSystemById(1));
-		assertNull(opDAO.getOperatingSystemById(1));		
+		//opDAO.deleteOperatingSystem(opDAO.getOperatingSystemById(1));
+		//assertNull(opDAO.getOperatingSystemById(1));		
 	}
 	
 	@Test
@@ -143,23 +170,21 @@ public class HibernateTest {
 	@Test
 	public void TestUser_CRUD(){
 		User user = null;
-		try {
-			//user = new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch");
-			user = new User("ruel85", "12345", "ruel.holderegger@gmx.ch");
-		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
+
+		//user = new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch");
+		user = new User("ruel85", "12345", "ruel.holderegger@gmx.ch");
+		
 		UserDAO userDAO = new UserDAO();
 		userDAO.createUser(user);
 		
-		User userSelected = userDAO.getUserByUID("2d1a0484f40daceeef42967c4ac00911");
+		User userSelected = userDAO.getUserByIdUser(0);
 		assertEquals("ruel85", userSelected.getUsername());
 		assertEquals("12345", userSelected.getPassword());
 		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
 		
-		//userDAO.deleteUser(userDAO.getUserbyId(1));
-		//assertNull(userDAO.getUserbyId(1));
+		userDAO.deleteUser(userDAO.getUserByIdUser(0));
+		assertNull(userDAO.getUserByIdUser(1));
 	}
 	
 	@Test
@@ -176,9 +201,15 @@ public class HibernateTest {
 	}
 	
 	@Test
-	public void TestCompany_CRUD(){
+	public void TestCompany_CRUD_AND_TestScanSetting(){
 		Company comp = new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen");
 		CompanyDAO compDAO = new CompanyDAO();
+
+		ScanSetting scanSetting = new ScanSetting("Holderegger", "192.168.1.1", "192.168.1.30", "17:00", 3, false);
+		ScanSettingDAO scDAO = new ScanSettingDAO();
+		scDAO.createScanSetting(scanSetting);
+		
+		comp.setScanSetting(scanSetting);
 		compDAO.createCompany(comp);
 		
 		Company compSelected = compDAO.getCompanyById(1);
@@ -187,10 +218,10 @@ public class HibernateTest {
 		assertEquals("9", compSelected.getHouseNumber());
 		assertEquals(null, compSelected.getHouseNumberAdd());
 		assertEquals("9015", compSelected.getZipCode());
-		assertEquals("St. Gallen", compSelected.getCity());
+		assertEquals("St. Gallen", compSelected.getCity());		
 		
-		compDAO.deleteCompany(compDAO.getCompanyById(1));
-		assertNull(compDAO.getCompanyById(1));
+		//compDAO.deleteCompany(compDAO.getCompanyById(1));
+		//assertNull(compDAO.getCompanyById(1));
 	}
 	
 	@Test
@@ -220,7 +251,7 @@ public class HibernateTest {
 		scanStatusDAO.deleteScanStatus(scanStatusDAO.getScanStatusById(1));
 		assertNull(scanStatusDAO.getScanStatusById(1));
 	}
-	
+	/*
 	@Test
 	public void TestScanSetting(){
 		ScanSetting scanS= new ScanSetting("HOLDEREGGER", "192.168.1.1", "192.168.1.35", "07:00", 1, true);
@@ -236,7 +267,7 @@ public class HibernateTest {
 		
 		//scanSDAO.deleteScanSettings(scanSDAO.getScanSettingById(1));
 		//assertNull(scanSDAO.getScanSettingById(1));	
-	}
+	}*/
 	
 	@Test
 	public void TestScanJob(){

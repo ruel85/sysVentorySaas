@@ -24,6 +24,9 @@
         
         <!-- Mapping files -->
         <mapping resource="HibernateEntityMappings.hbm.xml"/> 
-
+        <mapping resource="HibernateCompanyMapping.hbm.xml"/> 
+        <mapping resource="HibernateScanSettingMapping.hbm.xml"/>
+        <mapping resource="HibernateUserMapping.hbm.xml"/>
+        
     </session-factory>
 </hibernate-configuration>

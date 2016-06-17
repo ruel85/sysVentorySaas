@@ -1,19 +1,14 @@
 package ch.zbw.sysVentorySaas.App.model;
-
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
 
 public class User {
 	private int idUser;
-	private String uID = "";
+	private byte[] uID;
 	private String username;
 	private String password;
 	private String email;
 
-	public User(String username, String password, String email) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+	public User(String username, String password, String email){
 		this.uID= MD5Hash.getMD5Hash(username);
 		this.username=username;
 		this.password=password;
@@ -23,11 +18,11 @@ public class User {
 	public User(){
 	}
 
-	public String getuID() {
+	public byte[] getuID() {
 		return uID;
 	}
 
-	public void setuID(String uID) {
+	public void setuID(byte[] uID) {
 		this.uID = uID;
 	}
 
@@ -62,4 +57,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 }

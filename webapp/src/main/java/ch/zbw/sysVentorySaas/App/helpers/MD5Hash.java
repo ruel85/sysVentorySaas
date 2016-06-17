@@ -5,16 +5,17 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5Hash {
 	
-	    public static String getMD5Hash(String textToHash) 
+	    public static byte[] getMD5Hash(String textToHash) 
 	    {
 	        String generatedPassword = null;
+	        byte[] bytes = null;
 	        try {
 	            // Create MessageDigest instance for MD5
 	            MessageDigest md = MessageDigest.getInstance("MD5");
 	            //Add password bytes to digest
 	            md.update(textToHash.getBytes());
 	            //Get the hash's bytes 
-	            byte[] bytes = md.digest();
+	            bytes = md.digest();
 	            //This bytes[] has bytes in decimal format;
 	            //Convert it to hexadecimal format
 	            StringBuilder sb = new StringBuilder();
@@ -29,6 +30,6 @@ public class MD5Hash {
 	        {
 	            e.printStackTrace();
 	        }
-	        return generatedPassword.toString();
+	        return bytes;
 	    }
 }
