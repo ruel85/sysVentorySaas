@@ -26,7 +26,6 @@
         <mapping resource="HibernateCompanyMapping.hbm.xml"/> 
         <mapping resource="HibernateScanSettingMapping.hbm.xml"/>
         <mapping resource="HibernateUserMapping.hbm.xml"/>
-        
         <mapping resource="HibernateDeviceMapping.hbm.xml"/>
         <mapping resource="HibernateGroupMapping.hbm.xml"/>
         <mapping resource="HibernateNetworkInterfaceMapping.hbm.xml"/>
@@ -37,8 +36,5 @@
         <mapping resource="HibernateScanStatusMapping.hbm.xml"/>
         <mapping resource="HibernateServiceMapping.hbm.xml"/>
         <mapping resource="HibernateSoftwareMapping.hbm.xml"/>
-        <mapping resource="HibernateScanJobMapping.hbm.xml"/>
-        
-        
     </session-factory>
 </hibernate-configuration>

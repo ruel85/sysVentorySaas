@@ -1,7 +1,5 @@
 package ch.zbw.sysVentorySaas.App.test;
 
-
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 

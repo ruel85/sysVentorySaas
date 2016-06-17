@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.Processor" table="processor">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Prozessor</meta>
 		<id name="idProcessor" type="int" column="idprocessor">
@@ -9,3 +13,4 @@
 		<property name="cores" column="cores" type="int"/>
 		<property name="frequency" column="frequency" type="string"/>
 	</class>
+</hibernate-mapping>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.ScanJob" table="scanjob">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Scan-Job</meta>
 		<id name="idScanJob" type="int" column="idScanJob">
@@ -8,3 +12,4 @@
 		<property name="endTime" column="endTime" type="string"/>
 <!-- 		<property name="status" column="status" type="Enum"/> -->
 	</class>
+</hibernate-mapping>

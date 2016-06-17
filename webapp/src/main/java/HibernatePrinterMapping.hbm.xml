@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.Printer" table="printer">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Drucker</meta>
 		<id name="idPrinter" type="int" column="idprinter">
@@ -7,3 +11,4 @@
 		<property name="name" column="name" type="string"/>
 		<property name="description" column="description" type="string"/>
 	</class>
+</hibernate-mapping>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.OperatingSystem" table="operatingsystem">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Betriebssystem</meta>
 		<id name="idOperatingSystem" type="int" column="idoperatingsystem">
@@ -8,3 +12,4 @@
 		<property name="manufacturer" column="manufacturer" type="string"/>
 		<property name="architecture" column="architecture" type="string"/>
 	</class>
+</hibernate-mapping>

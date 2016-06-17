@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.Service" table="service">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Service</meta>
 		<id name="idService" type="int" column="idService">
@@ -7,4 +11,4 @@
 		<property name="name" column="name" type="string"/>
 		<property name="enabled" column="enabled" type="boolean"/>
 	</class>
-	
+</hibernate-mapping>
