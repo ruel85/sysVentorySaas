@@ -2,19 +2,17 @@ package ch.zbw.sysVentorySaas.App.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
-
-import ch.zbw.sysVentorySaas.App.DataAccessObject.AnyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.DeviceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.GroupDAO;
@@ -28,6 +26,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanStatusDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ServiceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
+import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
 import ch.zbw.sysVentorySaas.App.model.Company;
 import ch.zbw.sysVentorySaas.App.model.Device;
@@ -58,6 +57,21 @@ public class HibernateTest {
 		password="vdjjmf#n$ri7cr!?+RX7ZVbY5";
 		url="jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas";
 		mySQLParams = "?useSSL=false&serverTimezone=Europe/Paris";
+		
+		/*SessionFactory sessionFactory;
+		
+		// A SessionFactory is set up once for an application!
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+				.configure() // configures settings from hibernate.cfg.xml
+				.build();
+		try {
+			sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+		}
+		catch (Exception e) {
+			// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
+			// so destroy it manually.
+			StandardServiceRegistryBuilder.destroy( registry );
+		}*/
 	}
 	
 	@Test
@@ -164,8 +178,8 @@ public class HibernateTest {
 		assertEquals("50-1A-C5-F4-C7-BB", devSelected.getMacAddress());
 		assertEquals("192.168.2.21", devSelected.getIpAddress());
 		
-		devDAO.deleteDevice(devDAO.getDeviceById(1));
-		assertNull(devDAO.getDeviceById(1));
+		//devDAO.deleteDevice(devDAO.getDeviceById(1));
+		//assertNull(devDAO.getDeviceById(1));
 	}
 	
 	@Test
@@ -206,31 +220,41 @@ public class HibernateTest {
 	public void TestCompany_CRUD_AND_TestScanSetting(){
 		CompanyDAO compDAO = new CompanyDAO();
 		ScanSettingDAO scanSDAO = new ScanSettingDAO();
-		ScanSetting newScanSetting = scanSDAO.createScanSetting(
-				new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", "17:00", 1, false));
 		
-		Company newComp = compDAO.createCompany(new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen"));
+		Company comp = new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen");	;
+		ScanSetting scanSetting = new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", "17:00", 1, false);
 		
-		Company compSelected = compDAO.getCompanyById(newComp.getIdCompany());
-		assertEquals(compSelected.getIdCompany(), newComp.getIdCompany());
-		assertEquals("InnoSolv AG", compSelected.getName());
-		assertEquals("Ikarusstrasse", compSelected.getStreet());
-		assertEquals("9", compSelected.getHouseNumber());
-		assertEquals(null, compSelected.getHouseNumberAdd());
-		assertEquals("9015", compSelected.getZipCode());
-		assertEquals("St. Gallen", compSelected.getCity());
+		comp.setScanSetting(scanSetting);
+		scanSetting.setCompany(comp);
+		comp = compDAO.createCompany(comp);
+		// Prüfen, ob 1-1 Beziehung wirklich vorhanden ist...
+		assertEquals(comp.getIdCompany(), scanSDAO.getScanSettingById(comp.getIdCompany()).getIdCompany());
 		
-		ScanSetting scanSettingSelected = scanSDAO.getScanSettingById(newScanSetting.getIdScanSetting());
-		assertEquals(scanSettingSelected.getIdScanSetting(), newScanSetting.getIdScanSetting());
-		assertEquals("DonRaul", scanSettingSelected.getNetworkName());
-		assertEquals("192.168.1.1", scanSettingSelected.getIpStart());
-		assertEquals("192.168.1.35", scanSettingSelected.getIpEnd());
-		assertEquals("17:00", scanSettingSelected.getStartTime());
-		assertEquals(1, scanSettingSelected.getIntervallHours());
-		assertEquals(false, scanSettingSelected.getTimeToScan());
+		// 2. Datensatz (ohne ScanSetting) einfügen...
+		comp = new Company("Movento", "Irgendeinestrasse", "10", null, "9015", "St. Gallen");
+		compDAO.createCompany(comp);
+		assertNull(scanSDAO.getScanSettingById(comp.getIdCompany()));
 		
-		compDAO.deleteCompany(newComp);
-		assertNull(compDAO.getCompanyById(newComp.getIdCompany()));
+		//.. und diese Company ohne ScanSetting gleich wieder löschen
+		compDAO.deleteCompany(compDAO.getCompanyById(2));
+		assertNull(compDAO.getCompanyById(2));
+		
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		ScanSetting scanSetting1 = new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", "17:00", 1, false);
+		Company comp1 = new Company("VRSG", "Herisauerstrasse", "123", null, "9015", "St. Gallen");
+		comp1.setScanSetting(scanSetting1);
+		scanSetting1.setCompany(comp1);
+		session.save(comp1);
+		
+		List<Company> companies = session.createQuery("from Company").list();
+		for (Company company : companies) {
+			System.out.println(company.getName() + " , "
+					+ company.getStreet());
+		}
+		session.getTransaction().commit();
+		session.close();
 	}
 	
 	@Test
@@ -260,23 +284,6 @@ public class HibernateTest {
 		scanStatusDAO.deleteScanStatus(scanStatusDAO.getScanStatusById(1));
 		assertNull(scanStatusDAO.getScanStatusById(1));
 	}
-	/*
-	@Test
-	public void TestScanSetting(){
-		ScanSetting scanS= new ScanSetting("HOLDEREGGER", "192.168.1.1", "192.168.1.35", "07:00", 1, true);
-		ScanSettingDAO scanSDAO = new ScanSettingDAO();
-		scanSDAO.createScanSetting(scanS);
-		
-		ScanSetting scanSettingSelected = scanSDAO.getScanSettingById(1);
-		assertEquals("HOLDEREGGER", scanSettingSelected.getNetworkName());
-		assertEquals("192.168.1.1", scanSettingSelected.getIpStart());
-		assertEquals("192.168.1.35", scanSettingSelected.getIpEnd());
-		assertEquals("07:00", scanSettingSelected.getStartTime());
-		assertEquals(1, scanSettingSelected.getIntervallHours());
-		
-		//scanSDAO.deleteScanSettings(scanSDAO.getScanSettingById(1));
-		//assertNull(scanSDAO.getScanSettingById(1));	
-	}*/
 	
 	@Test
 	public void TestScanJob(){
@@ -291,5 +298,14 @@ public class HibernateTest {
 		
 		scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
 		assertNull(scanJobDAO.getScanJobById(1));
+	}
+	
+	@Test
+	public void TestGetDevices()
+	{
+		DeviceDAO deviceDAO = new DeviceDAO();
+		List<Device> devices = deviceDAO.getDevicesByScanJob(1);
+		
+		assertEquals(1, devices.size());
 	}
 }

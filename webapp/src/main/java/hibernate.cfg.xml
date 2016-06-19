@@ -11,16 +11,18 @@
         <property name="connection.password">vdjjmf#n$ri7cr!?+RX7ZVbY5</property>
         
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">1</property>
+        <!-- property name="connection.pool_size">1</property-->
         
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
-        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">true</property>
+    	<property name="hibernate.show_sql_comments">false</property>
  		
  		<!-- Drop and re-create the database schema on startup -->
     	<property name="hbm2ddl.auto">create-drop</property>
+<!-- 	   	<property name="hbm2ddl.auto">update</property> -->
         <property name="hibernate.current_session_context_class">thread</property>
-<!--         <mapping class="ch.zbw.sysVentorySaas.App2.model.Software"/> -->
         
         <!-- Mapping files --> 
         <mapping resource="HibernateCompanyMapping.hbm.xml"/> 

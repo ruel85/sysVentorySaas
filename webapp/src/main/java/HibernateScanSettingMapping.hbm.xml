@@ -5,14 +5,21 @@
 <hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.ScanSetting" table="scansetting">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einer Scan-Einstellung</meta>
-		<id name="idScanSetting" type="int" column="idScanSetting">
-			<generator class="identity"/>
+		
+		<id name="idCompany" column="idCompany" type="int">
+		<generator class="foreign">
+			<param name="property">company</param>
+		</generator>
 		</id>
+		
+		<one-to-one name="company" class="ch.zbw.sysVentorySaas.App.model.Company" constrained="true">
+		</one-to-one>
+		
 		<property name="networkName" column="networkName" type="string"/>
 		<property name="ipStart" column="ipStart" type="string"/>
 		<property name="ipEnd" column="ipEnd" type="string"/>
 		<property name="startTime" column="startTime" type="string"/>
 		<property name="intervallHours" column="intervallHours" type="int"/>
-		<property name="timeToScan" column="timeToScan" type="boolean"/>
+		<property name="timeToScan" column="timeToScan" type="boolean"/>			
 	</class>
 </hibernate-mapping>

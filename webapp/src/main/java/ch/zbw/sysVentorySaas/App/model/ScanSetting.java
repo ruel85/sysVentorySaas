@@ -1,17 +1,32 @@
 package ch.zbw.sysVentorySaas.App.model;
 
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 @XmlRootElement
-public class ScanSetting {
+public class ScanSetting{
 	
-	private int idScanSetting;
+	//@GenericGenerator(name="newGenerator", strategy="foreign", parameters={ @Parameter (value = "Company", name="property")})
+	private int idCompany;
 	private String networkName;
 	private String ipStart;
 	private String ipEnd;
 	private String startTime;
 	private int intervallHours;
 	private boolean timeToScan;
+	
+	// Für 1 zu 1 Beziehung
+	//@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name="idCompany")
+	private Company company;
 	
 	public ScanSetting(String networkName, String ipStart, String ipEnd, String startTime, int intervallHours, boolean timeToScan)
 	{
@@ -21,8 +36,16 @@ public class ScanSetting {
 		this.startTime=startTime;
 		this.intervallHours=intervallHours;
 		this.timeToScan=timeToScan;
-	}	
-	
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
 	public boolean getTimeToScan() {
 		return timeToScan;
 	}
@@ -34,12 +57,12 @@ public class ScanSetting {
 	public ScanSetting(){
 	}
 
-	public int getIdScanSetting() {
-		return idScanSetting;
+	public int getIdCompany() {
+		return idCompany;
 	}
 
-	public void setIdScanSetting(int idScanSetting) {
-		this.idScanSetting = idScanSetting;
+	public void setIdCompany(int idCompany) {
+		this.idCompany = idCompany;
 	}
 
 	public String getNetworkName() {
