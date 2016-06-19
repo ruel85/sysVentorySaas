@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+
+	<navigation-rule>
+		<from-view-id>/Login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{login.validateUsernamePassword}</from-action>
+			<from-outcome>Admin</from-outcome>
+			<to-view-id>/Admin.xhtml</to-view-id>			
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/Admin.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{userControl.checkUserRights}</from-action>
+			<from-outcome>UserControl</from-outcome>
+			<to-view-id>/UserControl.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{dashboard.checkUserRights}</from-action>
+			<from-outcome>Dashboard</from-outcome>
+			<to-view-id>/Dashboard.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{services.checkUserRights}</from-action>
+			<from-outcome>Services</from-outcome>
+			<to-view-id>/Services.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{loadMonitoring.checkUserRights}</from-action>
+			<from-outcome>LoadMonitoring</from-outcome>
+			<to-view-id>/LoadMonitoring.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+ <application>
+       <resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler>
+   </application>
+</faces-config>
