@@ -1,15 +1,6 @@
 package ch.zbw.sysVentorySaas.App.model;
 
-import javax.annotation.Generated;
-import javax.persistence.CascadeType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 @XmlRootElement
 public class ScanSetting{
@@ -23,9 +14,6 @@ public class ScanSetting{
 	private int intervallHours;
 	private boolean timeToScan;
 	
-	// Für 1 zu 1 Beziehung
-	//@OneToOne(cascade = CascadeType.ALL)
-	//@JoinColumn(name="idCompany")
 	private Company company;
 	
 	public ScanSetting(String networkName, String ipStart, String ipEnd, String startTime, int intervallHours, boolean timeToScan)

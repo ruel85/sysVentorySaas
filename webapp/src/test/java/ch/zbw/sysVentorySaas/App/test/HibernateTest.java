@@ -183,6 +183,15 @@ public class HibernateTest {
 	}
 	
 	@Test
+	public void TestGetDevices()
+	{
+		DeviceDAO deviceDAO = new DeviceDAO();
+		List<Device> devices = deviceDAO.getDevicesByScanJob(1);
+		
+		assertEquals(1, devices.size());
+	}
+	
+	@Test
 	public void TestUser_CRUD(){
 		User newUser = null;
 		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
@@ -298,14 +307,5 @@ public class HibernateTest {
 		
 		scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
 		assertNull(scanJobDAO.getScanJobById(1));
-	}
-	
-	@Test
-	public void TestGetDevices()
-	{
-		DeviceDAO deviceDAO = new DeviceDAO();
-		List<Device> devices = deviceDAO.getDevicesByScanJob(1);
-		
-		assertEquals(1, devices.size());
 	}
 }
