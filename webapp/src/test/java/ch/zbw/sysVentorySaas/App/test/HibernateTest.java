@@ -312,7 +312,7 @@ public class HibernateTest {
 		assertEquals("07:30", scanJobSelected.getEndTime());
 		//assertEquals("Erledigt", scanJobSelected.getStatus().getName());
 		
-		scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
-		assertNull(scanJobDAO.getScanJobById(1));
+		//scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
+		//assertNull(scanJobDAO.getScanJobById(1));
 	}	
 }

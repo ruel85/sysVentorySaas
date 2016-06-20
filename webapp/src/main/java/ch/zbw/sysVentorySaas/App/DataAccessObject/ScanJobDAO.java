@@ -1,10 +1,14 @@
 package ch.zbw.sysVentorySaas.App.DataAccessObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.model.ScanJob;
+import ch.zbw.sysVentorySaas.App.model.User;
 
 public class ScanJobDAO {
 
@@ -32,5 +36,15 @@ public class ScanJobDAO {
 		session.delete(scanJob);
 		transaction.commit();
 		return scanJob;
+	}
+	
+	public List<ScanJob> getAllScanJobs()
+	{
+		List<ScanJob> scanjobs = new ArrayList<ScanJob>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		scanjobs = session.createQuery("FROM ScanJob").list(); 
+		transaction.commit();
+		return scanjobs;
 	}
 }

@@ -21,29 +21,34 @@
 			href="Services"></b:navCommandLink>
 		<b:navCommandLink value="Logout" action="#{login.logout}" href="Login"></b:navCommandLink>
 	</b:tabLinks>
-	<b:container>
-		<b:dataTable value="#{scans.allScans}" var="scans" id="allScans"
+	<h:form>
+		<b:dataTable value="#{scans.scans}" var="scan" id="allScans"
 			styleClass="table table-striped table-bordered" style="width:100%">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Ausführdatum" />
+					<h:outputText value="Startzeit" />
 				</f:facet>
-				<h:outputText value="#{scan.startedAt}" />
+				<h:outputText value="#{scan.startTime}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Beschreibung" />
+					<h:outputText value="Endzeit" />
 				</f:facet>
-				<h:inputText value="#{scan.description}" />
+				<h:outputText value="#{scan.endTime}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Status" />
+					<h:outputText value="Statusbeschreibung" />
 				</f:facet>
-				<h:inputText value="#{scan.state}" />
+				<h:outputText value="#{scan.status.description}" />
 			</h:column>
-
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Statusname" />
+				</f:facet>
+				<h:outputText value="#{scan.status.name}" />
+			</h:column>
 		</b:dataTable>
-	</b:container>
+	</h:form>
 </h:body>
 </html>
