@@ -10,7 +10,6 @@
      <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.jsf</url-pattern>
 </servlet-mapping>
-
     <servlet>
         <servlet-name>Jersey Web Application</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
