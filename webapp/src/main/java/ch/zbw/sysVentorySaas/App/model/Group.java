@@ -5,6 +5,8 @@ public class Group {
 	private int idGroup;
 	private String name;
 	
+	
+	
 	public Group(String name) {
 		this.name=name;
 	}
