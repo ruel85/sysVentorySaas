@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import ch.zbw.sysVentorySaas.webapp.Dao.LoginDao;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.LoginDao;
 import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;
 
 @ManagedBean
@@ -46,7 +46,7 @@ public class Login implements Serializable {
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							"Benutzername oder Passwort ist nicht korrekt",
 							"Bitte geben Sie die richtigen Informationen ein."));
 			return "Login";

@@ -1,4 +1,4 @@
-package ch.zbw.sysVentorySaas.webapp.Dao;
+package ch.zbw.sysVentorySaas.App.DataAccessObject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

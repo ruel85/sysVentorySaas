@@ -12,12 +12,12 @@ import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;
 
 @ManagedBean
 @SessionScoped
-public class Dashboard implements Serializable {
+public class Scans implements Serializable {
 
 	private static final long serialVersionUID = 1094801825228386363L;
 	
-	public String checkDashboard()
+	public String checkScans()
 	{
-		return "Dashboard";
+		return "Scans";
 	}
 }

@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>Lastüberwachung</title>
+	<title>Scans</title>
 </h:head>
 <h:body>
 	<b:tabLinks>
@@ -21,8 +21,29 @@
 			href="Services"></b:navCommandLink>
 		<b:navCommandLink value="Logout" action="#{login.logout}" href="Login"></b:navCommandLink>
 	</b:tabLinks>
-	<h:form>
-		<p>Lastüberwachnung</p>
-	</h:form>
+	<b:container>
+		<b:dataTable value="#{scans.allScans}" var="scans" id="allScans"
+			styleClass="table table-striped table-bordered" style="width:100%">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Ausführdatum" />
+				</f:facet>
+				<h:outputText value="#{scan.startedAt}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Beschreibung" />
+				</f:facet>
+				<h:inputText value="#{scan.description}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Status" />
+				</f:facet>
+				<h:inputText value="#{scan.state}" />
+			</h:column>
+
+		</b:dataTable>
+	</b:container>
 </h:body>
 </html>
