@@ -215,8 +215,9 @@ public class HibernateTest {
 	public void TestGroup_CRUD(){
 		
 		GroupDAO groupDAO = new GroupDAO();
-		Group newGroup = groupDAO.createGroup( new Group("Administrator"));
+		Group newGroup = groupDAO.createGroup( new Group("CustomerAdmin"));
 		
+		groupDAO.createGroup(new Group("SysVentoryAdmin"));
 		groupDAO.createGroup(new Group("Inventor"));
 		groupDAO.createGroup(new Group("Visitor"));
 		
@@ -234,7 +235,7 @@ public class HibernateTest {
 		ScanSettingDAO scanSDAO = new ScanSettingDAO();
 		
 		Company comp = new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen");	;
-		ScanSetting scanSetting = new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", "17:00", 1, false);
+		ScanSetting scanSetting = new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", 1, false);
 		
 		comp.setScanSetting(scanSetting);
 		scanSetting.setCompany(comp);
@@ -254,7 +255,7 @@ public class HibernateTest {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
-		ScanSetting scanSetting1 = new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", "17:00", 1, false);
+		ScanSetting scanSetting1 = new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", 1, false);
 		Company comp1 = new Company("VRSG", "Herisauerstrasse", "123", null, "9015", "St. Gallen");
 		comp1.setScanSetting(scanSetting1);
 		scanSetting1.setCompany(comp1);
@@ -311,4 +312,11 @@ public class HibernateTest {
 		scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
 		assertNull(scanJobDAO.getScanJobById(1));
 	}
+	
+	@Test
+	public void TestgetAllUsers(){
+		UserDAO userdao = new UserDAO();
+		userdao.getAllUsers();
+	}
+	
 }

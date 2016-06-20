@@ -1,4 +1,6 @@
 package ch.zbw.sysVentorySaas.App.model;
+import java.util.List;
+
 import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
 
 public class User {
@@ -7,6 +9,8 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	
+	private List<Group> groups;
 
 	public User(String username, String password, String email){
 		this.uID= MD5Hash.getMD5Hash(username);
@@ -16,6 +20,14 @@ public class User {
 	}
 	
 	public User(){
+	}
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
 	}
 
 	public byte[] getuID() {

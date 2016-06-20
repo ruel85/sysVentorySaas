@@ -1,5 +1,8 @@
 package ch.zbw.sysVentorySaas.App.DataAccessObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.velocity.runtime.directive.Parse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -44,4 +47,16 @@ public class UserDAO {
 		transaction.commit();
 		return sEmpty;
 	}
+	
+	public List<User> getAllUsers()
+	{
+		List<User> users = new ArrayList<User>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		users = session.createQuery("FROM user").list(); 
+		transaction.commit();
+		return users;	
+		
+	}
+
 }

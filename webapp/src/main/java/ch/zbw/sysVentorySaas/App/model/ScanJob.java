@@ -7,6 +7,14 @@ public class ScanJob {
 	private String endTime;
 	private ScanStatus status;
 	
+	// Felder des relevanten ScanSettings
+	/*private int idCompany;
+	private String networkName;
+	private String ipStart;
+	private String ipEnd;
+	private int intervallHours;
+	private boolean timeToScan;*/
+	
 	public ScanJob(String startTime, String endTime, ScanStatus status)
 	{	
 		this.startTime=startTime;

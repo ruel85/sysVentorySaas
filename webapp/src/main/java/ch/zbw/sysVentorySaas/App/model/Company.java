@@ -1,5 +1,7 @@
 package ch.zbw.sysVentorySaas.App.model;
 
+import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -17,6 +19,8 @@ public class Company implements java.io.Serializable{
 	private String city;
 	
 	private ScanSetting scanSetting;
+	
+	private List<User> users;
 	
 	public Company(String name, String street, String houseNumber, String houseNumberAdd, String zipCode, String city) {
 		this.name=name;

@@ -6,31 +6,47 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ch.zbw.sysVentorySaas.webapp.Util.DataConnect;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.*;
+import ch.zbw.sysVentorySaas.App.model.User;
 
 public class LoginDao {
 
 	public static boolean validate(String user, String password) {
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataConnect.getConnection();
-			ps = con.prepareStatement("SELECT username, password FROM user WHERE BINARY username = ? AND password = ?");
-			ps.setString(1, user);
-			ps.setString(2, password);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				//result found, means valid inputs
-				return true;
-			}
-		} catch (SQLException ex) {
-			System.out.println("Login error -->" + ex.getMessage());
-			return false;
-		} finally {
-			DataConnect.close(con);
+		
+	UserDAO userdao = new UserDAO();
+	
+	
+	for(User oneUser: userdao.getAllUsers())
+	{
+		if(oneUser != null)
+			if(oneUser.getUsername().equals(user) && oneUser.getPassword().equals(password))
+		{
+			return true;
 		}
+	}
+	
+		
+//		Connection con = null;
+//		PreparedStatement ps = null;		
+//
+//		try {
+//			con = DataConnect.getConnection();
+//			ps = con.prepareStatement("SELECT username, password FROM user WHERE BINARY username = ? AND password = ?");
+//			ps.setString(1, user);
+//			ps.setString(2, password);
+//
+//			ResultSet rs = ps.executeQuery();
+//
+//			if (rs.next()) {
+//				//result found, means valid inputs
+//				return true;
+//			}
+//		} catch (SQLException ex) {
+//			System.out.println("Login error -->" + ex.getMessage());
+//			return false;
+//		} finally {
+//			DataConnect.close(con);
+//		}
 		return false;
 	}
 }
