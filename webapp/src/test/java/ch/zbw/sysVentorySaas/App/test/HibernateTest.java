@@ -209,9 +209,10 @@ public class HibernateTest {
 		
 		//userDAO.deleteUser(newUser);
 		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
-		
-		UserDAO userdao = new UserDAO();
-		userdao.getAllUsers();
+	
+		userDAO.createUser(new User("elias", "12345", null));
+		userDAO.createUser(new User("saj", "12345", null));
+		userDAO.createUser(new User("damjan", "12345", null));	
 	}
 	
 	@Test
