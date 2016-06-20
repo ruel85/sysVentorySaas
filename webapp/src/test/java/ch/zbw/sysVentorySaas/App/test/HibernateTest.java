@@ -209,6 +209,9 @@ public class HibernateTest {
 		
 		//userDAO.deleteUser(newUser);
 		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
+		
+		UserDAO userdao = new UserDAO();
+		userdao.getAllUsers();
 	}
 	
 	@Test
@@ -311,12 +314,5 @@ public class HibernateTest {
 		
 		scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
 		assertNull(scanJobDAO.getScanJobById(1));
-	}
-	
-	@Test
-	public void TestgetAllUsers(){
-		UserDAO userdao = new UserDAO();
-		userdao.getAllUsers();
-	}
-	
+	}	
 }
