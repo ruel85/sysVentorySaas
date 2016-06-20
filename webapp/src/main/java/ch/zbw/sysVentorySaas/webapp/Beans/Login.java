@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import ch.zbw.sysVentorySaas.App.DataAccessObject.LoginDao;
+import ch.zbw.sysVentorySaas.App.model.User;
 import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;
 
 @ManagedBean
@@ -38,10 +39,10 @@ public class Login implements Serializable {
 
 	//validate login
 	public String validateUsernamePassword() {
-		boolean valid = LoginDao.validate(user, password);
-		if (valid) {
+		User user = LoginDao.validate(this.user, password);
+		if (user != null) {
 			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", user);
+			session.setAttribute("user", user);
 			return "Admin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
