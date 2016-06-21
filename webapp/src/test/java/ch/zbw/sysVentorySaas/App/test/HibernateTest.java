@@ -41,6 +41,7 @@ import ch.zbw.sysVentorySaas.App.model.ScanStatus;
 import ch.zbw.sysVentorySaas.App.model.Service;
 import ch.zbw.sysVentorySaas.App.model.Software;
 import ch.zbw.sysVentorySaas.App.model.User;
+import ch.zbw.sysVentorySaas.App.services.ScanSettingService;
 
 public class HibernateTest {
 	private String user;
@@ -284,6 +285,17 @@ public class HibernateTest {
 		}
 		session.getTransaction().commit();
 		session.close();
+		
+		
+		List<ScanSetting> list = scanSDAO.getAllScanSettings();
+			for (ScanSetting oneScanSetting : list) {
+				if (oneScanSetting != null)
+					System.out.println("ScanSetting with idCompany:" + oneScanSetting.getIdCompany()); 
+			}
+	
+		ScanSettingService s = new ScanSettingService();
+		assertEquals(5, s.getScansettingById(5).getIdCompany());
+			
 	}
 	
 	@Test

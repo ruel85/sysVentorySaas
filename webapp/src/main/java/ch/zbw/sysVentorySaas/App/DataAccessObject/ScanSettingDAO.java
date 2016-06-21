@@ -1,11 +1,16 @@
 package ch.zbw.sysVentorySaas.App.DataAccessObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.JoinTable;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
+import ch.zbw.sysVentorySaas.App.model.Company;
+import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 import ch.zbw.sysVentorySaas.App.model.User;
 
@@ -25,7 +30,7 @@ public class ScanSettingDAO {
 		Transaction transaction = session.beginTransaction();
 		newObject = (ScanSetting) session.get(ScanSetting.class, id);
 		transaction.commit();
-		return newObject;
+		return newObject;	
 	}
 	
 	public void deleteScanSettings(ScanSetting scanSetting){
@@ -35,9 +40,12 @@ public class ScanSettingDAO {
 		transaction.commit();
 	}
 
-	public ScanSetting getScanSettingByUID(byte[] uID) {
-		UserDAO uDAO = new UserDAO();
-		User user = uDAO.getUserByUID(uID);		
-		return new ScanSetting();
+	public List<ScanSetting> getAllScanSettings() {
+		List<ScanSetting> scanSettings = new ArrayList<ScanSetting>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction(); 
+		scanSettings = session.createQuery("FROM ScanSetting").list();
+		transaction.commit();
+		return scanSettings;
 	}
 }
