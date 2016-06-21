@@ -16,29 +16,9 @@ import org.jboss.logging.Param;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 
-@Path("/scansettings")
+
 public class ScanSettingService {
 
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	public List<ScanSetting> getAllScanSettings() {
-		
-		List<ScanSetting> lst = new ArrayList<ScanSetting>();
-		ScanSettingDAO sDAO = new ScanSettingDAO();
-		lst = sDAO.getAllScanSettings();
-		return lst;
-	}
-	
-	@GET
-	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_XML)
-	public ScanSetting getScansettingById(@PathParam("id") int id){
-		
-		ScanSetting s = new ScanSetting();
-		ScanSettingDAO sDAO = new ScanSettingDAO();
-		System.out.println("Got Param" + id);
-		s= sDAO.getScanSettingById(id);	//todo Ruel
-		return s;
-	}
+
 	
 }
