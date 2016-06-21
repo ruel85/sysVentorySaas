@@ -33,16 +33,12 @@ public class ScanSettingResource {
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public ScanSetting getScanSettingByUID(@PathParam("id") int uID){		
-		
-		
-		UserDAO userDAO = new UserDAO();
-		userDAO.getUserByUID(uID)
+	public ScanSetting getScanSettingByUID(@PathParam("id") int uID){
 		
 		ScanSetting sEmty = new ScanSetting();
 		ScanSettingDAO dao = new ScanSettingDAO();
 		
-		sEmty = dao.getScanSettingById(1);	
+		sEmty = dao.getScanSettingById(uID);	
 		return sEmty;
 	}
 	
