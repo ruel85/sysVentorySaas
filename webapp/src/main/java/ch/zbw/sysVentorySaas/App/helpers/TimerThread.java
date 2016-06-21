@@ -16,11 +16,11 @@ public class TimerThread extends TimerTask {
 
 	@Override
 	public void run() {
-		this.scanSetting.setTimeToScan(true);
 		if (this.scanSetting.getIntervallHours() != intervall) {
 			this.cancel();
 			this.intervallHasChanged = true;
 		} else {
+			this.scanSetting.setTimeToScan(true);
 			System.out.println("ScanJob auf True gesetzt in " + scanSetting.getNetworkName());
 		}
 	}
