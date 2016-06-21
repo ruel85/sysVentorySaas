@@ -41,7 +41,6 @@ import ch.zbw.sysVentorySaas.App.model.ScanStatus;
 import ch.zbw.sysVentorySaas.App.model.Service;
 import ch.zbw.sysVentorySaas.App.model.Software;
 import ch.zbw.sysVentorySaas.App.model.User;
-import ch.zbw.sysVentorySaas.App.services.ScanSettingService;
 
 public class HibernateTest {
 	private String user;
