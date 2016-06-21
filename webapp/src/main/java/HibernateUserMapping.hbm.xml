@@ -14,7 +14,7 @@
 		<column name="idCompany" not-null="true"/>
 		</many-to-one>
 		
-		<property name="uID" column="uid" type="binary"/>
+		<property name="uID" column="uid" type="string"/>
 		<property name="username" column="username" type="string"/>
 		<property name="password" column="password" type="string"/>
 		<property name="email" column="email" type="string"/>

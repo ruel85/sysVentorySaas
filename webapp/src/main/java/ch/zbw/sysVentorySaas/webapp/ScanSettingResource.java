@@ -32,10 +32,10 @@ public class ScanSettingResource {
 			UserDAO userDAO = new UserDAO();
 			User user = userDAO.getUserByUID(uID);
 			
-			if(user != null && user.getCompany() != null)
-			{
-				return user.getCompany().getScanSetting();
-			}
-			else return null;
-		}
+			if(user != null)
+				return new ScanSetting("User konnte aufgrund UID (" + uID + ") nicht ermittelt werden!", "", "", 1, false);
+			else if(user.getCompany() == null)
+				return new ScanSetting("Company ist auf User nicht gesetzt!", "", "", 1, false);
+			return user.getCompany().getScanSetting();		
+}
 }

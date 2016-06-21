@@ -196,12 +196,12 @@ public class HibernateTest {
 		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
 		
 		UserDAO userDAO = new UserDAO();
-		User user2 = new User("ruel85", "12345", "ruel.holderegger@gmx.ch");
+		User user2 = new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch");
 		//newUser = userDAO.createUser(new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch"));
 	
-		User user3 = new User("elias", "12345", null);
-		User user4 = new User("saj", "12345", null);
-		User user5 = new User("damjan", "12345", null);	
+		User user3 = new User(null, "elias", "12345", null);
+		User user4 = new User(null, "saj", "12345", null);
+		User user5 = new User(null, "damjan", "12345", null);	
 		
 		Company comp = new Company("ZbW", "Gaiserwaldstrasse", "1", null, "9043", "Abtwil SG");
 		CompanyDAO comDAO = new  CompanyDAO();
@@ -358,8 +358,8 @@ public class HibernateTest {
 		//User user1 = uDAO.createUser(new User("Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com"));
 		//User user2 = uDAO.createUser(new User("Kevin", "0000", "info@info.de"));
 		
-		User user1 = new User("Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com");
-		User user2 = new User("Kevin", "0000", "info@info.de");
+		User user1 = new User(null, "Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com");
+		User user2 = new User(null, "Kevin", "0000", "info@info.de");
 		
 		user1.setCompany(comp1);
 		session.save(user1);

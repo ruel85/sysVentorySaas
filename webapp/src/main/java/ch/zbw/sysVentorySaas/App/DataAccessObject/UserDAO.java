@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.velocity.runtime.directive.Parse;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -32,13 +33,14 @@ public class UserDAO {
 
 	public User getUserByUID(String uID) {
 		User newObject = new User();
-		for (User oneUser : getAllUsers()) {
-			if (oneUser != null)
-				if (oneUser.getuID().equals(uID)) {
-					newObject = oneUser;
-					break;
-				}
-		}		
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("FROM User where uID = :uID");
+		query.setParameter("uID", uID);
+		newObject = (User)query.list();
+		transaction.commit();
+
 		return newObject;
 	}
 	
@@ -56,9 +58,8 @@ public class UserDAO {
 		List<User> users = new ArrayList<User>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
-		users = session.createQuery("FROM User").list(); 
+		users = session.createQuery("FROM User").list();
 		transaction.commit();
 		return users;
 	}
-
 }

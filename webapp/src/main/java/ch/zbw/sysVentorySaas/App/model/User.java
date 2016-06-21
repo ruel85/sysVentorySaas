@@ -5,7 +5,7 @@ import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
 
 public class User {
 	private int idUser;
-	private byte[] uID;
+	private String uID;
 	private String username;
 	private String password;
 	private String email;
@@ -14,8 +14,12 @@ public class User {
 	
 	private Company company;
 
-	public User(String username, String password, String email){
-		this.uID= MD5Hash.getMD5Hash(username);
+	public User(String uID, String username, String password, String email){
+		if(uID == null)
+		{
+			this.uID= MD5Hash.getMD5Hash(username).toString();
+		}
+		
 		this.username=username;
 		this.password=password;
 		this.email=email;
@@ -40,11 +44,11 @@ public class User {
 		this.groups = groups;
 	}
 
-	public byte[] getuID() {
+	public String getuID() {
 		return uID;
 	}
 
-	public void setuID(byte[] uID) {
+	public void setuID(String uID) {
 		this.uID = uID;
 	}
 
