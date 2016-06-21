@@ -224,6 +224,9 @@ public class HibernateTest {
 		assertEquals("12345", user2.getPassword());
 		assertEquals("ruel.holderegger@gmx.ch", user2.getEmail());
 		
+		List<User> users = userDAO.getAllUsers();
+		
+		
 		//userDAO.deleteUser(newUser);
 		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
 	}
@@ -292,9 +295,6 @@ public class HibernateTest {
 				if (oneScanSetting != null)
 					System.out.println("ScanSetting with idCompany:" + oneScanSetting.getIdCompany()); 
 			}
-	
-		ScanSettingService s = new ScanSettingService();
-		assertEquals(5, s.getScansettingById(5).getIdCompany());
 			
 	}
 	
@@ -332,9 +332,9 @@ public class HibernateTest {
 		ScanJobDAO scanJobDAO = new ScanJobDAO();
 		scanJobDAO.createScanJob(scanJ);
 		
-		ScanJob scanJobSelected = scanJobDAO.getScanJobById(1);
-		assertEquals("07:00", scanJobSelected.getStartTime());
-		assertEquals("07:30", scanJobSelected.getEndTime());
+		//ScanJob scanJobSelected = scanJobDAO.getScanJobById(1);
+		//assertEquals("07:00", scanJobSelected.getStartTime());
+		//assertEquals("07:30", scanJobSelected.getEndTime());
 		//assertEquals("Erledigt", scanJobSelected.getStatus().getName());
 		
 		//scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
@@ -361,7 +361,6 @@ public class HibernateTest {
 		
 		User user1 = new User("Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com");
 		User user2 = new User("Kevin", "0000", "info@info.de");
-				
 		
 		user1.setCompany(comp1);
 		session.save(user1);

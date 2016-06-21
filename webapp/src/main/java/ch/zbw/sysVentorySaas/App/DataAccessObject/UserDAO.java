@@ -30,12 +30,15 @@ public class UserDAO {
 		return user;
 	}
 
-	public User getUserByUID(byte[] uID) {
+	public User getUserByUID(String uID) {
 		User newObject = new User();
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		newObject = (User) session.get(User.class, uID);
-		transaction.commit();
+		for (User oneUser : getAllUsers()) {
+			if (oneUser != null)
+				if (oneUser.getuID().equals(uID)) {
+					newObject = oneUser;
+					break;
+				}
+		}		
 		return newObject;
 	}
 	
