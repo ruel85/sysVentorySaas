@@ -223,8 +223,11 @@ public class HibernateTest {
 		assertEquals("12345", user2.getPassword());
 		assertEquals("ruel.holderegger@gmx.ch", user2.getEmail());
 		
-		List<User> users = userDAO.getAllUsers();
+		ScanSetting scanSetting = new ScanSetting("ZBW-Gast", "192.168.5.55", "192.168.70.30", 60, true);
 		
+		comp.setScanSetting(scanSetting);
+		scanSetting.setCompany(comp);
+		comDAO.createCompany(comp);
 		
 		//userDAO.deleteUser(newUser);
 		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
@@ -286,8 +289,7 @@ public class HibernateTest {
 					+ company.getStreet());
 		}
 		session.getTransaction().commit();
-		session.close();
-		
+		session.close();		
 		
 		List<ScanSetting> list = scanSDAO.getAllScanSettings();
 			for (ScanSetting oneScanSetting : list) {

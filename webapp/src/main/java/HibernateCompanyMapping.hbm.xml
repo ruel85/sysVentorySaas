@@ -10,14 +10,15 @@
 			<generator class="native"></generator>
 		</id>
 		
-		<one-to-one name="scanSetting" class="ch.zbw.sysVentorySaas.App.model.ScanSetting" cascade="save-update">
+		<one-to-one name="scanSetting" class="ch.zbw.sysVentorySaas.App.model.ScanSetting" 
+		cascade="save-update" fetch="join" lazy="false">
 		</one-to-one>	
 		
 		<set name="users" table="user" inverse="true" lazy="true" fetch="select">
 			<key>
 				<column name="idUser" not-null="true"/>
 			</key>
-			<one-to-many class="ch.zbw.sysVentorySaas.App.model.User" />
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.User"/>
 		</set>
 		
 		<property name="name" column="name" type="string"/>

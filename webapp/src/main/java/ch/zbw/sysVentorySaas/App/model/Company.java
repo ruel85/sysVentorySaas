@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 public class Company{
 	
 	@Id @GeneratedValue
@@ -43,6 +46,7 @@ public class Company{
 		this.users = users;
 	}
 
+	@Fetch(FetchMode.JOIN)
 	public int getIdCompany() {
 		return idCompany;
 	}

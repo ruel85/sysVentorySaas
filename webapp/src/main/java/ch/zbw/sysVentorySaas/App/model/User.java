@@ -1,6 +1,5 @@
 package ch.zbw.sysVentorySaas.App.model;
 import java.util.List;
-
 import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
 
 public class User {
@@ -19,7 +18,7 @@ public class User {
 		{
 			this.uID= MD5Hash.getMD5Hash(username).toString();
 		}
-		
+		this.uID = uID;
 		this.username=username;
 		this.password=password;
 		this.email=email;
