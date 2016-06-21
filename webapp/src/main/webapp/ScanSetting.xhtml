@@ -11,36 +11,41 @@
 <h:body>
 	<b:tabLinks>
 		<b:navCommandLink value="Home" action="Admin" href="Home"></b:navCommandLink>
-		
+
 		<b:navCommandLink value="Benutzerverwaltung"
 			action="#{userControl.checkUserRights}" href="Benutzerverwaltung"></b:navCommandLink>
-			
+
 		<b:navCommandLink value="Scan-Einstellungen"
-			action="#{scanSettingBean.checkScanSetting}" href="ScanSettingBean"></b:navCommandLink>		
+			action="#{scanSettingBean.checkScanSetting}" href="ScanSettingBean"></b:navCommandLink>
+
+		<b:navCommandLink value="Scans" action="#{scans.checkScans}"
+			href="Scans"></b:navCommandLink>
 
 		<b:navCommandLink value="Lastüberwachung"
 			action="#{loadMonitoring.checkLoadMonitoring}" href="Lastüberwachung"></b:navCommandLink>
-		
+
 		<b:navCommandLink value="Services" action="#{services.checkServices}"
 			href="Services"></b:navCommandLink>
-		
+
 		<b:navCommandLink value="Logout" action="#{login.logout}" href="Login"></b:navCommandLink>
 	</b:tabLinks>
-	<b:container>
-	
-	<b:panelGrid colSpans="2,10">
-    <h:outputLabel value="Value 1" />
-    <b:inputText span="8" value="# {scanSettingBean.networkName}"/>
-    <h:outputLabel value="Ip-Range Anfang" />
-    <b:inputText span="10" value="# {scanSettingBean.ipStart}"  />
-    <h:outputLabel value="IP-Range Ende" />
-    <b:inputText value="# {scanSettingBean.ipEnd}" />
-    <h:outputLabel value="Intervall in h" />
-    <b:inputText value="# {scanSettingBean.intervallHour}" />
-    <h:outputLabel value="Zeit zu Scannen" />
-    <b:selectBooleanCheckbox value="# {scanSettingBean.intervallHour}" />
-</b:panelGrid>
+	<h:form>
+		<b:container>
 
-	</b:container>
+			<b:panelGrid colSpans="2,10">
+				<h:outputLabel value="Value 1" />
+				<b:inputText span="8" value="# {scanSettingBean.networkName}" />
+				<h:outputLabel value="Ip-Range Anfang" />
+				<b:inputText span="10" value="# {scanSettingBean.ipStart}" />
+				<h:outputLabel value="IP-Range Ende" />
+				<b:inputText value="# {scanSettingBean.ipEnd}" />
+				<h:outputLabel value="Intervall in h" />
+				<b:inputText value="# {scanSettingBean.intervallHour}" />
+				<h:outputLabel value="Zeit zu Scannen" />
+				<b:selectBooleanCheckbox value="# {scanSettingBean.intervallHour}" />
+			</b:panelGrid>
+
+		</b:container>
+	</h:form>
 </h:body>
 </html>
