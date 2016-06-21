@@ -10,12 +10,12 @@ public class TimerThreadTest {
 
 	@Test
 	public void test() {
-		ScanSetting ss1 = new ScanSetting("Network1", "192.168.1.1", "192.168.1.254", 1, false);
-		ScanSetting ss2 = new ScanSetting("Network2", "192.168.1.1", "192.168.1.254", 2, false);
-		ScanSetting ss3 = new ScanSetting("Network3", "192.168.1.1", "192.168.1.254", 3, false);
-		ScanSetting ss4 = new ScanSetting("Network4", "192.168.1.1", "192.168.1.254", 4, false);
-		ScanSetting ss5 = new ScanSetting("Network5", "192.168.1.1", "192.168.1.254", 5, false);
-		ScanSetting ss6 = new ScanSetting("Network6", "192.168.1.1", "192.168.1.254", 5, false);
+		ScanSetting ss1 = new ScanSetting("ScanJob1", "192.168.1.1", "192.168.1.254", 1, false);
+		ScanSetting ss2 = new ScanSetting("ScanJob2", "192.168.1.1", "192.168.1.254", 2, false);
+		ScanSetting ss3 = new ScanSetting("ScanJob3", "192.168.1.1", "192.168.1.254", 3, false);
+		ScanSetting ss4 = new ScanSetting("ScanJob4", "192.168.1.1", "192.168.1.254", 4, false);
+		ScanSetting ss5 = new ScanSetting("ScanJob5", "192.168.1.1", "192.168.1.254", 5, false);
+		ScanSetting ss6 = new ScanSetting("ScanJob6", "192.168.1.1", "192.168.1.254", 6, false);
 
 		ArrayList<ScanSetting> scanSettings = new ArrayList<>();
 		scanSettings.add(ss1);
@@ -28,9 +28,9 @@ public class TimerThreadTest {
 		Timer myTimer = new Timer();
 		myTimer.schedule(tm, 0, 1000);
 		
-		sleep(2000);
+		sleep(4000);
 
-		ss1.setIntervallHours(3);
+		ss1.setIntervallHours(5);
 
 		sleep(1000);
 
@@ -40,7 +40,7 @@ public class TimerThreadTest {
 
 		tm.removeScanSetting(ss2);
 
-		sleep(10000);
+		sleep(20000);
 	}
 
 	public void sleep(int ms) {

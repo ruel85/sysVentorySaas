@@ -13,15 +13,17 @@ public class TimerManager extends TimerTask {
 
 	/**
 	 * @param scanSettings
-	 * @param testing Falls durch einen JUnit-Test ausgeführt, bitte TRUE übergeben, dann wird der Intervall um den Faktor 1000 verkürzt
+	 * @param testing
+	 *            Falls durch einen JUnit-Test ausgeführt, bitte TRUE übergeben,
+	 *            dann wird der Intervall um den Faktor 1000 verkürzt
 	 */
 	public TimerManager(ArrayList<ScanSetting> scanSettings, boolean testing) {
 		timerList = new ArrayList<>();
-		if(testing)
+		if (testing)
 			factor = 1000;
 		else
 			factor = 1;
-		
+
 		for (ScanSetting scanSetting : scanSettings) {
 			TimerThread tt = new TimerThread(scanSetting);
 			Timer myTimer = new Timer();
@@ -40,7 +42,7 @@ public class TimerManager extends TimerTask {
 		Timer myTimer = new Timer();
 		myTimer.schedule(tt, 0, scanSetting.getIntervallHours() * (3600000 / factor));
 		timerList.add(tt);
-		System.out.println("Neuer Intervall-Jog ist hinzugekommen: " + scanSetting.getNetworkName());
+		System.out.println("Neues ScanSetting ist hinzugekommen: " + scanSetting.getNetworkName());
 	}
 
 	/**
@@ -55,17 +57,10 @@ public class TimerManager extends TimerTask {
 				String networkName = th.getScanSetting().getNetworkName();
 				th.cancel();
 				iterator.remove();
-				System.out.println("TimerThread von " + networkName + " wurde beendet und gelöscht");
+				System.out.println("ScanSetting: " + networkName + " wurde gelöscht");
 			}
 		}
 
-		if (timerList.contains(scanSetting)) {
-			int i = timerList.indexOf(scanSetting);
-			TimerTask toDelte = timerList.get(i);
-			toDelte.cancel();
-			timerList.remove(scanSetting);
-			System.out.println("TimerThread von " + scanSetting.getNetworkName() + " wurde beendet und gelöscht");
-		}
 	}
 
 	@Override
@@ -79,8 +74,7 @@ public class TimerManager extends TimerTask {
 				myTimer.schedule(tt, 0, scanSetting.getIntervallHours() * (3600000 / factor));
 				iterator.remove();
 				iterator.add(tt);
-				System.out.println("Intervall hat geändert von " + th.getScanSetting().getNetworkName()
-						+ ", erstelle neuen TimerThread");
+				System.out.println("ScanSetting hat geändert von: " + th.getScanSetting().getNetworkName());
 			}
 		}
 

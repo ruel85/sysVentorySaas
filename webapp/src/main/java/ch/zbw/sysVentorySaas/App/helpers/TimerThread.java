@@ -20,9 +20,9 @@ public class TimerThread extends TimerTask {
 		if (this.scanSetting.getIntervallHours() != intervall) {
 			this.cancel();
 			this.intervallHasChanged = true;
+		} else {
+			System.out.println("ScanJob auf True gesetzt in " + scanSetting.getNetworkName());
 		}
-	
-		System.out.println("Intervall-Job ausgeführt auf " + scanSetting.getNetworkName());
 	}
 
 	public boolean isIntervallHasChanged() {
@@ -32,7 +32,5 @@ public class TimerThread extends TimerTask {
 	public ScanSetting getScanSetting() {
 		return scanSetting;
 	}
-	
-	
 
 }
