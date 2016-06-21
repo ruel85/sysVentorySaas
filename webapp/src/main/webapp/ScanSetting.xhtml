@@ -34,15 +34,15 @@
 
 			<b:panelGrid colSpans="2,10">
 				<h:outputLabel value="Value 1" />
-				<b:inputText span="8" value="# {scanSettingBean.networkName}" />
+				<b:inputText span="8" value="#{scanSettingBean.networkName}" />
 				<h:outputLabel value="Ip-Range Anfang" />
-				<b:inputText span="10" value="# {scanSettingBean.ipStart}" />
+				<b:inputText span="10" value="#{scanSettingBean.ipStart}" />
 				<h:outputLabel value="IP-Range Ende" />
-				<b:inputText value="# {scanSettingBean.ipEnd}" />
+				<b:inputText value="#{scanSettingBean.ipEnd}" />
 				<h:outputLabel value="Intervall in h" />
-				<b:inputText value="# {scanSettingBean.intervallHour}" />
+				<b:inputText value="#{scanSettingBean.intervallHours}" />
 				<h:outputLabel value="Zeit zu Scannen" />
-				<b:selectBooleanCheckbox value="# {scanSettingBean.intervallHour}" />
+				<b:selectBooleanCheckbox value="#{scanSettingBean.timeToScan}" />
 			</b:panelGrid>
 
 		</b:container>
