@@ -13,14 +13,15 @@
 		<b:navCommandLink value="Home" action="Admin" href="Home"></b:navCommandLink>
 		<b:navCommandLink value="Benutzerverwaltung"
 			action="#{userControl.checkUserRights}" href="Benutzerverwaltung"></b:navCommandLink>
-		<b:navCommandLink value="Scans"
-			action="#{scans.checkScans}" href="Scans"></b:navCommandLink>
+		<b:navCommandLink value="Scans" action="#{scans.checkScans}"
+			href="Scans"></b:navCommandLink>
+		<b:navCommandLink value="Scan-Einstellungen"
+			action="#{scanSettingBean.checkScanSetting}" href="ScanSetting"></b:navCommandLink>
 		<b:navCommandLink value="Lastüberwachung"
 			action="#{loadMonitoring.checkLoadMonitoring}" href="Lastüberwachung"></b:navCommandLink>
-		<b:navCommandLink value="Services"
-			action="#{services.checkServices}" href="Services"></b:navCommandLink>
-					<b:navCommandLink value="Logout" action="#{login.logout}"
-			href="Login"></b:navCommandLink>
+		<b:navCommandLink value="Services" action="#{services.checkServices}"
+			href="Services"></b:navCommandLink>
+		<b:navCommandLink value="Logout" action="#{login.logout}" href="Login"></b:navCommandLink>
 	</b:tabLinks>
 	<h:form>
 		<p>Benutzerverwaltung</p>

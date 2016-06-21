@@ -28,14 +28,14 @@ public class ScanSettingBean implements Serializable{
 	private Company comp;
 	private ScanSetting setting;
 	
-	public ScanSettingBean()
-	{
-		init();
-	}
+//	public ScanSettingBean()
+//	{
+//		init();
+//	}
 	
 	public String checkScanSetting()
 	{
-		return "ScanSettingBean";
+		return "ScanSetting";
 	}
 	
 	public void init()
