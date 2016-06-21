@@ -5,9 +5,15 @@
 <hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.User" table="user">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem User</meta>
+		
 		<id name="idUser" type="int" column="iduser">
 			<generator class="identity"/>
 		</id>
+		
+		<many-to-one name="company" class="ch.zbw.sysVentorySaas.App.model.Company" fetch="select">
+		<column name="idCompany" not-null="true"/>
+		</many-to-one>
+		
 		<property name="uID" column="uid" type="binary"/>
 		<property name="username" column="username" type="string"/>
 		<property name="password" column="password" type="string"/>

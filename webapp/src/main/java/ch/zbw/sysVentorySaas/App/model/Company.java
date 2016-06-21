@@ -1,12 +1,13 @@
 package ch.zbw.sysVentorySaas.App.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-public class Company implements java.io.Serializable{
+public class Company{
 	
 	@Id @GeneratedValue
 	private int idCompany;
@@ -20,7 +21,7 @@ public class Company implements java.io.Serializable{
 	
 	private ScanSetting scanSetting;
 	
-	private List<User> users;
+	private Set<User> users;
 	
 	public Company(String name, String street, String houseNumber, String houseNumberAdd, String zipCode, String city) {
 		this.name=name;
@@ -32,6 +33,14 @@ public class Company implements java.io.Serializable{
 	}
 
 	public Company() {
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	public int getIdCompany() {

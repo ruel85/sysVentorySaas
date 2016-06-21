@@ -193,26 +193,38 @@ public class HibernateTest {
 	
 	@Test
 	public void TestUser_CRUD(){
-		User newUser = null;
 		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
 		
 		UserDAO userDAO = new UserDAO();
-		newUser = userDAO.createUser(new User("ruel85", "12345", "ruel.holderegger@gmx.ch"));
+		User user2 = new User("ruel85", "12345", "ruel.holderegger@gmx.ch");
 		//newUser = userDAO.createUser(new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch"));
-				
-		User userSelected = userDAO.getUserByIdUser(newUser.getIdUser());
+	
+		User user3 = new User("elias", "12345", null);
+		User user4 = new User("saj", "12345", null);
+		User user5 = new User("damjan", "12345", null);	
+		
+		Company comp = new Company("ZbW", "Gaiserwaldstrasse", "1", null, "9043", "Abtwil SG");
+		CompanyDAO comDAO = new  CompanyDAO();
+		comDAO.createCompany(comp);
+		user2.setCompany(comp);
+		user3.setCompany(comp);
+		user4.setCompany(comp);
+		user5.setCompany(comp);
+	
+		userDAO.createUser(user2);
+		userDAO.createUser(user3);
+		userDAO.createUser(user4);
+		userDAO.createUser(user5);
+		
+		User userSelected = userDAO.getUserByIdUser(user2.getIdUser());
 		//assertEquals(newUser.getuID(), userSelected.getuID());
 		
-		assertEquals("ruel85", newUser.getUsername());
-		assertEquals("12345", newUser.getPassword());
-		assertEquals("ruel.holderegger@gmx.ch", newUser.getEmail());
+		assertEquals("ruel85", user2.getUsername());
+		assertEquals("12345", user2.getPassword());
+		assertEquals("ruel.holderegger@gmx.ch", user2.getEmail());
 		
 		//userDAO.deleteUser(newUser);
 		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
-	
-		userDAO.createUser(new User("elias", "12345", null));
-		userDAO.createUser(new User("saj", "12345", null));
-		userDAO.createUser(new User("damjan", "12345", null));	
 	}
 	
 	@Test
@@ -315,5 +327,36 @@ public class HibernateTest {
 		
 		//scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
 		//assertNull(scanJobDAO.getScanJobById(1));
-	}	
+	}
+	
+	@Test
+	public void Test_Company_And_User(){
+		//CompanyDAO cDAO = new CompanyDAO();
+		//Company comp1 = cDAO.createCompany(new Company("Siemens", "Hauptstrasse", "20", "a", "9050", "Appenzell"));
+		//Company comp2 = cDAO.createCompany(new Company("Bühler AG", "Hauptstrasse", "25", "b", "9240", "Uzwil SG"));
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Company comp1 = new Company("Siemens", "Hauptstrasse", "20", "a", "9050", "Appenzell");
+		Company comp2 = new Company("Bühler AG", "Hauptstrasse", "25", "b", "9240", "Uzwil SG");
+		session.save(comp1);
+		session.save(comp2);
+		
+		//UserDAO uDAO = new UserDAO();
+		//User user1 = uDAO.createUser(new User("Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com"));
+		//User user2 = uDAO.createUser(new User("Kevin", "0000", "info@info.de"));
+		
+		User user1 = new User("Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com");
+		User user2 = new User("Kevin", "0000", "info@info.de");
+				
+		
+		user1.setCompany(comp1);
+		session.save(user1);
+		
+		user2.setCompany(comp2);
+		session.save(user2);
+		
+		session.getTransaction().commit();	
+	}
 }

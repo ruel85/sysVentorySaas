@@ -35,6 +35,11 @@
 			<from-outcome>LoadMonitoring</from-outcome>
 			<to-view-id>/LoadMonitoring.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{scanSettingBean.checkScanSetting}</from-action>
+			<from-outcome>ScanSettingBean</from-outcome>
+			<to-view-id>/ScanSettingBean.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
  <application>
        <resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler>

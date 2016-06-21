@@ -11,6 +11,8 @@ public class User {
 	private String email;
 	
 	private List<Group> groups;
+	
+	private Company company;
 
 	public User(String username, String password, String email){
 		this.uID= MD5Hash.getMD5Hash(username);
@@ -20,6 +22,14 @@ public class User {
 	}
 	
 	public User(){
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	public List<Group> getGroups() {
