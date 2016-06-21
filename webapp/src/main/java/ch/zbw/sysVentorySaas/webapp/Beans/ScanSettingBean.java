@@ -1,6 +1,8 @@
 package ch.zbw.sysVentorySaas.webapp.Beans;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -13,8 +15,8 @@ import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;
 
 @ManagedBean
 @SessionScoped
-public class ScanSettingBean implements Serializable{
-	
+public class ScanSettingBean implements Serializable {
+
 	private static final long serialVersionUID = 1253310005019082700L;
 
 	private int idCompany;
@@ -22,37 +24,25 @@ public class ScanSettingBean implements Serializable{
 	private String ipStart;
 	private String ipEnd;
 	private int intervallHours;
-	private boolean timeToScan;	
-	
+	private boolean timeToScan;
+
 	CompanyDAO cDAO;
-	private Company comp;
 	private ScanSetting setting;
-	
-//	public ScanSettingBean()
-//	{
-//		init();
-//	}
-	
-	public String checkScanSetting()
-	{
+
+	public String checkScanSetting() {
+		ScanSettingDAO setting = new ScanSettingDAO();
+		List<ScanSetting> list = setting.getAllScanSettings();
+		for (ScanSetting oneSetting : list) {
+			if (oneSetting.getCompany().getIdCompany() == getUser().getCompany().getIdCompany()) {
+				this.setting = oneSetting;
+			}
+		}
+		this.networkName = this.setting.getNetworkName();
+		this.ipStart = this.setting.getIpStart();
+		this.ipEnd = this.setting.getIpEnd();
+		this.intervallHours = this.setting.getIntervallHours();
+		this.timeToScan = this.setting.getTimeToScan();
 		return "ScanSetting";
-	}
-	
-	public void init()
-	{
-		User u = (User)SessionUtils.getSession().getAttribute("User");
-		
-		cDAO = new CompanyDAO();
-		this.comp = cDAO.getCompanyById(u.getCompany().getIdCompany());
-		
-		this.idCompany = comp.getIdCompany();
-		this.networkName = comp.getName();
-		setting = comp.getScanSetting();
-		this.networkName = setting.getNetworkName();
-		this.ipStart = setting.getIpStart();
-		this.ipEnd = setting.getIpEnd();
-		this.intervallHours = setting.getIntervallHours();
-		this.timeToScan = setting.getTimeToScan();
 	}
 
 	public int getIdCompany() {
@@ -102,4 +92,13 @@ public class ScanSettingBean implements Serializable{
 	public void setTimeToScan(boolean timeToScan) {
 		this.timeToScan = timeToScan;
 	}
+
+	public User getUser() {
+		return SessionUtils.getUser();
+	}
+
+	public void setSetting(ScanSetting setting) {
+		this.setting = setting;
+	}
+
 }
