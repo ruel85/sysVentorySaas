@@ -18,24 +18,24 @@ import ch.zbw.sysVentorySaas.App.model.User;
 
 public class ScanSettingDAO {
 
-	public ScanSetting createScanSetting(ScanSetting scanSetting){
+	public ScanSetting createScanSetting(ScanSetting scanSetting) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(scanSetting);
 		transaction.commit();
 		return scanSetting;
 	}
-	
-	public ScanSetting getScanSettingById(int id){
+
+	public ScanSetting getScanSettingById(int id) {
 		ScanSetting newObject = new ScanSetting();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		newObject = (ScanSetting) session.get(ScanSetting.class, id);
 		transaction.commit();
-		return newObject;	
+		return newObject;
 	}
-	
-	public void deleteScanSettings(ScanSetting scanSetting){
+
+	public void deleteScanSettings(ScanSetting scanSetting) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(scanSetting);
@@ -45,9 +45,25 @@ public class ScanSettingDAO {
 	public List<ScanSetting> getAllScanSettings() {
 		List<ScanSetting> scanSettings = new ArrayList<ScanSetting>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction(); 
+		Transaction transaction = session.beginTransaction();
 		scanSettings = session.createQuery("FROM ScanSetting").list();
 		transaction.commit();
 		return scanSettings;
 	}
+
+	/*
+	 * public void setTimeToScan(String uID, boolean b) { Session session =
+	 * HibernateUtil.getSessionFactory().getCurrentSession(); Transaction
+	 * transaction = session.beginTransaction();
+	 * 
+	 * User user = new UserDAO().getUserByUID(uID);
+	 * 
+	 * 
+	 * if(user != null) { int idCompany = user.getCompany().getIdCompany();
+	 * ScanSetting sc = session.createQuery("FROM ScanSetting where  ")
+	 * 
+	 * } session.delete(scanSetting); transaction.commit();
+	 * 
+	 * }
+	 */
 }

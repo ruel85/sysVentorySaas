@@ -106,13 +106,13 @@
     <version>2.2.10</version>
     <scope>runtime</scope>
 </dependency>
-
 <!-- http://mvnrepository.com/artifact/javassist/javassist -->
 <dependency>
     <groupId>javassist</groupId>
     <artifactId>javassist</artifactId>
     <version>3.12.0.SP1</version>
-</dependency>    
+</dependency>
+
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>

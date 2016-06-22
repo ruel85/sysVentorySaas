@@ -11,10 +11,10 @@
 		</id>
 		
 		<one-to-one name="scanSetting" class="ch.zbw.sysVentorySaas.App.model.ScanSetting" 
-		cascade="save-update" fetch="join" lazy="false">
+		cascade="save-update" fetch="join">
 		</one-to-one>	
 		
-		<set name="users" table="user" inverse="true" lazy="true" fetch="select">
+		<set name="users" table="user" inverse="true" fetch="select">
 			<key>
 				<column name="idUser" not-null="true"/>
 			</key>

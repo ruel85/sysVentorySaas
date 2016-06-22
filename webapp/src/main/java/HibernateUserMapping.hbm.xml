@@ -10,7 +10,7 @@
 			<generator class="identity"/>
 		</id>
 		
-		<many-to-one name="company" class="ch.zbw.sysVentorySaas.App.model.Company" fetch="join" lazy="false">
+		<many-to-one name="company" class="ch.zbw.sysVentorySaas.App.model.Company" fetch="join">
 		<column name="idCompany" not-null="true"/>
 		</many-to-one>
 		

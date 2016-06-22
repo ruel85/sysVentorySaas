@@ -59,11 +59,30 @@ public class ScanSettingService {
 		}*/
 		
 		@GET
-		@Path("/test/{uID}")
-		@Produces(MediaType.TEXT_PLAIN)
-		public String getScanSettingTest(@PathParam("uID") String uID)
+		@Path("/{uID}")
+		@Produces(MediaType.APPLICATION_XML)
+		public ScanSetting getScanSettingTest(@PathParam("uID") String uID)
 		{
-			System.out.println("Testaufruf: " + uID);
-			return "Hallo test";
+			ScanSetting sReturn = new ScanSetting();
+			System.out.println("UID: " + uID);
+			UserDAO userDAO = new UserDAO();
+			User user = userDAO.getUserByUID(uID);
+			
+			Company comp = new CompanyDAO().getCompanyById(user.getCompany().getIdCompany());
+			//System.out.println("Company-ID: "  + comp.getIdCompany());
+			//System.out.println("ScanSetting-ID: "  + new ScanSettingDAO().getScanSettingById(comp.getIdCompany()).getIdCompany());
+			
+			try {
+				//sReturn = new ScanSettingDAO().getScanSettingById(comp.getIdCompany());	
+			} catch (Exception e) {
+				Log4JLogger log = new Log4JLogger();
+				log.error(e.getMessage());
+			}
+			
+			sReturn.setIdCompany(1);
+			sReturn.setTimeToScan(true);
+			sReturn.setIntervallHours(5);
+			return sReturn;
+			
 		}
 }
