@@ -307,7 +307,6 @@ public class HibernateTest {
 				if (oneScanSetting != null)
 					System.out.println("ScanSetting with idCompany:" + oneScanSetting.getIdCompany()); 
 			}
-			
 	}
 	
 	@Test
