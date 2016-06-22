@@ -79,6 +79,9 @@ public class ScanSettingService {
 				log.error(e.getMessage());
 			}
 			
+			sReturn.setIpStart("192.168.1.30");
+			sReturn.setIpEnd("192.168.1.80");
+			sReturn.setIdCompany((comp != null ? comp.getIdCompany() : 1));
 			sReturn.setIdCompany(1);
 			sReturn.setTimeToScan(true);
 			sReturn.setIntervallHours(5);

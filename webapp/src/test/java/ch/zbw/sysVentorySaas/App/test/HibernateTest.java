@@ -55,7 +55,7 @@ public class HibernateTest {
 		
 		user ="SysVentoryAdmin";
 		password="vdjjmf#n$ri7cr!?+RX7ZVbY5";
-		url="jdbc:mysql://ruelholderegger.ch:3306/sysVentorySaas";
+		url="jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas";
 		mySQLParams = "?useSSL=false&serverTimezone=Europe/Paris";
 		
 		/*user ="sysventory";
