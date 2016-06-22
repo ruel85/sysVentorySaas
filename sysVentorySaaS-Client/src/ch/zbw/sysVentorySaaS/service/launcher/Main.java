@@ -19,17 +19,19 @@ import ch.zbw.sysVentorySaaS.service.configManager.FileManager;
 import ch.zbw.sysVentorySaaS.service.powershellExecuter.PowershellExecuter;
 
 public class Main {
-	private final String dataPath = System.getenv("APPDATA").toString() + "\\SysVentory";
+//	private final String dataPath = System.getenv("APPDATA").toString() + "\\SysVentory";
+	private final String dataPath = "C:\\SysVentory";
 	private final String configPath = dataPath + "\\PutHereConfigFile";
 	private final String reportPath = dataPath + "\\ScanResults";
+	private final String reportXmlPath = reportPath + "\\wmi.xml";
 	private final String logPath = dataPath + "\\Logs";
 	private final String configXmlPath = configPath + "\\config.xml";
 	private final String configXsdPath = configPath + "\\config.xsd";
 	private final String loggingPath = logPath + "\\log.txt";
 	private final String xmlRootElementConfig = "SysVentoryConfig";
-	private final String xmlRootElementJob = "SysVentoryJob";
+	private final String xmlRootElementJob = "ScanSetting";
 	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "Server");
-	private final List<String> xmlElementsJob = Arrays.asList("UserId", "JobAvailable");
+	private final List<String> xmlElementsJob = Arrays.asList("uID", "timeToScan");
 	private final int checkIntervall = 10000;
 
 	private String userId;
@@ -124,6 +126,7 @@ public class Main {
 		}
 	}
 
+
 	public Logger getLogger() {
 		return logger;
 	}
@@ -191,5 +194,19 @@ public class Main {
 	public List<String> getXmlElementsJob() {
 		return xmlElementsJob;
 	}
+
+	public String getReportXmlPath() {
+		return reportXmlPath;
+	}
+
+	public String getLogPath() {
+		return logPath;
+	}
+
+	public int getCheckIntervall() {
+		return checkIntervall;
+	}
+	
+	
 
 }

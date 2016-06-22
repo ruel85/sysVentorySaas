@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaaS.service.httpClient.MyHttpClient;
 
 class ScanTimerTask extends TimerTask {
 	private Main main;
-	private MyHttpClient httpc = new MyHttpClient();
+	private MyHttpClient httpc;
 	private DOMReader domr = new DOMReader();
 
 	public ScanTimerTask(Main main) {
@@ -18,12 +18,15 @@ class ScanTimerTask extends TimerTask {
 	public void run() {
 		main.getLogger().info("check if a job is waiting");
 		try {
-			httpc = new MyHttpClient();
+			httpc = new MyHttpClient(main.getServer() + "/" + main.getUserId());
 			domr = new DOMReader();
 			HashMap<String, String> jobrequest = domr.getHashMap(httpc.get(), main.getXmlRootElementJob(), main.getXmlElementsJob());
-			if (Boolean.parseBoolean(jobrequest.get("JobAvailable")) && jobrequest.get("UserId").equals(main.getUserId())) {
+			if (Boolean.parseBoolean(jobrequest.get("timeToScan")) && jobrequest.get("uID").equals(main.getUserId())) {
 				main.getLogger().info("job was found, starting job [OK]\n");
 				main.executePowershell();
+				main.getLogger().info("send xml-report to server");
+				httpc.post(main.getReportXmlPath());
+				main.getLogger().info("xml-report successfully was send to server [OK]\n");
 			} else {
 				main.getLogger().info("no job is waiting [OK]\n");
 			}

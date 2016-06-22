@@ -1,15 +1,28 @@
 package ch.zbw.sysVentorySaaS.service.httpClient;
 
 import java.io.BufferedReader;
+import java.io.Console;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,17 +34,20 @@ import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+
+@SuppressWarnings("deprecation")
 public class MyHttpClient {
-	private static String requestURI = "http://www.mocky.io/v2/5756c6e30f0000b81c2f0038";
+	private String requestURI;;
 
-	public MyHttpClient() {
-
+	public MyHttpClient(String requestURI) {
+		this.requestURI = requestURI;
 	}
 
-	public void post() throws Exception {
+	public void post_old() throws Exception {
 		HttpClient client = new DefaultHttpClient();
-		HttpPost post = new HttpPost("http://www.mocky.io/v2/5756b8e00f0000b61a2f001e");
-		String xml = "<?xml version=\"1.0\"?><contact-info><name>Jane Smith</name><company>AT&amp;T</company><phone>(212) 555-4567</phone></contact-info>";
+		String postURI = "post";
+		HttpPost post = new HttpPost(requestURI);
+		String xml = "";
 		HttpEntity entity = new ByteArrayEntity(xml.getBytes("UTF-8"));
 		post.setEntity(entity);
 		HttpResponse response = client.execute(post);
@@ -39,6 +55,31 @@ public class MyHttpClient {
 		System.out.println("HTTP RESULT: " + result);
 	}
 
+	public void post(String sourcePath) throws IOException, TransformerException {
+		
+		URL url = new URL(requestURI);
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.setDoOutput(true);
+		connection.setInstanceFollowRedirects(false);
+		connection.setRequestMethod("POST");
+		connection.setRequestProperty("Content-Type", "application/xml");
+
+		OutputStream os = connection.getOutputStream();
+
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer transformer = tf.newTransformer();
+		FileReader fileReader = new FileReader(sourcePath);
+		StreamSource source = new StreamSource(fileReader);
+		StreamResult result = new StreamResult(os);
+		transformer.transform(source, result);
+
+		System.out.println(result.toString());
+		
+		os.flush();
+		connection.getResponseCode();
+		connection.disconnect();
+	}
+	
 	public Document get() throws Exception {
 
 		URL url = new URL(requestURI);
