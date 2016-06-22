@@ -1,6 +1,7 @@
 package ch.zbw.sysVentorySaaS.service.powershellExecuter.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
 

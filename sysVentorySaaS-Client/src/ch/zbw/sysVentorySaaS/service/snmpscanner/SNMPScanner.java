@@ -2,6 +2,7 @@ package ch.zbw.sysVentorySaaS.service.snmpscanner;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import org.snmp4j.smi.OID;
 
 import ch.zbw.sysVentorySaas.App.model.Device;

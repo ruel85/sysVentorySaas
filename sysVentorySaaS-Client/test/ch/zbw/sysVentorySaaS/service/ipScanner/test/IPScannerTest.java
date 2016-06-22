@@ -1,6 +1,7 @@
 package ch.zbw.sysVentorySaaS.service.ipScanner.test;
 
 import java.util.ArrayList;
+
 import org.junit.Test;
 
 import ch.zbw.sysVentorySaaS.service.ipScanner.IPScanner;

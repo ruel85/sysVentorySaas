@@ -1,7 +1,6 @@
 package ch.zbw.sysVentorySaaS.service.httpClient;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,54 +8,33 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+import ch.zbw.sysVentorySaaS.service.launcher.Main;
 
-@SuppressWarnings("deprecation")
 public class MyHttpClient {
-	private String requestURI;;
+	private String requestURI;
+	private Main main;
 
-	public MyHttpClient(String requestURI) {
+	public MyHttpClient(Main main, String requestURI) {
 		this.requestURI = requestURI;
+		this.main = main;
 	}
 
-	public void post_old() throws Exception {
-		HttpClient client = new DefaultHttpClient();
-		String postURI = "post";
-		HttpPost post = new HttpPost(requestURI);
-		String xml = "";
-		HttpEntity entity = new ByteArrayEntity(xml.getBytes("UTF-8"));
-		post.setEntity(entity);
-		HttpResponse response = client.execute(post);
-		String result = EntityUtils.toString(response.getEntity());
-		System.out.println("HTTP RESULT: " + result);
-	}
+	public String post(String sourcePath) throws IOException, TransformerException {
 
-	public void post(String sourcePath) throws IOException, TransformerException {
-		
 		URL url = new URL(requestURI);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setDoOutput(true);
@@ -73,13 +51,13 @@ public class MyHttpClient {
 		StreamResult result = new StreamResult(os);
 		transformer.transform(source, result);
 
-		System.out.println(result.toString());
-		
 		os.flush();
 		connection.getResponseCode();
 		connection.disconnect();
+
+		return result.toString();
 	}
-	
+
 	public Document get() throws Exception {
 
 		URL url = new URL(requestURI);
@@ -88,6 +66,7 @@ public class MyHttpClient {
 
 		// make connection
 		URLConnection urlc = url.openConnection();
+		urlc.setRequestProperty("Accept-Charset", "blaba");
 
 		// use post mode
 		urlc.setDoOutput(true);
@@ -106,6 +85,30 @@ public class MyHttpClient {
 		}
 		br.close();
 		return loadXMLFromString(response);
+	}
+
+	public Document sendGET() throws Exception {
+		URL obj = new URL(requestURI);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setRequestMethod("GET");
+		con.setRequestProperty("accept", "application/xml");
+		int responseCode = con.getResponseCode();
+		StringBuffer response = new StringBuffer();
+		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+
+			System.out.println(in.readLine());
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+				System.out.println(inputLine);
+			}
+			in.close();
+			return loadXMLFromString(response.toString());
+		} else {
+			main.getLogger().warning("HTTP-Status: " + responseCode);
+			return null;
+		}
 	}
 
 	private Document loadXMLFromString(String xml) throws Exception {
