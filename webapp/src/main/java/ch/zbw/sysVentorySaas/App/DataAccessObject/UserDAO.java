@@ -3,10 +3,15 @@ package ch.zbw.sysVentorySaas.App.DataAccessObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.FetchType;
+
 import org.apache.velocity.runtime.directive.Parse;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.model.Software;
@@ -31,17 +36,18 @@ public class UserDAO {
 		return user;
 	}
 
-	public User getUserByUID(String uID) {
+	@Fetch(FetchMode.JOIN)
+	public User getUserByUID(String UID) {
 		User newObject = new User();
-		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("FROM User where uID = :uID");
-		query.setParameter("uID", uID);
-		newObject = (User)query.list();
+		query.setParameter("uID", UID);
+		List<User> users = query.list();	
+		if(users.size() > 0)
+			users = query.list();		
 		transaction.commit();
-
-		return newObject;
+		return (users.size()> 0) ? users.get(0) : newObject;
 	}
 	
 	public User getUserByIdUser(int idUser) {

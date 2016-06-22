@@ -55,8 +55,14 @@ public class HibernateTest {
 		
 		user ="SysVentoryAdmin";
 		password="vdjjmf#n$ri7cr!?+RX7ZVbY5";
-		url="jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas";
+		url="jdbc:mysql://ruelholderegger.ch:3306/sysVentorySaaS_Backup";
 		mySQLParams = "?useSSL=false&serverTimezone=Europe/Paris";
+		
+		/*user ="sysventory";
+		password="Admin123";
+		url="jdbc:sqlserver://sysventorysql.database.windows.net:1433";
+		mySQLParams = ";database=SysventorySQL;user=sysventory@sysventorysql;password={Admin123};encrypt=true;trustServerCertificate=true;hostNameInCertificate=eastasia1-a.control.database.windows.net;loginTimeout=30;";
+		*/
 		
 		/*SessionFactory sessionFactory;
 		
@@ -71,7 +77,7 @@ public class HibernateTest {
 			// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
 			// so destroy it manually.
 			StandardServiceRegistryBuilder.destroy( registry );
-		}*/
+		}*/	
 	}
 	
 	@Test
@@ -86,8 +92,23 @@ public class HibernateTest {
 				con.close();
 				
 			} catch (SQLException e) {
+				System.out.println(e.getMessage());
 				throw new SQLException(e.getMessage());
+				
 			}
+			
+			try {
+				con = DriverManager.getConnection(url + mySQLParams, user, password);
+				st = "Show databases;";
+				Statement statement = con.createStatement();
+				ResultSet rs = statement.executeQuery(st);
+				rs.next();
+				//System.out.println(rs.getString(1));
+				con.close();
+				
+			} catch (SQLException e) {
+				throw new SQLException(e.getMessage());
+			}			
 	}
 	
 	@Test
@@ -183,21 +204,11 @@ public class HibernateTest {
 	}
 	
 	@Test
-	public void TestGetDevices()
-	{
-		DeviceDAO deviceDAO = new DeviceDAO();
-		List<Device> devices = deviceDAO.getDevicesByScanJob(1);
-		
-		assertEquals(1, devices.size());
-	}
-	
-	@Test
 	public void TestUser_CRUD(){
 		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
 		
 		UserDAO userDAO = new UserDAO();
 		User user2 = new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch");
-		//newUser = userDAO.createUser(new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch"));
 	
 		User user3 = new User(null, "elias", "12345", null);
 		User user4 = new User(null, "saj", "12345", null);
@@ -223,8 +234,11 @@ public class HibernateTest {
 		assertEquals("12345", user2.getPassword());
 		assertEquals("ruel.holderegger@gmx.ch", user2.getEmail());
 		
-		List<User> users = userDAO.getAllUsers();
+		ScanSetting scanSetting = new ScanSetting("ZBW-Gast", "192.168.5.55", "192.168.70.30", 60, true);
 		
+		comp.setScanSetting(scanSetting);
+		scanSetting.setCompany(comp);
+		comDAO.createCompany(comp);
 		
 		//userDAO.deleteUser(newUser);
 		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
@@ -286,8 +300,7 @@ public class HibernateTest {
 					+ company.getStreet());
 		}
 		session.getTransaction().commit();
-		session.close();
-		
+		session.close();		
 		
 		List<ScanSetting> list = scanSDAO.getAllScanSettings();
 			for (ScanSetting oneScanSetting : list) {
