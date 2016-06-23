@@ -18,20 +18,21 @@ class ScanTimerTask extends TimerTask {
 	public void run() {
 		main.getLogger().info("check if a job is waiting");
 		try {
-			httpc = new MyHttpClient(main.getServer() + "/" + main.getUserId());
+			httpc = new MyHttpClient(main, main.getServer() + "/" + main.getUserId());
 			domr = new DOMReader();
-			HashMap<String, String> jobrequest = domr.getHashMap(httpc.get(), main.getXmlRootElementJob(), main.getXmlElementsJob());
+			HashMap<String, String> jobrequest = domr.getHashMap(httpc.sendGET(), main.getXmlRootElementJob(), main.getXmlElementsJob());
 			if (Boolean.parseBoolean(jobrequest.get("timeToScan")) && jobrequest.get("uID").equals(main.getUserId())) {
 				main.getLogger().info("job was found, starting job [OK]\n");
 				main.executePowershell();
 				main.getLogger().info("send xml-report to server");
-				httpc.post(main.getReportXmlPath());
+				main.getLogger().info(httpc.post(main.getReportXmlPath()));
 				main.getLogger().info("xml-report successfully was send to server [OK]\n");
 			} else {
 				main.getLogger().info("no job is waiting [OK]\n");
 			}
 
 		} catch (Exception e) {
+			if (e.getMessage() != null)
 			main.getLogger().warning(e.getMessage() + "\n");
 		}
 	}

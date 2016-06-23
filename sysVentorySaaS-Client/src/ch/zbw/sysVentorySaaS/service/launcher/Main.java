@@ -29,7 +29,7 @@ public class Main {
 	private final String configXsdPath = configPath + "\\config.xsd";
 	private final String loggingPath = logPath + "\\log.txt";
 	private final String xmlRootElementConfig = "SysVentoryConfig";
-	private final String xmlRootElementJob = "ScanSetting";
+	private final String xmlRootElementJob = "scanSetting";
 	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "Server");
 	private final List<String> xmlElementsJob = Arrays.asList("uID", "timeToScan");
 	private final int checkIntervall = 10000;
