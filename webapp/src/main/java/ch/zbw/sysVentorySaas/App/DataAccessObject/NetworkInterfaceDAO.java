@@ -8,7 +8,8 @@ import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
 
 public class NetworkInterfaceDAO {
-	public NetworkInterface createNetworkInterface(NetworkInterface networkInterface){
+	
+	public static NetworkInterface createNetworkInterface(NetworkInterface networkInterface){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(networkInterface);
@@ -16,7 +17,7 @@ public class NetworkInterfaceDAO {
 		return networkInterface;
 	}
 	
-	public NetworkInterface getNetworkInterfaceById(int id){
+	public static NetworkInterface getNetworkInterfaceById(int id){
 		NetworkInterface newObject = new NetworkInterface();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -25,7 +26,7 @@ public class NetworkInterfaceDAO {
 		return newObject;
 	}
 	
-	public NetworkInterface deleteNetworkInterface(NetworkInterface networkInterface)
+	public static NetworkInterface deleteNetworkInterface(NetworkInterface networkInterface)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();

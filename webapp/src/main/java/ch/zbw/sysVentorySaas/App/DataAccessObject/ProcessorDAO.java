@@ -7,14 +7,15 @@ import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.model.Processor;
 
 public class ProcessorDAO {
-	public void createProcessor(Processor processor){
+	
+	public static void createProcessor(Processor processor){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(processor);
 		transaction.commit();
 	}
 	
-	public Processor getProcessorById(int id){
+	public static Processor getProcessorById(int id){
 		Processor newObject = new Processor();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -23,7 +24,7 @@ public class ProcessorDAO {
 		return newObject;
 	}
 	
-	public void deleteProcessor(Processor processor)
+	public static void deleteProcessor(Processor processor)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();

@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaas.App.model.Service;
 
 public class ServiceDAO {
 	
-	public Service createService(Service service){
+	public static Service createService(Service service){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(service);
@@ -16,7 +16,7 @@ public class ServiceDAO {
 		return service;
 	}
 	
-	public Service getServiceById(int id){
+	public static Service getServiceById(int id){
 		Service newObject = new Service();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -25,7 +25,7 @@ public class ServiceDAO {
 		return newObject;
 	}
 	
-	public Service deleteCompany(Service service)
+	public static Service deleteCompany(Service service)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();

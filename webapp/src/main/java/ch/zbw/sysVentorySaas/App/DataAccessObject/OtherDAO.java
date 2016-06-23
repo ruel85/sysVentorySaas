@@ -39,7 +39,6 @@ public class OtherDAO {
 			scanSetting = (ScanSetting) query.list().get(0);	
 		}
 		
-		
 		transaction.commit();
 		return scanSetting;
 		

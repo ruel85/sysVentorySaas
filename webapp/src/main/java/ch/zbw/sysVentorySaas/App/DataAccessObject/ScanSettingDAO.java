@@ -18,7 +18,7 @@ import ch.zbw.sysVentorySaas.App.model.User;
 
 public class ScanSettingDAO {
 
-	public ScanSetting createScanSetting(ScanSetting scanSetting) {
+	public static ScanSetting createScanSetting(ScanSetting scanSetting) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(scanSetting);
@@ -26,7 +26,7 @@ public class ScanSettingDAO {
 		return scanSetting;
 	}
 
-	public ScanSetting getScanSettingById(int id) {
+	public static ScanSetting getScanSettingById(int id) {
 		ScanSetting newObject = new ScanSetting();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -35,14 +35,14 @@ public class ScanSettingDAO {
 		return newObject;
 	}
 
-	public void deleteScanSettings(ScanSetting scanSetting) {
+	public static void deleteScanSettings(ScanSetting scanSetting) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(scanSetting);
 		transaction.commit();
 	}
 
-	public List<ScanSetting> getAllScanSettings() {
+	public static List<ScanSetting> getAllScanSettings() {
 		List<ScanSetting> scanSettings = new ArrayList<ScanSetting>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();

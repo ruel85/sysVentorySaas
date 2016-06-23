@@ -66,21 +66,6 @@ public class HibernateTest {
 		url="jdbc:sqlserver://sysventorysql.database.windows.net:1433";
 		mySQLParams = ";database=SysventorySQL;user=sysventory@sysventorysql;password={Admin123};encrypt=true;trustServerCertificate=true;hostNameInCertificate=eastasia1-a.control.database.windows.net;loginTimeout=30;";
 		*/
-		
-		/*SessionFactory sessionFactory;
-		
-		// A SessionFactory is set up once for an application!
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-				.configure() // configures settings from hibernate.cfg.xml
-				.build();
-		try {
-			sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-		}
-		catch (Exception e) {
-			// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-			// so destroy it manually.
-			StandardServiceRegistryBuilder.destroy( registry );
-		}*/	
 	}
 	
 	@Test
@@ -98,20 +83,7 @@ public class HibernateTest {
 				System.out.println(e.getMessage());
 				throw new SQLException(e.getMessage());
 				
-			}
-			
-			try {
-				con = DriverManager.getConnection(url + mySQLParams, user, password);
-				st = "Show databases;";
-				Statement statement = con.createStatement();
-				ResultSet rs = statement.executeQuery(st);
-				rs.next();
-				//System.out.println(rs.getString(1));
-				con.close();
-				
-			} catch (SQLException e) {
-				throw new SQLException(e.getMessage());
-			}			
+			}		
 	}
 	
 	@Test
@@ -210,7 +182,6 @@ public class HibernateTest {
 	public void TestUser_CRUD(){
 		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
 		
-		UserDAO userDAO = new UserDAO();
 		User user2 = new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch");
 	
 		User user3 = new User(null, "elias", "12345", null);
@@ -218,23 +189,20 @@ public class HibernateTest {
 		User user5 = new User(null, "damjan", "12345", null);	
 		
 		Company comp = new Company("ZbW", "Gaiserwaldstrasse", "1", null, "9043", "Abtwil SG");
-		CompanyDAO comDAO = new  CompanyDAO();
-		comDAO.createCompany(comp);
+		CompanyDAO.createCompany(comp);
 		user2.setCompany(comp);
 		user3.setCompany(comp);
 		user4.setCompany(comp);
 		user5.setCompany(comp);
 	
-		userDAO.createUser(user2);
+		UserDAO.createUser(user2);
+		//ScanSetting sc = OtherDAO.getScanSettingByUID("2d1a0484f40daceeef42967c4ac00911");
 		
-		ScanSetting sc = OtherDAO.getScanSettingByUID("2d1a0484f40daceeef42967c4ac00911");
+		UserDAO.createUser(user3);
+		UserDAO.createUser(user4);
+		UserDAO.createUser(user5);
 		
-		
-		userDAO.createUser(user3);
-		userDAO.createUser(user4);
-		userDAO.createUser(user5);
-		
-		User userSelected = userDAO.getUserByIdUser(user2.getIdUser());
+		User userSelected = UserDAO.getUserByIdUser(user2.getIdUser());
 		//assertEquals(newUser.getuID(), userSelected.getuID());
 		
 		assertEquals("ruel85", user2.getUsername());
@@ -245,7 +213,7 @@ public class HibernateTest {
 		
 		comp.setScanSetting(scanSetting);
 		scanSetting.setCompany(comp);
-		comDAO.createCompany(comp);
+		CompanyDAO.createCompany(comp);
 		
 		//userDAO.deleteUser(newUser);
 		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
@@ -253,44 +221,39 @@ public class HibernateTest {
 	
 	@Test
 	public void TestGroup_CRUD(){
+		Group newGroup = GroupDAO.createGroup( new Group("CustomerAdmin"));
 		
-		GroupDAO groupDAO = new GroupDAO();
-		Group newGroup = groupDAO.createGroup( new Group("CustomerAdmin"));
+		GroupDAO.createGroup(new Group("SysVentoryAdmin"));
+		GroupDAO.createGroup(new Group("Inventor"));
+		GroupDAO.createGroup(new Group("Visitor"));
 		
-		groupDAO.createGroup(new Group("SysVentoryAdmin"));
-		groupDAO.createGroup(new Group("Inventor"));
-		groupDAO.createGroup(new Group("Visitor"));
-		
-		Group groupSelected = groupDAO.getGroupById(newGroup.getIdGroup());
+		Group groupSelected = GroupDAO.getGroupById(newGroup.getIdGroup());
 		assertEquals(groupSelected.getIdGroup(), newGroup.getIdGroup());
 		assertEquals(newGroup.getName(), groupSelected.getName());
 		
-		groupDAO.deleteGroup(newGroup);
-		assertNull(groupDAO.getGroupById(newGroup.getIdGroup()));
+		GroupDAO.deleteGroup(newGroup);
+		assertNull(GroupDAO.getGroupById(newGroup.getIdGroup()));
 	}
 	
 	@Test
 	public void TestCompany_CRUD_AND_TestScanSetting(){
-		CompanyDAO compDAO = new CompanyDAO();
-		ScanSettingDAO scanSDAO = new ScanSettingDAO();
-		
 		Company comp = new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen");	;
 		ScanSetting scanSetting = new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", 1, false);
 		
 		comp.setScanSetting(scanSetting);
 		scanSetting.setCompany(comp);
-		comp = compDAO.createCompany(comp);
+		comp = CompanyDAO.createCompany(comp);
 		// Prüfen, ob 1-1 Beziehung wirklich vorhanden ist...
-		assertEquals(comp.getIdCompany(), scanSDAO.getScanSettingById(comp.getIdCompany()).getIdCompany());
+		assertEquals(comp.getIdCompany(), ScanSettingDAO.getScanSettingById(comp.getIdCompany()).getIdCompany());
 		
 		// 2. Datensatz (ohne ScanSetting) einfügen...
 		comp = new Company("Movento", "Irgendeinestrasse", "10", null, "9015", "St. Gallen");
-		compDAO.createCompany(comp);
-		assertNull(scanSDAO.getScanSettingById(comp.getIdCompany()));
+		CompanyDAO.createCompany(comp);
+		assertNull(ScanSettingDAO.getScanSettingById(comp.getIdCompany()));
 		
 		//.. und diese Company ohne ScanSetting gleich wieder löschen
-		compDAO.deleteCompany(compDAO.getCompanyById(2));
-		assertNull(compDAO.getCompanyById(2));
+		CompanyDAO.deleteCompany(CompanyDAO.getCompanyById(2));
+		assertNull(CompanyDAO.getCompanyById(2));
 		
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -309,7 +272,7 @@ public class HibernateTest {
 		session.getTransaction().commit();
 		session.close();		
 		
-		List<ScanSetting> list = scanSDAO.getAllScanSettings();
+		List<ScanSetting> list = ScanSettingDAO.getAllScanSettings();
 			for (ScanSetting oneScanSetting : list) {
 				if (oneScanSetting != null)
 					System.out.println("ScanSetting with idCompany:" + oneScanSetting.getIdCompany()); 
@@ -319,49 +282,48 @@ public class HibernateTest {
 	@Test
 	public void TestService_CRUD(){
 		Service serv = new Service("MyService", true);
-		ServiceDAO servDAO = new ServiceDAO();
-		servDAO.createService(serv);
+		ServiceDAO.createService(serv);
 		
-		Service servSelected = servDAO.getServiceById(1);
+		Service servSelected = ServiceDAO.getServiceById(1);
 		assertEquals("MyService", servSelected.getName());
 		assertEquals(true, servSelected.getEnabled());
 		
-		servDAO.deleteCompany(servDAO.getServiceById(1));
-		assertNull(servDAO.getServiceById(1));
+		ServiceDAO.deleteCompany(ServiceDAO.getServiceById(1));
+		assertNull(ServiceDAO.getServiceById(1));
 	}
 	
 	@Test
 	public void TestScanStatus (){
 		ScanStatus scanStatus = new ScanStatus("Vorbereitet", "Der Scan ist vorbereitet und kann verarbeitet werden.");
-		ScanStatusDAO scanStatusDAO = new ScanStatusDAO();
-		scanStatusDAO.createScanStatus(scanStatus);
+		ScanStatusDAO.createScanStatus(scanStatus);
 		
-		ScanStatus scanStatusSelected = scanStatusDAO.getScanStatusById(1);
+		ScanStatus scanStatusSelected = ScanStatusDAO.getScanStatusById(1);
 		assertEquals("Vorbereitet", scanStatusSelected.getName());
 		assertEquals("Der Scan ist vorbereitet und kann verarbeitet werden.", scanStatusSelected.getDescription());
 		
-		scanStatusDAO.deleteScanStatus(scanStatusDAO.getScanStatusById(1));
-		assertNull(scanStatusDAO.getScanStatusById(1));
+		ScanStatusDAO.deleteScanStatus(ScanStatusDAO.getScanStatusById(1));
+		assertNull(ScanStatusDAO.getScanStatusById(1));
 	}
 	
 	@Test
 	public void TestScanJob(){
 		ScanJob scanJ = new ScanJob("07:00", "07:30", new ScanStatus("Erledigt", "Irgendeine Beschreibung"));
-		ScanJobDAO scanJobDAO = new ScanJobDAO();
-		scanJobDAO.createScanJob(scanJ);
+		ScanJob newScanJob = ScanJobDAO.createScanJob(scanJ);
 		
-		//ScanJob scanJobSelected = scanJobDAO.getScanJobById(1);
-		//assertEquals("07:00", scanJobSelected.getStartTime());
-		//assertEquals("07:30", scanJobSelected.getEndTime());
+		ScanJob scanJobSelected = ScanJobDAO.getScanJobById(newScanJob.getIdScanJob());
+		assertEquals("07:00", scanJobSelected.getStartTime());
+		assertEquals("07:30", scanJobSelected.getEndTime());
+		
+		//Todo Ruel: Daten können nicht geladen werden --> DB-Relation korrekt setzen in Hibernate!
 		//assertEquals("Erledigt", scanJobSelected.getStatus().getName());
+		//assertEquals("Irgendeine Beschreibung", scanJobSelected.getStatus().getDescription());
 		
-		//scanJobDAO.deleteScanJob(scanJobDAO.getScanJobById(1));
-		//assertNull(scanJobDAO.getScanJobById(1));
+		ScanJobDAO.deleteScanJob(scanJobSelected);
+		assertNull(ScanJobDAO.getScanJobById(scanJobSelected.getIdScanJob()));
 	}
 	
 	@Test
 	public void Test_Company_And_User(){
-		//CompanyDAO cDAO = new CompanyDAO();
 		//Company comp1 = cDAO.createCompany(new Company("Siemens", "Hauptstrasse", "20", "a", "9050", "Appenzell"));
 		//Company comp2 = cDAO.createCompany(new Company("Bühler AG", "Hauptstrasse", "25", "b", "9240", "Uzwil SG"));
 		
@@ -373,9 +335,8 @@ public class HibernateTest {
 		session.save(comp1);
 		session.save(comp2);
 		
-		//UserDAO uDAO = new UserDAO();
-		//User user1 = uDAO.createUser(new User("Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com"));
-		//User user2 = uDAO.createUser(new User("Kevin", "0000", "info@info.de"));
+		//User user1 = UserDAO.createUser(new User("Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com"));
+		//User user2 = UserDAO.createUser(new User("Kevin", "0000", "info@info.de"));
 		
 		User user1 = new User(null, "Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com");
 		User user2 = new User(null, "Kevin", "0000", "info@info.de");

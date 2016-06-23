@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaas.App.model.Software;
 
 public class SoftwareDAO {
 
-	public Software createSoftware(Software software){
+	public static Software createSoftware(Software software){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(software);
@@ -16,7 +16,7 @@ public class SoftwareDAO {
 		return software;
 	}
 	
-	public Software getSoftwarebyId(int id){
+	public static Software getSoftwarebyId(int id){
 		Software newObject = new Software();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -25,7 +25,7 @@ public class SoftwareDAO {
 		return newObject;
 	}
 	
-	public Software deleteSoftware(Software software)
+	public static Software deleteSoftware(Software software)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();

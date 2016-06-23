@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaas.App.model.Company;
 
 public class CompanyDAO {
 	
-	public Company createCompany(Company company){
+	public static Company createCompany(Company company){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(company);
@@ -16,7 +16,7 @@ public class CompanyDAO {
 		return company;
 	}
 	
-	public Company getCompanyById(int id){
+	public static Company getCompanyById(int id){
 		Company newObject = new Company();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -25,7 +25,7 @@ public class CompanyDAO {
 		return newObject;
 	}
 	
-	public Company deleteCompany(Company company)
+	public static Company deleteCompany(Company company)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();

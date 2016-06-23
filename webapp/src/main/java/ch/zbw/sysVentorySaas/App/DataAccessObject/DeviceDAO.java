@@ -10,7 +10,8 @@ import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.model.Device;
 
 public class DeviceDAO {
-	public Device createDevice(Device device){
+	
+	public static Device createDevice(Device device){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(device);
@@ -18,7 +19,7 @@ public class DeviceDAO {
 		return device;
 	}
 	
-	public Device getDeviceById(int id){
+	public static Device getDeviceById(int id){
 		Device newObject = new Device();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -27,7 +28,7 @@ public class DeviceDAO {
 		return newObject;
 	}
 	
-	public Device deleteDevice(Device device){
+	public static Device deleteDevice(Device device){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(device);
@@ -35,7 +36,7 @@ public class DeviceDAO {
 		return device;
 	}
 	
-	public List<Device> getDevicesByScanJob(int idScanJob)
+	public static List<Device> getDevicesByScanJob(int idScanJob)
 	{
 		List<Device> devices = new ArrayList<Device>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

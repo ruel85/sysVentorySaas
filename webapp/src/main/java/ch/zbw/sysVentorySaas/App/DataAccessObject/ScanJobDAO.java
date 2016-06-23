@@ -12,7 +12,7 @@ import ch.zbw.sysVentorySaas.App.model.User;
 
 public class ScanJobDAO {
 
-	public ScanJob createScanJob(ScanJob scanJob){
+	public static ScanJob createScanJob(ScanJob scanJob){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(scanJob);
@@ -20,7 +20,7 @@ public class ScanJobDAO {
 		return scanJob;
 	}
 	
-	public ScanJob getScanJobById(int id){
+	public static ScanJob getScanJobById(int id){
 		ScanJob newObject = new ScanJob();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -29,7 +29,7 @@ public class ScanJobDAO {
 		return newObject;
 	}
 	
-	public ScanJob deleteScanJob(ScanJob scanJob)
+	public static ScanJob deleteScanJob(ScanJob scanJob)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -38,7 +38,7 @@ public class ScanJobDAO {
 		return scanJob;
 	}
 	
-	public List<ScanJob> getAllScanJobs()
+	public static List<ScanJob> getAllScanJobs()
 	{
 		List<ScanJob> scanjobs = new ArrayList<ScanJob>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
