@@ -78,27 +78,27 @@ public class ScanSettingService {
 			//System.out.println("Company-ID: "  + comp.getIdCompany());
 			//System.out.println("ScanSetting-ID: "  + new ScanSettingDAO().getScanSettingById(comp.getIdCompany()).getIdCompany());
 			
-			try {
-				user = userDAO.getUserByUID(uID);
-				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
-				{
-					comp = new CompanyDAO().getCompanyById(user.getCompany().getIdCompany());
-					
-					if(comp != null && comp.getIdCompany() != 0)
-						return new ScanSettingDAO().getScanSettingById(comp.getIdCompany());
-				}
-				
-			} catch (Exception e) {
-				Log4JLogger log = new Log4JLogger();
-				log.error(e.getMessage());
-				
-				sReturn.setIpStart("192.168.1.30");
-				sReturn.setIpEnd("192.168.1.80");
-				sReturn.setIdCompany(-1);
-				sReturn.setIdCompany(1);
-				sReturn.setTimeToScan(false);
-				sReturn.setIntervallHours(60);				
-			}
+//			try {
+//				user = userDAO.getUserByUID(uID);
+//				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
+//				{
+//					comp = new CompanyDAO().getCompanyById(user.getCompany().getIdCompany());
+//					
+//					if(comp != null && comp.getIdCompany() != 0)
+//						return new ScanSettingDAO().getScanSettingById(comp.getIdCompany());
+//				}
+//				
+//			} catch (Exception e) {
+//				Log4JLogger log = new Log4JLogger();
+//				log.error(e.getMessage());				
+//			}
+			
+			sReturn.setIpStart("192.168.1.30");
+			sReturn.setIpEnd("192.168.1.80");
+			sReturn.setIdCompany(-1);
+			sReturn.setIdCompany(1);
+			sReturn.setTimeToScan(false);
+			sReturn.setIntervallHours(60);	
 			return sReturn;
 		}
 }
