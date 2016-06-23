@@ -92,14 +92,14 @@ public class ScanSettingService {
 			}
 			
 			
-			Random r = new Random(2);
-			int i = r.nextInt();
+			Random r = new Random();
+			int i = r.nextInt(100) + 1;
 			
 			sReturn.setIpStart("192.168.1.30");
 			sReturn.setIpEnd("192.168.1.80");
 			sReturn.setIdCompany(-1);
 			sReturn.setIdCompany(1);
-			sReturn.setTimeToScan((i == 1?true:false));
+			sReturn.setTimeToScan((i <= 50?true:false));
 			sReturn.setIntervallHours(60);	
 			return sReturn;
 		}
