@@ -12,7 +12,6 @@ import org.hibernate.annotations.FetchMode;
 
 public class Company{
 	
-	@Id @GeneratedValue
 	private int idCompany;
 	
 	private String name;
