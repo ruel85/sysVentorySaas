@@ -32,14 +32,6 @@ public class SNMPThread implements Runnable {
 		this.retries = 3;
 	}
 
-	public String getAsString(OID oid) throws IOException {
-		ResponseEvent event = get(new OID[] { oid });
-		if (event.getResponse() != null)
-			return event.getResponse().get(0).getVariable().toString();
-		else
-			return null;
-	}
-
 	public ResponseEvent get(OID oids[]) throws IOException {
 		PDU pdu = new PDU();
 		for (OID oid : oids) {
@@ -53,6 +45,18 @@ public class SNMPThread implements Runnable {
 			return null;
 	}
 
+	public String getAsString(OID oid) throws IOException {
+		ResponseEvent event = get(new OID[] { oid });
+		if (event.getResponse() != null)
+			return event.getResponse().get(0).getVariable().toString();
+		else
+			return null;
+	}
+
+	public String getIpv4() {
+		return ipv4;
+	}
+
 	private Target getTarget() {
 		Address targetAddress = GenericAddress.parse(protocol + ipv4 + portSNMP);
 		CommunityTarget target = new CommunityTarget();
@@ -64,6 +68,10 @@ public class SNMPThread implements Runnable {
 		return target;
 	}
 
+	public boolean isReachable() {
+		return reachable;
+	}
+
 	@Override
 	public void run() {
 		TransportMapping<?> transport = null;
@@ -71,21 +79,13 @@ public class SNMPThread implements Runnable {
 			transport = new DefaultUdpTransportMapping();
 			snmp = new Snmp(transport);
 			transport.listen();
-			if(getAsString(new OID(".1")) != null) {
+			if (getAsString(new OID(".1")) != null) {
 				reachable = true;
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public String getIpv4() {
-		return ipv4;
-	}
-	
-	public boolean isReachable() {
-		return reachable;
 	}
 
 }

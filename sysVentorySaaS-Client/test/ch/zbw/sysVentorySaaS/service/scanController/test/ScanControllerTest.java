@@ -14,7 +14,7 @@ public class ScanControllerTest {
 	public void test() throws IOException {
 		ScanController sc = new ScanController("172.16.4.1", "172.16.4.254", 10000, 500);
 		ArrayList<Device> devices = sc.getAllNetworkDevices();
-		for(Device d : devices) {
+		for (Device d : devices) {
 			System.out.println("IP=" + d.getIpAddress() + ", NAME=" + d.getName() + ", MAC=" + d.getMacAddress());
 		}
 	}

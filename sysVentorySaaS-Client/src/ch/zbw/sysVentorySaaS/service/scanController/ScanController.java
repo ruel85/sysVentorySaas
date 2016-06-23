@@ -24,9 +24,9 @@ public class ScanController {
 		ArrayList<Device> ipList = ips.getReachableIPs();
 		for (Device snmpDevice : snmpList) {
 			Iterator<Device> it = ipList.iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Device ipDevice = it.next();
-				if(snmpDevice.getIpAddress().equals(ipDevice.getIpAddress())){
+				if (snmpDevice.getIpAddress().equals(ipDevice.getIpAddress())) {
 					allNetworkDevices.add(snmpDevice);
 				} else {
 					allNetworkDevices.add(ipDevice);

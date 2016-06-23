@@ -8,6 +8,13 @@ public class FileManager {
 
 	}
 
+	public void cleanDirectory(String path) {
+		File dir = new File(path);
+		for (File file : dir.listFiles()) {
+			file.delete();
+		}
+	}
+
 	public void createDirectory(String path, boolean overwrite) {
 		File theDir = new File(path);
 		if (!theDir.exists() || overwrite) {
@@ -16,13 +23,6 @@ public class FileManager {
 			} catch (SecurityException se) {
 				se.printStackTrace();
 			}
-		}
-	}
-
-	public void cleanDirectory(String path) {
-		File dir = new File(path);
-		for (File file : dir.listFiles()) {
-			file.delete();
 		}
 	}
 
