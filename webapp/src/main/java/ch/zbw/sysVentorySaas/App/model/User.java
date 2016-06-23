@@ -14,7 +14,7 @@ public class User {
 	private Company company;
 
 	public User(String uID, String username, String password, String email){
-		if(uID == null)
+		if(uID.isEmpty() || uID == null)
 		{
 			this.uID= MD5Hash.getMD5Hash(username).toString();
 		}

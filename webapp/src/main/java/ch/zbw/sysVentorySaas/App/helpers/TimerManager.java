@@ -18,7 +18,7 @@ public class TimerManager extends TimerTask {
 	 *            dann wird der Intervall um den Faktor 1000 verkürzt
 	 */
 	public TimerManager(ArrayList<ScanSetting> scanSettings, boolean testing) {
-		timerList = new ArrayList<>();
+		timerList = new ArrayList<TimerThread>();
 		if (testing)
 			factor = 1000;
 		else

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.FetchType;
 
-import org.apache.velocity.runtime.directive.Parse;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,7 +13,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
-import ch.zbw.sysVentorySaas.App.model.Software;
 import ch.zbw.sysVentorySaas.App.model.User;
 
 public class UserDAO {
@@ -45,7 +43,14 @@ public class UserDAO {
 		query.setParameter("uID", UID);
 		List<User> users = query.list();	
 		if(users.size() > 0)
-			users = query.list();		
+		{
+			for(User oneUser : users)
+			{
+				Hibernate.initialize(oneUser.getCompany());
+				Hibernate.initialize(oneUser.getCompany().getIdCompany());
+				
+			}
+		}
 		transaction.commit();
 		return (users.size()> 0) ? users.get(0) : newObject;
 	}

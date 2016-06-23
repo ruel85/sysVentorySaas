@@ -16,12 +16,43 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
+<!--                 <executions> -->
+<!--     				<execution> -->
+<!--     					<id>unpack</id> -->
+<!--     					<phase>install</phase> -->
+<!--     					<goals> -->
+<!--     						<goal>unpack</goal> -->
+<!--     					</goals> -->
+<!--     					<configuration> -->
+<!--     						<artifactItems> -->
+<!--     							<artifactItem> -->
+<!--     								<groupId>${project.groupId}</groupId> -->
+<!--     								<artifactId>${project.artifactId}</artifactId> -->
+<!--     								<version>${project.version}</version> -->
+<!--     								<type>${project.packaging}</type> -->
+<!--     								<overWrite>true</overWrite> -->
+<!--     								<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}-exploded.${project.packaging} -->
+<!--     								</outputDirectory> -->
+<!--     							</artifactItem> -->
+<!--     						</artifactItems> -->
+<!--     					</configuration> -->
+<!--     				</execution> -->
+<!--     			</executions> -->
                 <inherited>true</inherited>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+            	<artifactId>maven-war-plugin</artifactId>
+            	<version>2.6</version>
+            	<configuration>
+            		<packagingExcludes>WEB-INF/lib/servlet-api-*.jar</packagingExcludes>
+            	</configuration>
+            </plugin>
+            
+            
         </plugins>
     </build>
 
@@ -125,9 +156,19 @@
             <artifactId>jersey-media-moxy</artifactId>
         </dependency>
         -->
+    
+    <!-- Dropwizar.io -->
+    <dependency>
+        <groupId>io.dropwizard</groupId>
+        <artifactId>dropwizard-core</artifactId>
+        <version>${dropwizard.version}</version>
+    </dependency>
+        
     </dependencies>
+    
     <properties>
         <jersey.version>2.16</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <dropwizard.version>0.9.3</dropwizard.version>
     </properties>
 </project>

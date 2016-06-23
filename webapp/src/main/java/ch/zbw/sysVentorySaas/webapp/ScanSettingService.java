@@ -1,16 +1,14 @@
 package ch.zbw.sysVentorySaas.webapp;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.logging.impl.Log4JLogger;
-import org.hibernate.Hibernate;
 
 import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
@@ -25,9 +23,17 @@ public class ScanSettingService {
 		@GET
 		@Produces(MediaType.APPLICATION_XML)
 		public List<ScanSetting> getAllScanSettings(){
+			
+			List<ScanSetting> newList;
+			
 			ScanSettingDAO scDAO = new ScanSettingDAO();
 			scDAO = new ScanSettingDAO();
-			return scDAO.getAllScanSettings();
+			newList = scDAO.getAllScanSettings();
+			if(newList != null && newList.size() > 0)
+				return newList;
+			
+			new ArrayList<ScanSetting>();
+			return null;
 		}
 		
 		/*@GET
@@ -66,26 +72,33 @@ public class ScanSettingService {
 			ScanSetting sReturn = new ScanSetting();
 			System.out.println("UID: " + uID);
 			UserDAO userDAO = new UserDAO();
-			User user = userDAO.getUserByUID(uID);
+			User user; 
 			
-			Company comp = new CompanyDAO().getCompanyById(user.getCompany().getIdCompany());
+			Company comp;
 			//System.out.println("Company-ID: "  + comp.getIdCompany());
 			//System.out.println("ScanSetting-ID: "  + new ScanSettingDAO().getScanSettingById(comp.getIdCompany()).getIdCompany());
 			
 			try {
-				//sReturn = new ScanSettingDAO().getScanSettingById(comp.getIdCompany());	
+				user = userDAO.getUserByUID(uID);
+				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
+				{
+					comp = new CompanyDAO().getCompanyById(user.getCompany().getIdCompany());
+					
+					if(comp != null && comp.getIdCompany() != 0)
+						return new ScanSettingDAO().getScanSettingById(comp.getIdCompany());
+				}
+				
 			} catch (Exception e) {
 				Log4JLogger log = new Log4JLogger();
 				log.error(e.getMessage());
+				
+				sReturn.setIpStart("192.168.1.30");
+				sReturn.setIpEnd("192.168.1.80");
+				sReturn.setIdCompany(-1);
+				sReturn.setIdCompany(1);
+				sReturn.setTimeToScan(false);
+				sReturn.setIntervallHours(60);				
 			}
-			
-			sReturn.setIpStart("192.168.1.30");
-			sReturn.setIpEnd("192.168.1.80");
-			sReturn.setIdCompany((comp != null ? comp.getIdCompany() : 1));
-			sReturn.setIdCompany(1);
-			sReturn.setTimeToScan(true);
-			sReturn.setIntervallHours(5);
 			return sReturn;
-			
 		}
 }

@@ -17,7 +17,7 @@ public class TimerThreadTest {
 		ScanSetting ss5 = new ScanSetting("ScanJob5", "192.168.1.1", "192.168.1.254", 5, false);
 		ScanSetting ss6 = new ScanSetting("ScanJob6", "192.168.1.1", "192.168.1.254", 6, false);
 
-		ArrayList<ScanSetting> scanSettings = new ArrayList<>();
+		ArrayList<ScanSetting> scanSettings = new ArrayList<ScanSetting>();
 		scanSettings.add(ss1);
 		scanSettings.add(ss2);
 		scanSettings.add(ss3);
