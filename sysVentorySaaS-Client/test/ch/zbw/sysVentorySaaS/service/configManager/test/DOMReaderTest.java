@@ -28,14 +28,14 @@ public class DOMReaderTest {
 	}
 
 	@Test
-	public void validateXML() throws SAXException, IOException {
-		domReader.isValidateXSD(xmlPath, xsdPath);
-	}
-	
-	@Test
 	public void testXMLcontent() throws ParserConfigurationException, SAXException, IOException {
 		HashMap<String, String> xmlContent = domReader.getHashMap(xmlPath, xmlRootElementConfig, xmlElementsConfig);
 		assertEquals("2d1a0484f40daceeef42967c4ac00911", xmlContent.get("UserId"));
 		assertEquals("rdse.northeurope.cloudapp.azure.com", xmlContent.get("Server"));
+	}
+
+	@Test
+	public void validateXML() throws SAXException, IOException {
+		domReader.isValidateXSD(xmlPath, xsdPath);
 	}
 }

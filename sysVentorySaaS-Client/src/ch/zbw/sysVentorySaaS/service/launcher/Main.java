@@ -19,7 +19,16 @@ import ch.zbw.sysVentorySaaS.service.configManager.FileManager;
 import ch.zbw.sysVentorySaaS.service.powershellExecuter.PowershellExecuter;
 
 public class Main {
-//	private final String dataPath = System.getenv("APPDATA").toString() + "\\SysVentory";
+	public static void main(String argv[]) {
+		new Main();
+	}
+
+	public static void stop() {
+
+	}
+
+	// private final String dataPath = System.getenv("APPDATA").toString() +
+	// "\\SysVentory";
 	private final String dataPath = "C:\\SysVentory";
 	private final String configPath = dataPath + "\\PutHereConfigFile";
 	private final String reportPath = dataPath + "\\ScanResults";
@@ -31,29 +40,127 @@ public class Main {
 	private final String xmlRootElementConfig = "SysVentoryConfig";
 	private final String xmlRootElementJob = "scanSetting";
 	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "Server");
-	private final List<String> xmlElementsJob = Arrays.asList("uID", "timeToScan");
-	private final int checkIntervall = 10000;
 
+	private final List<String> xmlElementsJob = Arrays.asList("timeToScan");
+	private final int checkIntervall = 10000;
 	private String userId;
 	private String server;
 	private DOMReader domReader;
 	private FileManager fm;
 	private PowershellExecuter pe;
+
 	private Logger logger;
+
 	private FileHandler fh;
 
 	public Main() {
 		initDirectory();
-		readConfig();
 		getSettingsFromServer();
 	}
 
-	public static void main(String argv[]) {
-		new Main();
+	public void executePowershell() {
+		String path = configPath + "\\scanjob.ps1";
+		logger.info("executing powershell-job (" + path + ") ");
+		boolean successfully = false;
+		pe = new PowershellExecuter();
+		try {
+			String fileContent = pe.readFile(path);
+			successfully = pe.execute_method2(fileContent);
+			if (successfully) {
+				logger.info("powershell was successfully executed [OK]\n");
+			} else {
+				logger.warning("powershell was not executed successfully [ERROR]\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			logger.warning(e.getMessage() + "\n");
+		}
 	}
 
-	public static void stop() {
+	public int getCheckIntervall() {
+		return checkIntervall;
+	}
 
+	public String getConfigPath() {
+		return configPath;
+	}
+
+	public String getConfigXmlPath() {
+		return configXmlPath;
+	}
+
+	public String getConfigXsdPath() {
+		return configXsdPath;
+	}
+
+	public String getDataPath() {
+		return dataPath;
+	}
+
+	public DOMReader getDomReader() {
+		return domReader;
+	}
+
+	public FileHandler getFh() {
+		return fh;
+	}
+
+	public FileManager getFm() {
+		return fm;
+	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public String getLoggingPath() {
+		return loggingPath;
+	}
+
+	public String getLogPath() {
+		return logPath;
+	}
+
+	public PowershellExecuter getPe() {
+		return pe;
+	}
+
+	public String getReportPath() {
+		return reportPath;
+	}
+
+	public String getReportXmlPath() {
+		return reportXmlPath;
+	}
+
+	public String getServer() {
+		return server;
+	}
+
+	public void getSettingsFromServer() {
+		ScanTimerTask myTask = new ScanTimerTask(this);
+		Timer myTimer = new Timer();
+		myTimer.schedule(myTask, 0, checkIntervall);
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public List<String> getXmlElementsConfig() {
+		return xmlElementsConfig;
+	}
+
+	public List<String> getXmlElementsJob() {
+		return xmlElementsJob;
+	}
+
+	public String getXmlRootElementConfig() {
+		return xmlRootElementConfig;
+	}
+
+	public String getXmlRootElementJob() {
+		return xmlRootElementJob;
 	}
 
 	public void initDirectory() {
@@ -100,113 +207,5 @@ public class Main {
 			logger.warning(e.getMessage() + "\n");
 		}
 	}
-
-	public void getSettingsFromServer() {
-		ScanTimerTask myTask = new ScanTimerTask(this);
-		Timer myTimer = new Timer();
-		myTimer.schedule(myTask, 0, checkIntervall);
-	}
-
-	public void executePowershell() {
-		String path = configPath + "\\scanjob.ps1";
-		logger.info("executing powershell-job (" + path + ") ");
-		boolean successfully = false;
-		pe = new PowershellExecuter();
-		try {
-			String fileContent = pe.readFile(path);
-			successfully = pe.execute_method2(fileContent);
-			if (successfully) {
-				logger.info("powershell was successfully executed [OK]\n");
-			} else {
-				logger.warning("powershell was not executed successfully [ERROR]\n");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			logger.warning(e.getMessage() + "\n");
-		}
-	}
-
-
-	public Logger getLogger() {
-		return logger;
-	}
-
-	public String getDataPath() {
-		return dataPath;
-	}
-
-	public String getConfigPath() {
-		return configPath;
-	}
-
-	public String getReportPath() {
-		return reportPath;
-	}
-
-	public String getConfigXmlPath() {
-		return configXmlPath;
-	}
-
-	public String getConfigXsdPath() {
-		return configXsdPath;
-	}
-
-	public String getLoggingPath() {
-		return loggingPath;
-	}
-
-	public String getXmlRootElementConfig() {
-		return xmlRootElementConfig;
-	}
-
-	public List<String> getXmlElementsConfig() {
-		return xmlElementsConfig;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public String getServer() {
-		return server;
-	}
-
-	public DOMReader getDomReader() {
-		return domReader;
-	}
-
-	public FileManager getFm() {
-		return fm;
-	}
-
-	public PowershellExecuter getPe() {
-		return pe;
-	}
-
-	public FileHandler getFh() {
-		return fh;
-	}
-
-	public String getXmlRootElementJob() {
-		return xmlRootElementJob;
-	}
-
-	public List<String> getXmlElementsJob() {
-		return xmlElementsJob;
-	}
-
-	public String getReportXmlPath() {
-		return reportXmlPath;
-	}
-
-	public String getLogPath() {
-		return logPath;
-	}
-
-	public int getCheckIntervall() {
-		return checkIntervall;
-	}
-	
-	
 
 }

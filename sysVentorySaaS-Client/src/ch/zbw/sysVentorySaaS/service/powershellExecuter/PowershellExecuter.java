@@ -17,22 +17,6 @@ public class PowershellExecuter {
 
 	}
 
-	public String readFile(String path) throws FileNotFoundException, IOException {
-		String command = null;
-		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			command = sb.toString();
-		}
-		return command;
-	}
-
 	public void execute_method1(String command) throws IOException {
 		succeedMessage = "";
 		failedMessage = "";
@@ -62,12 +46,28 @@ public class PowershellExecuter {
 		return successfully;
 	}
 
+	public String getFailedMessage() {
+		return failedMessage;
+	}
+
 	public String getSucceedMessage() {
 		return succeedMessage;
 	}
 
-	public String getFailedMessage() {
-		return failedMessage;
+	public String readFile(String path) throws FileNotFoundException, IOException {
+		String command = null;
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+				line = br.readLine();
+			}
+			command = sb.toString();
+		}
+		return command;
 	}
 
 }

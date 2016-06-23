@@ -17,6 +17,22 @@ public class PingThread implements Runnable {
 		this.timeout = timeout;
 	}
 
+	public String getHostname() {
+		return hostname;
+	}
+
+	public String getIpv4() {
+		return ipv4;
+	}
+
+	public String getMacAddress() {
+		return macAddress;
+	}
+
+	public boolean isReachable() {
+		return reachable;
+	}
+
 	@Override
 	public void run() {
 		try {
@@ -24,17 +40,16 @@ public class PingThread implements Runnable {
 			reachable = inet.isReachable(timeout);
 			hostname = inet.getHostName();
 			NetworkInterface network = NetworkInterface.getByInetAddress(inet);
-			if(network != null){
-			byte[] mac = network.getHardwareAddress();
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < mac.length; i++) {
-				sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? ":" : ""));
-			}
-			macAddress = sb.toString();
+			if (network != null) {
+				byte[] mac = network.getHardwareAddress();
+				StringBuilder sb = new StringBuilder();
+				for (int i = 0; i < mac.length; i++) {
+					sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? ":" : ""));
+				}
+				macAddress = sb.toString();
 			} else {
-				
+
 			}
-			
 
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -43,21 +58,5 @@ public class PingThread implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public boolean isReachable() {
-		return reachable;
-	}
-
-	public String getIpv4() {
-		return ipv4;
-	}
-
-	public String getHostname() {
-		return hostname;
-	}
-	
-	public String getMacAddress() {
-		return macAddress;
 	}
 }

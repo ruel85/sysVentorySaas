@@ -11,24 +11,17 @@ import org.junit.Test;
 
 import ch.zbw.sysVentorySaaS.service.configManager.FileManager;
 
-
-
 public class FileManagerTest {
 	private FileManager fm;
-	private final String path = System.getenv("APPDATA").toString()+"\\SysVentory\\putHereConfigFile";
-	
-	@Before
-	public void setUp() throws Exception {
-		fm = new FileManager();
-	}
-	
+	private final String path = System.getenv("APPDATA").toString() + "\\SysVentory\\putHereConfigFile";
+
 	@Test
 	public void createFolder() {
-		
+
 		fm.createDirectory(path, true);
 		assertTrue(new File(path).isDirectory());
 	}
-	
+
 	@Test
 	public void deleteFolder() throws IOException {
 		File f = new File(path + "\\test");
@@ -37,5 +30,10 @@ public class FileManagerTest {
 		fm.cleanDirectory(path);
 		assertFalse(f.exists());
 	}
-	
+
+	@Before
+	public void setUp() throws Exception {
+		fm = new FileManager();
+	}
+
 }

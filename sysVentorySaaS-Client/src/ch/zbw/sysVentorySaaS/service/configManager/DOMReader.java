@@ -22,12 +22,22 @@ import org.xml.sax.SAXException;
 
 public class DOMReader {
 
-	public void isValidateXSD(String xmlPath, String xsdPath) throws SAXException, IOException {
-		File inputFile = new File(xmlPath);
-		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Schema schema = factory.newSchema(new StreamSource(xsdPath));
-		Validator validator = schema.newValidator();
-		validator.validate(new StreamSource(inputFile));
+	public HashMap<String, String> getHashMap(Document doc, String xmlRootElement, List<String> xmlElements)
+			throws ParserConfigurationException, SAXException, IOException {
+		HashMap<String, String> result = new HashMap<>();
+		doc.getDocumentElement().normalize();
+		NodeList nList = doc.getElementsByTagName(xmlRootElement);
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+			Node nNode = nList.item(temp);
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element) nNode;
+				for (String s : xmlElements) {
+					result.put(s, eElement.getElementsByTagName(s).item(0).getTextContent());
+				}
+
+			}
+		}
+		return result;
 	}
 
 	public HashMap<String, String> getHashMap(String xmlPath, String xmlRootElement, List<String> xmlElements)
@@ -51,23 +61,13 @@ public class DOMReader {
 		}
 		return result;
 	}
-	
-	public HashMap<String, String> getHashMap(Document doc, String xmlRootElement, List<String> xmlElements)
-			throws ParserConfigurationException, SAXException, IOException {
-		HashMap<String, String> result = new HashMap<>();
-		doc.getDocumentElement().normalize();
-		NodeList nList = doc.getElementsByTagName(xmlRootElement);
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-			Node nNode = nList.item(temp);
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element eElement = (Element) nNode;
-				for (String s : xmlElements) {
-					result.put(s, eElement.getElementsByTagName(s).item(0).getTextContent());
-				}
 
-			}
-		}
-		return result;
+	public void isValidateXSD(String xmlPath, String xsdPath) throws SAXException, IOException {
+		File inputFile = new File(xmlPath);
+		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema schema = factory.newSchema(new StreamSource(xsdPath));
+		Validator validator = schema.newValidator();
+		validator.validate(new StreamSource(inputFile));
 	}
 
 }

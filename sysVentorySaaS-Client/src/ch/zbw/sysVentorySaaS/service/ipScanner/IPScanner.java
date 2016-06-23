@@ -24,7 +24,7 @@ public class IPScanner {
 		}
 		ArrayList<Thread> threads = new ArrayList<>();
 		ArrayList<PingThread> pingThreads = new ArrayList<>();
-		ArrayList<Device>  onlineIPs = new ArrayList<>();
+		ArrayList<Device> onlineIPs = new ArrayList<>();
 		for (String ipv4 : ipList) {
 			PingThread pt = new PingThread(ipv4, pingTime);
 			pingThreads.add(pt);
