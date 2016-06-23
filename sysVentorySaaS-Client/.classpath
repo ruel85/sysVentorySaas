@@ -8,7 +8,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/webapp"/>
 	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/commons-ip-math-1.23.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/evercam-discovery-lib-20151211.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/evercam-discovery-runnable-20151211.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/jPowerShell-1.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/org.apache.httpcomponents.httpclient_4.5.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/org.taksmind.subnetting_1.2.29.jar"/>

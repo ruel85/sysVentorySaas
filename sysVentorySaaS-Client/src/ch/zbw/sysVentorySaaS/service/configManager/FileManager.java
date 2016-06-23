@@ -26,4 +26,9 @@ public class FileManager {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "FileManager []";
+	}
+
 }

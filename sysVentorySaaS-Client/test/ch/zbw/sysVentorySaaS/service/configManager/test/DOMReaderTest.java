@@ -20,7 +20,7 @@ public class DOMReaderTest {
 	private final String xmlPath = "Files/config.xml";
 	private final String xsdPath = "Files/config.xsd";
 	private final String xmlRootElementConfig = "SysVentoryConfig";
-	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "Server");
+	private final List<String> xmlElementsConfig = Arrays.asList("UserId", "ServerGET", "ServerPOST");
 
 	@Before
 	public void setUp() throws Exception {
@@ -31,7 +31,8 @@ public class DOMReaderTest {
 	public void testXMLcontent() throws ParserConfigurationException, SAXException, IOException {
 		HashMap<String, String> xmlContent = domReader.getHashMap(xmlPath, xmlRootElementConfig, xmlElementsConfig);
 		assertEquals("2d1a0484f40daceeef42967c4ac00911", xmlContent.get("UserId"));
-		assertEquals("rdse.northeurope.cloudapp.azure.com", xmlContent.get("Server"));
+		assertEquals("http://sysventorysaas.azurewebsites.net/webapi/scansettings", xmlContent.get("ServerGET"));
+		assertEquals("http://sysventorysaas.azurewebsites.net/webapi/scanjobs", xmlContent.get("ServerPOST"));
 	}
 
 	@Test

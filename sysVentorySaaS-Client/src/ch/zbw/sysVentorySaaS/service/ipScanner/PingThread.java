@@ -17,22 +17,6 @@ public class PingThread implements Runnable {
 		this.timeout = timeout;
 	}
 
-	public String getHostname() {
-		return hostname;
-	}
-
-	public String getIpv4() {
-		return ipv4;
-	}
-
-	public String getMacAddress() {
-		return macAddress;
-	}
-
-	public boolean isReachable() {
-		return reachable;
-	}
-
 	@Override
 	public void run() {
 		try {
@@ -59,4 +43,70 @@ public class PingThread implements Runnable {
 			e.printStackTrace();
 		}
 	}
+
+	public String getHostname() {
+		return hostname;
+	}
+
+	public String getIpv4() {
+		return ipv4;
+	}
+
+	public String getMacAddress() {
+		return macAddress;
+	}
+
+	public boolean isReachable() {
+		return reachable;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((hostname == null) ? 0 : hostname.hashCode());
+		result = prime * result + ((ipv4 == null) ? 0 : ipv4.hashCode());
+		result = prime * result + ((macAddress == null) ? 0 : macAddress.hashCode());
+		result = prime * result + (reachable ? 1231 : 1237);
+		result = prime * result + timeout;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PingThread other = (PingThread) obj;
+		if (hostname == null) {
+			if (other.hostname != null)
+				return false;
+		} else if (!hostname.equals(other.hostname))
+			return false;
+		if (ipv4 == null) {
+			if (other.ipv4 != null)
+				return false;
+		} else if (!ipv4.equals(other.ipv4))
+			return false;
+		if (macAddress == null) {
+			if (other.macAddress != null)
+				return false;
+		} else if (!macAddress.equals(other.macAddress))
+			return false;
+		if (reachable != other.reachable)
+			return false;
+		if (timeout != other.timeout)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "PingThread [ipv4=" + ipv4 + ", hostname=" + hostname + ", macAddress=" + macAddress + ", timeout="
+				+ timeout + ", reachable=" + reachable + "]";
+	}
+
 }
