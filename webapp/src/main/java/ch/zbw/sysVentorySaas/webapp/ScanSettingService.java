@@ -76,7 +76,7 @@ public class ScanSettingService {
 			User user; 			
 			Company comp;
 			
-			try {
+			/*try {
 				user = UserDAO.getUserByUID(uID);
 				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
 				{
@@ -90,6 +90,7 @@ public class ScanSettingService {
 				Log4JLogger log = new Log4JLogger();
 				log.error(e.getMessage());				
 			}
+			*/
 			
 			
 			Random r = new Random();
