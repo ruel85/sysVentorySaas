@@ -23,7 +23,8 @@ public class ScanJobService {
 		
 		return "<html>"
 				+ "<body>"
-				+ "<p>ScanJob erhalten mit der ID" + uID
+				+ "<p>Hallo. ScanJob erhalten mit der UID" + uID + ".</p>"
+				+"<p>ScanJob wird nun verarbeitet...</p>"
 				+ "</body>"
 				+ ""
 				+ "</html>";
