@@ -23,11 +23,9 @@ import org.xml.sax.InputSource;
 import ch.zbw.sysVentorySaaS.service.launcher.Main;
 
 public class MyHttpClient {
-	private String requestURI;
 	private Main main;
 
 	public MyHttpClient(Main main, String requestURI) {
-		this.requestURI = requestURI;
 		this.main = main;
 	}
 
@@ -38,29 +36,8 @@ public class MyHttpClient {
 		return builder.parse(is);
 	}
 
-	public String post(String sourcePath) throws IOException, TransformerException {
-		URL url = new URL(requestURI);
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setDoOutput(true);
-		connection.setInstanceFollowRedirects(false);
-		connection.setRequestMethod("POST");
-		connection.setRequestProperty("Content-Type", "application/xml");
-		OutputStream os = connection.getOutputStream();
-		TransformerFactory tf = TransformerFactory.newInstance();
-		Transformer transformer = tf.newTransformer();
-		FileReader fileReader = new FileReader(sourcePath);
-		StreamSource source = new StreamSource(fileReader);
-		StreamResult result = new StreamResult(os);
-		transformer.transform(source, result);
-		os.flush();
-		connection.getResponseCode();
-		connection.disconnect();
-		main.getLogger().info("ResponseCode: "+ connection.getResponseCode() + "\n");
-		return String.valueOf(connection.getResponseCode());
-	}
-
 	public Document sendGET() throws Exception {
-		URL obj = new URL(requestURI);
+		URL obj = new URL(main.getServerGET() + "/" + main.getUserId());
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
 		con.setRequestProperty("Content-Type", "application/xml");
@@ -78,8 +55,61 @@ public class MyHttpClient {
 			return loadXMLFromString(response.toString());
 		} else {
 			main.getLogger().warning("HTTP-Status: " + responseCode);
+			System.out.println(con.getURL());
 			return null;
 		}
+	}
+
+	public String sendPOST(String sourcePath) throws IOException, TransformerException {
+		URL url = new URL(main.getServerPOST() + "/" + main.getUserId());
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.setDoOutput(true);
+		connection.setInstanceFollowRedirects(false);
+		connection.setRequestMethod("POST");
+		connection.setRequestProperty("Content-Type", "application/xml");
+		OutputStream os = connection.getOutputStream();
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer transformer = tf.newTransformer();
+		FileReader fileReader = new FileReader(sourcePath);
+		StreamSource source = new StreamSource(fileReader);
+		StreamResult result = new StreamResult(os);
+		transformer.transform(source, result);
+		os.flush();
+		connection.getResponseCode();
+		connection.disconnect();
+		main.getLogger().info("ResponseCode: " + connection.getResponseCode() + "\n");
+		return String.valueOf(connection.getResponseCode());
+	}
+
+	@Override
+	public String toString() {
+		return "MyHttpClient [main=" + main + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((main == null) ? 0 : main.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MyHttpClient other = (MyHttpClient) obj;
+		if (main == null) {
+			if (other.main != null)
+				return false;
+		} else if (!main.equals(other.main))
+			return false;
+		return true;
 	}
 
 }

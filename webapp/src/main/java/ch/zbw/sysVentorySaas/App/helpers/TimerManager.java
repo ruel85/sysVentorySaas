@@ -27,7 +27,7 @@ public class TimerManager extends TimerTask {
 		for (ScanSetting scanSetting : scanSettings) {
 			TimerThread tt = new TimerThread(scanSetting);
 			Timer myTimer = new Timer();
-			myTimer.schedule(tt, 0, scanSetting.getIntervallHours() * (3600000 / factor));
+			myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor), scanSetting.getIntervallHours() * (3600000 / factor));
 			timerList.add(tt);
 		}
 	}
@@ -40,7 +40,7 @@ public class TimerManager extends TimerTask {
 	public void addScanSetting(ScanSetting scanSetting) {
 		TimerThread tt = new TimerThread(scanSetting);
 		Timer myTimer = new Timer();
-		myTimer.schedule(tt, 0, scanSetting.getIntervallHours() * (3600000 / factor));
+		myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor), scanSetting.getIntervallHours() * (3600000 / factor));
 		timerList.add(tt);
 		System.out.println("Neues ScanSetting ist hinzugekommen: " + scanSetting.getNetworkName());
 	}
@@ -71,7 +71,7 @@ public class TimerManager extends TimerTask {
 				ScanSetting scanSetting = th.getScanSetting();
 				TimerThread tt = new TimerThread(scanSetting);
 				Timer myTimer = new Timer();
-				myTimer.schedule(tt, 0, scanSetting.getIntervallHours() * (3600000 / factor));
+				myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor), scanSetting.getIntervallHours() * (3600000 / factor));
 				iterator.remove();
 				iterator.add(tt);
 				System.out.println("ScanSetting hat geändert von: " + th.getScanSetting().getNetworkName());

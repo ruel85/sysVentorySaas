@@ -75,4 +75,48 @@ public class PowershellExecuter {
 		return command;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((failedMessage == null) ? 0 : failedMessage.hashCode());
+		result = prime * result + ((succeedMessage == null) ? 0 : succeedMessage.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PowershellExecuter other = (PowershellExecuter) obj;
+		if (failedMessage == null) {
+			if (other.failedMessage != null)
+				return false;
+		} else if (!failedMessage.equals(other.failedMessage))
+			return false;
+		if (succeedMessage == null) {
+			if (other.succeedMessage != null)
+				return false;
+		} else if (!succeedMessage.equals(other.succeedMessage))
+			return false;
+		return true;
+	}
+
+	public void setSucceedMessage(String succeedMessage) {
+		this.succeedMessage = succeedMessage;
+	}
+
+	public void setFailedMessage(String failedMessage) {
+		this.failedMessage = failedMessage;
+	}
+
+	@Override
+	public String toString() {
+		return "PowershellExecuter [succeedMessage=" + succeedMessage + ", failedMessage=" + failedMessage + "]";
+	}
+
 }

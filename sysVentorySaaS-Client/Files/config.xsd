@@ -5,7 +5,9 @@
 			<xs:sequence>
 				<xs:element type="xs:string" name="UserId" minOccurs="1"
 					maxOccurs="1" />
-				<xs:element type="xs:string" name="Server" minOccurs="1"
+				<xs:element type="xs:string" name="ServerGET" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element type="xs:string" name="ServerPOST" minOccurs="1"
 					maxOccurs="1" />
 			</xs:sequence>
 		</xs:complexType>
