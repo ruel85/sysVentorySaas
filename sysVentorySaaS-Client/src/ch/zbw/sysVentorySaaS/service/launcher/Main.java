@@ -55,6 +55,7 @@ public class Main {
 
 	public Main() {
 		initDirectory();
+		readConfig();
 		getSettingsFromServer();
 	}
 
@@ -77,6 +78,56 @@ public class Main {
 		}
 	}
 
+	public void initDirectory() {
+		fm = new FileManager();
+		fm.createDirectory(dataPath, false);
+		fm.createDirectory(configPath, false);
+		fm.createDirectory(reportPath, false);
+		fm.createDirectory(logPath, false);
+		logger = Logger.getLogger("Logger");
+		try {
+			fh = new FileHandler(loggingPath);
+			logger.addHandler(fh);
+			SimpleFormatter formatter = new SimpleFormatter();
+			fh.setFormatter(formatter);
+		} catch (SecurityException | IOException e) {
+			e.printStackTrace();
+			logger.warning(e.getMessage() + "\n");
+		}
+		logger.info("check if data directories exists");
+		if (new File(dataPath).exists() && new File(configPath).exists() && new File(reportPath).exists()
+				&& new File(logPath).exists())
+			logger.info("directories exists [OK]\n");
+		else
+			logger.info("directories does not exists [ERROR]\n");
+	}
+
+	public void readConfig() {
+		domReader = new DOMReader();
+		try {
+			logger.info("check if config.xml is valid (" + configXmlPath + ") ");
+			domReader.isValidateXSD(configXmlPath, configXsdPath);
+			logger.info("config.xml is valid [OK]\n");
+			logger.info("reading config from file ");
+			HashMap<String, String> xmlContent = domReader.getHashMap(configXmlPath, xmlRootElementConfig,
+					xmlElementsConfig);
+			userId = xmlContent.get("UserId");
+			server = xmlContent.get("Server");
+			if (!server.isEmpty() && !userId.isEmpty())
+				logger.info("config was reading successfully [OK]\n");
+			else
+				logger.warning("config can not be reading successfully [ERROR]\n");
+		} catch (SAXException | IOException | ParserConfigurationException e) {
+			logger.warning(e.getMessage() + "\n");
+		}
+	}
+	
+	public void getSettingsFromServer() {
+		ScanTimerTask myTask = new ScanTimerTask(this);
+		Timer myTimer = new Timer();
+		myTimer.schedule(myTask, 0, checkIntervall);
+	}
+	
 	public int getCheckIntervall() {
 		return checkIntervall;
 	}
@@ -137,12 +188,6 @@ public class Main {
 		return server;
 	}
 
-	public void getSettingsFromServer() {
-		ScanTimerTask myTask = new ScanTimerTask(this);
-		Timer myTimer = new Timer();
-		myTimer.schedule(myTask, 0, checkIntervall);
-	}
-
 	public String getUserId() {
 		return userId;
 	}
@@ -161,51 +206,6 @@ public class Main {
 
 	public String getXmlRootElementJob() {
 		return xmlRootElementJob;
-	}
-
-	public void initDirectory() {
-
-		fm = new FileManager();
-		fm.createDirectory(dataPath, false);
-		fm.createDirectory(configPath, false);
-		fm.createDirectory(reportPath, false);
-		fm.createDirectory(logPath, false);
-		logger = Logger.getLogger("Logger");
-		try {
-			fh = new FileHandler(loggingPath);
-			logger.addHandler(fh);
-			SimpleFormatter formatter = new SimpleFormatter();
-			fh.setFormatter(formatter);
-		} catch (SecurityException | IOException e) {
-			e.printStackTrace();
-			logger.warning(e.getMessage() + "\n");
-		}
-		logger.info("check if data directories exists");
-		if (new File(dataPath).exists() && new File(configPath).exists() && new File(reportPath).exists()
-				&& new File(logPath).exists())
-			logger.info("directories exists [OK]\n");
-		else
-			logger.info("directories does not exists [ERROR]\n");
-	}
-
-	public void readConfig() {
-		domReader = new DOMReader();
-		try {
-			logger.info("check if config.xml is valid (" + configXmlPath + ") ");
-			domReader.isValidateXSD(configXmlPath, configXsdPath);
-			logger.info("config.xml is valid [OK]\n");
-			logger.info("reading config from file ");
-			HashMap<String, String> xmlContent = domReader.getHashMap(configXmlPath, xmlRootElementConfig,
-					xmlElementsConfig);
-			userId = xmlContent.get("UserId");
-			server = xmlContent.get("Server");
-			if (!server.isEmpty() && !userId.isEmpty())
-				logger.info("config was reading successfully [OK]\n");
-			else
-				logger.warning("config can not be reading successfully [ERROR]\n");
-		} catch (SAXException | IOException | ParserConfigurationException e) {
-			logger.warning(e.getMessage() + "\n");
-		}
 	}
 
 }

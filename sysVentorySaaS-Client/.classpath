@@ -6,5 +6,15 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibraryDamjan"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/webapp"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/commons-ip-math-1.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/evercam-discovery-lib-20151211.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/evercam-discovery-runnable-20151211.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/jPowerShell-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/org.apache.httpcomponents.httpclient_4.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/org.taksmind.subnetting_1.2.29.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/snmp4j-2.4.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/snmp4j-2.4.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/WMI4Java-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Alpha0/Desktop/httpcomponents/httpcore-4.4.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
