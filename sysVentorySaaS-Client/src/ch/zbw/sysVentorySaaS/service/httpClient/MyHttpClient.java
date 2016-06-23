@@ -77,7 +77,7 @@ public class MyHttpClient {
 		os.flush();
 		connection.getResponseCode();
 		connection.disconnect();
-		main.getLogger().info("ResponseCode: " + connection.getResponseCode() + "\n");
+		main.getLogger().info("ResponseCode: " + connection.getResponseCode());
 		return String.valueOf(connection.getResponseCode());
 	}
 

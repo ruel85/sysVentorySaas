@@ -25,11 +25,13 @@ class ScanTimerTask extends TimerTask {
 			if (Boolean.parseBoolean(jobrequest.get("timeToScan"))) {
 
 				main.getLogger().info("job was found, starting job [OK]\n");
+				main.getLogger().info("|-----------------------------------> START SCAN <-----------------------------------|");
 				main.executePowershell();
 				main.getLogger().info("sending xml-report to server ...");
 				String status = httpc.sendPOST(main.getReportXmlPath());
 				if (status.equals("200")) {
-					main.getLogger().info("ScanJob successfully send to server [OK]\n");
+					main.getLogger().info("ScanJob successfully send to server [OK]");
+					main.getLogger().info("|-----------------------------------> END SCAN <-----------------------------------|\n\n");
 				} else {
 					main.getLogger().warning("ScanJob could not be send to server [OK]\n");
 				}
