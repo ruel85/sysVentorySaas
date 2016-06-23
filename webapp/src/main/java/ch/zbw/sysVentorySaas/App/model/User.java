@@ -14,11 +14,11 @@ public class User {
 	private Company company;
 
 	public User(String uID, String username, String password, String email){
-		if(uID.isEmpty() || uID == null)
-		{
+		if(uID == null || uID.isEmpty())
 			this.uID= MD5Hash.getMD5Hash(username).toString();
-		}
-		this.uID = uID;
+		else
+			this.uID = uID;
+		
 		this.username=username;
 		this.password=password;
 		this.email=email;
