@@ -55,17 +55,18 @@ public class MyHttpClient {
 		os.flush();
 		connection.getResponseCode();
 		connection.disconnect();
-		return result.toString();
+		main.getLogger().info("ResponseCode: "+ connection.getResponseCode() + "\n");
+		return String.valueOf(connection.getResponseCode());
 	}
 
 	public Document sendGET() throws Exception {
 		URL obj = new URL(requestURI);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("GET");
-		con.setRequestProperty("accept", "application/xml");
+		con.setRequestProperty("Content-Type", "application/xml");
 		int responseCode = con.getResponseCode();
 		StringBuffer response = new StringBuffer();
-		if (responseCode == HttpURLConnection.HTTP_OK) { // success
+		if (responseCode == HttpURLConnection.HTTP_OK) {
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
 

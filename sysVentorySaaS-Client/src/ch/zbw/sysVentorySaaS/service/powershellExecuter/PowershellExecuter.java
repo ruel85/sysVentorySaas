@@ -40,10 +40,15 @@ public class PowershellExecuter {
 	public boolean execute_method2(String command) throws PowerShellNotAvailableException {
 		succeedMessage = "";
 		failedMessage = "";
-		PowerShell powerShell = PowerShell.openSession();
-		boolean successfully = !powerShell.executeCommand(command).isError();
-		powerShell.close();
-		return successfully;
+		try {
+			PowerShell powerShell = PowerShell.openSession();
+			boolean successfully = !powerShell.executeCommand(command).isError();
+			powerShell.close();
+			return successfully;
+		} catch (Exception e) {
+			return false;
+		}
+
 	}
 
 	public String getFailedMessage() {
