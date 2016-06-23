@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import javax.print.attribute.standard.MediaSize.Other;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
@@ -18,6 +20,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.DeviceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.GroupDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.OperatingSystemDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.OtherDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
@@ -223,6 +226,10 @@ public class HibernateTest {
 		user5.setCompany(comp);
 	
 		userDAO.createUser(user2);
+		
+		ScanSetting sc = OtherDAO.getScanSettingByUID("2d1a0484f40daceeef42967c4ac00911");
+		
+		
 		userDAO.createUser(user3);
 		userDAO.createUser(user4);
 		userDAO.createUser(user5);
