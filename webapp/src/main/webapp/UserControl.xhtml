@@ -25,6 +25,27 @@
 	</b:tabLinks>
 	<h:form>
 		<p>Benutzerverwaltung</p>
+		<b:dataTable value="#{userControl.users}" var="user" id="allUsers"
+			styleClass="table table-striped table-bordered" style="width:100%" multi-column-search="true">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Benutzername" />
+				</f:facet>
+				<h:outputText value="#{user.username}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Passwort" />
+				</f:facet>
+				<h:outputText value="#{user.password}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="E-Mail" />
+				</f:facet>
+				<h:outputText value="#{user.email}" />
+			</h:column>
+		</b:dataTable>
 	</h:form>
 </h:body>
 </html>

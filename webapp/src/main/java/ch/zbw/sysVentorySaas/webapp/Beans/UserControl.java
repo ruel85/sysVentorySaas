@@ -1,6 +1,7 @@
 package ch.zbw.sysVentorySaas.webapp.Beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -8,6 +9,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
+import ch.zbw.sysVentorySaas.App.model.ScanJob;
+import ch.zbw.sysVentorySaas.App.model.User;
 import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;
 
 @ManagedBean
@@ -19,6 +24,8 @@ public class UserControl implements Serializable {
 	private String password;
 	private String message;
 	private String user;
+	
+	private List<User> users;
 
 	public String getPwd() {
 		return password;
@@ -42,6 +49,12 @@ public class UserControl implements Serializable {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+	
+	public List<User> getUsers() {
+		UserDAO userDao = new UserDAO();
+		this.users = userDao.getAllUsers();
+		return this.users;
 	}
 
 	//validate userControl
