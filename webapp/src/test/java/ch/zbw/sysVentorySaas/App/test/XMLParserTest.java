@@ -40,22 +40,17 @@ public static XMLParserDOM xmlParserDOM;
 		xmlParserDOM = new XMLParserDOM("Schema/computers.xsd", "Schema/computers.xml");
 	}
 	
-	@Test
+	
 	public void TestValidateXML() throws ParserConfigurationException, IOException, SAXException
 	{
 		xmlParserDOM.validateXML();
 	}
 	
-	
-	public void TestFillDataFromXMLFile() throws ParserConfigurationException, IOException, SAXException
-	{
-		File f = new File("Schema/computers.xml");
-		xmlParserDOM.fillDataFromXMLFile( new FileInputStream(f));
-	}
-	
 	@Test
 	public void TestReadDataWithJaxBUnmarshaller() throws Throwable	{
 		
-		XMLToDAOMapper.importData();
+		File fileXML = new File("Schema/computers.xml");
+		FileInputStream fi = new FileInputStream(fileXML);
+		XMLToDAOMapper.importData(fi);
 	}
 }

@@ -13,6 +13,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ProcessorDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App.computers.Computers;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer;
@@ -27,11 +28,12 @@ import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App.model.Printer;
 import ch.zbw.sysVentorySaas.App.model.Processor;
+import ch.zbw.sysVentorySaas.App.model.ScanJob;
 import ch.zbw.sysVentorySaas.App.model.Software;
 
 public class XMLToDAOMapper {
 
-	public static void importData() throws Throwable
+	public static void importData(InputStream i) throws Throwable
 	{
 		Device newDevice;
 		OperatingSystem newOperatingSystem;
@@ -39,21 +41,24 @@ public class XMLToDAOMapper {
 		Processor newProcessor;
 		Printer newPrinter;
 		NetworkInterface newNetworkInterface;
+		ScanJob newScanJob;
 		
 		final JAXBContext jaxbContext= JAXBContext.newInstance(ObjectFactory.class);
 		Unmarshaller jaxbUnmarshaller=jaxbContext.createUnmarshaller();
-		
-		File f = new File("Schema/computers.xml");		
-		InputStream is = new FileInputStream(f);
+				
+		InputStream is = i;
 		
 		Computers comp = (Computers) jaxbUnmarshaller.unmarshal(is);
-		System.out.println("Anzahl Computer:" + comp.getComputer().size());
+		System.out.println("Anzahl Computer:" + comp.getComputer().size());		
 		
-		List<Computer> comps = comp.getComputer();
-		
+		List<Computer> comps = comp.getComputer();		
 		if(comps == null || comps.size() == 0)
 			throw new Throwable("Keine Computers vorhanden!");
 
+		newScanJob = new ScanJob();
+		newScanJob.setStartTime(comp.getStamp());
+		ScanJobDAO.createScanJob(newScanJob);
+		
 		for(Computer oneComp : comps)
 		{
 			newDevice = new Device();
