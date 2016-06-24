@@ -41,9 +41,11 @@
 				<h:outputLabel value="Intervall in h" />
 				<b:inputText value="#{scanSettingBean.intervallHours}" />
 				<h:outputLabel value="Zeit zu Scannen" />
-				<b:selectBooleanCheckbox value="#{scanSettingBean.timeToScan}" />
 			</b:panelGrid>
-
+			<b:buttonGroup>
+				<b:button value="Speichern"></b:button>
+				<b:button value="Scan starten"></b:button>
+			</b:buttonGroup>
 		</b:container>
 	</h:form>
 </h:body>
