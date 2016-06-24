@@ -25,7 +25,7 @@
 	</b:tabLinks>
 	<h:form>
 		<b:dataTable value="#{scans.scans}" var="scan" id="allScans"
-			styleClass="table table-striped table-bordered" style="width:100%">
+			styleClass="table table-striped table-bordered" style="width:100%" multi-column-search="true">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Startzeit" />
