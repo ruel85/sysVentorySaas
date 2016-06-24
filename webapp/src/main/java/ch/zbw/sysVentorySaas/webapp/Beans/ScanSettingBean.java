@@ -102,16 +102,21 @@ public class ScanSettingBean implements Serializable {
 		this.setting = setting;
 	}
 	
-	// start Scanjob
+	// start Scanjob DD
 	public void startScan()
 	{
-		
+		setting.setTimeToScan(true);
+		ScanSettingDAO.createScanSetting(setting);
 	}
 	
-	// save Settings
+	// save Settings DD
 	public void saveSettings()
 	{
-		
+		setting.setNetworkName(networkName);
+		setting.setIpStart(ipStart);
+		setting.setIpEnd(ipEnd);
+		setting.setIntervallHours(intervallHours);
+		ScanSettingDAO.createScanSetting(setting);
 	}
 
 }
