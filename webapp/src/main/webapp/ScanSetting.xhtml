@@ -43,8 +43,8 @@
 				<h:outputLabel value="Zeit zu Scannen" />
 			</b:panelGrid>
 			<b:buttonGroup>
-				<b:button value="Speichern"></b:button>
-				<b:button value="Scan starten"></b:button>
+				<b:commandButton value="Speichern" look="primary" action="#{scanSettingBean.saveSettings}"></b:commandButton>
+				<b:commandButton value="Scan starten" look="primary" action="#{scanSettingBean.startScan}"></b:commandButton>
 			</b:buttonGroup>
 		</b:container>
 	</h:form>

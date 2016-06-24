@@ -29,6 +29,7 @@ public class ScanSettingBean implements Serializable {
 	CompanyDAO cDAO;
 	private ScanSetting setting;
 
+	// liefert die Settings des Unternehmens
 	public String checkScanSetting() {
 		ScanSettingDAO setting = new ScanSettingDAO();
 		List<ScanSetting> list = setting.getAllScanSettings();
@@ -99,6 +100,18 @@ public class ScanSettingBean implements Serializable {
 
 	public void setSetting(ScanSetting setting) {
 		this.setting = setting;
+	}
+	
+	// start Scanjob
+	public void startScan()
+	{
+		
+	}
+	
+	// save Settings
+	public void saveSettings()
+	{
+		
 	}
 
 }
