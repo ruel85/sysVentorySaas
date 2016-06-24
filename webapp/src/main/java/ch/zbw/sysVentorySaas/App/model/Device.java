@@ -6,20 +6,27 @@ public class Device {
 	private String macAddress;
 	private String ipAddress;
 	private String manufacturer;
+	private String memory;
 
-	public Device(String macAddress) {
-		this.macAddress = macAddress;
-	}
 
-	public Device(String name, String manufacturer, String macAddress, String ipAddress) {
+	public Device(String name, String manufacturer, String macAddress, String ipAddress, String memory) {
 		this.name=name;
 		this.manufacturer=manufacturer;
 		this.macAddress=macAddress;
 		this.ipAddress=ipAddress;
+		this.memory = memory;
 	}
 	
 	public Device()
 	{
+	}
+
+	public String getMemory() {
+		return memory;
+	}
+
+	public void setMemory(String memory) {
+		this.memory = memory;
 	}
 
 	public int getIdDevice() {

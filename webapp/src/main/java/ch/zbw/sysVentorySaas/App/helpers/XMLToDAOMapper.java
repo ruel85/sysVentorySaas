@@ -67,6 +67,7 @@ public class XMLToDAOMapper {
 			newDevice.setIpAddress(oneComp
 					.getNetzwerkkonfiguration().getNetzwerkKarte().get(0).getIPAdresse().getValue());
 			newDevice.setManufacturer("Hersteller unbekannt");
+			newDevice.setMemory(oneComp.getSystem().getMemory().getValue().toString());
 			DeviceDAO.createDevice(newDevice);
 			
 			newOperatingSystem = new OperatingSystem();

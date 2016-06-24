@@ -12,5 +12,6 @@
 		<property name="manufacturer" column="manufacturer" type="string"/>
 		<property name="macAddress" column="macAddress" type="string"/>
 		<property name="ipAddress" column="ipAddress" type="string"/>
+		<property name="memory" column="memory" type="string" />
 	</class>
 </hibernate-mapping>
