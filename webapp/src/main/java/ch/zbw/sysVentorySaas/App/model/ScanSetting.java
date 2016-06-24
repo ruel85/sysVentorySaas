@@ -2,6 +2,7 @@ package ch.zbw.sysVentorySaas.App.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class ScanSetting{
@@ -13,7 +14,7 @@ public class ScanSetting{
 	private int intervallHours;
 	private boolean timeToScan;
 	
-	// Darf kein XML-Element sein!
+	@XmlTransient /*Ignoriert das markierte Element für das XML-Bindung */
 	private Company company;
 	
 	public ScanSetting(String networkName, String ipStart, String ipEnd, int intervallHours, boolean timeToScan)

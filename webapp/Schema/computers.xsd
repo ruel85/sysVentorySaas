@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+         <!-- XML Schema Generated from XML Document on Thu Jun 23 2016 22:13:51 GMT+0200 -->
+         <!-- with XmlGrid.net Free Online Service http://xmlgrid.net -->
+         <xs:element name="computers">
+               <xs:complexType>
+                     <xs:sequence>
+                           <xs:element name="computer" maxOccurs="unbounded">
+                                 <xs:complexType>
+                                       <xs:sequence>
+                                             <xs:element name="System">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="computername">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="systemtype">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="Memory">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="value" type="xs:int"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="Betriebssystem">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="Buildnummer">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="value" type="xs:int"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="OSArchitektur">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="Peripherie">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="Druckers">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="Drucker" maxOccurs="unbounded">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                               <xs:element name="Druckertreibers">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="Druckertreiber" maxOccurs="unbounded">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="Netzwerkkonfiguration">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="NetzwerkKarte" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="Beschreibung">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="Gateway">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="DHCP">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="IPAdresse">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="Subnetz">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="Macadresse">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="Programme">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="Programm" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="Name">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="Version">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="Prozessoren">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="Prozessor">
+                                                                     <xs:complexType>
+                                                                           <xs:sequence>
+                                                                                 <xs:element name="Name">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="Beschreibung">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="NoC">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:int"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                                 <xs:element name="CCS">
+                                                                                       <xs:complexType>
+                                                                                             <xs:attribute name="value" type="xs:int"></xs:attribute>
+                                                                                       </xs:complexType>
+                                                                                 </xs:element>
+                                                                           </xs:sequence>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                             <xs:element name="SIDS">
+                                                   <xs:complexType>
+                                                         <xs:sequence>
+                                                               <xs:element name="SID" maxOccurs="unbounded">
+                                                                     <xs:complexType>
+                                                                           <xs:attribute name="value" type="xs:string"></xs:attribute>
+                                                                     </xs:complexType>
+                                                               </xs:element>
+                                                         </xs:sequence>
+                                                   </xs:complexType>
+                                             </xs:element>
+                                       </xs:sequence>
+                                 </xs:complexType>
+                           </xs:element>
+                     </xs:sequence>
+                     <xs:attribute name="stamp" type="xs:string"></xs:attribute>
+               </xs:complexType>
+         </xs:element>
+   </xs:schema>

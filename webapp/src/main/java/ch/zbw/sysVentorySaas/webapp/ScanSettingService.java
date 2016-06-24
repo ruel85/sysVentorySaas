@@ -76,7 +76,7 @@ public class ScanSettingService {
 			User user; 			
 			Company comp;
 			
-			/*try {
+			try {
 				user = UserDAO.getUserByUID(uID);
 				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
 				{
@@ -90,7 +90,7 @@ public class ScanSettingService {
 				Log4JLogger log = new Log4JLogger();
 				log.error(e.getMessage());				
 			}
-			*/
+			
 			
 			
 			Random r = new Random();
@@ -99,7 +99,6 @@ public class ScanSettingService {
 			sReturn.setIpStart("192.168.1.30");
 			sReturn.setIpEnd("192.168.1.80");
 			sReturn.setIdCompany(-1);
-			sReturn.setIdCompany(1);
 			sReturn.setTimeToScan((i <= 50?true:false));
 			sReturn.setIntervallHours(60);	
 			return sReturn;
