@@ -26,24 +26,30 @@
 	<h:form>
 		<p>Benutzerverwaltung</p>
 		<b:dataTable value="#{userControl.users}" var="user" id="allUsers"
-			styleClass="table table-striped table-bordered" style="width:100%" multi-column-search="true">
+			styleClass="table table-striped table-bordered" style="width:100%"
+			multi-column-search="true">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Benutzername" />
 				</f:facet>
-				<h:outputText value="#{user.username}" />
+				<h:inputText value="#{user.username}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Passwort" />
 				</f:facet>
-				<h:outputText value="#{user.password}" />
+				<h:inputText value="#{user.password}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="E-Mail" />
 				</f:facet>
-				<h:outputText value="#{user.email}" />
+				<h:inputText value="#{user.email}" />
+			</h:column>
+			<h:column>
+				<b:commandButton value="Löschen" look="danger" icon="remove" action="#{userControl.deleteUser}" actionListener="#{userControl.attrListener}">
+					<f:attribute name="iduser" value="#{user.idUser}" />
+				</b:commandButton>
 			</h:column>
 		</b:dataTable>
 	</h:form>
