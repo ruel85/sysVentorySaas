@@ -76,20 +76,20 @@ public class ScanSettingService {
 			User user; 			
 			Company comp;
 			
-			try {
-				user = UserDAO.getUserByUID(uID);
-				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
-				{
-					comp = CompanyDAO.getCompanyById(user.getCompany().getIdCompany());
-					
-					if(comp != null && comp.getIdCompany() != 0)
-						return ScanSettingDAO.getScanSettingById(comp.getIdCompany());
-				}
-				
-			} catch (Exception e) {
-				Log4JLogger log = new Log4JLogger();
-				log.error(e.getMessage());				
-			}
+//			try {
+//				user = UserDAO.getUserByUID(uID);
+//				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
+//				{
+//					comp = CompanyDAO.getCompanyById(user.getCompany().getIdCompany());
+//					
+//					if(comp != null && comp.getIdCompany() != 0)
+//						return ScanSettingDAO.getScanSettingById(comp.getIdCompany());
+//				}
+//				
+//			} catch (Exception e) {
+//				Log4JLogger log = new Log4JLogger();
+//				log.error(e.getMessage());				
+//			}
 			
 			
 			
