@@ -159,7 +159,7 @@ public class HibernateTest {
 	
 	@Test
 	public void TestDevice_CRUD(){
-		Device dev = new Device("Desktop PC", "DELL", "50-1A-C5-F4-C7-BB", "192.168.2.21");
+		Device dev = new Device("Desktop PC", "DELL", "50-1A-C5-F4-C7-BB", "192.168.2.21", "65434", "x64-based PC");
 		Device newDevice = DeviceDAO.createDevice(dev);
 		
 		Device devSelected = DeviceDAO.getDeviceById(newDevice.getIdDevice());
@@ -167,6 +167,8 @@ public class HibernateTest {
 		assertEquals("DELL", devSelected.getManufacturer());
 		assertEquals("50-1A-C5-F4-C7-BB", devSelected.getMacAddress());
 		assertEquals("192.168.2.21", devSelected.getIpAddress());
+		assertEquals("65434", devSelected.getMemory());
+		assertEquals("x64-based PC", devSelected.getSystemtyp());
 		
 		DeviceDAO.deleteDevice(DeviceDAO.getDeviceById(devSelected.getIdDevice()));
 		assertNull(DeviceDAO.getDeviceById(devSelected.getIdDevice()));
