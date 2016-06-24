@@ -22,10 +22,15 @@ public class ScanJobService {
 	public String createScanJobByUID(@PathParam("uID") String uID, File xmlResult) throws Throwable
 	{
 		System.out.println("Neuer POST-Request mit uID = " + uID);		
+	
+		// todo Ruel bevor eingelesen wird:
+		// XML-Validierung
+		// uID Validieren
+		
 		File xmlFile = xmlResult;
 		FileInputStream fi = new FileInputStream(xmlFile);
 		XMLToDAOMapper.importData(fi);
-				
+		
 		return "<html>"
 				+ "<body>"
 				+ "<p>ScanJob erhalten mit der UID" + uID + ".</p>"
@@ -33,6 +38,5 @@ public class ScanJobService {
 				+ "</body>"
 				+ ""
 				+ "</html>";
-		
 	}
 }
