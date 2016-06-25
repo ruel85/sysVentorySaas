@@ -7,6 +7,7 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<title>Benutzerverwaltung</title>
+	<script type="text/javascript" src="UserControl.js"></script>
 </h:head>
 <h:body>
 	<b:tabLinks>
@@ -32,23 +33,34 @@
 				<f:facet name="header">
 					<h:outputText value="Benutzername" />
 				</f:facet>
-				<h:inputText value="#{user.username}" />
+				<h:inputText id="username" value="#{user.username}"
+					binding="#{userControl.tmpUsername}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Passwort" />
 				</f:facet>
-				<h:inputText value="#{user.password}" />
+				<h:inputSecret id="password" value="#{user.password}"
+					binding="#{userControl.tmpPassword}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="E-Mail" />
 				</f:facet>
-				<h:inputText value="#{user.email}" />
+				<h:inputText id="email" value="#{user.email}"
+					update="#{userControl.tmpEmail}" binding="#{userControl.tmpEmail}"/>
 			</h:column>
 			<h:column>
-				<b:commandButton value="Löschen" look="danger" icon="remove" action="#{userControl.deleteUser}" actionListener="#{userControl.attrListener}">
+				<b:commandButton id="delete" value="Löschen" look="danger" icon="remove"
+					action="#{userControl.deleteUser}"
+					actionListener="#{userControl.userListener}">
 					<f:attribute name="iduser" value="#{user.idUser}" />
+				</b:commandButton>
+				<b:commandButton id="save" value="Speichern" look="Primary" icon="save"
+					action="#{userControl.saveUser}"
+					actionListener="#{userControl.userListener}">
+					<f:attribute name="iduser" value="#{user.idUser}" />
+					<f:attribute name="email" value="#{user.email}" />
 				</b:commandButton>
 			</h:column>
 		</b:dataTable>

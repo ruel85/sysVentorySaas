@@ -1,4 +1,5 @@
 package ch.zbw.sysVentorySaas.App.model;
+
 import java.util.List;
 
 import javax.persistence.EnumType;
@@ -10,6 +11,7 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.GroupDAO;
 import ch.zbw.sysVentorySaas.App.helpers.GroupType;
 import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
+import ch.zbw.sysVentorySaas.App.helpers.PasswordEncryptor;
 
 public class User {
 	private int idUser;
@@ -17,34 +19,30 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
-	
+
 	private GroupType groupType;
 	private Company company;
-	
+
 	private ConfigurablePasswordEncryptor passwordEncryptor;
 
-	public User(String uID, String username, String password, String email, GroupType groupType){
-	
-		passwordEncryptor = new ConfigurablePasswordEncryptor();
-		passwordEncryptor.setAlgorithm("SHA-1");
-		passwordEncryptor.setPlainDigest(true);
-		
-		if(uID == null || uID.isEmpty())
-			this.uID= MD5Hash.getMD5Hash(username).toString();
+	public User(String uID, String username, String password, String email, GroupType groupType) {
+
+		this.passwordEncryptor = PasswordEncryptor.getPWEncryptor();
+		if (uID == null || uID.isEmpty())
+			this.uID = MD5Hash.getMD5Hash(username).toString();
 		else
 			this.uID = uID;
-		
-		this.username=username;
-		this.password= passwordEncryptor.encryptPassword(password);
-		this.email=email;
-		this.groupType=groupType;
-	}
-	
-	public User(){
-		passwordEncryptor = new ConfigurablePasswordEncryptor();
+
+		this.username = username;
+		this.password = passwordEncryptor.encryptPassword(password);
+		this.email = email;
+		this.groupType = groupType;
 	}
 
-	
+	public User() {
+		this.passwordEncryptor = PasswordEncryptor.getPWEncryptor();
+	}
+
 	public GroupType getGroupType() {
 		return groupType;
 	}
@@ -52,7 +50,7 @@ public class User {
 	public void setGroupType(GroupType groupType) {
 		this.groupType = groupType;
 	}
-	
+
 	public Company getCompany() {
 		return company;
 	}
@@ -90,10 +88,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		//this.password = password;
-		passwordEncryptor.setAlgorithm("SHA-1");
-		passwordEncryptor.setPlainDigest(true);
-		String encryptedPassword = passwordEncryptor.encryptPassword(password);
+		String encryptedPassword = this.passwordEncryptor.encryptPassword(password);
 		this.password = encryptedPassword;
 	}
 

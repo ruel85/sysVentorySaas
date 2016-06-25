@@ -17,6 +17,7 @@ import ch.zbw.sysVentorySaas.App.model.User;
 
 public class UserDAO {
 	
+	// Create or Update User
 	public static User createUser(User user){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
@@ -25,6 +26,7 @@ public class UserDAO {
 		return user;
 	}
 	
+	// remove User
 	public static User deleteUser(User user)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -34,6 +36,7 @@ public class UserDAO {
 		return user;
 	}
 
+	// get User by UID
 	public static User getUserByUID(String UID) {
 		User newObject = new User();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -54,6 +57,7 @@ public class UserDAO {
 		return (users.size()> 0) ? users.get(0) : newObject;
 	}
 	
+    // get User by ID
 	public static User getUserByIdUser(int idUser) {
 		User sEmpty = new User();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -63,6 +67,7 @@ public class UserDAO {
 		return sEmpty;
 	}
 	
+	// returns a List of Users
 	public static List<User> getAllUsers()
 	{
 		List<User> users = new ArrayList<User>();

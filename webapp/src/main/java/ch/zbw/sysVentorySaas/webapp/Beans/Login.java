@@ -39,7 +39,7 @@ public class Login implements Serializable {
 
 	//validate login
 	public String validateUsernamePassword() {
-		User user = LoginDao.validate(this.user, password);
+		User user = LoginDao.validate(this.user, this.password);
 		if (user != null) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("user", user);

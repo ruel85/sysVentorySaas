@@ -35,6 +35,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
 import ch.zbw.sysVentorySaas.App.helpers.GroupType;
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
+import ch.zbw.sysVentorySaas.App.helpers.PasswordEncryptor;
 import ch.zbw.sysVentorySaas.App.model.Company;
 import ch.zbw.sysVentorySaas.App.model.Device;
 import ch.zbw.sysVentorySaas.App.model.Group;
@@ -57,7 +58,7 @@ public class HibernateTest {
 	private String mySQLParams;
 	private Connection con;
 	private String st;
-	
+		
 	@Before
 	public void setUp(){
 		
@@ -185,11 +186,8 @@ public class HibernateTest {
 	}
 	
 	@Test
-	public void TestUser_CRUD(){
-		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
-		passwordEncryptor.setAlgorithm("SHA-1");
-		passwordEncryptor.setPlainDigest(true);
-		
+	public void TestUser_CRUD(){		
+		ConfigurablePasswordEncryptor encryptor = PasswordEncryptor.getPWEncryptor();
 		List<User> userList = new ArrayList<User>();
 		userList.add(new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch", GroupType.SysVentoryAdmin));
 		userList.add( new User(null, "elias", "12345", null, GroupType.SysVentoryAdmin));
@@ -213,7 +211,7 @@ public class HibernateTest {
 		
 		assertEquals("ruel85", userSelected.getUsername());
 		
-		assertTrue(passwordEncryptor.checkPassword(passwordEncryptor.encryptPassword("12345"), userSelected.getPassword()));
+		assertTrue(encryptor.checkPassword(encryptor.encryptPassword("12345"), userSelected.getPassword()));
 		
 		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
 		assertEquals(GroupType.SysVentoryAdmin, userSelected.getGroupType());
