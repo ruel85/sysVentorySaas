@@ -28,7 +28,7 @@
     	<property name="hibernate.show_sql_comments">true</property>
  		
  		<!-- Drop and re-create the database schema on startup -->
-<!--     	<property name="hbm2ddl.auto">create-drop</property> -->
+    	<property name="hbm2ddl.auto">create-drop</property>
 <!-- 	   	<property name="hbm2ddl.auto">update</property> -->
         
         <!-- Mapping files --> 
@@ -45,5 +45,6 @@
         <mapping resource="HibernateScanStatusMapping.hbm.xml"/>
         <mapping resource="HibernateServiceMapping.hbm.xml"/>
         <mapping resource="HibernateSoftwareMapping.hbm.xml"/>
+        <mapping resource="HibernateSIDMapping.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

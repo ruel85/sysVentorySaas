@@ -16,7 +16,7 @@
 		
 		<property name="uID" column="uid" type="string"/>
 		<property name="username" column="username" type="string"/>
-		<property name="password" column="password" type="string"/>
+		<property name="password" column="password" type="string" />
 		<property name="email" column="email" type="string"/>
 		
 <!-- 		type="ch.zbw.sysVentorySaas.App.GroupType" -->

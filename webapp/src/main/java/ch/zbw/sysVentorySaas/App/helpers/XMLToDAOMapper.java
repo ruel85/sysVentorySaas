@@ -22,6 +22,7 @@ import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Peripherie.Drucker
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Peripherie.Druckers.Drucker;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Programme.Programm;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Prozessoren.Prozessor;
+import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.SIDS.SID;
 import ch.zbw.sysVentorySaas.App.computers.ObjectFactory;
 import ch.zbw.sysVentorySaas.App.model.Device;
 import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
@@ -42,6 +43,7 @@ public class XMLToDAOMapper {
 		Printer newPrinter;
 		NetworkInterface newNetworkInterface;
 		ScanJob newScanJob;
+		ch.zbw.sysVentorySaas.App.model.SID sid;
 		
 		final JAXBContext jaxbContext= JAXBContext.newInstance(ObjectFactory.class);
 		Unmarshaller jaxbUnmarshaller=jaxbContext.createUnmarshaller();
@@ -112,6 +114,13 @@ public class XMLToDAOMapper {
 				software.setName(oneProgramm.getName().getValue());
 				software.setVersion(oneProgramm.getVersion().getValue());
 				SoftwareDAO.createSoftware(software);
+			}
+			
+			List<SID> sidList = oneComp.getSIDS().getSID();
+			for(SID oneSID : sidList)
+			{
+				sid = new ch.zbw.sysVentorySaas.App.model.SID();
+				sid.setSID(oneSID.getValue());				
 			}
 			
 		}

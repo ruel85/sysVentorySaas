@@ -25,6 +25,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.OtherDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ProcessorDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.SIDDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanStatusDAO;
@@ -41,6 +42,7 @@ import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App.model.Printer;
 import ch.zbw.sysVentorySaas.App.model.Processor;
+import ch.zbw.sysVentorySaas.App.model.SID;
 import ch.zbw.sysVentorySaas.App.model.ScanJob;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 import ch.zbw.sysVentorySaas.App.model.ScanStatus;
@@ -355,4 +357,14 @@ public class HibernateTest {
 		
 		session.getTransaction().commit();	
 	}
+	
+	@Test
+	public void Test_SID(){
+		SID sid = SIDDAO.createSID(new SID("S-1-5-21-2056415622-1170722248-999543400-501"));
+		
+		SID sidSelected = SIDDAO.getSIDById(sid.getIdSID());
+		assertEquals("S-1-5-21-2056415622-1170722248-999543400-501", sidSelected.getSID());
+	}
+	
+	
 }
