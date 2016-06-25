@@ -7,7 +7,7 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<title>Home</title>
+	<title>AdminBean</title>
 </h:head>
 <h:body>
 	<b:tabLinks>
@@ -24,9 +24,7 @@
 			href="Services"></b:navCommandLink>
 		<b:navCommandLink value="Logout" action="#{login.logout}" href="Login"></b:navCommandLink>
 	</b:tabLinks>
-	<h:form>
-		<p>Home</p>		
-		
+	<h:form>	
 		<!-- Anzahl Geräte
 		     Anzahl Scans
 		     
@@ -35,7 +33,9 @@
 		     
 		     
 		     Liste mit allen Geräten für diese Firma  -->
-		
+		<b:inputText value="#{adminBean.countCompany}" />
+		<b:inputText value="#{adminBean.countDevicesPerCompanyAvarge}" />
+		<b:inputText value="#{adminBean.countUsers}" />
 		
 		
 	</h:form>

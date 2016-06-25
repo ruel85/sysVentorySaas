@@ -8,7 +8,6 @@ import javax.faces.bean.SessionScoped;
 
 import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
-import ch.zbw.sysVentorySaas.App.model.Company;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 import ch.zbw.sysVentorySaas.App.model.User;
 import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;

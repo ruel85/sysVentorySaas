@@ -1,10 +1,14 @@
 package ch.zbw.sysVentorySaas.App.DataAccessObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.model.Company;
+import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 
 public class CompanyDAO {
 	
@@ -32,5 +36,14 @@ public class CompanyDAO {
 		session.delete(company);
 		transaction.commit();
 		return company;
+	}
+	
+	public static List<Company> getAllCompanies() {
+		List<Company> companies = new ArrayList<Company>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		companies = session.createQuery("FROM Company").list();
+		transaction.commit();
+		return companies;
 	}
 }
