@@ -47,7 +47,8 @@ public class SNMPScanner {
 			if (st.isReachable()) {
 				String macAdressIndex = st.getAsString(new OID(".1.3.6.1.2.1.4.20.1.2." + st.getIpv4()));
 				String macAdress = st.getAsString(new OID(".1.3.6.1.2.1.2.2.1.6." + macAdressIndex));
-				Device snmpDevice = new Device(macAdress);
+				Device snmpDevice = new Device();
+				snmpDevice.setMacAddress(macAdress);
 				String deviceName = st.getAsString(new OID(".1.3.6.1.2.1.1.5.0"));
 				snmpDevice.setIpAddress(st.getIpv4());
 				snmpDevice.setName(deviceName);
