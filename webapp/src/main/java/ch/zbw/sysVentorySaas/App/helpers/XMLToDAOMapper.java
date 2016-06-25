@@ -96,6 +96,11 @@ public class XMLToDAOMapper {
 			{
 				newNetworkInterface = new NetworkInterface();
 				newNetworkInterface.setName(oneNetzwerkKarte.getBeschreibung().getValue());
+				newNetworkInterface.setDhcp(oneNetzwerkKarte.getDHCP().getValue());
+				newNetworkInterface.setSubnet(oneNetzwerkKarte.getSubnetz().getValue());
+				newNetworkInterface.setGateway(oneNetzwerkKarte.getGateway().getValue());
+				newNetworkInterface.setMacAddress(oneNetzwerkKarte.getMacadresse().getValue());
+				
 				NetworkInterfaceDAO.createNetworkInterface(newNetworkInterface);
 			}
 			

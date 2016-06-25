@@ -9,5 +9,9 @@
 			<generator class="identity"/>
 		</id>
 		<property name="name" column="name" type="string"/>
+		<property name="dhcp" column="dhcp" type="string"/>
+		<property name="subnet" column="subnet" type="string"/>
+		<property name="gateway" column="gateway" type="string"/>
+		<property name="macAddress" column="macAddress" type="string"/>
 	</class>
 </hibernate-mapping>

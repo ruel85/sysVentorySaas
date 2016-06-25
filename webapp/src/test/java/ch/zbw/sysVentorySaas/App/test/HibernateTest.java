@@ -147,11 +147,16 @@ public class HibernateTest {
 	
 	@Test
 	public void TestNetworkInterface_CRUD(){
-		NetworkInterface ni = new NetworkInterface("Marvell AVASTAR Wireless-AC Network Controller");
+		NetworkInterface ni = new NetworkInterface(
+				"Marvell AVASTAR Wireless-AC Network Controller","10.0.20.17", "255.255.255.0", "10.1.53.1", "34:E6:D7:4B:AC:A1s");
 		NetworkInterfaceDAO.createNetworkInterface(ni);
 		
-		NetworkInterface niSelected = NetworkInterfaceDAO.getNetworkInterfaceById(1);
+		NetworkInterface niSelected = NetworkInterfaceDAO.getNetworkInterfaceById(ni.getIdNetworkInterface());
 		assertEquals("Marvell AVASTAR Wireless-AC Network Controller", niSelected.getName());
+		assertEquals("10.0.20.17", niSelected.getDhcp());
+		assertEquals("255.255.255.0", niSelected.getSubnet());
+		assertEquals("10.1.53.1", niSelected.getGateway());
+		assertEquals("34:E6:D7:4B:AC:A1s", niSelected.getMacAddress());
 		
 		NetworkInterfaceDAO.deleteNetworkInterface(niSelected);
 		assertNull(NetworkInterfaceDAO.getNetworkInterfaceById(1));
