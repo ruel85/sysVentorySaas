@@ -14,13 +14,17 @@
 		<column name="idCompany" not-null="true"/>
 		</many-to-one>
 		
-<!-- 		<many-to-one name="group" class="ch.zbw.sysVentorySaas.App.model.Group"> -->
-<!-- 			<column name="idGroup" not-null="false"></column> -->
-<!-- 		</many-to-one> -->
-		
 		<property name="uID" column="uid" type="string"/>
 		<property name="username" column="username" type="string"/>
 		<property name="password" column="password" type="string"/>
 		<property name="email" column="email" type="string"/>
+		
+<!-- 		type="ch.zbw.sysVentorySaas.App.GroupType" -->
+		<property name="groupType" column="groupType" type="ch.zbw.sysVentorySaas.App.helpers.GroupType">
+		<type name="org.hibernate.type">
+        <param name="enumClass">ch.zbw.sysVentorySaas.App.helpers.GroupType</param>
+         <param name="useNamed">true</param>
+        </type>
+		</property>
 	</class>
 </hibernate-mapping>

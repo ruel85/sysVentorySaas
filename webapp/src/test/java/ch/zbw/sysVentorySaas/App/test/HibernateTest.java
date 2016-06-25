@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.print.attribute.standard.MediaSize.Other;
@@ -29,6 +30,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanStatusDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ServiceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
+import ch.zbw.sysVentorySaas.App.helpers.GroupType;
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
 import ch.zbw.sysVentorySaas.App.model.Company;
@@ -183,32 +185,32 @@ public class HibernateTest {
 	public void TestUser_CRUD(){
 		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
 		
-		User user2 = new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch");
-	
-		User user3 = new User(null, "elias", "12345", null);
-		User user4 = new User(null, "saj", "12345", null);
-		User user5 = new User(null, "damjan", "12345", null);	
+		
+		List<User> userList = new ArrayList<User>();
+		userList.add(new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch", GroupType.SysVentoryAdmin));
+		userList.add( new User(null, "elias", "12345", null, GroupType.SysVentoryAdmin));
+		userList.add(new User(null, "saj", "12345", null, GroupType.SysVentoryAdmin));
+		userList.add( new User(null, "damjan", "12345", null, GroupType.SysVentoryAdmin));
+		userList.add( new User(null, "palmer", "password", null, GroupType.CustomerAdmin));
+		userList.add( new User(null, "palmer", "password", null, GroupType.CustomerAdmin));
+		
 		
 		Company comp = new Company("ZbW", "Gaiserwaldstrasse", "1", null, "9043", "Abtwil SG");
 		CompanyDAO.createCompany(comp);
-		user2.setCompany(comp);
-		user3.setCompany(comp);
-		user4.setCompany(comp);
-		user5.setCompany(comp);
-	
-		UserDAO.createUser(user2);
-		//ScanSetting sc = OtherDAO.getScanSettingByUID("2d1a0484f40daceeef42967c4ac00911");
 		
-		UserDAO.createUser(user3);
-		UserDAO.createUser(user4);
-		UserDAO.createUser(user5);
+		for(User oneUser : userList)
+		{
+			oneUser.setCompany(comp);
+			UserDAO.createUser(oneUser);
+		}
 		
-		User userSelected = UserDAO.getUserByIdUser(user2.getIdUser());
+		User userSelected = UserDAO.getUserByIdUser(userList.get(0).getIdUser());
 		//assertEquals(newUser.getuID(), userSelected.getuID());
 		
-		assertEquals("ruel85", user2.getUsername());
-		assertEquals("12345", user2.getPassword());
-		assertEquals("ruel.holderegger@gmx.ch", user2.getEmail());
+		assertEquals("ruel85", userSelected.getUsername());
+		assertEquals("12345", userSelected.getPassword());
+		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
+		assertEquals(GroupType.SysVentoryAdmin, userSelected.getGroupType());
 		
 		ScanSetting scanSetting = new ScanSetting("ZBW-Gast", "192.168.5.55", "192.168.70.30", 60, true);
 		
@@ -223,7 +225,6 @@ public class HibernateTest {
 	@Test
 	public void TestGroup_CRUD(){
 		Group newGroup = GroupDAO.createGroup( new Group("CustomerAdmin"));
-		
 		GroupDAO.createGroup(new Group("SysVentoryAdmin"));
 		GroupDAO.createGroup(new Group("Inventor"));
 		GroupDAO.createGroup(new Group("Visitor"));
@@ -232,8 +233,8 @@ public class HibernateTest {
 		assertEquals(groupSelected.getIdGroup(), newGroup.getIdGroup());
 		assertEquals(newGroup.getName(), groupSelected.getName());
 		
-		GroupDAO.deleteGroup(newGroup);
-		assertNull(GroupDAO.getGroupById(newGroup.getIdGroup()));
+		//GroupDAO.deleteGroup(newGroup);
+		//assertNull(GroupDAO.getGroupById(newGroup.getIdGroup()));
 	}
 	
 	@Test
@@ -339,8 +340,8 @@ public class HibernateTest {
 		//User user1 = UserDAO.createUser(new User("Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com"));
 		//User user2 = UserDAO.createUser(new User("Kevin", "0000", "info@info.de"));
 		
-		User user1 = new User(null, "Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com");
-		User user2 = new User(null, "Kevin", "0000", "info@info.de");
+		User user1 = new User(null, "Ruelito", "rtwoirptow", "ruel.holderegger@outlook.com", GroupType.Visitor);
+		User user2 = new User(null, "Kevin", "0000", "info@info.de", GroupType.Inventor);
 		
 		user1.setCompany(comp1);
 		session.save(user1);
