@@ -1,12 +1,9 @@
 package ch.zbw.sysVentorySaas.webapp.Beans;
 
 import java.io.Serializable;
-import java.util.List;
-
 import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
-import ch.zbw.sysVentorySaas.App.model.Company;
-import ch.zbw.sysVentorySaas.App.model.User;
+
 
 public class AdminBean implements Serializable {
 
@@ -18,19 +15,8 @@ public class AdminBean implements Serializable {
 	
 	// liefert die Daten für das Dashboard
 	public void refreshDashboard() {
-		countCompany = 0;
-		countDevicesPerCompanyAvarge = 0;
-		countUsers = 0;
-		
-		// zählt wieviele Firmen existieren
-		for(Company c : CompanyDAO.getAllCompanies()) {
-			countCompany++;
-		}
-		// zählt wieviele User existieren
-		for(User u : UserDAO.getAllUsers()) {
-			countUsers++;
-		}
-		
+		countCompany = CompanyDAO.getAllCompanies().size();
+		countUsers = UserDAO.getAllUsers().size();
 	}
 
 	public long getCountCompany() {

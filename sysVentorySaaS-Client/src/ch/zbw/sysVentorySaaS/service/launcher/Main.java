@@ -55,7 +55,7 @@ public class Main {
 		getSettingsFromServer();
 	}
 
-	public void executePowershell() {
+	public boolean executePowershell() {
 		String path = configPath + "\\scanjob.ps1";
 		logger.info("executing powershell-job (" + path + ") ");
 		boolean successfully = false;
@@ -72,6 +72,7 @@ public class Main {
 			e.printStackTrace();
 			logger.warning(e.getMessage() + "\n");
 		}
+		return successfully;
 	}
 
 	public void initDirectory() {
@@ -94,8 +95,11 @@ public class Main {
 		if (new File(dataPath).exists() && new File(configPath).exists() && new File(reportPath).exists()
 				&& new File(logPath).exists())
 			logger.info("directories exists [OK]\n");
-		else
+		else {
 			logger.info("directories does not exists [ERROR]\n");
+			logger.warning("service will be terminated");
+			System.exit(0);
+		}
 	}
 
 	public void readConfig() {
@@ -112,10 +116,15 @@ public class Main {
 			serverPOST = xmlContent.get("ServerPOST");
 			if (!serverGET.isEmpty() && !serverPOST.isEmpty() && !userId.isEmpty())
 				logger.info("config was reading successfully [OK]\n");
-			else
+			else {
 				logger.warning("config can not be reading successfully [ERROR]\n");
+				logger.warning("service will be terminated");
+				System.exit(0);
+			}
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 			logger.warning(e.getMessage() + "\n");
+			logger.warning("service will be terminated");
+			System.exit(0);
 		}
 	}
 

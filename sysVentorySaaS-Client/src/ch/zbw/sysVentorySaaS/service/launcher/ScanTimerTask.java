@@ -25,15 +25,29 @@ class ScanTimerTask extends TimerTask {
 			if (Boolean.parseBoolean(jobrequest.get("timeToScan"))) {
 
 				main.getLogger().info("job was found, starting job [OK]\n");
-				main.getLogger().info("|-----------------------------------> START SCAN <-----------------------------------|");
-				main.executePowershell();
-				main.getLogger().info("sending xml-report to server ...");
-				String status = httpc.sendPOST(main.getReportXmlPath());
-				if (status.equals("200")) {
-					main.getLogger().info("ScanJob successfully send to server [OK]");
-					main.getLogger().info("|-----------------------------------> END SCAN <-----------------------------------|\n\n");
+				main.getLogger()
+						.info("|-----------------------------------> START SCAN <-----------------------------------|");
+				int trys = 0;
+				while (main.executePowershell() == false && trys <= 3) {
+					trys++;
+				}
+				if (trys <= 3) {
+					main.getLogger().info("sending xml-report to server ...");
+					String status = httpc.sendPOST(main.getReportXmlPath());
+					if (status.equals("200")) {
+						main.getLogger().info("ScanJob successfully send to server [OK]");
+						main.getLogger().info(
+								"|-----------------------------------> END SCAN [OK] <-----------------------------------|\n\n");
+					} else {
+						main.getLogger().warning("ScanJob could not be send to server [ERROR]\n");
+						main.getLogger().info(
+								"|-----------------------------------> END SCAN [ERROR] <-----------------------------------|\n\n");
+					}
 				} else {
-					main.getLogger().warning("ScanJob could not be send to server [OK]\n");
+					main.getLogger().info(
+							"ScanJob could not be send to server, because Powershell not executed successfully [ERROR]\n");
+					main.getLogger().info(
+							"|-----------------------------------> END SCAN [ERROR] <-----------------------------------|\n\n");
 				}
 			} else {
 				main.getLogger().info("no job is waiting [OK]\n");
