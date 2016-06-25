@@ -7,8 +7,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
+import ch.zbw.sysVentorySaas.App.helpers.JobStatus;
 import ch.zbw.sysVentorySaas.App.model.Company;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
+import ch.zbw.sysVentorySaas.interfaces.IDashboardSysVentoryAdmin;
 
 public class CompanyDAO {
 	
