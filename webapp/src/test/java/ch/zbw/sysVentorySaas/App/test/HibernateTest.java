@@ -1,7 +1,7 @@
 package ch.zbw.sysVentorySaas.App.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,6 +14,7 @@ import javax.print.attribute.standard.MediaSize.Other;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.junit.Before;
 import org.junit.Test;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
@@ -183,8 +184,9 @@ public class HibernateTest {
 	
 	@Test
 	public void TestUser_CRUD(){
-		byte[] hash = MD5Hash.getMD5Hash("ruel85");	
-		
+		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+		passwordEncryptor.setAlgorithm("SHA-1");
+		passwordEncryptor.setPlainDigest(true);
 		
 		List<User> userList = new ArrayList<User>();
 		userList.add(new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch", GroupType.SysVentoryAdmin));
@@ -208,7 +210,9 @@ public class HibernateTest {
 		//assertEquals(newUser.getuID(), userSelected.getuID());
 		
 		assertEquals("ruel85", userSelected.getUsername());
-		assertEquals("12345", userSelected.getPassword());
+		
+		assertTrue(passwordEncryptor.checkPassword(passwordEncryptor.encryptPassword("12345"), userSelected.getPassword()));
+		
 		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
 		assertEquals(GroupType.SysVentoryAdmin, userSelected.getGroupType());
 		
