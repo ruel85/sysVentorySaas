@@ -7,13 +7,11 @@ import ch.zbw.sysVentorySaas.App.model.User;
 public class LoginDao {
 
 	public static User validate(String user, String password) {
-
-		UserDAO userdao = new UserDAO();
-
-		for (User oneUser : userdao.getAllUsers()) {
+		for (User oneUser : UserDAO.getAllUsers()) {
 			if (oneUser != null) {
 				if (oneUser.getUsername().equals(user) && 
-						PasswordEncryptor.checkPassword(PasswordEncryptor.getPWEncryptor().encryptPassword(password), oneUser.getPassword())) {
+						PasswordEncryptor.checkPassword(oneUser.getPassword()
+								,PasswordEncryptor.getPWEncryptor().encryptPassword(password))) {
 					return oneUser;
 				}
 			}

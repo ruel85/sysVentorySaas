@@ -11,8 +11,8 @@ public final class PasswordEncryptor {
 		return passwordEncryptor;
 	}
 
-	public static boolean checkPassword(String password, String passwordUser) {
-		return getPWEncryptor().checkPassword(password,
+	public static boolean checkPassword(String plainPassword, String passwordUser) {
+		return getPWEncryptor().checkPassword(plainPassword,
 				passwordUser);
 	}
 }
