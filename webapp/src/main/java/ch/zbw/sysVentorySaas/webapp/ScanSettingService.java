@@ -86,8 +86,9 @@ public class ScanSettingService {
 					
 					if(idCompany !=0)
 					{
-						sReturn = ScanSettingDAO.getScanSettingById(idCompany);
-						return sReturn;
+						// Todo Ruel
+						//sReturn = ScanSettingDAO.getScanSettingById(idCompany);
+						//return sReturn;
 					}					
 				}
 				
@@ -101,10 +102,10 @@ public class ScanSettingService {
 			int i = r.nextInt(100) + 1;
 			sReturn.setTimeToScan((i <= 50?true:false));
 			
-//			sReturn.setIpStart("192.168.1.30");
-//			sReturn.setIpEnd("192.168.1.80");
-//			sReturn.setIdCompany(-1);
-//			sReturn.setIntervallHours(60);	
+			sReturn.setIpStart("192.168.1.30");
+			sReturn.setIpEnd("192.168.1.80");
+			sReturn.setIdCompany(-1);
+			sReturn.setIntervallHours(60);	
 			return sReturn;
 		}
 }
