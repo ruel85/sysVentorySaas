@@ -16,6 +16,12 @@ import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
+/**
+ * SNMPThread ist für eine einzige SNMP-Abfrage verantwortlich
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class SNMPThread implements Runnable {
 	private Snmp snmp;
 	private String ipv4;
@@ -26,12 +32,23 @@ public class SNMPThread implements Runnable {
 	private final String community = "public";
 	private volatile boolean reachable;
 
+	/**
+	 * Konstruktor, setzt die max. Versuche auf 3x
+	 * 
+	 * @param ipv4
+	 * @param timeout
+	 */
 	public SNMPThread(String ipv4, int timeout) {
 		this.ipv4 = ipv4;
 		this.timeout = timeout;
 		this.retries = 3;
 	}
 
+	/**
+	 * @param oids
+	 * @return
+	 * @throws IOException
+	 */
 	public ResponseEvent get(OID oids[]) throws IOException {
 		PDU pdu = new PDU();
 		for (OID oid : oids) {
@@ -45,6 +62,11 @@ public class SNMPThread implements Runnable {
 			return null;
 	}
 
+	/**
+	 * @param oid
+	 * @return
+	 * @throws IOException
+	 */
 	public String getAsString(OID oid) throws IOException {
 		ResponseEvent event = get(new OID[] { oid });
 		if (event.getResponse() != null)
@@ -53,10 +75,16 @@ public class SNMPThread implements Runnable {
 			return null;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getIpv4() {
 		return ipv4;
 	}
 
+	/**
+	 * @return
+	 */
 	private Target getTarget() {
 		Address targetAddress = GenericAddress.parse(protocol + ipv4 + portSNMP);
 		CommunityTarget target = new CommunityTarget();
@@ -68,6 +96,9 @@ public class SNMPThread implements Runnable {
 		return target;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isReachable() {
 		return reachable;
 	}

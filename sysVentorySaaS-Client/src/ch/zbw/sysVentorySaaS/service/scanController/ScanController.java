@@ -8,16 +8,35 @@ import ch.zbw.sysVentorySaaS.service.ipScanner.IPScanner;
 import ch.zbw.sysVentorySaaS.service.snmpscanner.SNMPScanner;
 import ch.zbw.sysVentorySaas.App.model.Device;
 
+/**
+ * ScanController ist der Controller für die isReachable- und SNMP-Scans
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class ScanController {
 	private ArrayList<Device> allNetworkDevices;
 	private SNMPScanner snmps;
 	private IPScanner ips;
 
+	/**
+	 * @param ipMin
+	 * @param ipMax
+	 * @param pingTimeout
+	 * @param snmpTimeout
+	 */
 	public ScanController(String ipMin, String ipMax, int pingTimeout, int snmpTimeout) {
 		snmps = new SNMPScanner(ipMin, ipMax, snmpTimeout);
 		ips = new IPScanner(ipMin, ipMax, pingTimeout);
 	}
 
+	/**
+	 * Gib alle Netwerkgeräte zurück die gefunden wordne sind, priorisiert dabei
+	 * SNMP-Geräte
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	public ArrayList<Device> getAllNetworkDevices() throws IOException {
 		allNetworkDevices = new ArrayList<Device>();
 		ArrayList<Device> snmpList = snmps.getSNMPDevices();
@@ -36,22 +55,37 @@ public class ScanController {
 		return allNetworkDevices;
 	}
 
+	/**
+	 * @return
+	 */
 	public SNMPScanner getSnmps() {
 		return snmps;
 	}
 
+	/**
+	 * @param snmps
+	 */
 	public void setSnmps(SNMPScanner snmps) {
 		this.snmps = snmps;
 	}
 
+	/**
+	 * @return
+	 */
 	public IPScanner getIps() {
 		return ips;
 	}
 
+	/**
+	 * @param ips
+	 */
 	public void setIps(IPScanner ips) {
 		this.ips = ips;
 	}
 
+	/**
+	 * @param allNetworkDevices
+	 */
 	public void setAllNetworkDevices(ArrayList<Device> allNetworkDevices) {
 		this.allNetworkDevices = allNetworkDevices;
 	}

@@ -6,17 +6,34 @@ import ch.zbw.sysVentorySaas.App.model.Device;
 import net.ripe.commons.ip.Ipv4;
 import net.ripe.commons.ip.Ipv4Range;
 
+/**
+ * IPScanner managed die PingThreads
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class IPScanner {
 	private String ipMin;
 	private String ipMax;
 	private int pingTime;
 
+	/**
+	 * @param ipMin
+	 * @param ipMax
+	 * @param pingTime
+	 */
 	public IPScanner(String ipMin, String ipMax, int pingTime) {
 		this.ipMin = ipMin;
 		this.ipMax = ipMax;
 		this.pingTime = pingTime;
 	}
 
+	/**
+	 * Sucht nach erreichbaren IP-Adressen
+	 * 
+	 * @return Gibt eine ArrayList von Devices zurück, die alle erreichbaren Geräte
+	 *         beinhaltet
+	 */
 	public ArrayList<Device> getReachableIPs() {
 		ArrayList<String> ipList = new ArrayList<>();
 		for (Ipv4 ipv4 : Ipv4Range.parse(ipMin + "-" + ipMax)) {
@@ -52,26 +69,44 @@ public class IPScanner {
 		return onlineIPs;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getIpMin() {
 		return ipMin;
 	}
 
+	/**
+	 * @param ipMin
+	 */
 	public void setIpMin(String ipMin) {
 		this.ipMin = ipMin;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getIpMax() {
 		return ipMax;
 	}
 
+	/**
+	 * @param ipMax
+	 */
 	public void setIpMax(String ipMax) {
 		this.ipMax = ipMax;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getPingTime() {
 		return pingTime;
 	}
 
+	/**
+	 * @param pingTime
+	 */
 	public void setPingTime(int pingTime) {
 		this.pingTime = pingTime;
 	}

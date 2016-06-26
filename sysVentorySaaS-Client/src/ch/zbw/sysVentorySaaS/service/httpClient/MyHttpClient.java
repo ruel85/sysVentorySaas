@@ -22,13 +22,30 @@ import org.xml.sax.InputSource;
 
 import ch.zbw.sysVentorySaaS.service.launcher.Main;
 
+/**
+ * MyHttpClient ist für die HTTP-Kommunikation verantwortlich
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class MyHttpClient {
 	private Main main;
 
-	public MyHttpClient(Main main, String requestURI) {
+	/**
+	 * @param main
+	 */
+	public MyHttpClient(Main main) {
 		this.main = main;
 	}
 
+	/**
+	 * Erzeugt ein Document aus einem XML-Pfad
+	 * 
+	 * @param xml
+	 *            Pfad zur XML
+	 * @return
+	 * @throws Exception
+	 */
 	private Document loadXMLFromString(String xml) throws Exception {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
@@ -36,6 +53,12 @@ public class MyHttpClient {
 		return builder.parse(is);
 	}
 
+	/**
+	 * Sendet einen GET-Request
+	 * 
+	 * @return Document mit dem Response
+	 * @throws Exception
+	 */
 	public Document sendGET() throws Exception {
 		URL obj = new URL(main.getServerGET() + "/" + main.getUserId());
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -60,6 +83,15 @@ public class MyHttpClient {
 		}
 	}
 
+	/**
+	 * Sendet einen POST-Request mit Angabe eines XML-Pfades
+	 * 
+	 * @param sourcePath
+	 *            Pfad zur XML Datei
+	 * @return
+	 * @throws IOException
+	 * @throws TransformerException
+	 */
 	public String sendPOST(String sourcePath) throws IOException, TransformerException {
 		URL url = new URL(main.getServerPOST() + "/" + main.getUserId());
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -83,8 +115,8 @@ public class MyHttpClient {
 
 	@Override
 	public String toString() {
-		return "MyHttpClient [main=" + main + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+		return "MyHttpClient [main=" + main + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 	@Override

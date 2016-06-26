@@ -15,7 +15,7 @@
 		<b:navCommandLink value="Benutzerverwaltung"
 			action="#{userControl.checkUserRights}" href="Benutzerverwaltung"></b:navCommandLink>
 		<b:navCommandLink value="Scan-Einstellungen"
-			action="#{scanSettingBean.checkScanSetting}" href="ScanSetting"></b:navCommandLink>		
+			action="#{scanSettingBean.checkScanSetting}" href="ScanSetting"></b:navCommandLink>
 		<b:navCommandLink value="Scans" action="#{scans.checkScans}"
 			href="Scans"></b:navCommandLink>
 		<b:navCommandLink value="Lastüberwachung"
@@ -24,20 +24,23 @@
 			href="Services"></b:navCommandLink>
 		<b:navCommandLink value="Logout" action="#{login.logout}" href="Login"></b:navCommandLink>
 	</b:tabLinks>
-	<h:form>	
+	<h:form>
 		<!-- Anzahl Geräte
 		     Anzahl Scans
 		     
 		     Letzter Scan
 		     Anzahl angemeldeter User
-		     
+		
 		     
 		     Liste mit allen Geräten für diese Firma  -->
-		<b:inputText value="#{adminBean.countCompany}" />
-		<b:inputText value="#{adminBean.countDevicesPerCompanyAvarge}" />
-		<b:inputText value="#{adminBean.countUsers}" />
-		
-		
+		<b:panelGrid colSpans="2,10">
+				<h:outputLabel value="Anzahl Firmen:" />
+				<h:outputText value="#{login.countCompany}" />
+				<h:outputLabel value="Anzahl Geräte pro Firma:" />
+				<h:outputText value="#{login.countDevicesPerCompanyAvarge}" />
+				<h:outputLabel value="Anzahl Benutzer:" />
+				<h:outputText value="#{login.countUsers}" />
+		</b:panelGrid>
 	</h:form>
 </h:body>
 </html>

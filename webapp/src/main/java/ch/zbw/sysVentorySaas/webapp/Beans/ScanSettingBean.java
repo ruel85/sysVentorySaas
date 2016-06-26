@@ -37,11 +37,13 @@ public class ScanSettingBean implements Serializable {
 				this.setting = oneSetting;
 			}
 		}
-		this.networkName = this.setting.getNetworkName();
-		this.ipStart = this.setting.getIpStart();
-		this.ipEnd = this.setting.getIpEnd();
-		this.intervallHours = this.setting.getIntervallHours();
-		this.timeToScan = this.setting.getTimeToScan();
+		if (this.setting != null) {
+			this.networkName = this.setting.getNetworkName();
+			this.ipStart = this.setting.getIpStart();
+			this.ipEnd = this.setting.getIpEnd();
+			this.intervallHours = this.setting.getIntervallHours();
+			this.timeToScan = this.setting.getTimeToScan();
+		}
 		return "ScanSetting";
 	}
 
@@ -100,17 +102,15 @@ public class ScanSettingBean implements Serializable {
 	public void setSetting(ScanSetting setting) {
 		this.setting = setting;
 	}
-	
+
 	// start Scanjob DD
-	public void startScan()
-	{
+	public void startScan() {
 		setting.setTimeToScan(true);
 		ScanSettingDAO.saveScanSetting(setting);
 	}
-	
+
 	// save Settings DD
-	public void saveSettings()
-	{
+	public void saveSettings() {
 		setting.setNetworkName(networkName);
 		setting.setIpStart(ipStart);
 		setting.setIpEnd(ipEnd);

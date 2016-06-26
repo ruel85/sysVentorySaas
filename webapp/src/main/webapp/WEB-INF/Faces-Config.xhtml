@@ -8,7 +8,7 @@
 	<navigation-rule>
 		<from-view-id>/Login.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{login.validateUsernamePassword}</from-action>
+			<from-action>#{adminBean.checkUserRights}</from-action>
 			<from-outcome>Admin</from-outcome>
 			<to-view-id>/Admin.xhtml</to-view-id>			
 		</navigation-case>

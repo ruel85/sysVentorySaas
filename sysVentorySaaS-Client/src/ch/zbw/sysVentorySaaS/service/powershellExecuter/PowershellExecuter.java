@@ -8,14 +8,23 @@ import java.io.IOException;
 import com.profesorfalken.jpowershell.PowerShell;
 import com.profesorfalken.jpowershell.PowerShellNotAvailableException;
 
+/**
+ * PowershellExcecuter ist für die Ausführung einer Powershell verantwortlich
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class PowershellExecuter {
 	private String succeedMessage;
 	private String failedMessage;
 
-	public PowershellExecuter() {
-
-	}
-
+	/**
+	 * Führt ein Powershell-Command aus
+	 * 
+	 * @param command
+	 * @return erfolgreich oder nicht
+	 * @throws PowerShellNotAvailableException
+	 */
 	public boolean execute_method2(String command) throws PowerShellNotAvailableException {
 		succeedMessage = "";
 		failedMessage = "";
@@ -30,14 +39,32 @@ public class PowershellExecuter {
 
 	}
 
+	/**
+	 * Error-Meldung für method1
+	 * 
+	 * @return
+	 */
 	public String getFailedMessage() {
 		return failedMessage;
 	}
 
+	/**
+	 * Success-Meldung für method1
+	 * 
+	 * @return
+	 */
 	public String getSucceedMessage() {
 		return succeedMessage;
 	}
 
+	/**
+	 * Liest den Inalt einer Datei in einen String
+	 * 
+	 * @param path
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public String readFile(String path) throws FileNotFoundException, IOException {
 		String command = null;
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -85,10 +112,16 @@ public class PowershellExecuter {
 		return true;
 	}
 
+	/**
+	 * @param succeedMessage
+	 */
 	public void setSucceedMessage(String succeedMessage) {
 		this.succeedMessage = succeedMessage;
 	}
 
+	/**
+	 * @param failedMessage
+	 */
 	public void setFailedMessage(String failedMessage) {
 		this.failedMessage = failedMessage;
 	}
