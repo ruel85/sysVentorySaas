@@ -8,6 +8,11 @@
 		<id name="idSoftware" type="int" column="idsoftware">
 			<generator class="identity"/>
 		</id>
+
+<!-- 		<many-to-one name="device" class="ch.zbw.sysVentorySaas.App.model.Device" fetch="join"> -->
+<!-- 		<column name="idDevice" not-null="true"/> -->
+<!-- 		</many-to-one> -->
+
 		<property name="name" column="name" type="string"/>
 		<property name="manufacturer" column="manufacturer" type="string"/>
 		<property name="version" column="version" type="string"/>
