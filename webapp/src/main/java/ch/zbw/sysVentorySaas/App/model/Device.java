@@ -12,6 +12,7 @@ public class Device {
 	private String systemtype;
 	
 	private Set<Software> software;
+	private ScanJob scanJob;
 
 	public Device(String name, String manufacturer, String macAddress, String ipAddress, String memory, String systemtype) {
 		this.name=name;
@@ -24,7 +25,15 @@ public class Device {
 	
 	public Device()
 	{
-	}	
+	}
+
+	public ScanJob getScanJob() {
+		return scanJob;
+	}
+
+	public void setScanJob(ScanJob scanJob) {
+		this.scanJob = scanJob;
+	}
 
 	public String getSystemtype() {
 		return systemtype;

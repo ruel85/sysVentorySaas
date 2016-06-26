@@ -26,6 +26,13 @@
 		<property name="ipStart_Copie" column="ipstart_copie" type="string"/>
 		<property name="ipEnd_Copie" column="ipend_copie" type="string"/>
 		<property name="intervallMinutes_copie" column="intervallminutes_copie" type="int"/>
+		
+		<set name="devices" table="device" inverse="true" fetch="select">
+			<key>
+				<column name="idDevice" not-null="true"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Device"/>
+		</set>
 
 	</class>
 </hibernate-mapping>

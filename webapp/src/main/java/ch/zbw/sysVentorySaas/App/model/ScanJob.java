@@ -1,5 +1,7 @@
 package ch.zbw.sysVentorySaas.App.model;
 
+import java.util.Set;
+
 import ch.zbw.sysVentorySaas.App.helpers.JobStatus;
 
 public class ScanJob {
@@ -9,14 +11,14 @@ public class ScanJob {
 	private String endTime;
 	private JobStatus jobStatus;
 	
-	private ScanSetting scanSetting;
-	
 	// Felder des relevanten ScanSettings, damit die urspr. Konfig nicht verloren geht...
-	private int idCompany_Copie;
 	private String networkName_Copie;
 	private String ipStart_Copie;
 	private String ipEnd_Copie;
 	private int intervallMinutes_copie;
+	
+	private ScanSetting scanSetting;
+	private Set<Device> devices;
 	
 	public ScanJob(String startTime, String endTime, JobStatus jobStatus
 			,String networkName_Copie, String ipStart_Copie ,String ipEnd_Copie, int intervallMinutes_copie, ScanSetting scanSetting)
@@ -34,6 +36,14 @@ public class ScanJob {
 	
 	public ScanJob()
 	{	
+	}	
+
+	public Set<Device> getDevices() {
+		return devices;
+	}
+
+	public void setDevices(Set<Device> devices) {
+		this.devices = devices;
 	}
 
 	public ScanSetting getScanSetting() {
