@@ -266,14 +266,14 @@ public class HibernateTest {
 	@Test
 	public void TestService_CRUD(){
 		Service serv = new Service("MyService", true);
-		ServiceDAO.saveService(serv);
+		Service newService = ServiceDAO.saveService(serv);
 		
-		Service servSelected = ServiceDAO.getServiceById(1);
+		Service servSelected = ServiceDAO.getServiceById(newService.getIdService());
 		assertEquals("MyService", servSelected.getName());
 		assertEquals(true, servSelected.getEnabled());
 		
-		ServiceDAO.deleteCompany(ServiceDAO.getServiceById(1));
-		assertNull(ServiceDAO.getServiceById(1));
+		ServiceDAO.deleteCompany(ServiceDAO.getServiceById(newService.getIdService()));
+		assertNull(ServiceDAO.getServiceById(newService.getIdService()));
 	}
 	
 	@Test
