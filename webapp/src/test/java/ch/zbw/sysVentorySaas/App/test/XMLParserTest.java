@@ -49,7 +49,7 @@ public static XMLParserDOM xmlParserDOM;
 	@Test
 	public void TestReadDataWithJaxBUnmarshaller() throws Throwable	{
 		
-		File fileXML = new File("Schema/computers.xml");
+		File fileXML = new File("Schema/computers2.xml");
 		FileInputStream fi = new FileInputStream(fileXML);
 		XMLToDAOMapper.importData(fi);
 	}
