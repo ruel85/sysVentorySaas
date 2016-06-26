@@ -1,6 +1,7 @@
 package ch.zbw.sysVentorySaas.App.helpers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,15 +11,18 @@ import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 public class TimerManager extends TimerTask {
 	private ArrayList<TimerThread> timerList;
 	private int factor;
+	private ArrayList<ScanSetting> scanSettings;
 
 	/**
 	 * @param scanSettings
 	 * @param testing
 	 *            Falls durch einen JUnit-Test ausgeführt, bitte TRUE übergeben,
 	 *            dann wird der Intervall um den Faktor 1000 verkürzt
+	 * @throws Exception
 	 */
-	public TimerManager(ArrayList<ScanSetting> scanSettings, boolean testing) {
+	public TimerManager(List<ScanSetting> scanSettingsList, boolean testing) throws Exception {
 		timerList = new ArrayList<TimerThread>();
+		scanSettings = new ArrayList<ScanSetting>(scanSettingsList);
 		if (testing)
 			factor = 1000;
 		else
@@ -27,7 +31,8 @@ public class TimerManager extends TimerTask {
 		for (ScanSetting scanSetting : scanSettings) {
 			TimerThread tt = new TimerThread(scanSetting);
 			Timer myTimer = new Timer();
-			myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor), scanSetting.getIntervallHours() * (3600000 / factor));
+			myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor),
+					scanSetting.getIntervallHours() * (3600000 / factor));
 			timerList.add(tt);
 		}
 	}
@@ -36,11 +41,13 @@ public class TimerManager extends TimerTask {
 	 * @param scanSetting
 	 *            Fügt dem TimerManager ein neues ScanSetting hinzu und startet
 	 *            dieses automatisch mit dem Intervall
+	 * @throws Exception
 	 */
-	public void addScanSetting(ScanSetting scanSetting) {
+	public void addScanSetting(ScanSetting scanSetting) throws Exception {
 		TimerThread tt = new TimerThread(scanSetting);
 		Timer myTimer = new Timer();
-		myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor), scanSetting.getIntervallHours() * (3600000 / factor));
+		myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor),
+				scanSetting.getIntervallHours() * (3600000 / factor));
 		timerList.add(tt);
 		System.out.println("Neues ScanSetting ist hinzugekommen: " + scanSetting.getNetworkName());
 	}
@@ -69,12 +76,20 @@ public class TimerManager extends TimerTask {
 			TimerThread th = iterator.next();
 			if (th.isIntervallHasChanged()) {
 				ScanSetting scanSetting = th.getScanSetting();
-				TimerThread tt = new TimerThread(scanSetting);
-				Timer myTimer = new Timer();
-				myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor), scanSetting.getIntervallHours() * (3600000 / factor));
-				iterator.remove();
-				iterator.add(tt);
-				System.out.println("ScanSetting hat geändert von: " + th.getScanSetting().getNetworkName());
+				TimerThread tt;
+				try {
+					tt = new TimerThread(scanSetting);
+					Timer myTimer = new Timer();
+					myTimer.schedule(tt, scanSetting.getIntervallHours() * (3600000 / factor),
+							scanSetting.getIntervallHours() * (3600000 / factor));
+					iterator.remove();
+					iterator.add(tt);
+					System.out.println("ScanSetting hat geändert von: " + th.getScanSetting().getNetworkName());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 		}
 

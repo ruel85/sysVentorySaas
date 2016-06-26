@@ -9,7 +9,7 @@ import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 public class TimerThreadTest {
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		ScanSetting ss1 = new ScanSetting("ScanJob1", "192.168.1.1", "192.168.1.254", 1, false);
 		ScanSetting ss2 = new ScanSetting("ScanJob2", "192.168.1.1", "192.168.1.254", 2, false);
 		ScanSetting ss3 = new ScanSetting("ScanJob3", "192.168.1.1", "192.168.1.254", 3, false);

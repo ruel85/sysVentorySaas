@@ -1,6 +1,8 @@
 package ch.zbw.sysVentorySaas.App.helpers;
 
 import java.util.TimerTask;
+
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 
 public class TimerThread extends TimerTask {
@@ -8,20 +10,26 @@ public class TimerThread extends TimerTask {
 	private int intervall;
 	private boolean intervallHasChanged;
 
-	public TimerThread(ScanSetting scanSetting) {
-		this.scanSetting = scanSetting;
+	public TimerThread(ScanSetting scanSetting) throws Exception {
+		this.scanSetting = ScanSettingDAO.getScanSettingById(scanSetting.getIdCompany());
 		this.intervall = scanSetting.getIntervallHours();
 		intervallHasChanged = false;
 	}
 
 	@Override
 	public void run() {
-		if (this.scanSetting.getIntervallHours() != intervall) {
-			this.cancel();
-			this.intervallHasChanged = true;
-		} else {
-			this.scanSetting.setTimeToScan(true);
-			System.out.println("ScanJob auf True gesetzt in " + scanSetting.getNetworkName());
+		try {
+			if (ScanSettingDAO.getScanSettingById(scanSetting.getIdCompany()).getIntervallHours() != intervall) {
+				this.cancel();
+				this.intervallHasChanged = true;
+			} else {
+				this.scanSetting.setTimeToScan(true);
+				ScanSettingDAO.saveScanSetting(scanSetting);
+				System.out.println("ScanJob auf True gesetzt in " + scanSetting.getNetworkName());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
