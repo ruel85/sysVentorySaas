@@ -109,38 +109,38 @@ public class HibernateTest {
 	public void TestOperatingSystem_CRUD()
 	{
 		OperatingSystem op = new OperatingSystem("Windows 10", "Microsoft Windows", "64-bit");
-		OperatingSystemDAO.createOperatingSystem(op);
+		OperatingSystem newOP = OperatingSystemDAO.createOperatingSystem(op);
 		
-		assertEquals("Windows 10", OperatingSystemDAO.getOperatingSystemById(1).getName());
-		assertEquals("Microsoft Windows", OperatingSystemDAO.getOperatingSystemById(1).getManufacturer());
-		assertEquals("64-bit", OperatingSystemDAO.getOperatingSystemById(1).getArchitecture());
+		assertEquals("Windows 10", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getName());
+		assertEquals("Microsoft Windows", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getManufacturer());
+		assertEquals("64-bit", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getArchitecture());
 		
-		OperatingSystemDAO.deleteOperatingSystem(OperatingSystemDAO.getOperatingSystemById(1));
-		assertNull(OperatingSystemDAO.getOperatingSystemById(1));		
+		OperatingSystemDAO.deleteOperatingSystem(newOP);
+		assertNull(OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()));		
 	}
 	
 	@Test
 	public void TestProcessor_CRUD()
 	{
 		Processor pr = new Processor("i7-465U", "Intel(R)",  4, "2.30 GHz");
-		ProcessorDAO.createProcessor(pr);
+		Processor newProcessor = ProcessorDAO.createProcessor(pr);
 		
-		Processor prSelected = ProcessorDAO.getProcessorById(1);
+		Processor prSelected = ProcessorDAO.getProcessorById(newProcessor.getIdProcessor());
 		assertEquals("i7-465U", prSelected.getName());
 		assertEquals("Intel(R)", prSelected.getManufacturer());
 		assertEquals(4, prSelected.getCores());
 		assertEquals("2.30 GHz", prSelected.getFrequency());
 		
 		ProcessorDAO.deleteProcessor(prSelected);
-		assertNull(ProcessorDAO.getProcessorById(1));
+		assertNull(ProcessorDAO.getProcessorById(prSelected.getIdProcessor()));
 	}
 	
 	@Test
 	public void TestPrinter_CRUD(){
 		Printer p = new Printer("Canon", "Farbdrucker Zimmer links");
-		PrinterDAO.createPrinter(p);
+		Printer newPrinter = PrinterDAO.createPrinter(p);
 		
-		Printer pSelected = PrinterDAO.getPrinterById(1);
+		Printer pSelected = PrinterDAO.getPrinterById(newPrinter.getIdPrinter());
 		assertEquals("Canon", pSelected.getName());
 		assertEquals("Farbdrucker Zimmer links", pSelected.getDescription());
 		
@@ -162,7 +162,7 @@ public class HibernateTest {
 		assertEquals("34:E6:D7:4B:AC:A1s", niSelected.getMacAddress());
 		
 		NetworkInterfaceDAO.deleteNetworkInterface(niSelected);
-		assertNull(NetworkInterfaceDAO.getNetworkInterfaceById(1));
+		assertNull(NetworkInterfaceDAO.getNetworkInterfaceById(niSelected.getIdNetworkInterface()));
 	}
 	
 	@Test

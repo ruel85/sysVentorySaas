@@ -8,11 +8,12 @@ import ch.zbw.sysVentorySaas.App.model.Processor;
 
 public class ProcessorDAO {
 	
-	public static void createProcessor(Processor processor){
+	public static Processor createProcessor(Processor processor){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(processor);
 		transaction.commit();
+		return processor;
 	}
 	
 	public static Processor getProcessorById(int id){
