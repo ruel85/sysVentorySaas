@@ -9,17 +9,35 @@ import ch.zbw.sysVentorySaas.App.model.Device;
 import net.ripe.commons.ip.Ipv4;
 import net.ripe.commons.ip.Ipv4Range;
 
+/**
+ * SNMPScanner ist für die einzelnen SNMPThreads verantwortlich und managed
+ * siese
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class SNMPScanner {
 	private String ipMin;
 	private String ipMax;
 	private int pingTime;
 
+	/**
+	 * @param ipMin
+	 * @param ipMax
+	 * @param pingTime
+	 */
 	public SNMPScanner(String ipMin, String ipMax, int pingTime) {
 		this.ipMin = ipMin;
 		this.ipMax = ipMax;
 		this.pingTime = pingTime;
 	}
 
+	/**
+	 * Sucht alle SNMP-Geräte und packt diese in eine ArrayList
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	public ArrayList<Device> getSNMPDevices() throws IOException {
 		ArrayList<String> ipList = new ArrayList<>();
 		for (Ipv4 ipv4 : Ipv4Range.parse(ipMin + "-" + ipMax)) {

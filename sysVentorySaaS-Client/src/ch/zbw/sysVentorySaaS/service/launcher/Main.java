@@ -18,6 +18,12 @@ import ch.zbw.sysVentorySaaS.service.configManager.DOMReader;
 import ch.zbw.sysVentorySaaS.service.configManager.FileManager;
 import ch.zbw.sysVentorySaaS.service.powershellExecuter.PowershellExecuter;
 
+/**
+ * Main ist die Hauptklasse des Services, hier wird die gesamte Logik ausgeführt
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class Main {
 	private final String dataPath = "C:\\SysVentory";
 	private final String configPath = dataPath + "\\PutHereConfigFile";
@@ -41,20 +47,35 @@ public class Main {
 	private static Logger logger;
 	private FileHandler fh;
 
+	/**
+	 * @param argv
+	 */
 	public static void main(String argv[]) {
 		new Main();
 	}
 
+	/**
+	 * 
+	 */
 	public static void stop() {
 		logger.info("stopping service [OK]");
 	}
 
+	/**
+	 * Der Konstruktor initialisiert die Programm-Verzeichnisse, liest die
+	 * Konfiguration startet die ScanJob-Abfragen
+	 */
 	public Main() {
 		initDirectory();
 		readConfig();
 		getSettingsFromServer();
 	}
 
+	/**
+	 * Führ eine Powershell-Datei aus
+	 * 
+	 * @return erfolgreich oder nicht
+	 */
 	public boolean executePowershell() {
 		String path = configPath + "\\scanjob.ps1";
 		logger.info("executing powershell-job (" + path + ") ");
@@ -75,6 +96,9 @@ public class Main {
 		return successfully;
 	}
 
+	/**
+	 * Initialisiert die Programm-Verzeichnisse
+	 */
 	public void initDirectory() {
 		fm = new FileManager();
 		fm.createDirectory(dataPath, false);
@@ -102,6 +126,9 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Initialisiert die XML-Konfiguration in das Programm
+	 */
 	public void readConfig() {
 		domReader = new DOMReader();
 		try {
@@ -128,124 +155,214 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Startet die ScanJob-Abfragen in einem definiertem Intervall
+	 */
 	public void getSettingsFromServer() {
 		ScanTimerTask myTask = new ScanTimerTask(this);
 		Timer myTimer = new Timer();
 		myTimer.schedule(myTask, 0, checkIntervall);
 	}
 
+	/**
+	 * @return
+	 */
 	public String getServerGET() {
 		return serverGET;
 	}
 
+	/**
+	 * @param serverGET
+	 */
 	public void setServerGET(String serverGET) {
 		this.serverGET = serverGET;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getServerPOST() {
 		return serverPOST;
 	}
 
+	/**
+	 * @param serverPOST
+	 */
 	public void setServerPOST(String serverPOST) {
 		this.serverPOST = serverPOST;
 	}
 
+	/**
+	 * @param userId
+	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
+	/**
+	 * @param domReader
+	 */
 	public void setDomReader(DOMReader domReader) {
 		this.domReader = domReader;
 	}
 
+	/**
+	 * @param fm
+	 */
 	public void setFm(FileManager fm) {
 		this.fm = fm;
 	}
 
+	/**
+	 * @param pe
+	 */
 	public void setPe(PowershellExecuter pe) {
 		this.pe = pe;
 	}
 
+	/**
+	 * @param fh
+	 */
 	public void setFh(FileHandler fh) {
 		this.fh = fh;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getCheckIntervall() {
 		return checkIntervall;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getConfigPath() {
 		return configPath;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getConfigXmlPath() {
 		return configXmlPath;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getConfigXsdPath() {
 		return configXsdPath;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getDataPath() {
 		return dataPath;
 	}
 
+	/**
+	 * @return
+	 */
 	public DOMReader getDomReader() {
 		return domReader;
 	}
 
+	/**
+	 * @return
+	 */
 	public FileHandler getFh() {
 		return fh;
 	}
 
+	/**
+	 * @return
+	 */
 	public FileManager getFm() {
 		return fm;
 	}
 
+	/**
+	 * @return
+	 */
 	public Logger getLogger() {
 		return logger;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getLoggingPath() {
 		return loggingPath;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getLogPath() {
 		return logPath;
 	}
 
+	/**
+	 * @return
+	 */
 	public PowershellExecuter getPe() {
 		return pe;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getReportPath() {
 		return reportPath;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getReportXmlPath() {
 		return reportXmlPath;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getServer() {
 		return serverGET;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getUserId() {
 		return userId;
 	}
 
+	/**
+	 * @return
+	 */
 	public List<String> getXmlElementsConfig() {
 		return xmlElementsConfig;
 	}
 
+	/**
+	 * @return
+	 */
 	public List<String> getXmlElementsJob() {
 		return xmlElementsJob;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getXmlRootElementConfig() {
 		return xmlRootElementConfig;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getXmlRootElementJob() {
 		return xmlRootElementJob;
 	}

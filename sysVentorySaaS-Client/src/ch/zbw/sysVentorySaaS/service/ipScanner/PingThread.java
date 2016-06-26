@@ -5,6 +5,12 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 
+/**
+ * PingThread ist eine einzelne IsReachable-Abfrage
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class PingThread implements Runnable {
 	private String ipv4;
 	private String hostname;
@@ -12,6 +18,10 @@ public class PingThread implements Runnable {
 	private int timeout;
 	private volatile boolean reachable;
 
+	/**
+	 * @param ipv4
+	 * @param timeout
+	 */
 	public PingThread(String ipv4, int timeout) {
 		this.ipv4 = ipv4;
 		this.timeout = timeout;
@@ -44,18 +54,30 @@ public class PingThread implements Runnable {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public String getHostname() {
 		return hostname;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getIpv4() {
 		return ipv4;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getMacAddress() {
 		return macAddress;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isReachable() {
 		return reachable;
 	}

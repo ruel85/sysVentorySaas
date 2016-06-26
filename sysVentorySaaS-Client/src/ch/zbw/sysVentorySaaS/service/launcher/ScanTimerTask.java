@@ -2,14 +2,25 @@ package ch.zbw.sysVentorySaaS.service.launcher;
 
 import java.util.HashMap;
 import java.util.TimerTask;
+
 import ch.zbw.sysVentorySaaS.service.configManager.DOMReader;
 import ch.zbw.sysVentorySaaS.service.httpClient.MyHttpClient;
 
+/**
+ * ScanTimerTask prüft alle x Sekunden ob ein Job ausgeführt werden muss und
+ * handelt diesen dann ab
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 class ScanTimerTask extends TimerTask {
 	private Main main;
 	private MyHttpClient httpc;
 	private DOMReader domr = new DOMReader();
 
+	/**
+	 * @param main
+	 */
 	public ScanTimerTask(Main main) {
 		this.main = main;
 	}
@@ -18,7 +29,7 @@ class ScanTimerTask extends TimerTask {
 	public void run() {
 		main.getLogger().info("check if a job is waiting ...");
 		try {
-			httpc = new MyHttpClient(main, main.getServerGET() + "/" + main.getUserId());
+			httpc = new MyHttpClient(main);
 			domr = new DOMReader();
 			HashMap<String, String> jobrequest = domr.getHashMap(httpc.sendGET(), main.getXmlRootElementJob(),
 					main.getXmlElementsJob());

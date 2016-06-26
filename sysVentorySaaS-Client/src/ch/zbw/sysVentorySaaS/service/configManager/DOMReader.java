@@ -20,8 +20,26 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * DOMReader ist für das Handling mit XML-Dateien zuständig
+ * 
+ * @author Damjan Djuranovic
+ *
+ */
 public class DOMReader {
 
+	/**
+	 * Liest die XML-Elemente aus einem Dokument aus, und gibt eine HashMap
+	 * zurück
+	 * 
+	 * @param doc
+	 * @param xmlRootElement
+	 * @param xmlElements
+	 * @return Gibt eine HashMap zurück, die alle XML-Elemente beinhaltet
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public HashMap<String, String> getHashMap(Document doc, String xmlRootElement, List<String> xmlElements)
 			throws ParserConfigurationException, SAXException, IOException {
 		HashMap<String, String> result = new HashMap<>();
@@ -40,6 +58,18 @@ public class DOMReader {
 		return result;
 	}
 
+	/**
+	 * Liest die XML-Elemente aus einer XML-Datei aus, und gibt eine HashMap
+	 * zurück
+	 * 
+	 * @param xmlPath
+	 * @param xmlRootElement
+	 * @param xmlElements
+	 * @return Gibt eine HashMap zurück, die alle XML-Elemente beinhaltet
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public HashMap<String, String> getHashMap(String xmlPath, String xmlRootElement, List<String> xmlElements)
 			throws ParserConfigurationException, SAXException, IOException {
 		HashMap<String, String> result = new HashMap<>();
@@ -62,6 +92,14 @@ public class DOMReader {
 		return result;
 	}
 
+	/**
+	 * Prüft eine XML gegen ein Schema, ob das XML valide ist
+	 * 
+	 * @param xmlPath
+	 * @param xsdPath
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public void isValidateXSD(String xmlPath, String xsdPath) throws SAXException, IOException {
 		File inputFile = new File(xmlPath);
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
