@@ -31,6 +31,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
 import ch.zbw.sysVentorySaas.App.helpers.GroupType;
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
+import ch.zbw.sysVentorySaas.App.helpers.JobStatus;
 import ch.zbw.sysVentorySaas.App.helpers.PasswordEncryptor;
 import ch.zbw.sysVentorySaas.App.model.Company;
 import ch.zbw.sysVentorySaas.App.model.Device;
@@ -297,16 +298,13 @@ public class HibernateTest {
 	
 	@Test
 	public void TestScanJob(){
-		ScanJob scanJ = new ScanJob("07:00", "07:30", new ScanStatus("Erledigt", "Irgendeine Beschreibung"));
+		ScanJob scanJ = new ScanJob("07:00", "07:30", JobStatus.Erstellt, ScanSettingDAO.getAllScanSettings().get(0));
 		ScanJob newScanJob = ScanJobDAO.saveScanJob(scanJ);
 		
 		ScanJob scanJobSelected = ScanJobDAO.getScanJobById(newScanJob.getIdScanJob());
 		assertEquals("07:00", scanJobSelected.getStartTime());
 		assertEquals("07:30", scanJobSelected.getEndTime());
-		
-		//Todo Ruel: Daten können nicht geladen werden --> DB-Relation korrekt setzen in Hibernate!
-		//assertEquals("Erledigt", scanJobSelected.getStatus().getName());
-		//assertEquals("Irgendeine Beschreibung", scanJobSelected.getStatus().getDescription());
+		assertEquals(JobStatus.Erstellt, scanJobSelected.getJobStatus());
 		
 		ScanJobDAO.deleteScanJob(scanJobSelected);
 		assertNull(ScanJobDAO.getScanJobById(scanJobSelected.getIdScanJob()));

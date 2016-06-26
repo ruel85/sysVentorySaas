@@ -8,7 +8,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
 import ch.zbw.sysVentorySaas.App.helpers.XMLToDAOMapper;
+import ch.zbw.sysVentorySaas.App.model.ScanSetting;
+import ch.zbw.sysVentorySaas.App.model.User;
 
 
 @Path("scanjobs")
@@ -29,7 +35,9 @@ public class ScanJobService {
 		
 		File xmlFile = xmlResult;
 		FileInputStream fi = new FileInputStream(xmlFile);
-		XMLToDAOMapper.importData(fi);
+		User user = UserDAO.getUserByUID(uID);
+		ScanSetting scanSetting = ScanSettingDAO.getScanSettingById(CompanyDAO.getCompanyById(user.getCompany().getIdCompany()).getIdCompany());		
+		XMLToDAOMapper.importData(fi, scanSetting);
 		
 		return "<html>"
 				+ "<body>"

@@ -3,6 +3,10 @@ package ch.zbw.sysVentorySaas.App.helpers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.security.Timestamp;
+import java.sql.Time;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -33,11 +37,12 @@ import ch.zbw.sysVentorySaas.App.model.Printer;
 import ch.zbw.sysVentorySaas.App.model.PrinterDriver;
 import ch.zbw.sysVentorySaas.App.model.Processor;
 import ch.zbw.sysVentorySaas.App.model.ScanJob;
+import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 import ch.zbw.sysVentorySaas.App.model.Software;
 
 public class XMLToDAOMapper {
 
-	public static void importData(InputStream i) throws Throwable
+	public static void importData(InputStream i, ScanSetting scanSetting) throws Throwable
 	{
 		Device newDevice;
 		OperatingSystem newOperatingSystem;
@@ -61,9 +66,9 @@ public class XMLToDAOMapper {
 		if(comps == null || comps.size() == 0)
 			throw new Throwable("Keine Computers vorhanden!");
 
-		newScanJob = new ScanJob();
-		newScanJob.setStartTime(comp.getStamp());
-		ScanJobDAO.saveScanJob(newScanJob);
+		newScanJob = new ScanJob(ZonedDateTime.now().toString(),"", JobStatus.InVerarbeitung, scanSetting);
+		//newScanJob.setStartTime(comp.getStamp());
+		newScanJob = ScanJobDAO.saveScanJob(newScanJob);
 		
 		for(Computer oneComp : comps)
 		{
@@ -135,7 +140,8 @@ public class XMLToDAOMapper {
 				sid = new ch.zbw.sysVentorySaas.App.model.SID();
 				sid.setSID(oneSID.getValue());				
 			}
-			
 		}
+		newScanJob.setEndTime(ZonedDateTime.now().toString());
+		ScanJobDAO.saveScanJob(newScanJob);
 	}
 }

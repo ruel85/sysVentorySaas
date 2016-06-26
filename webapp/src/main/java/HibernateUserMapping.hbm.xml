@@ -19,7 +19,6 @@
 		<property name="password" column="password" type="string" />
 		<property name="email" column="email" type="string"/>
 		
-<!-- 		type="ch.zbw.sysVentorySaas.App.GroupType" -->
 		<property name="groupType" column="groupType" type="ch.zbw.sysVentorySaas.App.helpers.GroupType">
 		<type name="org.hibernate.type">
         <param name="enumClass">ch.zbw.sysVentorySaas.App.helpers.GroupType</param>

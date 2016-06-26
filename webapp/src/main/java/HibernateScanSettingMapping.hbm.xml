@@ -15,6 +15,13 @@
 		<one-to-one name="company" class="ch.zbw.sysVentorySaas.App.model.Company" constrained="true" fetch="join">
 		</one-to-one>
 		
+		<set name="scanjobs" table="scanjob" inverse="true" fetch="select">
+			<key>
+				<column name="idScanJob" not-null="true"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.ScanJob"/>
+		</set>
+		
 		<property name="networkName" column="networkName" type="string"/>
 		<property name="ipStart" column="ipStart" type="string"/>
 		<property name="ipEnd" column="ipEnd" type="string"/>

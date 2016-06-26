@@ -56,34 +56,33 @@ public class ScanSettingService {
 			User user; 			
 			Company comp;
 
-			// Todo Ruel
-//			try {
-//				user = UserDAO.getUserByUID(uID);
-//				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
-//				{
-//					int idCompany = CompanyDAO.getCompanyById(user.getCompany().getIdCompany()).getIdCompany();
-//					
-//					if(idCompany !=0)
-//					{
-//						
-//						sReturn = ScanSettingDAO.getScanSettingById(idCompany);
-//						return sReturn;
-//					}					
-//				}
-//				
-//			} catch (Exception e) {
-//				
-//				logger.error(e.getMessage());
-//			}
+			try {
+				user = UserDAO.getUserByUID(uID);
+				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
+				{
+					int idCompany = CompanyDAO.getCompanyById(user.getCompany().getIdCompany()).getIdCompany();
+					
+					if(idCompany !=0)
+					{
+						
+						sReturn = ScanSettingDAO.getScanSettingById(idCompany);
+						return sReturn;
+					}					
+				}
+				
+			} catch (Exception e) {
+				
+				sReturn.setNetworkName("getUserByUID(): Fehler beim Ermitteln des Users mit UID ( " + uID + " ) oder der Company oder der ScanSetting!");
+			}
 			
-			Random r = new Random();
+			/*Random r = new Random();
 			int i = r.nextInt(100) + 1;
 			sReturn.setTimeToScan((i <= 50?true:false));
 			
 			sReturn.setIpStart("192.168.1.30");
 			sReturn.setIpEnd("192.168.1.80");
 			sReturn.setIdCompany(-1);
-			sReturn.setIntervallHours(60);
+			sReturn.setIntervallHours(60);*/
 			
 			return sReturn;
 		}

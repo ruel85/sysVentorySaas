@@ -1,5 +1,4 @@
 package ch.zbw.sysVentorySaas.App.DataAccessObject;
-
 import ch.zbw.sysVentorySaas.App.helpers.PasswordEncryptor;
 import ch.zbw.sysVentorySaas.App.model.User;
 
@@ -10,7 +9,7 @@ public class LoginDao {
 		for (User oneUser : UserDAO.getAllUsers()) {
 			if (oneUser != null) {
 				if (oneUser.getUsername().equals(username) 
-						//&& PasswordEncryptor.getPWEncryptor().checkPassword(password, oneUser.getPassword())
+						&& PasswordEncryptor.getPWEncryptor().checkPassword(password, oneUser.getPassword())
 						) {
 					return oneUser;
 				}
