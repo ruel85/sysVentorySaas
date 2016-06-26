@@ -79,21 +79,20 @@ public class Main {
 	public boolean executePowershell() {
 		String path = configPath + "\\scanjob.ps1";
 		logger.info("executing powershell-job (" + path + ") ");
-		boolean successfully = false;
 		pe = new PowershellExecuter();
+		String message = "";
 		try {
 			String fileContent = pe.readFile(path);
-			successfully = pe.execute_method2(fileContent);
-			if (successfully) {
-				logger.info("powershell was successfully executed [OK]\n");
-			} else {
-				logger.warning("powershell was not executed successfully [ERROR]\n");
-			}
+			message = pe.execute_method2(fileContent);
+			logger.info(message + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 			logger.warning(e.getMessage() + "\n");
 		}
-		return successfully;
+		if (message.isEmpty())
+			return true;
+		else
+			return false;
 	}
 
 	/**
