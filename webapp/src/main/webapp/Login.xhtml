@@ -49,13 +49,13 @@
 						</b:inputSecret>
 					</b:column>
 					<b:column medium-screen="6" style-class="message">
-						<b:message for="password" line-break="p hr p" />
+						<b:message for="password" />
 					</b:column>
 				</b:row>
 				<b:row>
 					<b:column span="2" offset="2">
 						<b:commandButton update="@form" look="primary" icon="log-in"
-							onclick="ajax:login.validateUsernamePassword()" value="Login"
+							action="#{login.validateUsernamePassword}" value="Login"
 							style="width:100%"></b:commandButton>
 					</b:column>
 					<b:column span="2">
