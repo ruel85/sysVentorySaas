@@ -63,7 +63,7 @@ public class XMLToDAOMapper {
 
 		newScanJob = new ScanJob();
 		newScanJob.setStartTime(comp.getStamp());
-		ScanJobDAO.createScanJob(newScanJob);
+		ScanJobDAO.saveScanJob(newScanJob);
 		
 		for(Computer oneComp : comps)
 		{
@@ -74,19 +74,19 @@ public class XMLToDAOMapper {
 					.getNetzwerkkonfiguration().getNetzwerkKarte().get(0).getIPAdresse().getValue());
 			newDevice.setManufacturer("Hersteller unbekannt");
 			newDevice.setMemory(oneComp.getSystem().getMemory().getValue().toString());
-			DeviceDAO.createDevice(newDevice);
+			DeviceDAO.saveDevice(newDevice);
 			
 			newOperatingSystem = new OperatingSystem();
 			newOperatingSystem.setName(oneComp.getSystem().getBetriebssystem().getValue());
 			newOperatingSystem.setManufacturer("Hersteller unbekannt");
 			newOperatingSystem.setArchitecture(oneComp.getSystem().getOSArchitektur().getValue());
-			OperatingSystemDAO.createOperatingSystem(newOperatingSystem);
+			OperatingSystemDAO.saveOperatingSystem(newOperatingSystem);
 			
 			newProcessor = new Processor();
 			newProcessor.setName(oneComp.getProzessoren().getProzessor().getName().getValue());
 			newProcessor.setCores(oneComp.getProzessoren().getProzessor().getNoC().getValue());
 			newProcessor.setFrequency(oneComp.getProzessoren().getProzessor().getCCS().getValue().toString());
-			ProcessorDAO.createProcessor(newProcessor);
+			ProcessorDAO.saveProcessor(newProcessor);
 			
 			List<Drucker> druckerList = oneComp.getPeripherie().getDruckers().getDrucker();
 			for(Drucker oneDrucker :druckerList)
@@ -94,7 +94,7 @@ public class XMLToDAOMapper {
 				newPrinter = new Printer();
 				newPrinter.setName(oneDrucker.getValue());
 				newPrinter.setDescription("Keine Beschreibung vorhanden.");
-				PrinterDAO.createPrinter(newPrinter);
+				PrinterDAO.savePrinter(newPrinter);
 			}
 			
 			List<Druckertreiber> druckertreiberList = oneComp.getPeripherie().getDruckertreibers().getDruckertreiber();
@@ -102,7 +102,7 @@ public class XMLToDAOMapper {
 			{
 				newPrinterDriver = new PrinterDriver();
 				newPrinterDriver.setName(oneDruckertreiber.getValue());
-				PrinterDriverDAO.createPrinterDriver(newPrinterDriver);
+				PrinterDriverDAO.savePrinterDriver(newPrinterDriver);
 			}
 
 			List<NetzwerkKarte> netzwerkKartenListe = oneComp.getNetzwerkkonfiguration().getNetzwerkKarte();
@@ -115,7 +115,7 @@ public class XMLToDAOMapper {
 				newNetworkInterface.setGateway(oneNetzwerkKarte.getGateway().getValue());
 				newNetworkInterface.setMacAddress(oneNetzwerkKarte.getMacadresse().getValue());
 				
-				NetworkInterfaceDAO.createNetworkInterface(newNetworkInterface);
+				NetworkInterfaceDAO.saveNetworkInterface(newNetworkInterface);
 			}
 			
 			List<Programm> programmList = oneComp.getProgramme().getProgramm();
@@ -125,7 +125,7 @@ public class XMLToDAOMapper {
 				software.setManufacturer("Hersteller unbekannt");
 				software.setName(oneProgramm.getName().getValue());
 				software.setVersion(oneProgramm.getVersion().getValue());
-				SoftwareDAO.createSoftware(software);
+				SoftwareDAO.saveSoftware(software);
 			}
 			
 			List<SID> sidList = oneComp.getSIDS().getSID();

@@ -9,7 +9,7 @@ import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
 
 public class NetworkInterfaceDAO {
 	
-	public static NetworkInterface createNetworkInterface(NetworkInterface networkInterface){
+	public static NetworkInterface saveNetworkInterface(NetworkInterface networkInterface){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(networkInterface);

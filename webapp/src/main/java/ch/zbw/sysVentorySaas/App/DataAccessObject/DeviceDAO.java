@@ -11,7 +11,7 @@ import ch.zbw.sysVentorySaas.App.model.Device;
 
 public class DeviceDAO {
 	
-	public static Device createDevice(Device device){
+	public static Device saveDevice(Device device){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(device);

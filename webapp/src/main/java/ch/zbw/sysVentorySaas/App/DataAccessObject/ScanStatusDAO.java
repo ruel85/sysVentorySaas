@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaas.App.model.ScanStatus;
 
 public class ScanStatusDAO {
 
-	public static ScanStatus createScanStatus(ScanStatus scanStatus){
+	public static ScanStatus saveScanStatus(ScanStatus scanStatus){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(scanStatus);

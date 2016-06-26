@@ -18,7 +18,7 @@ import ch.zbw.sysVentorySaas.App.model.User;
 public class UserDAO {
 	
 	// Create or Update User
-	public static User createUser(User user){
+	public static User saveUser(User user){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(user);

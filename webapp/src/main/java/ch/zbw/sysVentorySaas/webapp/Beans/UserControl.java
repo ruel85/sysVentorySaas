@@ -111,7 +111,7 @@ public class UserControl implements Serializable {
 				String username = this.tmpUsername.getSubmittedValue().toString();
 				String email = test;
 				UserDAO userDao = new UserDAO();
-				userDao.createUser(user);
+				userDao.saveUser(user);
 			}
 		}
 	}

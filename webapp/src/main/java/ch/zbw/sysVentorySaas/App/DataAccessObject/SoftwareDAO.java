@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaas.App.model.Software;
 
 public class SoftwareDAO {
 
-	public static Software createSoftware(Software software){
+	public static Software saveSoftware(Software software){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(software);

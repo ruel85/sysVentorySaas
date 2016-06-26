@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaas.App.model.SID;
 
 public class SIDDAO {
 
-	public static SID createSID(SID sid){
+	public static SID saveSID(SID sid){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(sid);

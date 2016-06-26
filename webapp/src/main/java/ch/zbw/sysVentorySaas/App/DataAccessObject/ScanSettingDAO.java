@@ -18,7 +18,7 @@ import ch.zbw.sysVentorySaas.App.model.User;
 
 public class ScanSettingDAO {
 
-	public static ScanSetting createScanSetting(ScanSetting scanSetting) {
+	public static ScanSetting saveScanSetting(ScanSetting scanSetting) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(scanSetting);

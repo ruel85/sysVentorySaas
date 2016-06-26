@@ -7,7 +7,7 @@ import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
 import ch.zbw.sysVentorySaas.App.model.PrinterDriver;
 
 public class PrinterDriverDAO {
-	public static PrinterDriver createPrinterDriver(PrinterDriver printerDriver){
+	public static PrinterDriver savePrinterDriver(PrinterDriver printerDriver){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(printerDriver);

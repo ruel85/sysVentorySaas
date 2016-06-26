@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaas.App.model.Service;
 
 public class ServiceDAO {
 	
-	public static Service createService(Service service){
+	public static Service saveService(Service service){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(service);

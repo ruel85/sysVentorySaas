@@ -10,8 +10,7 @@ public class LoginDao {
 		for (User oneUser : UserDAO.getAllUsers()) {
 			if (oneUser != null) {
 				if (oneUser.getUsername().equals(user) && 
-						PasswordEncryptor.checkPassword(oneUser.getPassword()
-								,PasswordEncryptor.getPWEncryptor().encryptPassword(password))) {
+						oneUser.getPassword() == PasswordEncryptor.getPWEncryptor().encryptPassword(password)) {
 					return oneUser;
 				}
 			}

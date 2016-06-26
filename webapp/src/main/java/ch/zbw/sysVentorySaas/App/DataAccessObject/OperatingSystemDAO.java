@@ -9,7 +9,7 @@ import ch.zbw.sysVentorySaas.App.model.Software;
 
 public class OperatingSystemDAO {
 	
-	public static OperatingSystem createOperatingSystem(OperatingSystem operatingSystem){
+	public static OperatingSystem saveOperatingSystem(OperatingSystem operatingSystem){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(operatingSystem);

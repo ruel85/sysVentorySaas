@@ -105,7 +105,7 @@ public class ScanSettingBean implements Serializable {
 	public void startScan()
 	{
 		setting.setTimeToScan(true);
-		ScanSettingDAO.createScanSetting(setting);
+		ScanSettingDAO.saveScanSetting(setting);
 	}
 	
 	// save Settings DD
@@ -115,7 +115,7 @@ public class ScanSettingBean implements Serializable {
 		setting.setIpStart(ipStart);
 		setting.setIpEnd(ipEnd);
 		setting.setIntervallHours(intervallHours);
-		ScanSettingDAO.createScanSetting(setting);
+		ScanSettingDAO.saveScanSetting(setting);
 	}
 
 }

@@ -14,7 +14,7 @@ import ch.zbw.sysVentorySaas.interfaces.IDashboardSysVentoryAdmin;
 
 public class CompanyDAO {
 	
-	public static Company createCompany(Company company){
+	public static Company saveCompany(Company company){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(company);

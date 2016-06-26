@@ -13,7 +13,7 @@ public class AnyDAO<T> {
 	this.typeParameterClass = typeParameterClass;	
 	}
 	
-	public AnyDAO<T> createAnyEntity(AnyDAO<T> dao){
+	public AnyDAO<T> saveAnyEntity(AnyDAO<T> dao){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(dao);

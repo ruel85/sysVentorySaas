@@ -12,7 +12,7 @@ import ch.zbw.sysVentorySaas.App.model.User;
 
 public class ScanJobDAO {
 
-	public static ScanJob createScanJob(ScanJob scanJob){
+	public static ScanJob saveScanJob(ScanJob scanJob){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(scanJob);

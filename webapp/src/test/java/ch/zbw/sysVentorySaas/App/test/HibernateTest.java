@@ -92,7 +92,7 @@ public class HibernateTest {
 	@Test
 	public void TestSoftware_CRUD()
 	{
-		Software newSoftware = SoftwareDAO.createSoftware(new Software("NEST/IS-E", "InnoSolv AG", "2016.6"));
+		Software newSoftware = SoftwareDAO.saveSoftware(new Software("NEST/IS-E", "InnoSolv AG", "2016.6"));
 		
 		assertEquals("InnoSolv AG", newSoftware.getManufacturer());
 		assertEquals("NEST/IS-E", newSoftware.getName());
@@ -109,7 +109,7 @@ public class HibernateTest {
 	public void TestOperatingSystem_CRUD()
 	{
 		OperatingSystem op = new OperatingSystem("Windows 10", "Microsoft Windows", "64-bit");
-		OperatingSystem newOP = OperatingSystemDAO.createOperatingSystem(op);
+		OperatingSystem newOP = OperatingSystemDAO.saveOperatingSystem(op);
 		
 		assertEquals("Windows 10", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getName());
 		assertEquals("Microsoft Windows", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getManufacturer());
@@ -123,7 +123,7 @@ public class HibernateTest {
 	public void TestProcessor_CRUD()
 	{
 		Processor pr = new Processor("i7-465U", "Intel(R)",  4, "2.30 GHz");
-		Processor newProcessor = ProcessorDAO.createProcessor(pr);
+		Processor newProcessor = ProcessorDAO.saveProcessor(pr);
 		
 		Processor prSelected = ProcessorDAO.getProcessorById(newProcessor.getIdProcessor());
 		assertEquals("i7-465U", prSelected.getName());
@@ -138,7 +138,7 @@ public class HibernateTest {
 	@Test
 	public void TestPrinter_CRUD(){
 		Printer p = new Printer("Canon", "Farbdrucker Zimmer links");
-		Printer newPrinter = PrinterDAO.createPrinter(p);
+		Printer newPrinter = PrinterDAO.savePrinter(p);
 		
 		Printer pSelected = PrinterDAO.getPrinterById(newPrinter.getIdPrinter());
 		assertEquals("Canon", pSelected.getName());
@@ -152,7 +152,7 @@ public class HibernateTest {
 	public void TestNetworkInterface_CRUD(){
 		NetworkInterface ni = new NetworkInterface(
 				"Marvell AVASTAR Wireless-AC Network Controller","10.0.20.17", "255.255.255.0", "10.1.53.1", "34:E6:D7:4B:AC:A1s");
-		NetworkInterfaceDAO.createNetworkInterface(ni);
+		NetworkInterfaceDAO.saveNetworkInterface(ni);
 		
 		NetworkInterface niSelected = NetworkInterfaceDAO.getNetworkInterfaceById(ni.getIdNetworkInterface());
 		assertEquals("Marvell AVASTAR Wireless-AC Network Controller", niSelected.getName());
@@ -168,7 +168,7 @@ public class HibernateTest {
 	@Test
 	public void TestDevice_CRUD(){
 		Device dev = new Device("Desktop PC", "DELL", "50-1A-C5-F4-C7-BB", "192.168.2.21", "65434", "x64-based PC");
-		Device newDevice = DeviceDAO.createDevice(dev);
+		Device newDevice = DeviceDAO.saveDevice(dev);
 		
 		Device devSelected = DeviceDAO.getDeviceById(newDevice.getIdDevice());
 		assertEquals("Desktop PC", devSelected.getName());
@@ -195,12 +195,12 @@ public class HibernateTest {
 		
 		
 		Company comp = new Company("ZbW", "Gaiserwaldstrasse", "1", null, "9043", "Abtwil SG");
-		CompanyDAO.createCompany(comp);
+		CompanyDAO.saveCompany(comp);
 		
 		for(User oneUser : userList)
 		{
 			oneUser.setCompany(comp);
-			UserDAO.createUser(oneUser);
+			UserDAO.saveUser(oneUser);
 		}
 		
 		User userSelected = UserDAO.getUserByIdUser(userList.get(0).getIdUser());
@@ -215,7 +215,7 @@ public class HibernateTest {
 		
 		comp.setScanSetting(scanSetting);
 		scanSetting.setCompany(comp);
-		CompanyDAO.createCompany(comp);
+		CompanyDAO.saveCompany(comp);
 		
 		//userDAO.deleteUser(newUser);
 		//assertNull(userDAO.getUserByIdUser(newUser.getIdUser()));
@@ -243,13 +243,13 @@ public class HibernateTest {
 		
 		comp.setScanSetting(scanSetting);
 		scanSetting.setCompany(comp);
-		comp = CompanyDAO.createCompany(comp);
+		comp = CompanyDAO.saveCompany(comp);
 		// Prüfen, ob 1-1 Beziehung wirklich vorhanden ist...
 		assertEquals(comp.getIdCompany(), ScanSettingDAO.getScanSettingById(comp.getIdCompany()).getIdCompany());
 		
 		// 2. Datensatz (ohne ScanSetting) einfügen...
 		comp = new Company("Movento", "Irgendeinestrasse", "10", null, "9015", "St. Gallen");
-		CompanyDAO.createCompany(comp);
+		CompanyDAO.saveCompany(comp);
 		assertNull(ScanSettingDAO.getScanSettingById(comp.getIdCompany()));
 		
 		//.. und diese Company ohne ScanSetting gleich wieder löschen
@@ -283,7 +283,7 @@ public class HibernateTest {
 	@Test
 	public void TestService_CRUD(){
 		Service serv = new Service("MyService", true);
-		ServiceDAO.createService(serv);
+		ServiceDAO.saveService(serv);
 		
 		Service servSelected = ServiceDAO.getServiceById(1);
 		assertEquals("MyService", servSelected.getName());
@@ -296,7 +296,7 @@ public class HibernateTest {
 	@Test
 	public void TestScanStatus (){
 		ScanStatus scanStatus = new ScanStatus("Vorbereitet", "Der Scan ist vorbereitet und kann verarbeitet werden.");
-		ScanStatusDAO.createScanStatus(scanStatus);
+		ScanStatusDAO.saveScanStatus(scanStatus);
 		
 		ScanStatus scanStatusSelected = ScanStatusDAO.getScanStatusById(1);
 		assertEquals("Vorbereitet", scanStatusSelected.getName());
@@ -309,7 +309,7 @@ public class HibernateTest {
 	@Test
 	public void TestScanJob(){
 		ScanJob scanJ = new ScanJob("07:00", "07:30", new ScanStatus("Erledigt", "Irgendeine Beschreibung"));
-		ScanJob newScanJob = ScanJobDAO.createScanJob(scanJ);
+		ScanJob newScanJob = ScanJobDAO.saveScanJob(scanJ);
 		
 		ScanJob scanJobSelected = ScanJobDAO.getScanJobById(newScanJob.getIdScanJob());
 		assertEquals("07:00", scanJobSelected.getStartTime());
@@ -353,7 +353,7 @@ public class HibernateTest {
 	
 	@Test
 	public void Test_SID(){
-		SID sid = SIDDAO.createSID(new SID("S-1-5-21-2056415622-1170722248-999543400-501"));
+		SID sid = SIDDAO.saveSID(new SID("S-1-5-21-2056415622-1170722248-999543400-501"));
 		
 		SID sidSelected = SIDDAO.getSIDById(sid.getIdSID());
 		assertEquals("S-1-5-21-2056415622-1170722248-999543400-501", sidSelected.getSID());
@@ -362,7 +362,7 @@ public class HibernateTest {
 	@Test
 	public void Test_PrinterDriver()
 	{
-		PrinterDriver printerDriver = PrinterDriverDAO.createPrinterDriver(new PrinterDriver("PDF-XChange 4.0,3,Windows x64"));
+		PrinterDriver printerDriver = PrinterDriverDAO.savePrinterDriver(new PrinterDriver("PDF-XChange 4.0,3,Windows x64"));
 		PrinterDriver printerDriverSelected = PrinterDriverDAO.getPrinterDriverById(printerDriver.getIdPrinterDriver());
 		assertEquals("PDF-XChange 4.0,3,Windows x64", printerDriverSelected.getName());
 		

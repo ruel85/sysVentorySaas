@@ -8,7 +8,7 @@ import ch.zbw.sysVentorySaas.App.model.Printer;
 
 public class PrinterDAO {
 	
-	public static Printer createPrinter(Printer printer){
+	public static Printer savePrinter(Printer printer){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(printer);
