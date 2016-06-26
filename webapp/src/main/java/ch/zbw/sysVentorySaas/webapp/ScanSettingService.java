@@ -81,6 +81,6 @@ public class ScanSettingService {
 				
 				sReturn.setNetworkName("getUserByUID(): Fehler beim Ermitteln des Users mit UID ( " + uID + " ) oder der Company oder der ScanSetting!");
 			}
-			throw new WebApplicationException("UID ungültig.", 404);
+			throw new WebApplicationException("UID ungültig.", 418);
 		}
 }
