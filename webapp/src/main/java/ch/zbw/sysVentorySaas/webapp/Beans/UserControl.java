@@ -13,6 +13,7 @@ import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 
 import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
+import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
 import ch.zbw.sysVentorySaas.App.model.User;
 import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;
 
@@ -118,6 +119,10 @@ public class UserControl implements Serializable {
 
 	public void saveChanges() {
 		for (User user : this.users) {
+			if(user.getuID() == null)
+			{
+				user.setuID(MD5Hash.getMD5Hash(user.getUsername()).toString());
+			}
 			UserDAO.saveUser(user);
 		}
 	}
