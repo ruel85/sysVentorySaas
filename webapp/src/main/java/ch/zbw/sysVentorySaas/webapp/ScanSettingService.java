@@ -64,7 +64,6 @@ public class ScanSettingService {
 					
 					if(idCompany !=0)
 					{
-						
 						sReturn = ScanSettingDAO.getScanSettingById(idCompany);
 						return sReturn;
 					}					

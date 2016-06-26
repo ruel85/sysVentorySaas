@@ -19,6 +19,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDriverDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App.computers.Computers;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer;
@@ -143,5 +144,11 @@ public class XMLToDAOMapper {
 		}
 		newScanJob.setEndTime(ZonedDateTime.now().toString());
 		ScanJobDAO.saveScanJob(newScanJob);
+		
+		if(scanSetting != null && scanSetting.getIdCompany() != 0)
+		{
+			scanSetting.setTimeToScan(false);
+			ScanSettingDAO.saveScanSetting(scanSetting);
+		}
 	}
 }
