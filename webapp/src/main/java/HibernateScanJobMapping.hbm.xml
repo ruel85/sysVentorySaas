@@ -5,11 +5,25 @@
 <hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.ScanJob" table="scanjob">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Scan-Job</meta>
+		
 		<id name="idScanJob" type="int" column="idScanJob">
 			<generator class="identity"/>
 		</id>
+		
+		<many-to-one name="scanSetting" class="ch.zbw.sysVentorySaas.App.model.ScanSetting" fetch="join">
+		<column name="idCompany" not-null="true"/>
+		</many-to-one>
+		
 		<property name="startTime" column="startTime" type="string"/>
 		<property name="endTime" column="endTime" type="string"/>
 <!-- 		<property name="status" column="status" type="Enum"/> -->
+
+		<property name="jobStatus" column="jobstatus" type="ch.zbw.sysVentorySaas.App.helpers.JobStatus">
+		<type name="org.hibernate.type">
+        	<param name="enumClass">ch.zbw.sysVentorySaas.App.helpers.JobStatus</param>
+        	<param name="useNamed">true</param>
+        </type>
+		</property>
+
 	</class>
 </hibernate-mapping>

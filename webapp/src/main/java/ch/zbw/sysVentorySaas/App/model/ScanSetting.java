@@ -1,5 +1,7 @@
 package ch.zbw.sysVentorySaas.App.model;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -17,6 +19,8 @@ public class ScanSetting{
 	@XmlTransient /*Ignoriert das markierte Element für das XML-Bindung */
 	private Company company;
 	
+	private Set<ScanJob> scanjobs;
+	
 	public ScanSetting(String networkName, String ipStart, String ipEnd, int intervallHours, boolean timeToScan)
 	{
 		this.networkName=networkName;
@@ -25,8 +29,18 @@ public class ScanSetting{
 		this.intervallHours=intervallHours;
 		this.timeToScan=timeToScan;
 	}
-
 	
+	public Set<ScanJob> getScanjobs() {
+		return scanjobs;
+	}
+
+	public void setScanjobs(Set<ScanJob> scanjobs) {
+		this.scanjobs = scanjobs;
+	}
+
+
+
+
 	public Company getCompany() {
 		return company;
 	}

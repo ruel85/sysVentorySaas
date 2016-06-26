@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import ch.zbw.sysVentorySaas.App.DataAccessObject.DeviceDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
 import ch.zbw.sysVentorySaas.App.computers.Computers;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Prozessoren.Prozessor;
@@ -26,6 +27,7 @@ import ch.zbw.sysVentorySaas.App.model.Device;
 import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App.model.Printer;
+import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 import ch.zbw.sysVentorySaas.App.model.Software;
 import ch.zbw.sysVentorySaas.App.computers.ObjectFactory;
 import ch.zbw.sysVentorySaas.App.computers.XMLParserDOM;
@@ -51,6 +53,7 @@ public static XMLParserDOM xmlParserDOM;
 		
 		File fileXML = new File("Schema/computers2.xml");
 		FileInputStream fi = new FileInputStream(fileXML);
-		XMLToDAOMapper.importData(fi);
+		ScanSetting scanSetting = ScanSettingDAO.getAllScanSettings().get(0);
+		XMLToDAOMapper.importData(fi, scanSetting);
 	}
 }
