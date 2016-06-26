@@ -15,24 +15,24 @@
 </style>
 </h:head>
 <h:body style="padding-top: 60px; background-color: #add;">
-	<h:form styleClass="loginform" prependId="false">
-
+	<h:form id="loginform">
 		<b:container layout="fluid">
 		    <b:panel title="sysVentorySaaS - Login" look="primary">
 				<b:row>
 					<b:column medium-screen="2">
-						<h:outputText value="Benutzername:" />
+						<h:outputText value="Benutzername:" for="username" />
 					</b:column>
 					<b:column medium-screen="4">
-						<b:inputText id="username" placeholder="Benutzername" ajax="true"
-							value="#{login.user}" update="@(.message)">
+						<b:inputText id="username" placeholder="Benutzername"
+							value="#{login.user}" ajax="true" autocomplete="false"
+							update="@(.message)">
 							<f:facet name="prepend">
 								<b:icon name="user" />
 							</f:facet>
 						</b:inputText>
 					</b:column>
 					<b:column medium-screen="6" style-class="message">
-						<b:message for="username"></b:message>
+						<b:message for="username" />
 					</b:column>
 				</b:row>
 				<b:row>
@@ -42,20 +42,20 @@
 					<b:column medium-screen="4">
 						<b:inputSecret id="password" type="password"
 							placeholder="Passwort" value="#{login.password}" ajax="true"
-							update="@(.message)">
+							autocomplete="false" update="@(.message)">
 							<f:facet name="prepend">
 								<b:iconAwesome name="key" />
 							</f:facet>
 						</b:inputSecret>
 					</b:column>
 					<b:column medium-screen="6" style-class="message">
-						<b:message for="password"></b:message>
+						<b:message for="password" line-break="p hr p" />
 					</b:column>
 				</b:row>
 				<b:row>
 					<b:column span="2" offset="2">
 						<b:commandButton update="@form" look="primary" icon="log-in"
-							action="#{login.validateUsernamePassword}" value="Login"
+							onclick="ajax:login.validateUsernamePassword()" value="Login"
 							style="width:100%"></b:commandButton>
 					</b:column>
 					<b:column span="2">

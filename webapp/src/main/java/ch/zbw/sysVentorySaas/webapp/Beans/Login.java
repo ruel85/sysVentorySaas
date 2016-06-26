@@ -55,8 +55,8 @@ public class Login implements Serializable {
 			return "Admin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"loginform:password",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							"Benutzername oder Passwort ist nicht korrekt",
 							"Bitte geben Sie die richtigen Informationen ein."));
 			FacesContext.getCurrentInstance().renderResponse();
