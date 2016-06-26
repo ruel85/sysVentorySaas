@@ -7,8 +7,9 @@ public class Software{
 	private String manufacturer;
 	private String version;
 	
+	private Device device;
+	
 	public Software(){
-		
 	}
 	
 	public Software(String name, String manufacturer, String version){
@@ -17,6 +18,14 @@ public class Software{
 		this.version = version;
 	}
 	
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
+	}
+
 	public int getIdSoftware() {
 		return idSoftware;
 	}

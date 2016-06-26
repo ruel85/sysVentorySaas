@@ -7,7 +7,7 @@ public final class PasswordEncryptor {
 		ConfigurablePasswordEncryptor passwordEncryptor;
 		passwordEncryptor = new ConfigurablePasswordEncryptor();
 		passwordEncryptor.setAlgorithm("SHA-1");
-		passwordEncryptor.setPlainDigest(false);
+		passwordEncryptor.setPlainDigest(true);
 		return passwordEncryptor;
 	}
 

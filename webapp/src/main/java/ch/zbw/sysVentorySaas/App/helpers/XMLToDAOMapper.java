@@ -125,6 +125,7 @@ public class XMLToDAOMapper {
 				software.setManufacturer("Hersteller unbekannt");
 				software.setName(oneProgramm.getName().getValue());
 				software.setVersion(oneProgramm.getVersion().getValue());
+				software.setDevice(newDevice);
 				SoftwareDAO.saveSoftware(software);
 			}
 			

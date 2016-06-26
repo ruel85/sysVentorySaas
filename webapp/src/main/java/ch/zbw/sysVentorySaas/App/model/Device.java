@@ -1,5 +1,7 @@
 package ch.zbw.sysVentorySaas.App.model;
 
+import java.util.Set;
+
 public class Device {
 	private int idDevice;
 	private String name;
@@ -8,6 +10,8 @@ public class Device {
 	private String manufacturer;
 	private String memory;
 	private String systemtype;
+	
+	private Set<Software> software;
 
 	public Device(String name, String manufacturer, String macAddress, String ipAddress, String memory, String systemtype) {
 		this.name=name;
@@ -20,6 +24,22 @@ public class Device {
 	
 	public Device()
 	{
+	}	
+
+	public String getSystemtype() {
+		return systemtype;
+	}
+
+	public void setSystemtype(String systemtype) {
+		this.systemtype = systemtype;
+	}
+
+	public Set<Software> getSoftware() {
+		return software;
+	}
+
+	public void setSoftware(Set<Software> software) {
+		this.software = software;
 	}
 
 	public String getSystemType() {

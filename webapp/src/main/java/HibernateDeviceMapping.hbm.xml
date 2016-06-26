@@ -14,5 +14,14 @@
 		<property name="ipAddress" column="ipAddress" type="string"/>
 		<property name="memory" column="memory" type="string" />
 		<property name="systemType" column="systemtype" type="string"/>
+		
+		<set name="software" table="software" inverse="true" fetch="select">
+			<key>
+				<column name="idSoftware" not-null="false"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Software"/>
+		</set>
+		
+		
 	</class>
 </hibernate-mapping>
