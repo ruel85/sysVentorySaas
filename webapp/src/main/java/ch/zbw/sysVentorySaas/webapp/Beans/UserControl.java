@@ -55,7 +55,7 @@ public class UserControl implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public UIInput getTmpUsername() {
 		return tmpUsername;
 	}
@@ -98,21 +98,9 @@ public class UserControl implements Serializable {
 		this.idUser = (int) event.getComponent().getAttributes().get("iduser");
 	}
 
-	public void saveUser() {
+	public void saveChanges() {
 		for (User user : this.users) {
-			if (user.getIdUser() == this.idUser) {
-				
-//				this.tmpUser.setUsername(this.username);
-//				this.tmpUser.setPassword(this.password);
-//				this.tmpUser.setEmail(this.email);
-
-				String test = (String)this.tmpEmail.getValue();
-				test = this.tmpEmail.getSubmittedValue().toString();
-				String username = this.tmpUsername.getSubmittedValue().toString();
-				String email = test;
-				UserDAO userDao = new UserDAO();
-				userDao.saveUser(user);
-			}
+			UserDAO.saveUser(user);
 		}
 	}
 
@@ -130,5 +118,9 @@ public class UserControl implements Serializable {
 
 	public void setTmpPassword(UIInput tmpPassword) {
 		this.tmpPassword = tmpPassword;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

@@ -33,37 +33,32 @@
 				<f:facet name="header">
 					<h:outputText value="Benutzername" />
 				</f:facet>
-				<h:inputText id="username" value="#{user.username}"
+				<b:inputText id="username" value="#{user.username}"
 					binding="#{userControl.tmpUsername}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Passwort" />
 				</f:facet>
-				<h:inputSecret id="password" value="#{user.password}"
+				<b:inputSecret value="#{user.password}"
 					binding="#{userControl.tmpPassword}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="E-Mail" />
 				</f:facet>
-				<h:inputText id="email" value="#{user.email}"
-					update="#{userControl.tmpEmail}" binding="#{userControl.tmpEmail}"/>
+				<b:inputText value="#{user.email}" />
 			</h:column>
 			<h:column>
-				<b:commandButton id="delete" value="Löschen" look="danger" icon="remove"
-					action="#{userControl.deleteUser}"
+				<b:commandButton id="delete" value="Löschen" look="danger"
+					icon="remove" action="#{userControl.deleteUser}"
 					actionListener="#{userControl.userListener}">
 					<f:attribute name="iduser" value="#{user.idUser}" />
-				</b:commandButton>
-				<b:commandButton id="save" value="Speichern" look="Primary" icon="save"
-					action="#{userControl.saveUser}"
-					actionListener="#{userControl.userListener}">
-					<f:attribute name="iduser" value="#{user.idUser}" />
-					<f:attribute name="email" value="#{user.email}" />
 				</b:commandButton>
 			</h:column>
 		</b:dataTable>
+		<b:commandButton look="Primary" icon="save" value="Save Changes"
+			action="#{userControl.saveChanges}"></b:commandButton>
 	</h:form>
 </h:body>
 </html>
