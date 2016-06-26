@@ -56,8 +56,10 @@
 				</b:commandButton>
 			</h:column>
 		</b:dataTable>
-		<b:commandButton look="Primary" icon="save" value="Save Changes"
-			action="#{userControl.saveChanges}"></b:commandButton>
+		<b:commandButton look="Primary" icon="save"
+			value="Änderungen Speichern" action="#{userControl.saveChanges}"></b:commandButton>
+		<b:commandButton look="Primary" icon="user" value="Benutzer hinzufügen"
+			action="#{userControl.addUser}"></b:commandButton>
 	</h:form>
 </h:body>
 </html>

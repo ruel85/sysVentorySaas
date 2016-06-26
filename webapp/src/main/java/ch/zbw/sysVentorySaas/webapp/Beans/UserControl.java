@@ -1,6 +1,7 @@
 package ch.zbw.sysVentorySaas.webapp.Beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -31,6 +32,20 @@ public class UserControl implements Serializable {
 	private User user;
 
 	private List<User> users;
+
+	public void loadList() {
+		UserDAO userDao = new UserDAO();
+		List<User> allUsers = userDao.getAllUsers();
+		User loggedUser = SessionUtils.getUser();
+		this.users = new ArrayList<User>();
+		for(User user : allUsers)
+		{
+			if(user.getCompany().getIdCompany() == loggedUser.getCompany().getIdCompany())
+			{
+				this.users.add(user);
+			}
+		}
+	}
 
 	public String getPwd() {
 		return password;
@@ -66,13 +81,16 @@ public class UserControl implements Serializable {
 
 	// list of all users
 	public List<User> getUsers() {
-		UserDAO userDao = new UserDAO();
-		this.users = userDao.getAllUsers();
+
 		return this.users;
 	}
 
 	// validate userControl
 	public String checkUserRights() {
+		if(this.users == null)
+		{
+			this.loadList();
+		}
 		return "UserControl";
 	}
 
@@ -122,5 +140,13 @@ public class UserControl implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	// fügt einen leeren Benutzer hinzu
+	public String addUser() {
+		User user = new User();
+		user.setCompany(SessionUtils.getUser().getCompany());
+		this.users.add(user);
+		return null;
 	}
 }
