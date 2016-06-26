@@ -29,9 +29,6 @@ import ch.zbw.sysVentorySaas.App.model.User;
 
 @Path("/scansettings")
 public class ScanSettingService {
-	
-	static final Logger logger = Logger.getLogger(ScanSettingService.class);
-
 		
 		@GET
 		@Produces(MediaType.APPLICATION_XML)
