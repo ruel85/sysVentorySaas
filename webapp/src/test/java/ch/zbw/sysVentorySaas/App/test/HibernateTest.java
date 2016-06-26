@@ -145,7 +145,7 @@ public class HibernateTest {
 		assertEquals("Farbdrucker Zimmer links", pSelected.getDescription());
 		
 		PrinterDAO.deleteProcessor(pSelected);
-		assertNull(PrinterDAO.getPrinterById(1));
+		assertNull(PrinterDAO.getPrinterById(newPrinter.getIdPrinter()));
 	}
 	
 	@Test
