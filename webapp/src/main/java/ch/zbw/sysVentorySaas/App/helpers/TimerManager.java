@@ -9,9 +9,9 @@ import java.util.TimerTask;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 
 public class TimerManager extends TimerTask {
-	private ArrayList<TimerThread> timerList;
-	private int factor;
-	private ArrayList<ScanSetting> scanSettings;
+	private static ArrayList<TimerThread> timerList;
+	private static int factor;
+	private static ArrayList<ScanSetting> scanSettings;
 
 	/**
 	 * @param scanSettings
@@ -43,7 +43,7 @@ public class TimerManager extends TimerTask {
 	 *            dieses automatisch mit dem Intervall
 	 * @throws Exception
 	 */
-	public void addScanSetting(ScanSetting scanSetting) throws Exception {
+	public static void addScanSetting(ScanSetting scanSetting) throws Exception {
 		TimerThread tt = new TimerThread(scanSetting);
 		Timer myTimer = new Timer();
 		myTimer.schedule(tt, scanSetting.getIntervallHours() * (60000 / factor),
@@ -57,7 +57,7 @@ public class TimerManager extends TimerTask {
 	 *            Entfernt aus dem TimerManager ein ScanSetting und beendet
 	 *            dessen Intervall
 	 */
-	public void removeScanSetting(ScanSetting scanSetting) {
+	public static void removeScanSetting(ScanSetting scanSetting) {
 		for (ListIterator<TimerThread> iterator = timerList.listIterator(); iterator.hasNext();) {
 			TimerThread th = iterator.next();
 			if (th.getScanSetting() == scanSetting) {
@@ -94,5 +94,31 @@ public class TimerManager extends TimerTask {
 		}
 
 	}
+
+	public static ArrayList<TimerThread> getTimerList() {
+		return timerList;
+	}
+
+	public static void setTimerList(ArrayList<TimerThread> timerList) {
+		TimerManager.timerList = timerList;
+	}
+
+	public static int getFactor() {
+		return factor;
+	}
+
+	public static void setFactor(int factor) {
+		TimerManager.factor = factor;
+	}
+
+	public static ArrayList<ScanSetting> getScanSettings() {
+		return scanSettings;
+	}
+
+	public static void setScanSettings(ArrayList<ScanSetting> scanSettings) {
+		TimerManager.scanSettings = scanSettings;
+	}
+	
+	
 
 }

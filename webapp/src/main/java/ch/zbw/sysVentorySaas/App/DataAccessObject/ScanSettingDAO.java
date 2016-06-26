@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
+import ch.zbw.sysVentorySaas.App.helpers.TimerManager;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
 
 public class ScanSettingDAO {
@@ -16,21 +17,29 @@ public class ScanSettingDAO {
 		Transaction transaction = session.beginTransaction();
 		session.saveOrUpdate(scanSetting);
 		transaction.commit();
+
+		if (scanSetting.getIdCompany() == 0) {
+			try {
+				TimerManager.addScanSetting(scanSetting);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return scanSetting;
 	}
 
 	public static ScanSetting getScanSettingById(int idCompany) throws Exception {
 		ScanSetting newObject = new ScanSetting();
-		List<ScanSetting> listScanSettings= getAllScanSettings();
-		for(ScanSetting result : listScanSettings)
-		{
-			if(result.getIdCompany() == idCompany)
-			{
+		List<ScanSetting> listScanSettings = getAllScanSettings();
+		for (ScanSetting result : listScanSettings) {
+			if (result.getIdCompany() == idCompany) {
 				newObject = result;
 				return newObject;
 			}
 		}
-		throw new Exception("ScanSetting konnte aufgrund der ID (" + idCompany +") nicht ermittelt werden. Setting bitte anlegen, wenn keine vorhanden sein sollte!");
+		throw new Exception("ScanSetting konnte aufgrund der ID (" + idCompany
+				+ ") nicht ermittelt werden. Setting bitte anlegen, wenn keine vorhanden sein sollte!");
 	}
 
 	public static void deleteScanSettings(ScanSetting scanSetting) {
@@ -38,6 +47,9 @@ public class ScanSettingDAO {
 		Transaction transaction = session.beginTransaction();
 		session.delete(scanSetting);
 		transaction.commit();
+
+		// für den Scheduler
+		TimerManager.removeScanSetting(scanSetting);
 	}
 
 	public static List<ScanSetting> getAllScanSettings() {
