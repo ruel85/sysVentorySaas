@@ -12,7 +12,7 @@
 		</generator>
 		</id>
 		
-		<one-to-one name="company" class="ch.zbw.sysVentorySaas.App.model.Company" constrained="true" fetch="join">
+		<one-to-one name="company" class="ch.zbw.sysVentorySaas.App.model.Company" constrained="true" fetch="select">
 		</one-to-one>
 		
 		<set name="scanjobs" table="scanjob" inverse="true" fetch="select">

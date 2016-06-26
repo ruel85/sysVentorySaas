@@ -54,7 +54,6 @@ public class ScanSettingService {
 			ScanSetting sReturn = new ScanSetting();
 			System.out.println("getScanSettingByUID: " + uID);
 			User user; 			
-			Company comp;
 
 			try {
 				user = UserDAO.getUserByUID(uID);
@@ -65,7 +64,16 @@ public class ScanSettingService {
 					if(idCompany !=0)
 					{
 						sReturn = ScanSettingDAO.getScanSettingById(idCompany);
-						return sReturn;
+						// Weil das zurückgeben des sReturn-Objektes nicht geht und
+						// Es eine LayHibernateException gibt...
+						ScanSetting neuScanSetting = new ScanSetting();
+						neuScanSetting.setIdCompany(sReturn.getIdCompany());
+						neuScanSetting.setIntervallHours(sReturn.getIntervallHours());
+						neuScanSetting.setIpEnd(sReturn.getIpEnd());
+						neuScanSetting.setIpStart(sReturn.getIpStart());
+						neuScanSetting.setNetworkName(sReturn.getNetworkName());
+						neuScanSetting.setTimeToScan(sReturn.getTimeToScan());
+						return neuScanSetting;
 					}					
 				}
 				
@@ -73,16 +81,6 @@ public class ScanSettingService {
 				
 				sReturn.setNetworkName("getUserByUID(): Fehler beim Ermitteln des Users mit UID ( " + uID + " ) oder der Company oder der ScanSetting!");
 			}
-			
-			/*Random r = new Random();
-			int i = r.nextInt(100) + 1;
-			sReturn.setTimeToScan((i <= 50?true:false));
-			
-			sReturn.setIpStart("192.168.1.30");
-			sReturn.setIpEnd("192.168.1.80");
-			sReturn.setIdCompany(-1);
-			sReturn.setIntervallHours(60);*/
-			
-			return sReturn;
+			throw new WebApplicationException("UID ungültig.", 404);
 		}
 }

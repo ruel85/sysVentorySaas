@@ -31,7 +31,7 @@ public class MyServiceTest {
      */
     @Test
     public void testGetIt() {
-        String responseMsg = target.path("webapp/webapi/myresource").request().get(String.class);
+        String responseMsg = target.path("myresource").request().get(String.class);
         assertEquals("Got it!", responseMsg);
     }
 }
