@@ -12,6 +12,7 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.DeviceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.OperatingSystemDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDriverDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.SoftwareDAO;
@@ -20,6 +21,7 @@ import ch.zbw.sysVentorySaas.App.computers.Computers.Computer;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Netzwerkkonfiguration.NetzwerkKarte;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Peripherie.Druckers;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Peripherie.Druckers.Drucker;
+import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Peripherie.Druckertreibers.Druckertreiber;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Programme.Programm;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.Prozessoren.Prozessor;
 import ch.zbw.sysVentorySaas.App.computers.Computers.Computer.SIDS.SID;
@@ -28,6 +30,7 @@ import ch.zbw.sysVentorySaas.App.model.Device;
 import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App.model.Printer;
+import ch.zbw.sysVentorySaas.App.model.PrinterDriver;
 import ch.zbw.sysVentorySaas.App.model.Processor;
 import ch.zbw.sysVentorySaas.App.model.ScanJob;
 import ch.zbw.sysVentorySaas.App.model.Software;
@@ -41,6 +44,7 @@ public class XMLToDAOMapper {
 		Software software;
 		Processor newProcessor;
 		Printer newPrinter;
+		PrinterDriver newPrinterDriver;
 		NetworkInterface newNetworkInterface;
 		ScanJob newScanJob;
 		ch.zbw.sysVentorySaas.App.model.SID sid;
@@ -91,6 +95,14 @@ public class XMLToDAOMapper {
 				newPrinter.setName(oneDrucker.getValue());
 				newPrinter.setDescription("Keine Beschreibung vorhanden.");
 				PrinterDAO.createPrinter(newPrinter);
+			}
+			
+			List<Druckertreiber> druckertreiberList = oneComp.getPeripherie().getDruckertreibers().getDruckertreiber();
+			for(Druckertreiber oneDruckertreiber :druckertreiberList)
+			{
+				newPrinterDriver = new PrinterDriver();
+				newPrinterDriver.setName(oneDruckertreiber.getValue());
+				PrinterDriverDAO.createPrinterDriver(newPrinterDriver);
 			}
 
 			List<NetzwerkKarte> netzwerkKartenListe = oneComp.getNetzwerkkonfiguration().getNetzwerkKarte();

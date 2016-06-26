@@ -9,9 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.print.attribute.standard.MediaSize.Other;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
@@ -22,8 +19,8 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.DeviceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.GroupDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.NetworkInterfaceDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.OperatingSystemDAO;
-import ch.zbw.sysVentorySaas.App.DataAccessObject.OtherDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDAO;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.PrinterDriverDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ProcessorDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.SIDDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
@@ -34,7 +31,6 @@ import ch.zbw.sysVentorySaas.App.DataAccessObject.SoftwareDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
 import ch.zbw.sysVentorySaas.App.helpers.GroupType;
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
-import ch.zbw.sysVentorySaas.App.helpers.MD5Hash;
 import ch.zbw.sysVentorySaas.App.helpers.PasswordEncryptor;
 import ch.zbw.sysVentorySaas.App.model.Company;
 import ch.zbw.sysVentorySaas.App.model.Device;
@@ -42,6 +38,7 @@ import ch.zbw.sysVentorySaas.App.model.Group;
 import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
 import ch.zbw.sysVentorySaas.App.model.Printer;
+import ch.zbw.sysVentorySaas.App.model.PrinterDriver;
 import ch.zbw.sysVentorySaas.App.model.Processor;
 import ch.zbw.sysVentorySaas.App.model.SID;
 import ch.zbw.sysVentorySaas.App.model.ScanJob;
@@ -179,7 +176,7 @@ public class HibernateTest {
 		assertEquals("50-1A-C5-F4-C7-BB", devSelected.getMacAddress());
 		assertEquals("192.168.2.21", devSelected.getIpAddress());
 		assertEquals("65434", devSelected.getMemory());
-		assertEquals("x64-based PC", devSelected.getSystemtyp());
+		assertEquals("x64-based PC", devSelected.getSystemType());
 		
 		DeviceDAO.deleteDevice(DeviceDAO.getDeviceById(devSelected.getIdDevice()));
 		assertNull(DeviceDAO.getDeviceById(devSelected.getIdDevice()));
@@ -210,9 +207,7 @@ public class HibernateTest {
 		//assertEquals(newUser.getuID(), userSelected.getuID());
 		
 		assertEquals("ruel85", userSelected.getUsername());
-		
-		assertTrue(encryptor.checkPassword(encryptor.encryptPassword("12345"), userSelected.getPassword()));
-		
+		assertTrue(encryptor.checkPassword(userSelected.getPassword(), encryptor.encryptPassword("12345")));	
 		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
 		assertEquals(GroupType.SysVentoryAdmin, userSelected.getGroupType());
 		
@@ -362,6 +357,17 @@ public class HibernateTest {
 		
 		SID sidSelected = SIDDAO.getSIDById(sid.getIdSID());
 		assertEquals("S-1-5-21-2056415622-1170722248-999543400-501", sidSelected.getSID());
+	}
+	
+	@Test
+	public void Test_PrinterDriver()
+	{
+		PrinterDriver printerDriver = PrinterDriverDAO.createPrinterDriver(new PrinterDriver("PDF-XChange 4.0,3,Windows x64"));
+		PrinterDriver printerDriverSelected = PrinterDriverDAO.getPrinterDriverById(printerDriver.getIdPrinterDriver());
+		assertEquals("PDF-XChange 4.0,3,Windows x64", printerDriverSelected.getName());
+		
+		PrinterDriverDAO.deletePrinterDriver(printerDriverSelected);
+		assertNull(PrinterDriverDAO.getPrinterDriverById(printerDriverSelected.getIdPrinterDriver()));
 	}
 	
 	

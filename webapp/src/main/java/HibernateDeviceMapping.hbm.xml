@@ -13,6 +13,6 @@
 		<property name="macAddress" column="macAddress" type="string"/>
 		<property name="ipAddress" column="ipAddress" type="string"/>
 		<property name="memory" column="memory" type="string" />
-		<property name="systemtyp" column="systemtyp" type="string"/>
+		<property name="systemType" column="systemtype" type="string"/>
 	</class>
 </hibernate-mapping>

@@ -7,27 +7,27 @@ public class Device {
 	private String ipAddress;
 	private String manufacturer;
 	private String memory;
-	private String systemtyp;
+	private String systemtype;
 
-	public Device(String name, String manufacturer, String macAddress, String ipAddress, String memory, String systemtyp) {
+	public Device(String name, String manufacturer, String macAddress, String ipAddress, String memory, String systemtype) {
 		this.name=name;
 		this.manufacturer=manufacturer;
 		this.macAddress=macAddress;
 		this.ipAddress=ipAddress;
 		this.memory = memory;
-		this.systemtyp = systemtyp;
+		this.systemtype = systemtype;
 	}
 	
 	public Device()
 	{
 	}
 
-	public String getSystemtyp() {
-		return systemtyp;
+	public String getSystemType() {
+		return systemtype;
 	}
 
-	public void setSystemtyp(String systemtyp) {
-		this.systemtyp = systemtyp;
+	public void setSystemType(String systemType) {
+		this.systemtype = systemType;
 	}
 
 	public String getMemory() {

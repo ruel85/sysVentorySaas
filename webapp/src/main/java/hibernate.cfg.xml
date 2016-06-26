@@ -46,5 +46,6 @@
         <mapping resource="HibernateServiceMapping.hbm.xml"/>
         <mapping resource="HibernateSoftwareMapping.hbm.xml"/>
         <mapping resource="HibernateSIDMapping.hbm.xml"/>
+        <mapping resource="HibernatePrinterDriverMapping.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
