@@ -60,6 +60,13 @@ public class XMLToDAOMapper {
 				
 		InputStream is = i;
 		
+		if(scanSetting != null && scanSetting.getIdCompany() != 0)
+		{
+			scanSetting.setTimeToScan(false);
+			ScanSettingDAO.saveScanSetting(scanSetting);
+		}	
+		
+		
 		Computers comp = (Computers) jaxbUnmarshaller.unmarshal(is);
 		System.out.println("Anzahl Computer:" + comp.getComputer().size());		
 		
@@ -146,12 +153,7 @@ public class XMLToDAOMapper {
 			
 			newScanJob.setEndTime(ZonedDateTime.now().toString());
 			ScanJobDAO.saveScanJob(newScanJob);
-			
-			if(scanSetting != null && scanSetting.getIdCompany() != 0)
-			{
-				scanSetting.setTimeToScan(false);
-				ScanSettingDAO.saveScanSetting(scanSetting);
-			}			
+		
 		} catch (Exception e) {
 			newScanJob.setJobStatus(JobStatus.Fehler);
 			ScanJobDAO.saveScanJob(newScanJob);
