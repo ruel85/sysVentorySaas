@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.logging.impl.Log4JLogger;
+import org.mockito.internal.stubbing.answers.ThrowsException;
 
 import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanSettingDAO;
@@ -69,38 +70,40 @@ public class ScanSettingService {
 		@GET
 		@Path("/{uID}")
 		@Produces(MediaType.APPLICATION_XML)
-		public ScanSetting getScanSettingByUID(@PathParam("uID") String uID)
+		public ScanSetting getScanSettingByUID(@PathParam("uID") String uID) throws ServiceNotFoundException
 		{
 			ScanSetting sReturn = new ScanSetting();
 			System.out.println("getScanSettingByUID: " + uID);
 			User user; 			
 			Company comp;
 			
-//			try {
-//				user = UserDAO.getUserByUID(uID);
-//				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
-//				{
-//					comp = CompanyDAO.getCompanyById(user.getCompany().getIdCompany());
-//					
-//					if(comp != null && comp.getIdCompany() != 0)
-//						return ScanSettingDAO.getScanSettingById(comp.getIdCompany());
-//				}
-//				
-//			} catch (Exception e) {
-//				Log4JLogger log = new Log4JLogger();
-//				log.error(e.getMessage());				
-//			}
-			
-			
+			try {
+				user = UserDAO.getUserByUID(uID);
+				if(user != null && user.getCompany() != null && user.getCompany().getIdCompany() != 0)
+				{
+					int idCompany = CompanyDAO.getCompanyById(user.getCompany().getIdCompany()).getIdCompany();
+					
+					if(idCompany !=0)
+					{
+						sReturn = ScanSettingDAO.getScanSettingById(idCompany);
+						return sReturn;
+					}					
+				}
+				
+			} catch (Exception e) {
+				Log4JLogger log = new Log4JLogger();
+				log.error(e.getMessage());
+				throw new ServiceNotFoundException(e.getMessage(), 1);
+			}
 			
 			Random r = new Random();
 			int i = r.nextInt(100) + 1;
-			
-			sReturn.setIpStart("192.168.1.30");
-			sReturn.setIpEnd("192.168.1.80");
-			sReturn.setIdCompany(-1);
 			sReturn.setTimeToScan((i <= 50?true:false));
-			sReturn.setIntervallHours(60);	
+			
+//			sReturn.setIpStart("192.168.1.30");
+//			sReturn.setIpEnd("192.168.1.80");
+//			sReturn.setIdCompany(-1);
+//			sReturn.setIntervallHours(60);	
 			return sReturn;
 		}
 }

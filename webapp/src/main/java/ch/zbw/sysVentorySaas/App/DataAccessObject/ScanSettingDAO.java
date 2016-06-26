@@ -3,18 +3,11 @@ package ch.zbw.sysVentorySaas.App.DataAccessObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.JoinTable;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
-import ch.zbw.sysVentorySaas.App.model.Company;
-import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.ScanSetting;
-import ch.zbw.sysVentorySaas.App.model.User;
 
 public class ScanSettingDAO {
 
@@ -26,13 +19,18 @@ public class ScanSettingDAO {
 		return scanSetting;
 	}
 
-	public static ScanSetting getScanSettingById(int id) {
+	public static ScanSetting getScanSettingById(int idCompany) throws Exception {
 		ScanSetting newObject = new ScanSetting();
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		newObject = (ScanSetting) session.get(ScanSetting.class, id);
-		transaction.commit();
-		return newObject;
+		List<ScanSetting> listScanSettings= getAllScanSettings();
+		for(ScanSetting result : listScanSettings)
+		{
+			if(result.getIdCompany() == idCompany)
+			{
+				newObject = result;
+				return newObject;
+			}
+		}
+		throw new Exception("ScanSetting konnte aufgrund der ID (" + idCompany +") nicht ermittelt werden. Setting bitte anlegen, wenn keine vorhanden sein sollte!");
 	}
 
 	public static void deleteScanSettings(ScanSetting scanSetting) {

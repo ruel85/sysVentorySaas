@@ -185,17 +185,17 @@ public class HibernateTest {
 	@Test
 	public void TestUser_CRUD(){		
 		ConfigurablePasswordEncryptor encryptor = PasswordEncryptor.getPWEncryptor();
+		Company comp = new Company("ZbW", "Gaiserwaldstrasse", "1", null, "9043", "Abtwil SG");
+		CompanyDAO.saveCompany(comp);
+		
 		List<User> userList = new ArrayList<User>();
 		userList.add(new User("2d1a0484f40daceeef42967c4ac00911", "ruel85", "12345", "ruel.holderegger@gmx.ch", GroupType.SysVentoryAdmin));
 		userList.add( new User(null, "elias", "12345", null, GroupType.SysVentoryAdmin));
 		userList.add(new User(null, "saj", "12345", null, GroupType.SysVentoryAdmin));
 		userList.add( new User(null, "damjan", "12345", null, GroupType.SysVentoryAdmin));
 		userList.add( new User(null, "palmer", "password", null, GroupType.CustomerAdmin));
-		userList.add( new User(null, "palmer", "password", null, GroupType.CustomerAdmin));
+		userList.add( new User(null, "max muster", "muster", null, GroupType.CustomerAdmin));
 		
-		
-		Company comp = new Company("ZbW", "Gaiserwaldstrasse", "1", null, "9043", "Abtwil SG");
-		CompanyDAO.saveCompany(comp);
 		
 		for(User oneUser : userList)
 		{
@@ -203,16 +203,13 @@ public class HibernateTest {
 			UserDAO.saveUser(oneUser);
 		}
 		
-		User userSelected = UserDAO.getUserByIdUser(userList.get(0).getIdUser());
-		//assertEquals(newUser.getuID(), userSelected.getuID());
-		
+		User userSelected = userList.get(0);
 		assertEquals("ruel85", userSelected.getUsername());
 		assertTrue(encryptor.checkPassword(userSelected.getPassword(), encryptor.encryptPassword("12345")));	
 		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
 		assertEquals(GroupType.SysVentoryAdmin, userSelected.getGroupType());
 		
-		ScanSetting scanSetting = new ScanSetting("ZBW-Gast", "192.168.5.55", "192.168.70.30", 60, true);
-		
+		ScanSetting scanSetting = new ScanSetting("ZBW-Gast", "192.168.5.55", "192.168.70.30", 60, true);		
 		comp.setScanSetting(scanSetting);
 		scanSetting.setCompany(comp);
 		CompanyDAO.saveCompany(comp);
@@ -222,39 +219,25 @@ public class HibernateTest {
 	}
 	
 	@Test
-	public void TestGroup_CRUD(){
-		Group newGroup = GroupDAO.createGroup( new Group("CustomerAdmin"));
-		GroupDAO.createGroup(new Group("SysVentoryAdmin"));
-		GroupDAO.createGroup(new Group("Inventor"));
-		GroupDAO.createGroup(new Group("Visitor"));
-		
-		Group groupSelected = GroupDAO.getGroupById(newGroup.getIdGroup());
-		assertEquals(groupSelected.getIdGroup(), newGroup.getIdGroup());
-		assertEquals(newGroup.getName(), groupSelected.getName());
-		
-		//GroupDAO.deleteGroup(newGroup);
-		//assertNull(GroupDAO.getGroupById(newGroup.getIdGroup()));
-	}
-	
-	@Test
-	public void TestCompany_CRUD_AND_TestScanSetting(){
-		Company comp = new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen");	;
+	public void TestCompany_CRUD_AND_TestScanSetting() throws Exception{
+		Company comp = new Company("InnoSolv AG", "Ikarusstrasse", "9", null, "9015", "St. Gallen");
 		ScanSetting scanSetting = new ScanSetting("DonRaul", "192.168.1.1", "192.168.1.35", 1, false);
 		
 		comp.setScanSetting(scanSetting);
 		scanSetting.setCompany(comp);
 		comp = CompanyDAO.saveCompany(comp);
+
+		
 		// Prüfen, ob 1-1 Beziehung wirklich vorhanden ist...
 		assertEquals(comp.getIdCompany(), ScanSettingDAO.getScanSettingById(comp.getIdCompany()).getIdCompany());
 		
 		// 2. Datensatz (ohne ScanSetting) einfügen...
 		comp = new Company("Movento", "Irgendeinestrasse", "10", null, "9015", "St. Gallen");
-		CompanyDAO.saveCompany(comp);
-		assertNull(ScanSettingDAO.getScanSettingById(comp.getIdCompany()));
-		
+		Company newCompany = CompanyDAO.saveCompany(comp);
+
 		//.. und diese Company ohne ScanSetting gleich wieder löschen
-		CompanyDAO.deleteCompany(CompanyDAO.getCompanyById(2));
-		assertNull(CompanyDAO.getCompanyById(2));
+		CompanyDAO.deleteCompany(CompanyDAO.getCompanyById(newCompany.getIdCompany()));
+		assertNull(CompanyDAO.getCompanyById(newCompany.getIdCompany()));
 		
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
