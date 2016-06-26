@@ -8,7 +8,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import ch.zbw.sysVentorySaas.App.DataAccessObject.CompanyDAO;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.LoginDao;
+import ch.zbw.sysVentorySaas.App.DataAccessObject.UserDAO;
 import ch.zbw.sysVentorySaas.App.model.User;
 import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;
 
@@ -20,6 +22,10 @@ public class Login implements Serializable {
 	
 	private String password;
 	private String user;
+	
+	private long countCompany;
+	private long countDevicesPerCompanyAvarge; // muss noch gemacht werden
+	private long countUsers;
 
 	public String getPassword() {
 		return this.password;
@@ -43,8 +49,10 @@ public class Login implements Serializable {
 		if (user != null) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("user", user);
-			AdminBean bean = new AdminBean();
-			return bean.checkUserRights();
+			this.setCountCompany(CompanyDAO.getAllCompanies().size());
+			this.setCountUsers(UserDAO.getAllUsers().size());
+			this.setCountDevicesPerCompanyAvarge(0);
+			return "Admin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
@@ -60,5 +68,29 @@ public class Login implements Serializable {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
 		return "Login";
+	}
+
+	public long getCountCompany() {
+		return countCompany;
+	}
+
+	public void setCountCompany(long countCompany) {
+		this.countCompany = countCompany;
+	}
+
+	public long getCountDevicesPerCompanyAvarge() {
+		return countDevicesPerCompanyAvarge;
+	}
+
+	public void setCountDevicesPerCompanyAvarge(long countDevicesPerCompanyAvarge) {
+		this.countDevicesPerCompanyAvarge = countDevicesPerCompanyAvarge;
+	}
+
+	public long getCountUsers() {
+		return countUsers;
+	}
+
+	public void setCountUsers(long countUsers) {
+		this.countUsers = countUsers;
 	}
 }
