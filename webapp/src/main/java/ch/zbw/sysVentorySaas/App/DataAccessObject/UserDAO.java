@@ -37,24 +37,19 @@ public class UserDAO {
 	}
 
 	// get User by UID
-	public static User getUserByUID(String UID) {
-		User newObject = new User();
+	public static User getUserByUID(String UID) throws Exception {
+		User user = new User();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("FROM User where uID = :uID");
 		query.setParameter("uID", UID);
 		List<User> users = query.list();	
-		if(users.size() > 0)
-		{
-			for(User oneUser : users)
-			{
-				Hibernate.initialize(oneUser.getCompany());
-				Hibernate.initialize(oneUser.getCompany().getIdCompany());
-				
-			}
-		}
 		transaction.commit();
-		return (users.size()> 0) ? users.get(0) : newObject;
+		
+		if(users.size()== 0)
+			throw new Exception("User mit der UID (" + UID + ") nicht gefunden!");
+		user = users.get(0);
+		return user;
 	}
 	
     // get User by ID
