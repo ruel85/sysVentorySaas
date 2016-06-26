@@ -43,7 +43,8 @@ public class Login implements Serializable {
 		if (user != null) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("user", user);
-			return "Admin";
+			AdminBean bean = new AdminBean();
+			return bean.checkUserRights();
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
