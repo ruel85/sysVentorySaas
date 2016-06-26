@@ -12,14 +12,14 @@ public class TimerThread extends TimerTask {
 
 	public TimerThread(ScanSetting scanSetting) throws Exception {
 		this.scanSetting = ScanSettingDAO.getScanSettingById(scanSetting.getIdCompany());
-		this.intervall = scanSetting.getIntervallHours();
+		this.intervall = scanSetting.getIntervallMinutes();
 		intervallHasChanged = false;
 	}
 
 	@Override
 	public void run() {
 		try {
-			if (ScanSettingDAO.getScanSettingById(scanSetting.getIdCompany()).getIntervallHours() != intervall) {
+			if (ScanSettingDAO.getScanSettingById(scanSetting.getIdCompany()).getIntervallMinutes() != intervall) {
 				this.cancel();
 				this.intervallHasChanged = true;
 			} else {

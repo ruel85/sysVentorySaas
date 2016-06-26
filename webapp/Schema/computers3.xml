@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<computers stamp="2016-06-26 23:55:16">
+  <computer>
+    <System>
+      <computername value="WINSERVER2012" />
+      <systemtype value="x64-based PC" />
+      <Memory value="7515721728" />
+      <Betriebssystem value="Microsoft Windows Server 2012 R2 Standard Evaluation" />
+      <Buildnummer value="9600" />
+      <OSArchitektur value="64-bit" />
+    </System>
+    <Peripherie>
+      <Druckers>
+        <Drucker value="Fax (redirected 2)" />
+        <Drucker value="Microsoft XPS Document Writer (redirected 2)" />
+        <Drucker value="Brother DCP-8110DN Printer (redirected 2)" />
+        <Drucker value="Microsoft XPS Document Writer" />
+      </Druckers>
+      <Druckertreibers>
+        <Druckertreiber value="Microsoft XPS Document Writer v4,4,Windows x64" />
+        <Druckertreiber value="Brother Laser Type2 Class Driver,4,Windows x64" />
+        <Druckertreiber value="Remote Desktop Easy Print,3,Windows x64" />
+        <Druckertreiber value="Microsoft Shared Fax Driver,3,Windows x64" />
+        <Druckertreiber value="Microsoft enhanced Point and Print compatibility driver,3,Windows x64" />
+        <Druckertreiber value="Microsoft enhanced Point and Print compatibility driver,3,Windows NT x86" />
+      </Druckertreibers>
+    </Peripherie>
+    <Netzwerkkonfiguration>
+      <NetzwerkKarte>
+        <Beschreibung value="Intel(R) 82574L Gigabit Network Connection" />
+        <Gateway value="192.168.1.1" />
+        <DHCP value="" />
+        <IPAdresse value="192.168.1.10" />
+        <Subnetz value="255.255.255.0" />
+        <Macadresse value="00:0C:29:9F:B3:A5" />
+      </NetzwerkKarte>
+    </Netzwerkkonfiguration>
+    <Programme>
+      <Programm>
+        <Name value="VMware Tools" />
+        <Version value="10.0.6.3560309" />
+      </Programm>
+      <Programm>
+        <Name value="Java 8 Update 91" />
+        <Version value="8.0.910.15" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161" />
+        <Version value="9.0.30729.6161" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148" />
+        <Version value="9.0.30729.4148" />
+      </Programm>
+      <Programm>
+        <Name value="Java Auto Updater" />
+        <Version value="2.8.91.15" />
+      </Programm>
+    </Programme>
+    <Prozessoren>
+      <Prozessor>
+        <Name value="Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz" />
+        <Beschreibung value="Intel64 Family 6 Model 94 Stepping 3" />
+        <NoC value="2" />
+        <CCS value="2904" />
+      </Prozessor>
+      <Prozessor>
+        <Name value="Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz" />
+        <Beschreibung value="Intel64 Family 6 Model 94 Stepping 3" />
+        <NoC value="2" />
+        <CCS value="2904" />
+      </Prozessor>
+    </Prozessoren>
+    <SIDS>
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-500" />
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-501" />
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-502" />
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-1107" />
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-1110" />
+    </SIDS>
+  </computer>
+  <computer>
+    <System>
+      <computername value="SYSWIN7-01" />
+      <systemtype value="x64-based PC" />
+      <Memory value="2147016704" />
+      <Betriebssystem value="Microsoft Windows 7 Professional " />
+      <Buildnummer value="7601" />
+      <OSArchitektur value="64-Bit" />
+    </System>
+    <Peripherie>
+      <Druckers>
+        <Drucker value="Microsoft XPS Document Writer" />
+        <Drucker value="Fax" />
+      </Druckers>
+      <Druckertreibers>
+        <Druckertreiber value="Remote Desktop Easy Print,3,Windows x64" />
+        <Druckertreiber value="Microsoft XPS Document Writer,3,Windows x64" />
+        <Druckertreiber value="Microsoft Shared Fax Driver,3,Windows x64" />
+      </Druckertreibers>
+    </Peripherie>
+    <Netzwerkkonfiguration>
+      <NetzwerkKarte>
+        <Beschreibung value="Intel(R) PRO/1000 MT-Netzwerkverbindung" />
+        <Gateway value="192.168.1.1" />
+        <DHCP value="" />
+        <IPAdresse value="192.168.1.15" />
+        <Subnetz value="255.255.255.0" />
+        <Macadresse value="00:0C:29:AC:66:A0" />
+      </NetzwerkKarte>
+    </Netzwerkkonfiguration>
+    <Programme>
+      <Programm>
+        <Name value="Microsoft .NET Framework 4.6.1" />
+        <Version value="4.6.01055" />
+      </Programm>
+      <Programm>
+        <Name value="VMware Tools" />
+        <Version value="10.0.6.3560309" />
+      </Programm>
+      <Programm>
+        <Name value="Apple Application Support (64-Bit)" />
+        <Version value="4.3.1" />
+      </Programm>
+      <Programm>
+        <Name value="Apple Application Support (32-Bit)" />
+        <Version value="4.3.1" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161" />
+        <Version value="9.0.30729.6161" />
+      </Programm>
+      <Programm>
+        <Name value="Apple Mobile Device Support" />
+        <Version value="9.3.0.15" />
+      </Programm>
+      <Programm>
+        <Name value="Bonjour" />
+        <Version value="3.1.0.1" />
+      </Programm>
+      <Programm>
+        <Name value="Google Update Helper" />
+        <Version value="1.3.30.3" />
+      </Programm>
+      <Programm>
+        <Name value="Apple Software Update" />
+        <Version value="2.2.0.150" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148" />
+        <Version value="9.0.30729.4148" />
+      </Programm>
+    </Programme>
+    <Prozessoren>
+      <Prozessor>
+        <Name value="Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz" />
+        <Beschreibung value="Intel64 Family 6 Model 94 Stepping 3" />
+        <NoC value="1" />
+        <CCS value="2904" />
+      </Prozessor>
+    </Prozessoren>
+    <SIDS>
+      <SID value="S-1-5-21-2497901937-3013023436-1391800768-1000" />
+      <SID value="S-1-5-21-2497901937-3013023436-1391800768-500" />
+      <SID value="S-1-5-21-2497901937-3013023436-1391800768-501" />
+    </SIDS>
+  </computer>
+  <computer>
+    <System>
+      <computername value="SYSWIN7-02" />
+      <systemtype value="x64-based PC" />
+      <Memory value="2147016704" />
+      <Betriebssystem value="Microsoft Windows 7 Professional " />
+      <Buildnummer value="7601" />
+      <OSArchitektur value="64-Bit" />
+    </System>
+    <Peripherie>
+      <Druckers>
+        <Drucker value="Microsoft XPS Document Writer" />
+        <Drucker value="Fax" />
+      </Druckers>
+      <Druckertreibers>
+        <Druckertreiber value="Remote Desktop Easy Print,3,Windows x64" />
+        <Druckertreiber value="Microsoft XPS Document Writer,3,Windows x64" />
+        <Druckertreiber value="Microsoft Shared Fax Driver,3,Windows x64" />
+      </Druckertreibers>
+    </Peripherie>
+    <Netzwerkkonfiguration>
+      <NetzwerkKarte>
+        <Beschreibung value="Intel(R) PRO/1000 MT-Netzwerkverbindung" />
+        <Gateway value="192.168.1.1" />
+        <DHCP value="" />
+        <IPAdresse value="192.168.1.18" />
+        <Subnetz value="255.255.255.0" />
+        <Macadresse value="00:0C:29:87:EE:F9" />
+      </NetzwerkKarte>
+    </Netzwerkkonfiguration>
+    <Programme>
+      <Programm>
+        <Name value="Microsoft .NET Framework 4.6.1" />
+        <Version value="4.6.01055" />
+      </Programm>
+      <Programm>
+        <Name value="VMware Tools" />
+        <Version value="10.0.6.3560309" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161" />
+        <Version value="9.0.30729.6161" />
+      </Programm>
+      <Programm>
+        <Name value="Skype™ 7.24" />
+        <Version value="7.24.104" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148" />
+        <Version value="9.0.30729.4148" />
+      </Programm>
+    </Programme>
+    <Prozessoren>
+      <Prozessor>
+        <Name value="Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz" />
+        <Beschreibung value="Intel64 Family 6 Model 94 Stepping 3" />
+        <NoC value="1" />
+        <CCS value="2904" />
+      </Prozessor>
+    </Prozessoren>
+    <SIDS>
+      <SID value="S-1-5-21-3203245017-2898135692-3365025711-1000" />
+      <SID value="S-1-5-21-3203245017-2898135692-3365025711-500" />
+      <SID value="S-1-5-21-3203245017-2898135692-3365025711-501" />
+    </SIDS>
+  </computer>
+  <computer>
+    <System>
+      <computername value="SYSWIN10-02" />
+      <systemtype value="x64-based PC" />
+      <Memory value="4294496256" />
+      <Betriebssystem value="Microsoft Windows 10 Pro" />
+      <Buildnummer value="10586" />
+      <OSArchitektur value="64-Bit" />
+    </System>
+    <Peripherie>
+      <Druckers>
+        <Drucker value="Microsoft XPS Document Writer" />
+        <Drucker value="Microsoft Print to PDF" />
+        <Drucker value="HP4FBE18 (HP Officejet 6700)" />
+        <Drucker value="Fax" />
+      </Druckers>
+      <Druckertreibers>
+        <Druckertreiber value="Microsoft XPS Document Writer v4,4,Windows x64" />
+        <Druckertreiber value="Microsoft Print To PDF,4,Windows x64" />
+        <Druckertreiber value="HP Officejet 6700 Class Driver,4,Windows x64" />
+        <Druckertreiber value="Remote Desktop Easy Print,3,Windows x64" />
+        <Druckertreiber value="Microsoft Shared Fax Driver,3,Windows x64" />
+        <Druckertreiber value="Microsoft enhanced Point and Print compatibility driver,3,Windows x64" />
+        <Druckertreiber value="Microsoft enhanced Point and Print compatibility driver,3,Windows NT x86" />
+      </Druckertreibers>
+    </Peripherie>
+    <Netzwerkkonfiguration>
+      <NetzwerkKarte>
+        <Beschreibung value="Intel(R) 82574L Gigabit Network Connection" />
+        <Gateway value="192.168.1.1" />
+        <DHCP value="" />
+        <IPAdresse value="192.168.1.12" />
+        <Subnetz value="255.255.255.0" />
+        <Macadresse value="00:0C:29:3B:AB:48" />
+      </NetzwerkKarte>
+    </Netzwerkkonfiguration>
+    <Programme>
+      <Programm>
+        <Name value="Bonjour" />
+        <Version value="3.0.0.10" />
+      </Programm>
+      <Programm>
+        <Name value="VMware Tools" />
+        <Version value="10.0.6.3560309" />
+      </Programm>
+      <Programm>
+        <Name value="Apple Software Update" />
+        <Version value="2.1.3.127" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161" />
+        <Version value="9.0.30729.6161" />
+      </Programm>
+      <Programm>
+        <Name value="Safari" />
+        <Version value="5.34.57.2" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148" />
+        <Version value="9.0.30729.4148" />
+      </Programm>
+    </Programme>
+    <Prozessoren>
+      <Prozessor>
+        <Name value="Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz" />
+        <Beschreibung value="Intel64 Family 6 Model 94 Stepping 3" />
+        <NoC value="1" />
+        <CCS value="2904" />
+      </Prozessor>
+    </Prozessoren>
+    <SIDS>
+      <SID value="S-1-5-21-3304092497-536641740-2306582177-1001" />
+      <SID value="S-1-5-21-3304092497-536641740-2306582177-500" />
+      <SID value="S-1-5-21-3304092497-536641740-2306582177-503" />
+      <SID value="S-1-5-21-3304092497-536641740-2306582177-501" />
+    </SIDS>
+  </computer>
+  <computer>
+    <System>
+      <computername value="SYSWIN10-01" />
+      <systemtype value="x64-based PC" />
+      <Memory value="4294496256" />
+      <Betriebssystem value="Microsoft Windows 10 Pro" />
+      <Buildnummer value="10586" />
+      <OSArchitektur value="64-Bit" />
+    </System>
+    <Peripherie>
+      <Druckers>
+        <Drucker value="Microsoft XPS Document Writer" />
+        <Drucker value="Microsoft Print to PDF" />
+        <Drucker value="Fax" />
+      </Druckers>
+      <Druckertreibers>
+        <Druckertreiber value="Microsoft XPS Document Writer v4,4,Windows x64" />
+        <Druckertreiber value="Microsoft Print To PDF,4,Windows x64" />
+        <Druckertreiber value="Remote Desktop Easy Print,3,Windows x64" />
+        <Druckertreiber value="Microsoft Shared Fax Driver,3,Windows x64" />
+        <Druckertreiber value="Microsoft enhanced Point and Print compatibility driver,3,Windows x64" />
+        <Druckertreiber value="Microsoft enhanced Point and Print compatibility driver,3,Windows NT x86" />
+      </Druckertreibers>
+    </Peripherie>
+    <Netzwerkkonfiguration>
+      <NetzwerkKarte>
+        <Beschreibung value="Intel(R) 82574L Gigabit Network Connection" />
+        <Gateway value="192.168.1.1" />
+        <DHCP value="" />
+        <IPAdresse value="192.168.1.11" />
+        <Subnetz value="255.255.255.0" />
+        <Macadresse value="00:0C:29:DA:38:75" />
+      </NetzwerkKarte>
+    </Netzwerkkonfiguration>
+    <Programme>
+      <Programm>
+        <Name value="VMware Tools" />
+        <Version value="10.0.6.3560309" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161" />
+        <Version value="9.0.30729.6161" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148" />
+        <Version value="9.0.30729.4148" />
+      </Programm>
+    </Programme>
+    <Prozessoren>
+      <Prozessor>
+        <Name value="Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz" />
+        <Beschreibung value="Intel64 Family 6 Model 94 Stepping 3" />
+        <NoC value="1" />
+        <CCS value="2904" />
+      </Prozessor>
+    </Prozessoren>
+    <SIDS>
+      <SID value="S-1-5-21-3175270837-2729088929-811238728-1001" />
+      <SID value="S-1-5-21-3175270837-2729088929-811238728-500" />
+      <SID value="S-1-5-21-3175270837-2729088929-811238728-503" />
+      <SID value="S-1-5-21-3175270837-2729088929-811238728-501" />
+    </SIDS>
+  </computer>
+</computers>

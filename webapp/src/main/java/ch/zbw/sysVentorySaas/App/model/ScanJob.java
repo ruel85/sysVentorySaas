@@ -16,20 +16,20 @@ public class ScanJob {
 	private String networkName_Copie;
 	private String ipStart_Copie;
 	private String ipEnd_Copie;
-	private int intervallHours_Copie;
+	private int intervallMinutes_copie;
 	
-	public ScanJob(String startTime, String endTime, JobStatus jobStatus, ScanSetting scanSetting)
+	public ScanJob(String startTime, String endTime, JobStatus jobStatus
+			,String networkName_Copie, String ipStart_Copie ,String ipEnd_Copie, int intervallMinutes_copie, ScanSetting scanSetting)
 	{	
 		this.startTime=startTime;
 		this.endTime=endTime;
 		this.jobStatus=jobStatus;
 		this.scanSetting=scanSetting;
 		
-		this.idCompany_Copie = scanSetting.getIdCompany();
-		this.networkName_Copie = scanSetting.getNetworkName();
-		this.ipStart_Copie = scanSetting.getIpStart();
-		this.ipEnd_Copie = scanSetting.getIpEnd();
-		this.intervallHours_Copie = scanSetting.getIntervallHours();		
+		this.networkName_Copie = networkName_Copie;
+		this.ipStart_Copie = ipStart_Copie;
+		this.ipEnd_Copie = ipEnd_Copie;
+		this.intervallMinutes_copie = intervallMinutes_copie;		
 	}
 	
 	public ScanJob()
@@ -42,14 +42,6 @@ public class ScanJob {
 
 	public void setScanSetting(ScanSetting scanSetting) {
 		this.scanSetting = scanSetting;
-	}
-
-	public int getIdCompany_Copie() {
-		return idCompany_Copie;
-	}
-
-	public void setIdCompany_Copie(int idCompany_Copie) {
-		this.idCompany_Copie = idCompany_Copie;
 	}
 
 	public String getNetworkName_Copie() {
@@ -74,14 +66,6 @@ public class ScanJob {
 
 	public void setIpEnd_Copie(String ipEnd_Copie) {
 		this.ipEnd_Copie = ipEnd_Copie;
-	}
-
-	public int getIntervallHours_Copie() {
-		return intervallHours_Copie;
-	}
-
-	public void setIntervallHours_Copie(int intervallHours_Copie) {
-		this.intervallHours_Copie = intervallHours_Copie;
 	}
 
 	public int getIdScanJob() {
@@ -114,5 +98,13 @@ public class ScanJob {
 
 	public void setJobStatus(JobStatus jobStatus) {
 		this.jobStatus = jobStatus;
+	}
+
+	public int getIntervallMinutes_copie() {
+		return intervallMinutes_copie;
+	}
+
+	public void setIntervallMinutes_copie(int intervallMinutes_copie) {
+		this.intervallMinutes_copie = intervallMinutes_copie;
 	}
 }

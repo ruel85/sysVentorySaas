@@ -298,7 +298,11 @@ public class HibernateTest {
 	
 	@Test
 	public void TestScanJob(){
-		ScanJob scanJ = new ScanJob("07:00", "07:30", JobStatus.Erstellt, ScanSettingDAO.getAllScanSettings().get(0));
+		
+		ScanSetting sc = ScanSettingDAO.getAllScanSettings().get(0);
+		
+		ScanJob scanJ = new ScanJob("07:00", "07:30", JobStatus.Erstellt
+				, sc.getNetworkName(), sc.getIpStart(), sc.getIpEnd(), sc.getIntervallMinutes(), sc);
 		ScanJob newScanJob = ScanJobDAO.saveScanJob(scanJ);
 		
 		ScanJob scanJobSelected = ScanJobDAO.getScanJobById(newScanJob.getIdScanJob());

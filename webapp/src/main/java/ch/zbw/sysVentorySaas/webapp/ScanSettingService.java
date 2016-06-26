@@ -68,14 +68,15 @@ public class ScanSettingService {
 						// Es eine LayHibernateException gibt...
 						ScanSetting neuScanSetting = new ScanSetting();
 						neuScanSetting.setIdCompany(sReturn.getIdCompany());
-						neuScanSetting.setIntervallHours(sReturn.getIntervallHours());
+						neuScanSetting.setIntervallMinutes(sReturn.getIntervallMinutes());
 						neuScanSetting.setIpEnd(sReturn.getIpEnd());
 						neuScanSetting.setIpStart(sReturn.getIpStart());
 						neuScanSetting.setNetworkName(sReturn.getNetworkName());
 						neuScanSetting.setTimeToScan(sReturn.getTimeToScan());
 						return neuScanSetting;
-					}					
+					}
 				}
+				throw new Exception();
 				
 			} catch (Exception e) {
 				

@@ -25,7 +25,7 @@
 		<property name="networkName" column="networkName" type="string"/>
 		<property name="ipStart" column="ipStart" type="string"/>
 		<property name="ipEnd" column="ipEnd" type="string"/>
-		<property name="intervallHours" column="intervallHours" type="int"/>
-		<property name="timeToScan" column="timeToScan" type="boolean"/>			
+		<property name="intervallMinutes" column="intervallMinutes" type="int"/>
+		<property name="timeToScan" column="timeToScan" type="boolean"/>		
 	</class>
 </hibernate-mapping>

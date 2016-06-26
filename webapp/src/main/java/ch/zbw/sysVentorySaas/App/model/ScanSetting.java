@@ -13,7 +13,7 @@ public class ScanSetting{
 	private String networkName;
 	private String ipStart;
 	private String ipEnd;
-	private int intervallHours;
+	private int intervallMinutes;
 	private boolean timeToScan;
 	
 	@XmlTransient /*Ignoriert das markierte Element für das XML-Bindung */
@@ -22,12 +22,12 @@ public class ScanSetting{
 	@XmlTransient /*Ignoriert das markierte Element für das XML-Bindung */
 	private Set<ScanJob> scanjobs;
 	
-	public ScanSetting(String networkName, String ipStart, String ipEnd, int intervallHours, boolean timeToScan)
+	public ScanSetting(String networkName, String ipStart, String ipEnd, int intervallMinutes, boolean timeToScan)
 	{
 		this.networkName=networkName;
 		this.ipStart=ipStart;
 		this.ipEnd=ipEnd;
-		this.intervallHours=intervallHours;
+		this.intervallMinutes=intervallMinutes;
 		this.timeToScan=timeToScan;
 	}
 	
@@ -93,11 +93,11 @@ public class ScanSetting{
 		this.ipEnd = ipEnd;
 	}
 	
-	public int getIntervallHours() {
-		return intervallHours;
+	public int getIntervallMinutes() {
+		return intervallMinutes;
 	}
 
-	public void setIntervallHours(int intervallHours) {
-		this.intervallHours = intervallHours;
+	public void setIntervallMinutes(int intervallMinutes) {
+		this.intervallMinutes = intervallMinutes;
 	}
 }

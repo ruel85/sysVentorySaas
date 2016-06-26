@@ -30,7 +30,7 @@ public class TimerThreadTest {
 		
 		sleep(4000);
 
-		ss1.setIntervallHours(5);
+		ss1.setIntervallMinutes(5);
 
 		sleep(1000);
 

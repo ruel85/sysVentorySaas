@@ -16,14 +16,16 @@
 		
 		<property name="startTime" column="startTime" type="string"/>
 		<property name="endTime" column="endTime" type="string"/>
-<!-- 		<property name="status" column="status" type="Enum"/> -->
-
 		<property name="jobStatus" column="jobstatus" type="ch.zbw.sysVentorySaas.App.helpers.JobStatus">
 		<type name="org.hibernate.type">
         	<param name="enumClass">ch.zbw.sysVentorySaas.App.helpers.JobStatus</param>
         	<param name="useNamed">true</param>
         </type>
 		</property>
+		<property name="networkName_Copie" column="networkname_Copie" type="string"/>
+		<property name="ipStart_Copie" column="ipstart_copie" type="string"/>
+		<property name="ipEnd_Copie" column="ipend_copie" type="string"/>
+		<property name="intervallMinutes_copie" column="intervallminutes_copie" type="int"/>
 
 	</class>
 </hibernate-mapping>

@@ -74,8 +74,8 @@ public class XMLToDAOMapper {
 		if(comps == null || comps.size() == 0)
 			throw new Throwable("Keine Computers vorhanden!");
 
-		newScanJob = new ScanJob(ZonedDateTime.now().toString(),"", JobStatus.InVerarbeitung, scanSetting);
-		//newScanJob.setStartTime(comp.getStamp());
+		newScanJob = new ScanJob(ZonedDateTime.now().toString(),"", JobStatus.InVerarbeitung
+				, scanSetting.getNetworkName(), scanSetting.getIpStart(), scanSetting.getIpEnd(), scanSetting.getIntervallMinutes(),scanSetting);
 		newScanJob = ScanJobDAO.saveScanJob(newScanJob);
 		
 		try {

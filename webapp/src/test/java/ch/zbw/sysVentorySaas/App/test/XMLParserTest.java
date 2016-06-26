@@ -49,9 +49,27 @@ public static XMLParserDOM xmlParserDOM;
 	}
 	
 	@Test
-	public void TestReadDataWithJaxBUnmarshaller() throws Throwable	{
+	public void TestReadDataWithJaxBUnmarshaller1() throws Throwable	{
+		
+		File fileXML = new File("Schema/computers.xml");
+		FileInputStream fi = new FileInputStream(fileXML);
+		ScanSetting scanSetting = ScanSettingDAO.getAllScanSettings().get(0);
+		XMLToDAOMapper.importData(fi, scanSetting);
+	}
+	
+	@Test
+	public void TestReadDataWithJaxBUnmarshaller2() throws Throwable	{
 		
 		File fileXML = new File("Schema/computers2.xml");
+		FileInputStream fi = new FileInputStream(fileXML);
+		ScanSetting scanSetting = ScanSettingDAO.getAllScanSettings().get(0);
+		XMLToDAOMapper.importData(fi, scanSetting);
+	}
+	
+	@Test
+	public void TestReadDataWithJaxBUnmarshaller3() throws Throwable	{
+		
+		File fileXML = new File("Schema/computers3.xml");
 		FileInputStream fi = new FileInputStream(fileXML);
 		ScanSetting scanSetting = ScanSettingDAO.getAllScanSettings().get(0);
 		XMLToDAOMapper.importData(fi, scanSetting);
