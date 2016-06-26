@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SysVentoryConfig>
 	<UserId>2d1a0484f40daceeef42967c4ac00911</UserId>
-	<ServerGET>http://sysventorysaas.azurewebsites.net/webapi/scansettings</ServerGET>
-	<ServerPOST>http://sysventorysaas.azurewebsites.net/webapi/scanjobs</ServerPOST>
+	<ServerGET>http://sysventorysaas.trafficmanager.net/webapi/scansettings</ServerGET>
+	<ServerPOST>http://sysventorysaas02.azurewebsites.net/webapi/scanjobs</ServerPOST>
 </SysVentoryConfig>

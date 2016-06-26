@@ -48,17 +48,18 @@ class ScanTimerTask extends TimerTask {
 					if (status.equals("200")) {
 						main.getLogger().info("ScanJob successfully send to server [OK]");
 						main.getLogger().info(
-								"|-----------------------------------> END SCAN [OK] <-----------------------------------|\n\n");
+								"|-----------------------------------> END SCAN [OK] <-----------waiting 30s-------------|\n");
+						Thread.sleep(30000);
 					} else {
 						main.getLogger().warning("ScanJob could not be send to server [ERROR]\n");
 						main.getLogger().info(
-								"|-----------------------------------> END SCAN [ERROR] <-----------------------------------|\n\n");
+								"|-----------------------------------> END SCAN [ERROR] <-----------------------------------|\n");
 					}
 				} else {
 					main.getLogger().info(
 							"ScanJob could not be send to server, because Powershell not executed successfully [ERROR]\n");
 					main.getLogger().info(
-							"|-----------------------------------> END SCAN [ERROR] <-----------------------------------|\n\n");
+							"|-----------------------------------> END SCAN [ERROR] <-----------------------------------|\n");
 				}
 			} else {
 				main.getLogger().info("no job is waiting [OK]\n");
