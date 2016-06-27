@@ -81,7 +81,7 @@ public class XMLToDAOMapper {
 			{
 				newDevice = new Device();
 				newDevice.setMacAddress(oneComp.getNetzwerkkonfiguration().getNetzwerkKarte().get(0).getMacadresse().getValue());
-				newDevice.setName(oneComp.getSIDS().getSID().get(0).getValue());
+				newDevice.setName(oneComp.getSystem().getComputername().getValue());
 				newDevice.setIpAddress(oneComp
 						.getNetzwerkkonfiguration().getNetzwerkKarte().get(0).getIPAdresse().getValue());
 				newDevice.setManufacturer("Keine Angaben vorhanden");
