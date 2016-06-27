@@ -9,10 +9,15 @@
 <!--         <property name="connection.url">jdbc:mysql://ruelholderegger.ch:3306/sysVentorySaaS_Backup?useSSL=false&amp;serverTimezone=Europe/Paris</property> -->
 <!--         <property name="connection.username">SysVentoryAdmin</property> -->
 <!--         <property name="connection.password">vdjjmf#n$ri7cr!?+RX7ZVbY5</property> -->
+
+ 		<!--  Azure MySQL Instanz -->
+        <property name="connection.url">jdbc:mysql://eu-cdbr-azure-north-e.cloudapp.net:3306/mysysventorysql?useSSL=false&amp;serverTimezone=Europe/Paris</property>
+        <property name="connection.username">b30492e7a6de8d</property>        
+        <property name="connection.password">6a500e51</property>
         
-        <property name="connection.url">jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas04?useSSL=false&amp;serverTimezone=Europe/Paris</property>
-        <property name="connection.username">SysVentoryAdmin</property>        
-        <property name="connection.password">vdjjmf#n$ri7cr!?+RX7ZVbY5</property>
+<!--         <property name="connection.url">jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas04?useSSL=false&amp;serverTimezone=Europe/Paris</property> -->
+<!--         <property name="connection.username">SysVentoryAdmin</property>         -->
+<!--         <property name="connection.password">vdjjmf#n$ri7cr!?+RX7ZVbY5</property> -->
 
 <!--         <property name="hibernate.dialect">org.hibernate.dialect.SQLServer2008Dialect</property> -->
 <!--         <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> -->

@@ -17,7 +17,7 @@
 		
 		<set name="scanjobs" table="scanjob" inverse="true" fetch="select">
 			<key>
-				<column name="idScanJob" not-null="true"/>
+				<column name="idCompany" not-null="true"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.ScanJob"/>
 		</set>

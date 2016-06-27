@@ -29,7 +29,7 @@
 		
 		<set name="devices" table="device" inverse="true" fetch="select">
 			<key>
-				<column name="idDevice" not-null="true"/>
+				<column name="idScanJob" not-null="true"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Device"/>
 		</set>

@@ -16,10 +16,10 @@ public class ScanSetting{
 	private int intervallMinutes;
 	private boolean timeToScan;
 	
-	@XmlTransient /*Ignoriert das markierte Element für das XML-Bindung */
+	//@XmlTransient /*Ignoriert das markierte Element für das XML-Bindung */
 	private Company company;
 	
-	@XmlTransient /*Ignoriert das markierte Element für das XML-Bindung */
+	//@XmlTransient /*Ignoriert das markierte Element für das XML-Bindung */
 	private Set<ScanJob> scanjobs;
 	
 	public ScanSetting(String networkName, String ipStart, String ipEnd, int intervallMinutes, boolean timeToScan)

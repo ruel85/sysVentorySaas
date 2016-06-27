@@ -16,7 +16,7 @@
 		
 		<set name="users" table="user" inverse="true" fetch="select">
 			<key>
-				<column name="idUser" not-null="true"/>
+				<column name="idCompany" not-null="true"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.User"/>
 		</set>

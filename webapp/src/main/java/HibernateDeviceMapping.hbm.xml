@@ -23,49 +23,49 @@
 		
 		<set name="software" table="software" inverse="true" fetch="select">
 			<key>
-				<column name="idSoftware" not-null="false"/>
+				<column name="idDevice" not-null="false"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Software"/>
 		</set>
 		
 		<set name="operatingSystem" table="operatingsystem" inverse="true" fetch="select">
 			<key>
-				<column name="idOperatingSystem" not-null="false"/>
+				<column name="idDevice" not-null="false"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.OperatingSystem"/>
 		</set>
 
 		<set name="sid" table="sid" inverse="true" fetch="select">
 			<key>
-				<column name="idSID" not-null="false"/>
+				<column name="idDevice" not-null="false"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.SID"/>
 		</set>
 		
 		<set name="processors" table="processor" inverse="true" fetch="select">
 			<key>
-				<column name="idProcessor" not-null="false"/>
+				<column name="idDevice" not-null="false"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Processor"/>
 		</set>
 		
 		<set name="printers" table="printer" inverse="true" fetch="select">
 			<key>
-				<column name="idPrinter" not-null="false"/>
+				<column name="idDevice" not-null="false"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Printer"/>
 		</set>
 		
 		<set name="networkInterfaces" table="networkinterface" inverse="true" fetch="select">
 			<key>
-				<column name="idNetworkInterface" not-null="false"/>
+				<column name="idDevice" not-null="false"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.NetworkInterface"/>
 		</set>
 		
 		<set name="printerDrivers" table="printerdriver" inverse="true" fetch="select">
 			<key>
-				<column name="idPrinterDriver" not-null="false"/>
+				<column name="idDevice" not-null="false"/>
 			</key>
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.PrinterDriver"/>
 		</set>

@@ -65,7 +65,7 @@ public class HibernateTest {
 		
 		user ="SysVentoryAdmin";
 		password="vdjjmf#n$ri7cr!?+RX7ZVbY5";
-		url="jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas03";
+		url="jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas04";
 		mySQLParams = "?useSSL=false&serverTimezone=Europe/Paris";
 		
 		/*user ="sysventory";
@@ -96,7 +96,7 @@ public class HibernateTest {
 	@Test
 	public void TestSoftware_CRUD()
 	{
-		ScanJob scanjob = ScanJobDAO.getAllScanJobs(3).get(0);
+		ScanJob scanjob = ScanJobDAO.getAllScanJobs(21).get(0);
 		Device newDevice = new Device("Juhuu", "ZbW", "654658", "1654.65.5645", "6544", "65461s");
 		newDevice.setScanJob(scanjob);
 		DeviceDAO.saveDevice(newDevice);
@@ -120,7 +120,7 @@ public class HibernateTest {
 	public void TestOperatingSystem_CRUD()
 	{
 		OperatingSystem op = new OperatingSystem("Microsoft Windows 10", "64-bit");
-		op.setDevice(DeviceDAO.getDeviceById(3));
+		op.setDevice(DeviceDAO.getDeviceById(1));
 		OperatingSystem newOP = OperatingSystemDAO.saveOperatingSystem(op);
 		
 		assertEquals("Microsoft Windows 10", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getName());
@@ -182,7 +182,7 @@ public class HibernateTest {
 	
 	@Test
 	public void TestDevice_CRUD(){
-		ScanJob scanJob = ScanJobDAO.getAllScanJobs(3).get(0);
+		ScanJob scanJob = ScanJobDAO.getAllScanJobs(21).get(0);
 		
 		Device dev = new Device("Desktop PC", "DELL", "50-1A-C5-F4-C7-BB", "192.168.2.21", "65434", "x64-based PC");
 		dev.setScanJob(scanJob);
@@ -196,8 +196,8 @@ public class HibernateTest {
 		assertEquals("65434", devSelected.getMemory());
 		assertEquals("x64-based PC", devSelected.getSystemType());
 		
-		DeviceDAO.deleteDevice(DeviceDAO.getDeviceById(devSelected.getIdDevice()));
-		assertNull(DeviceDAO.getDeviceById(devSelected.getIdDevice()));
+		//DeviceDAO.deleteDevice(DeviceDAO.getDeviceById(devSelected.getIdDevice()));
+		//assertNull(DeviceDAO.getDeviceById(devSelected.getIdDevice()));
 	}
 	
 	@Test
@@ -350,7 +350,7 @@ public class HibernateTest {
 		SID sid = new SID("S-1-5-21-2056415622-1170722248-999543400-501");
 		
 		Device d = new Device("Surface 4", "Windows", "", "", "", "");
-		ScanJob sc = (ScanJobDAO.getAllScanJobs(3).get(0));		
+		ScanJob sc = (ScanJobDAO.getAllScanJobs(21).get(0));		
 		d.setScanJob(sc);
 		d = DeviceDAO.saveDevice(d);
 		sid.setDevice(d);
@@ -370,8 +370,8 @@ public class HibernateTest {
 		PrinterDriver printerDriverSelected = PrinterDriverDAO.getPrinterDriverById(printerDriver.getIdPrinterDriver());
 		assertEquals("PDF-XChange 4.0,3,Windows x64", printerDriverSelected.getName());
 		
-		PrinterDriverDAO.deletePrinterDriver(printerDriverSelected);
-		assertNull(PrinterDriverDAO.getPrinterDriverById(printerDriverSelected.getIdPrinterDriver()));
+		//PrinterDriverDAO.deletePrinterDriver(printerDriverSelected);
+		//assertNull(PrinterDriverDAO.getPrinterDriverById(printerDriverSelected.getIdPrinterDriver()));
 	}
 	
 	
