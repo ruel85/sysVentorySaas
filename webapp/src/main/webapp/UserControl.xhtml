@@ -26,8 +26,7 @@
 	<h:form>
 		<p>Benutzerverwaltung</p>
 		<b:dataTable value="#{userControl.users}" var="user" id="allUsers"
-			styleClass="table table-striped table-bordered" style="width:100%"
-			multi-column-search="true">
+			styleClass="table table-striped table-bordered" style="width:100%" seaching="false">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Benutzername" />
