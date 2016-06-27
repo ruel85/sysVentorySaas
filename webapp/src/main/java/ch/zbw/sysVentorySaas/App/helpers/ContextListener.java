@@ -31,7 +31,10 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         System.out.println("Shutting down!");
+        try {
         tm.cancel();
-        tm = null;
+        tm = null; } catch (Exception e) {
+        	e.printStackTrace();
+        }
     }
 }
