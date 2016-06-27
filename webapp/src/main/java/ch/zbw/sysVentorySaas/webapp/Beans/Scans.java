@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import ch.zbw.sysVentorySaas.App.DataAccessObject.ScanJobDAO;
 import ch.zbw.sysVentorySaas.App.model.ScanJob;
+import ch.zbw.sysVentorySaas.webapp.Util.SessionUtils;
 
 @ManagedBean
 @SessionScoped
@@ -22,14 +23,8 @@ public class Scans implements Serializable {
 
 	public List<ScanJob> getScans() {
 		ScanJobDAO scansDao = new ScanJobDAO();
-//		List<ScanJob> allJobs = scansDao.getAllScanJobs();
-//		int userCompany = SessionUtils.getUser().getCompany().getIdCompany();
-//		for (ScanJob job : allJobs) {
-//			//if (job.getIdCompany() == userCompany) {
-//				this.scans.add(job);
-//			//}
-//		}
-		this.scans = scansDao.getAllScanJobs();
+		int userCompany = SessionUtils.getUser().getCompany().getIdCompany();
+		this.scans = scansDao.getAllScanJobs(userCompany);
 
 		return this.scans;
 	}
