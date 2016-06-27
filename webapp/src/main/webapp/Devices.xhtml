@@ -9,21 +9,9 @@
 	<title>Devices</title>
 </h:head>
 <h:body>
-	<b:tabLinks>
-		<b:navCommandLink value="Home" action="Admin" href="Home"></b:navCommandLink>
-		<b:navCommandLink value="Benutzerverwaltung"
-			action="#{userControl.checkUserRights}" href="Benutzerverwaltung"></b:navCommandLink>
-		<b:navCommandLink value="Scan-Einstellungen"
-			action="#{scanSettingBean.checkScanSetting}" href="ScanSetting"></b:navCommandLink>
-		<b:navCommandLink value="Scans" action="#{scans.checkScans}"
-			href="Scans"></b:navCommandLink>
-		<b:navCommandLink value="Lastüberwachung"
-			action="#{loadMonitoring.checkLoadMonitoring}" href="Lastüberwachung"></b:navCommandLink>
-		<b:navCommandLink value="Services" action="#{services.checkServices}"
-			href="Services"></b:navCommandLink>
-		<b:navCommandLink value="Logout" action="#{login.logout}" href="Login"></b:navCommandLink>
-	</b:tabLinks>
 	<h:form>
+		<h:commandButton action="Scans" value="Zurück zu Scans" look="primary" icon="chevron-left" />
+		<p>Devices</p>
 		<b:dataTable value="#{devices.devices}" var="device" id="allDevices"
 			styleClass="table table-striped table-bordered" style="width:100%"
 			multi-column-search="true">

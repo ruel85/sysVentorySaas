@@ -1,8 +1,8 @@
 package ch.zbw.sysVentorySaas.App.DataAccessObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -38,13 +38,11 @@ public class DeviceDAO {
 	
 	public static List<Device> getDevicesByScanJob(int idScanJob)
 	{
-		List<Device> devices = new ArrayList<Device>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		List result = session.createQuery( "from Device" ).list();
-		for (Device device : (List<Device>) result ) {
-			devices.add(device);
-		}
+		Query query = session.createQuery("from Device where idScanJob = :idScanJob");
+		query.setParameter("idScanJob", idScanJob);
+		List<Device> devices = query.list();
 		session.getTransaction().commit();
 		return devices;		
 	}
