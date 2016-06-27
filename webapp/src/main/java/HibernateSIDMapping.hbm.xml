@@ -5,9 +5,15 @@
 <hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.SID" table="sid">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem SID</meta>
+		
 		<id name="idSID" type="int" column="idSID">
 			<generator class="identity"/>
 		</id>
+		
+		<many-to-one name="device" class="ch.zbw.sysVentorySaas.App.model.Device" fetch="select">
+		<column name="idDevice" not-null="true"/>
+		</many-to-one>
+		
 		<property name="SID" column="SID" type="string"/>
 	</class>
 </hibernate-mapping>

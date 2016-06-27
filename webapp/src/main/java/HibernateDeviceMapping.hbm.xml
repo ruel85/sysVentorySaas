@@ -28,6 +28,19 @@
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Software"/>
 		</set>
 		
+		<set name="operatingSystem" table="operatingsystem" inverse="true" fetch="select">
+			<key>
+				<column name="idOperatingSystem" not-null="false"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.OperatingSystem"/>
+		</set>
+
+		<set name="sid" table="sid" inverse="true" fetch="select">
+			<key>
+				<column name="idSID" not-null="false"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.SID"/>
+		</set>
 		
 	</class>
 </hibernate-mapping>

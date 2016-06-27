@@ -11,8 +11,11 @@ public class Device {
 	private String memory;
 	private String systemtype;
 	
-	private Set<Software> software;
 	private ScanJob scanJob;
+	
+	private Set<Software> software;
+	private Set<OperatingSystem> operatingSystem;
+	private Set<SID> sid;
 
 	public Device(String name, String manufacturer, String macAddress, String ipAddress, String memory, String systemtype) {
 		this.name=name;
@@ -25,6 +28,22 @@ public class Device {
 	
 	public Device()
 	{
+	}
+
+	public Set<SID> getSid() {
+		return sid;
+	}
+
+	public void setSid(Set<SID> sid) {
+		this.sid = sid;
+	}
+
+	public Set<OperatingSystem> getOperatingSystem() {
+		return operatingSystem;
+	}
+
+	public void setOperatingSystem(Set<OperatingSystem> operatingSystem) {
+		this.operatingSystem = operatingSystem;
 	}
 
 	public ScanJob getScanJob() {

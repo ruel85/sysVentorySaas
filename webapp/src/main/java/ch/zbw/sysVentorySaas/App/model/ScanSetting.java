@@ -39,9 +39,6 @@ public class ScanSetting{
 		this.scanjobs = scanjobs;
 	}
 
-
-
-
 	public Company getCompany() {
 		return company;
 	}

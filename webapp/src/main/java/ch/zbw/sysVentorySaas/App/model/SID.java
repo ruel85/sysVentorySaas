@@ -4,10 +4,19 @@ public class SID {
 	
 	private int idSID;
 	private String SID;
+	private Device device;
 	
 	public SID(){	
 	}
 	
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
+	}
+
 	public SID(String SID)
 	{
 		this.SID = SID; 

@@ -5,11 +5,17 @@
 <hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.OperatingSystem" table="operatingsystem">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Betriebssystem</meta>
+		
 		<id name="idOperatingSystem" type="int" column="idoperatingsystem">
 			<generator class="identity"/>
 		</id>
+		
+		<many-to-one name="device" class="ch.zbw.sysVentorySaas.App.model.Device" fetch="join">
+		<column name="idDevice" not-null="true"/>
+		</many-to-one>
+		
 		<property name="name" column="name" type="string"/>
-		<property name="manufacturer" column="manufacturer" type="string"/>
+<!-- 		<property name="manufacturer" column="manufacturer" type="string"/> -->
 		<property name="architecture" column="architecture" type="string"/>
 	</class>
 </hibernate-mapping>

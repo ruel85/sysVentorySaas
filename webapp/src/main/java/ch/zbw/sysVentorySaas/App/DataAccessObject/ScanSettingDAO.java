@@ -42,15 +42,16 @@ public class ScanSettingDAO {
 				+ ") nicht ermittelt werden. Setting bitte anlegen, wenn keine vorhanden sein sollte!");
 	}
 
-	public static void deleteScanSettings(ScanSetting scanSetting) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		session.delete(scanSetting);
-		transaction.commit();
-
-		// für den Scheduler
-		TimerManager.removeScanSetting(scanSetting);
-	}
+	//Eine Setting wird eigentlich nie gelöscht!
+//	public static void deleteScanSettings(ScanSetting scanSetting) {
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Transaction transaction = session.beginTransaction();
+//		session.delete(scanSetting);
+//		transaction.commit();
+//
+//		// für den Scheduler
+//		TimerManager.removeScanSetting(scanSetting);
+//	}
 
 	public static List<ScanSetting> getAllScanSettings() {
 		List<ScanSetting> scanSettings = new ArrayList<ScanSetting>();

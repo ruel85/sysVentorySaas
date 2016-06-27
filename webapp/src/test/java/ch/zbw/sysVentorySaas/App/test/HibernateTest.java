@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Priority;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
@@ -98,13 +101,13 @@ public class HibernateTest {
 		newDevice.setScanJob(scanjob);
 		DeviceDAO.saveDevice(newDevice);
 		
-		Software newSoftware = new Software("NEST/IS-E", "InnoSolv AG", "2016.6");
+		Software newSoftware = new Software("NEST/IS-E", "Release 2016.6");
 		newSoftware.setDevice(newDevice);
 		newSoftware = SoftwareDAO.saveSoftware(newSoftware);
 		
-		assertEquals("InnoSolv AG", newSoftware.getManufacturer());
+//		assertEquals("InnoSolv AG", newSoftware.getManufacturer());
 		assertEquals("NEST/IS-E", newSoftware.getName());
-		assertEquals("2016.6", newSoftware.getVersion());
+		assertEquals("Release 2016.6", newSoftware.getVersion());
 		
 		Software softwareSelected = SoftwareDAO.getSoftwarebyId(newSoftware.getIdSoftware());
 		assertEquals(newSoftware.getIdSoftware(), softwareSelected.getIdSoftware());
@@ -116,11 +119,12 @@ public class HibernateTest {
 	@Test
 	public void TestOperatingSystem_CRUD()
 	{
-		OperatingSystem op = new OperatingSystem("Windows 10", "Microsoft Windows", "64-bit");
+		OperatingSystem op = new OperatingSystem("Microsoft Windows 10", "64-bit");
+		op.setDevice(DeviceDAO.getDeviceById(3));
 		OperatingSystem newOP = OperatingSystemDAO.saveOperatingSystem(op);
 		
-		assertEquals("Windows 10", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getName());
-		assertEquals("Microsoft Windows", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getManufacturer());
+		assertEquals("Microsoft Windows 10", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getName());
+//		assertEquals("Microsoft Windows", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getManufacturer());
 		assertEquals("64-bit", OperatingSystemDAO.getOperatingSystemById(newOP.getIdOperatingSystem()).getArchitecture());
 		
 		OperatingSystemDAO.deleteOperatingSystem(newOP);
@@ -260,11 +264,6 @@ public class HibernateTest {
 		scanSetting1.setCompany(comp1);
 		session.save(comp1);
 		
-		List<Company> companies = session.createQuery("from Company").list();
-		for (Company company : companies) {
-			System.out.println(company.getName() + " , "
-					+ company.getStreet());
-		}
 		session.getTransaction().commit();
 		session.close();		
 		
@@ -289,16 +288,12 @@ public class HibernateTest {
 	}
 	
 	@Test
-	public void TestScanStatus (){
-		ScanStatus scanStatus = new ScanStatus("Vorbereitet", "Der Scan ist vorbereitet und kann verarbeitet werden.");
-		ScanStatusDAO.saveScanStatus(scanStatus);
+	public void TestScanJobStatus (){
 		
-		ScanStatus scanStatusSelected = ScanStatusDAO.getScanStatusById(1);
-		assertEquals("Vorbereitet", scanStatusSelected.getName());
-		assertEquals("Der Scan ist vorbereitet und kann verarbeitet werden.", scanStatusSelected.getDescription());
-		
-		ScanStatusDAO.deleteScanStatus(ScanStatusDAO.getScanStatusById(1));
-		assertNull(ScanStatusDAO.getScanStatusById(1));
+		assertTrue(JobStatus.InVerarbeitung.getClass() != null);
+		assertTrue(JobStatus.Erledigt.getClass() != null);
+		assertTrue(JobStatus.Fehler.getClass() != null);
+		assertTrue(JobStatus.Erledigt.getClass() != null);
 	}
 	
 	@Test
@@ -347,9 +342,17 @@ public class HibernateTest {
 		session.getTransaction().commit();	
 	}
 	
+
 	@Test
-	public void Test_SID(){
-		SID sid = SIDDAO.saveSID(new SID("S-1-5-21-2056415622-1170722248-999543400-501"));
+	public void TestSID(){
+		SID sid = new SID("S-1-5-21-2056415622-1170722248-999543400-501");
+		
+		Device d = new Device("Surface 4", "Windows", "", "", "", "");
+		ScanJob sc = (ScanJobDAO.getAllScanJobs().get(0));		
+		d.setScanJob(sc);
+		d = DeviceDAO.saveDevice(d);
+		sid.setDevice(d);
+		SIDDAO.saveSID(sid);
 		
 		SID sidSelected = SIDDAO.getSIDById(sid.getIdSID());
 		assertEquals("S-1-5-21-2056415622-1170722248-999543400-501", sidSelected.getSID());

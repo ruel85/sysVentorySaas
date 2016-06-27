@@ -57,19 +57,17 @@ public class XMLToDAOMapper {
 		
 		final JAXBContext jaxbContext= JAXBContext.newInstance(ObjectFactory.class);
 		Unmarshaller jaxbUnmarshaller=jaxbContext.createUnmarshaller();
-				
-		InputStream is = i;
 		
 		if(scanSetting != null && scanSetting.getIdCompany() != 0)
 		{
 			scanSetting.setTimeToScan(false);
 			ScanSettingDAO.saveScanSetting(scanSetting);
-		}	
+		}
 		
+		if(i == null)
+			throw new Exception("Kein XML-Daten vorhanden!");
 		
-		Computers comp = (Computers) jaxbUnmarshaller.unmarshal(is);
-		System.out.println("Anzahl Computer:" + comp.getComputer().size());		
-		
+		Computers comp = (Computers) jaxbUnmarshaller.unmarshal(i);	
 		List<Computer> comps = comp.getComputer();		
 		if(comps == null || comps.size() == 0)
 			throw new Throwable("Keine Computers vorhanden!");
@@ -86,16 +84,17 @@ public class XMLToDAOMapper {
 				newDevice.setName(oneComp.getSIDS().getSID().get(0).getValue());
 				newDevice.setIpAddress(oneComp
 						.getNetzwerkkonfiguration().getNetzwerkKarte().get(0).getIPAdresse().getValue());
-				newDevice.setManufacturer("Hersteller unbekannt");
+				newDevice.setManufacturer("Keine Angaben vorhanden");
 				newDevice.setMemory(oneComp.getSystem().getMemory().getValue().toString());
 				newDevice.setSystemType(oneComp.getSystem().getSystemtype().getValue());
 				newDevice.setScanJob(newScanJob);
-				DeviceDAO.saveDevice(newDevice);
+				newDevice = DeviceDAO.saveDevice(newDevice);
 				
 				newOperatingSystem = new OperatingSystem();
 				newOperatingSystem.setName(oneComp.getSystem().getBetriebssystem().getValue());
-				newOperatingSystem.setManufacturer("Hersteller unbekannt");
+				//newOperatingSystem.setManufacturer("Hersteller unbekannt");
 				newOperatingSystem.setArchitecture(oneComp.getSystem().getOSArchitektur().getValue());
+				newOperatingSystem.setDevice(newDevice);
 				OperatingSystemDAO.saveOperatingSystem(newOperatingSystem);
 				
 				newProcessor = new Processor();
@@ -138,7 +137,7 @@ public class XMLToDAOMapper {
 				for(Programm oneProgramm :programmList)
 				{
 					software = new Software();
-					software.setManufacturer("Hersteller unbekannt");
+					//software.setManufacturer("Hersteller unbekannt");
 					software.setName(oneProgramm.getName().getValue());
 					software.setVersion(oneProgramm.getVersion().getValue());
 					software.setDevice(newDevice);
@@ -149,6 +148,7 @@ public class XMLToDAOMapper {
 				for(SID oneSID : sidList)
 				{
 					sid = new ch.zbw.sysVentorySaas.App.model.SID();
+					sid.setDevice(newDevice);
 					sid.setSID(oneSID.getValue());				
 				}
 			}

@@ -4,7 +4,7 @@ public class Software{
 	
 	private int idSoftware;
 	private String name;
-	private String manufacturer;
+//	private String manufacturer;
 	private String version;
 	
 	private Device device;
@@ -12,9 +12,9 @@ public class Software{
 	public Software(){
 	}
 	
-	public Software(String name, String manufacturer, String version){
+	public Software(String name, String version){
 		this.name = name;
-		this.manufacturer = manufacturer;
+//		this.manufacturer = manufacturer;
 		this.version = version;
 	}
 	
@@ -39,12 +39,12 @@ public class Software{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getManufacturer() {
-		return manufacturer;
-	}
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
+//	public String getManufacturer() {
+//		return manufacturer;
+//	}
+//	public void setManufacturer(String manufacturer) {
+//		this.manufacturer = manufacturer;
+//	}
 	public String getVersion() {
 		return version;
 	}

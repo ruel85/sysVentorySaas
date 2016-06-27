@@ -10,7 +10,7 @@
 <!--         <property name="connection.username">SysVentoryAdmin</property> -->
 <!--         <property name="connection.password">vdjjmf#n$ri7cr!?+RX7ZVbY5</property> -->
         
-        <property name="connection.url">jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas03?useSSL=false&amp;serverTimezone=Europe/Paris</property>
+        <property name="connection.url">jdbc:mysql://ruelholderegger.ch:3306/SysVentorySaas04?useSSL=false&amp;serverTimezone=Europe/Paris</property>
         <property name="connection.username">SysVentoryAdmin</property>        
         <property name="connection.password">vdjjmf#n$ri7cr!?+RX7ZVbY5</property>
 
