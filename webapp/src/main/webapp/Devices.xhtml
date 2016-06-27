@@ -50,9 +50,11 @@
 				<f:facet name="header">
 					<h:outputText value="Gerätedetails" />
 				</f:facet>
-				<b:navCommandLink value="Details" icon="list" look="primary"
-					action="#{deviceInfos.getDeviceInfosByDevice(device.idDevice)}"
-					href="DeviceInfos" />
+				<b:listLinks>
+					<b:navCommandLink value="Details" icon="list" look="primary"
+						action="#{deviceInfos.getDeviceInfosByDevice(device.idDevice)}"
+						href="DeviceInfos" />
+				</b:listLinks>
 			</h:column>
 		</b:dataTable>
 	</h:form>

@@ -49,10 +49,11 @@
 				<f:facet name="header">
 					<h:outputText value="Geräte" />
 				</f:facet>
-				<h:outputText></h:outputText>
-				<b:navCommandLink value="Details" icon="list" look="primary"
-					action="#{devices.getDevicesByScanJob(scan.idScanJob)}"
-					href="Devices"></b:navCommandLink>
+				<b:listLinks>
+					<b:navCommandLink value="Details" icon="list" look="primary"
+						action="#{devices.getDevicesByScanJob(scan.idScanJob)}"
+						href="Devices"></b:navCommandLink>
+				</b:listLinks>
 			</h:column>
 		</b:dataTable>
 	</h:form>

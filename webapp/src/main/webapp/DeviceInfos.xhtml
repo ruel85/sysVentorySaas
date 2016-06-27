@@ -12,7 +12,7 @@
 	<h:form>
 		<h:commandButton action="Devices" value="Zurück zu Devices"
 			look="primary" icon="chevron-left" />
-		<p>Detailinformationen zum Device</p>
+		<p>Gerätedetails</p>
 		<b:panel title="Interfaces" look="primary">
 			<b:dataTable value="#{deviceInfos.interfaces}" var="netInterface"
 				id="allInterfaces" styleClass="table table-striped table-bordered"
@@ -68,74 +68,87 @@
 			</b:dataTable>
 		</b:panel>
 		<b:panel title="Drucker" look="primary" collapsible="true">
-			<b:dataTable value="#{deviceInfos.interfaces}" var="netInterface"
+			<b:dataTable value="#{deviceInfos.printers}" var="printer"
 				id="allPrinter" styleClass="table table-striped table-bordered"
 				style="width:100%" multi-column-search="true">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Name" />
 					</f:facet>
-					<h:outputText value="#{netInterface.name}" />
+					<h:outputText value="#{printer.name}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="DHCP" />
+						<h:outputText value="Beschreibung" />
 					</f:facet>
-					<h:outputText value="#{netInterface.dhcp}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Subnet" />
-					</f:facet>
-					<h:outputText value="#{netInterface.subnet}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Gateway" />
-					</f:facet>
-					<h:outputText value="#{netInterface.gateway}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Typ" />
-					</f:facet>
-					<h:outputText value="#{netInterface.macAddress}" />
+					<h:outputText value="#{printer.description}" />
 				</h:column>
 			</b:dataTable>
 		</b:panel>
 		<b:panel title="Drucker-Treiber" look="primary" collapsible="true">
-			<b:dataTable value="#{deviceInfos.interfaces}" var="netInterface"
-				id="allPrinterDrivers" styleClass="table table-striped table-bordered"
+			<b:dataTable value="#{deviceInfos.printerDrivers}" var="driver"
+				id="allPrinterDrivers"
+				styleClass="table table-striped table-bordered" style="width:100%"
+				multi-column-search="true">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{driver.name}" />
+				</h:column>
+			</b:dataTable>
+		</b:panel>
+		<b:panel title="Prozessor" look="primary">
+			<b:dataTable value="#{deviceInfos.processor}" var="pro"
+				id="allProcessor" styleClass="table table-striped table-bordered"
 				style="width:100%" multi-column-search="true">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Name" />
 					</f:facet>
-					<h:outputText value="#{netInterface.name}" />
+					<h:outputText value="#{pro.name}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="DHCP" />
+						<h:outputText value="Anzahl Kerne" />
 					</f:facet>
-					<h:outputText value="#{netInterface.dhcp}" />
+					<h:outputText value="#{pro.cores}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Subnet" />
+						<h:outputText value="Takt" />
 					</f:facet>
-					<h:outputText value="#{netInterface.subnet}" />
+					<h:outputText value="#{pro.frequency}" />
+				</h:column>
+			</b:dataTable>
+		</b:panel>
+		<b:panel title="SID" look="primary">
+			<b:dataTable value="#{deviceInfos.sid}" var="s" id="allSID"
+				styleClass="table table-striped table-bordered" style="width:100%"
+				multi-column-search="true">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="SID" />
+					</f:facet>
+					<h:outputText value="#{s.SID}" />
+				</h:column>
+			</b:dataTable>
+		</b:panel>
+		<b:panel title="Software" look="primary">
+			<b:dataTable value="#{deviceInfos.software}" var="soft"
+				id="allSoftware" styleClass="table table-striped table-bordered"
+				style="width:100%" multi-column-search="true">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{soft.name}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Gateway" />
+						<h:outputText value="Version" />
 					</f:facet>
-					<h:outputText value="#{netInterface.gateway}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Typ" />
-					</f:facet>
-					<h:outputText value="#{netInterface.macAddress}" />
+					<h:outputText value="#{soft.version}" />
 				</h:column>
 			</b:dataTable>
 		</b:panel>

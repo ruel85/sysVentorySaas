@@ -1,9 +1,13 @@
 package ch.zbw.sysVentorySaas.App.DataAccessObject;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
+import ch.zbw.sysVentorySaas.App.model.Printer;
 import ch.zbw.sysVentorySaas.App.model.PrinterDriver;
 
 public class PrinterDriverDAO {
@@ -22,6 +26,16 @@ public class PrinterDriverDAO {
 		newObject = (PrinterDriver) session.get(PrinterDriver.class, id);
 		transaction.commit();
 		return newObject;
+	}
+	
+	public static List<PrinterDriver> getPrinterDriverByIdDevice(int idDevice){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from PrinterDriver where idDevice = :idDevice");
+		query.setParameter("idDevice", idDevice);
+		List<PrinterDriver> printerDriver = query.list();
+		session.getTransaction().commit();
+		return printerDriver;	
 	}
 	
 	public static PrinterDriver deletePrinterDriver(PrinterDriver printerDriver)
