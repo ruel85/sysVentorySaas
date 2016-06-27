@@ -33,13 +33,13 @@
 		<b:container>
 			<b:panelGrid colSpans="2,10">
 				<h:outputLabel value="Netzwerkname" />
-				<b:inputText span="8" value="#{scanSettingBean.networkName}" />
-				<h:outputLabel value="Ip-Range Anfang" />
+				<b:inputText span="10" value="#{scanSettingBean.networkName}" />
+				<h:outputLabel value="IP-Range Anfang" />
 				<b:inputText span="10" value="#{scanSettingBean.ipStart}" />
 				<h:outputLabel value="IP-Range Ende" />
-				<b:inputText value="#{scanSettingBean.ipEnd}" />
-				<h:outputLabel value="Intervall in m" />
-				<b:inputText value="#{scanSettingBean.intervallHours}" />
+				<b:inputText span="10" value="#{scanSettingBean.ipEnd}" />
+				<h:outputLabel value="Intervall [m]" />
+				<b:inputText span="10" value="#{scanSettingBean.intervallHours}" />
 			</b:panelGrid>
 			<b:buttonGroup>
 				<b:commandButton value="Speichern" look="primary" action="#{scanSettingBean.saveSettings}"></b:commandButton>
