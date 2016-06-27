@@ -1,9 +1,13 @@
 package ch.zbw.sysVentorySaas.App.DataAccessObject;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import ch.zbw.sysVentorySaas.App.helpers.HibernateUtil;
+import ch.zbw.sysVentorySaas.App.model.Device;
 import ch.zbw.sysVentorySaas.App.model.NetworkInterface;
 import ch.zbw.sysVentorySaas.App.model.OperatingSystem;
 
@@ -24,6 +28,17 @@ public class NetworkInterfaceDAO {
 		newObject = (NetworkInterface) session.get(NetworkInterface.class, id);
 		transaction.commit();
 		return newObject;
+	}
+	
+	public static List<NetworkInterface> getNetworkInterfacesByDeviceId(int idDevice)
+	{
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from NetworkInterface where idDevice = :idDevice");
+		query.setParameter("idDevice", idDevice);
+		List<NetworkInterface> interfaces = query.list();
+		session.getTransaction().commit();
+		return interfaces;	
 	}
 	
 	public static NetworkInterface deleteNetworkInterface(NetworkInterface networkInterface)

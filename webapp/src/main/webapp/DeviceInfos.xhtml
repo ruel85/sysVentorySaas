@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Detailinformationen zum Device</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:commandButton action="Devices" value="Zurück zu Devices"
+			look="primary" icon="chevron-left" />
+		<p>Detailinformationen zum Device</p>
+		<b:panel title="Interfaces" look="primary">
+			<b:dataTable value="#{deviceInfos.interfaces}" var="netInterface"
+				id="allInterfaces" styleClass="table table-striped table-bordered"
+				style="width:100%" multi-column-search="true">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{netInterface.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="DHCP" />
+					</f:facet>
+					<h:outputText value="#{netInterface.dhcp}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Subnet" />
+					</f:facet>
+					<h:outputText value="#{netInterface.subnet}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Gateway" />
+					</f:facet>
+					<h:outputText value="#{netInterface.gateway}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Typ" />
+					</f:facet>
+					<h:outputText value="#{netInterface.macAddress}" />
+				</h:column>
+			</b:dataTable>
+		</b:panel>
+		<b:panel title="Betriebssysteme" look="primary">
+			<b:dataTable value="#{deviceInfos.operatingSystem}" var="system"
+				id="allSystems" styleClass="table table-striped table-bordered"
+				style="width:100%" multi-column-search="true">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{system.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Architektur" />
+					</f:facet>
+					<h:outputText value="#{system.architecture}" />
+				</h:column>
+			</b:dataTable>
+		</b:panel>
+		<b:panel title="Drucker" look="primary" collapsible="true">
+			<b:dataTable value="#{deviceInfos.interfaces}" var="netInterface"
+				id="allPrinter" styleClass="table table-striped table-bordered"
+				style="width:100%" multi-column-search="true">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{netInterface.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="DHCP" />
+					</f:facet>
+					<h:outputText value="#{netInterface.dhcp}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Subnet" />
+					</f:facet>
+					<h:outputText value="#{netInterface.subnet}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Gateway" />
+					</f:facet>
+					<h:outputText value="#{netInterface.gateway}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Typ" />
+					</f:facet>
+					<h:outputText value="#{netInterface.macAddress}" />
+				</h:column>
+			</b:dataTable>
+		</b:panel>
+		<b:panel title="Drucker-Treiber" look="primary" collapsible="true">
+			<b:dataTable value="#{deviceInfos.interfaces}" var="netInterface"
+				id="allPrinterDrivers" styleClass="table table-striped table-bordered"
+				style="width:100%" multi-column-search="true">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{netInterface.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="DHCP" />
+					</f:facet>
+					<h:outputText value="#{netInterface.dhcp}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Subnet" />
+					</f:facet>
+					<h:outputText value="#{netInterface.subnet}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Gateway" />
+					</f:facet>
+					<h:outputText value="#{netInterface.gateway}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Typ" />
+					</f:facet>
+					<h:outputText value="#{netInterface.macAddress}" />
+				</h:column>
+			</b:dataTable>
+		</b:panel>
+	</h:form>
+</h:body>
+</html>

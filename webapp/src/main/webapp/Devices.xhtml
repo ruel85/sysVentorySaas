@@ -6,12 +6,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>Devices</title>
+	<title>Geräte</title>
 </h:head>
 <h:body>
 	<h:form>
-		<h:commandButton action="Scans" value="Zurück zu Scans" look="primary" icon="chevron-left" />
-		<p>Devices</p>
+		<h:commandButton action="Scans" value="Zurück zu Scans" look="primary"
+			icon="chevron-left" />
+		<p>Geräte</p>
 		<b:dataTable value="#{devices.devices}" var="device" id="allDevices"
 			styleClass="table table-striped table-bordered" style="width:100%"
 			multi-column-search="true">
@@ -44,6 +45,14 @@
 					<h:outputText value="Typ" />
 				</f:facet>
 				<h:outputText value="#{device.systemtype}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Gerätedetails" />
+				</f:facet>
+				<b:navCommandLink value="Details" icon="list" look="primary"
+					action="#{deviceInfos.getDeviceInfosByDevice(device.idDevice)}"
+					href="DeviceInfos" />
 			</h:column>
 		</b:dataTable>
 	</h:form>

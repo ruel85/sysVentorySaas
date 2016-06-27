@@ -46,8 +46,13 @@
 				<h:outputText value="#{scan.jobStatus}" />
 			</h:column>
 			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Geräte" />
+				</f:facet>
+				<h:outputText></h:outputText>
 				<b:navCommandLink value="Details" icon="list" look="primary"
-					action="#{devices.getDevicesByScanJob(scan.idScanJob)}" href="Devices"></b:navCommandLink>
+					action="#{devices.getDevicesByScanJob(scan.idScanJob)}"
+					href="Devices"></b:navCommandLink>
 			</h:column>
 		</b:dataTable>
 	</h:form>
