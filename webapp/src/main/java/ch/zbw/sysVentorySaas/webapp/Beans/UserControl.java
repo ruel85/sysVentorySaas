@@ -27,9 +27,6 @@ public class UserControl implements Serializable {
 	private String username;
 	private String email;
 	private int idUser;
-	private UIInput tmpUsername;
-	private UIInput tmpEmail;
-	private UIInput tmpPassword;
 	private User user;
 
 	private List<User> users;
@@ -70,14 +67,6 @@ public class UserControl implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public UIInput getTmpUsername() {
-		return tmpUsername;
-	}
-
-	public void setTmpUsername(UIInput tmpUser) {
-		this.tmpUsername = tmpUser;
 	}
 
 	// list of all users
@@ -125,22 +114,6 @@ public class UserControl implements Serializable {
 			}
 			UserDAO.saveUser(user);
 		}
-	}
-
-	public UIInput getTmpEmail() {
-		return tmpEmail;
-	}
-
-	public void setTmpEmail(UIInput tmpEmail) {
-		this.tmpEmail = tmpEmail;
-	}
-
-	public UIInput getTmpPassword() {
-		return tmpPassword;
-	}
-
-	public void setTmpPassword(UIInput tmpPassword) {
-		this.tmpPassword = tmpPassword;
 	}
 
 	public void setUser(User user) {

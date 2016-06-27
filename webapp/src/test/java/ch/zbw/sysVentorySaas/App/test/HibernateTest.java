@@ -96,7 +96,7 @@ public class HibernateTest {
 	@Test
 	public void TestSoftware_CRUD()
 	{
-		ScanJob scanjob = ScanJobDAO.getAllScanJobs().get(0);
+		ScanJob scanjob = ScanJobDAO.getAllScanJobs(3).get(0);
 		Device newDevice = new Device("Juhuu", "ZbW", "654658", "1654.65.5645", "6544", "65461s");
 		newDevice.setScanJob(scanjob);
 		DeviceDAO.saveDevice(newDevice);
@@ -182,8 +182,7 @@ public class HibernateTest {
 	
 	@Test
 	public void TestDevice_CRUD(){
-		
-		ScanJob scanJob = ScanJobDAO.getAllScanJobs().get(0);
+		ScanJob scanJob = ScanJobDAO.getAllScanJobs(3).get(0);
 		
 		Device dev = new Device("Desktop PC", "DELL", "50-1A-C5-F4-C7-BB", "192.168.2.21", "65434", "x64-based PC");
 		dev.setScanJob(scanJob);
@@ -351,7 +350,7 @@ public class HibernateTest {
 		SID sid = new SID("S-1-5-21-2056415622-1170722248-999543400-501");
 		
 		Device d = new Device("Surface 4", "Windows", "", "", "", "");
-		ScanJob sc = (ScanJobDAO.getAllScanJobs().get(0));		
+		ScanJob sc = (ScanJobDAO.getAllScanJobs(3).get(0));		
 		d.setScanJob(sc);
 		d = DeviceDAO.saveDevice(d);
 		sid.setDevice(d);

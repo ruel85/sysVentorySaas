@@ -25,7 +25,8 @@
 	</b:tabLinks>
 	<h:form>
 		<b:dataTable value="#{scans.scans}" var="scan" id="allScans"
-			styleClass="table table-striped table-bordered" style="width:100%" multi-column-search="true">
+			styleClass="table table-striped table-bordered" style="width:100%"
+			multi-column-search="true">
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Startzeit" />
@@ -40,15 +41,13 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Statusbeschreibung" />
-				</f:facet>
-				<h:outputText value="#{scan.status.description}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
 					<h:outputText value="Statusname" />
 				</f:facet>
-				<h:outputText value="#{scan.status.name}" />
+				<h:outputText value="#{scan.jobStatus}" />
+			</h:column>
+			<h:column>
+				<b:navCommandLink value="Details" icon="list" look="primary"
+					action="#{devices.getDevicesByScanJob(scan.idScanJob)}" href="Devices"></b:navCommandLink>
 			</h:column>
 		</b:dataTable>
 	</h:form>

@@ -32,15 +32,13 @@
 				<f:facet name="header">
 					<h:outputText value="Benutzername" />
 				</f:facet>
-				<b:inputText id="username" value="#{user.username}"
-					binding="#{userControl.tmpUsername}" />
+				<b:inputText id="username" value="#{user.username}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
 					<h:outputText value="Passwort" />
 				</f:facet>
-				<b:inputSecret value="#{user.password}"
-					binding="#{userControl.tmpPassword}" />
+				<b:inputSecret value="#{user.password}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
@@ -58,8 +56,8 @@
 		</b:dataTable>
 		<b:commandButton look="Primary" icon="save"
 			value="Änderungen Speichern" action="#{userControl.saveChanges}"></b:commandButton>
-		<b:commandButton look="Primary" icon="user" value="Benutzer hinzufügen"
-			action="#{userControl.addUser}"></b:commandButton>
+		<b:commandButton look="Primary" icon="user"
+			value="Benutzer hinzufügen" action="#{userControl.addUser}"></b:commandButton>
 	</h:form>
 </h:body>
 </html>
