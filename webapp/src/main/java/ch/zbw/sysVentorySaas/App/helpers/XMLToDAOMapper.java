@@ -157,6 +157,7 @@ public class XMLToDAOMapper {
 			}
 			
 			newScanJob.setEndTime(ZonedDateTime.now().toString());
+			newScanJob.setJobStatus(JobStatus.Erledigt);
 			ScanJobDAO.saveScanJob(newScanJob);
 		
 		} catch (Exception e) {
