@@ -8,7 +8,6 @@
 	<navigation-rule>
 		<from-view-id>/Login.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{adminBean.checkUserRights}</from-action>
 			<from-outcome>Admin</from-outcome>
 			<to-view-id>/Admin.xhtml</to-view-id>			
 		</navigation-case>
@@ -41,6 +40,14 @@
 			<to-view-id>/ScanSetting.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/Scans.xhtml</from-view-id>
+        <navigation-case>
+			<from-outcome>Devices</from-outcome>
+			<to-view-id>/Devices.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
  <application>
        <resource-handler>org.omnifaces.resourcehandler.CombinedResourceHandler</resource-handler>
    </application>

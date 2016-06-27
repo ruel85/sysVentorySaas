@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>Scans</title>
+	<title>Devices</title>
 </h:head>
 <h:body>
 	<b:tabLinks>
@@ -24,30 +24,38 @@
 		<b:navCommandLink value="Logout" action="#{login.logout}" href="Login"></b:navCommandLink>
 	</b:tabLinks>
 	<h:form>
-		<b:dataTable value="#{scans.scans}" var="scan" id="allScans"
+		<b:dataTable value="#{devices.devices}" var="device" id="allDevices"
 			styleClass="table table-striped table-bordered" style="width:100%"
 			multi-column-search="true">
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Startzeit" />
+					<h:outputText value="Name" />
 				</f:facet>
-				<h:outputText value="#{scan.startTime}" />
+				<h:outputText value="#{device.name}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Endzeit" />
+					<h:outputText value="Macadresse" />
 				</f:facet>
-				<h:outputText value="#{scan.endTime}" />
+				<h:outputText value="#{device.macAddress}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Statusname" />
+					<h:outputText value="IP-Adresse" />
 				</f:facet>
-				<h:outputText value="#{scan.jobStatus}" />
+				<h:outputText value="#{device.ipAddress}" />
 			</h:column>
 			<h:column>
-				<b:navCommandLink value="Details" icon="list" look="primary"
-					action="#{devices.getDevicesByScanJob(scan.idScanJob)}" href="Devices"></b:navCommandLink>
+				<f:facet name="header">
+					<h:outputText value="Speicher" />
+				</f:facet>
+				<h:outputText value="#{device.memory}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Typ" />
+				</f:facet>
+				<h:outputText value="#{device.systemtype}" />
 			</h:column>
 		</b:dataTable>
 	</h:form>
