@@ -134,12 +134,13 @@ public class HibernateTest {
 	@Test
 	public void TestProcessor_CRUD()
 	{
-		Processor pr = new Processor("i7-465U", "Intel(R)",  4, "2.30 GHz");
+		Processor pr = new Processor("Intel i7-465U", 4, "2.30 GHz");
+		pr.setDevice(DeviceDAO.getDeviceById(1));
 		Processor newProcessor = ProcessorDAO.saveProcessor(pr);
 		
 		Processor prSelected = ProcessorDAO.getProcessorById(newProcessor.getIdProcessor());
-		assertEquals("i7-465U", prSelected.getName());
-		assertEquals("Intel(R)", prSelected.getManufacturer());
+		assertEquals("Intel i7-465U", prSelected.getName());
+//		assertEquals("Intel(R)", prSelected.getManufacturer());
 		assertEquals(4, prSelected.getCores());
 		assertEquals("2.30 GHz", prSelected.getFrequency());
 		
@@ -150,6 +151,7 @@ public class HibernateTest {
 	@Test
 	public void TestPrinter_CRUD(){
 		Printer p = new Printer("Canon", "Farbdrucker Zimmer links");
+		p.setDevice(DeviceDAO.getDeviceById(1));
 		Printer newPrinter = PrinterDAO.savePrinter(p);
 		
 		Printer pSelected = PrinterDAO.getPrinterById(newPrinter.getIdPrinter());
@@ -164,6 +166,7 @@ public class HibernateTest {
 	public void TestNetworkInterface_CRUD(){
 		NetworkInterface ni = new NetworkInterface(
 				"Marvell AVASTAR Wireless-AC Network Controller","10.0.20.17", "255.255.255.0", "10.1.53.1", "34:E6:D7:4B:AC:A1s");
+		ni.setDevice(DeviceDAO.getDeviceById(1));
 		NetworkInterfaceDAO.saveNetworkInterface(ni);
 		
 		NetworkInterface niSelected = NetworkInterfaceDAO.getNetworkInterfaceById(ni.getIdNetworkInterface());
@@ -361,7 +364,10 @@ public class HibernateTest {
 	@Test
 	public void Test_PrinterDriver()
 	{
-		PrinterDriver printerDriver = PrinterDriverDAO.savePrinterDriver(new PrinterDriver("PDF-XChange 4.0,3,Windows x64"));
+		PrinterDriver printerDriver = new PrinterDriver("PDF-XChange 4.0,3,Windows x64");
+		printerDriver.setDevice(DeviceDAO.getDeviceById(1));
+		printerDriver = PrinterDriverDAO.savePrinterDriver(printerDriver);
+		
 		PrinterDriver printerDriverSelected = PrinterDriverDAO.getPrinterDriverById(printerDriver.getIdPrinterDriver());
 		assertEquals("PDF-XChange 4.0,3,Windows x64", printerDriverSelected.getName());
 		

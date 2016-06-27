@@ -16,6 +16,10 @@ public class Device {
 	private Set<Software> software;
 	private Set<OperatingSystem> operatingSystem;
 	private Set<SID> sid;
+	private Set<Processor> processors;
+	private Set<Printer> printers;
+	private Set<NetworkInterface> networkInterfaces;
+	private Set<PrinterDriver> printerDrivers;
 
 	public Device(String name, String manufacturer, String macAddress, String ipAddress, String memory, String systemtype) {
 		this.name=name;
@@ -28,6 +32,38 @@ public class Device {
 	
 	public Device()
 	{
+	}
+
+	public Set<PrinterDriver> getPrinterDrivers() {
+		return printerDrivers;
+	}
+
+	public void setPrinterDrivers(Set<PrinterDriver> printerDrivers) {
+		this.printerDrivers = printerDrivers;
+	}
+
+	public Set<Processor> getProcessors() {
+		return processors;
+	}
+
+	public void setProcessors(Set<Processor> processors) {
+		this.processors = processors;
+	}
+
+	public Set<Printer> getPrinters() {
+		return printers;
+	}
+
+	public void setPrinters(Set<Printer> printers) {
+		this.printers = printers;
+	}
+
+	public Set<NetworkInterface> getNetworkInterfaces() {
+		return networkInterfaces;
+	}
+
+	public void setNetworkInterfaces(Set<NetworkInterface> networkInterfaces) {
+		this.networkInterfaces = networkInterfaces;
 	}
 
 	public Set<SID> getSid() {

@@ -6,12 +6,22 @@ public class Printer {
 	private String name;
 	private String description;
 	
+	private Device device;
+	
 	public Printer(String name, String description) {
 		this.name=name;
 		this.description=description;
 	}
 	
 	public Printer(){
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
 	}
 
 	public int getIdPrinter() {

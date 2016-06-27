@@ -48,7 +48,7 @@ public static XMLParserDOM xmlParserDOM;
 		xmlParserDOM.validateXML();
 	}
 	
-	
+	@Test
 	public void TestReadDataWithJaxBUnmarshaller1() throws Throwable	{
 		
 		File fileXML = new File("Schema/computers.xml");

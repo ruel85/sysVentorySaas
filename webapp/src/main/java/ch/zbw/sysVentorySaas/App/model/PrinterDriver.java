@@ -5,10 +5,24 @@ public class PrinterDriver {
 	private int idPrinterDriver;
 	private String name;
 	
+	private Device device;
+	
 	public PrinterDriver()
 	{
 	}
 	
+	public Device getDevice() {
+		return device;
+	}
+
+
+
+	public void setDevice(Device device) {
+		this.device = device;
+	}
+
+
+
 	public PrinterDriver(String name)
 	{
 		this.name=name;

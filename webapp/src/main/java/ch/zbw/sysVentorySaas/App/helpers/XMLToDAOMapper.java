@@ -101,6 +101,7 @@ public class XMLToDAOMapper {
 				newProcessor.setName(oneComp.getProzessoren().getProzessor().getName().getValue());
 				newProcessor.setCores(oneComp.getProzessoren().getProzessor().getNoC().getValue());
 				newProcessor.setFrequency(oneComp.getProzessoren().getProzessor().getCCS().getValue().toString());
+				newProcessor.setDevice(newDevice);
 				ProcessorDAO.saveProcessor(newProcessor);
 				
 				List<Drucker> druckerList = oneComp.getPeripherie().getDruckers().getDrucker();
@@ -109,6 +110,7 @@ public class XMLToDAOMapper {
 					newPrinter = new Printer();
 					newPrinter.setName(oneDrucker.getValue());
 					newPrinter.setDescription("Keine Beschreibung vorhanden.");
+					newPrinter.setDevice(newDevice);
 					PrinterDAO.savePrinter(newPrinter);
 				}
 				
@@ -117,6 +119,7 @@ public class XMLToDAOMapper {
 				{
 					newPrinterDriver = new PrinterDriver();
 					newPrinterDriver.setName(oneDruckertreiber.getValue());
+					newPrinterDriver.setDevice(newDevice);
 					PrinterDriverDAO.savePrinterDriver(newPrinterDriver);
 				}
 
@@ -129,7 +132,7 @@ public class XMLToDAOMapper {
 					newNetworkInterface.setSubnet(oneNetzwerkKarte.getSubnetz().getValue());
 					newNetworkInterface.setGateway(oneNetzwerkKarte.getGateway().getValue());
 					newNetworkInterface.setMacAddress(oneNetzwerkKarte.getMacadresse().getValue());
-					
+					newNetworkInterface.setDevice(newDevice);
 					NetworkInterfaceDAO.saveNetworkInterface(newNetworkInterface);
 				}
 				

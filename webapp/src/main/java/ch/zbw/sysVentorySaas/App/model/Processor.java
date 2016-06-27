@@ -4,18 +4,28 @@ public class Processor {
 	
 	private int idProcessor;
 	private String name;
-	private String manufacturer;
+//	private String manufacturer;
 	private int cores;
 	private String frequency;
 
-	public Processor(String name, String manufacturer, int cores, String frequency) {
+	private Device device;
+	
+	public Processor(String name, int cores, String frequency) {
 		this.name = name;
-		this.manufacturer=manufacturer;
+//		this.manufacturer=manufacturer;
 		this.cores=cores;
 		this.frequency=frequency;
 	}
 	
 	public Processor(){
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
 	}
 
 	public int getIdProcessor() {
@@ -34,13 +44,13 @@ public class Processor {
 		this.name = name;
 	}
 
-	public String getManufacturer() {
-		return manufacturer;
-	}
-
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
+//	public String getManufacturer() {
+//		return manufacturer;
+//	}
+//
+//	public void setManufacturer(String manufacturer) {
+//		this.manufacturer = manufacturer;
+//	}
 
 	public int getCores() {
 		return cores;

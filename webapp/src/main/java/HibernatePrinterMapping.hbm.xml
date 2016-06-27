@@ -5,9 +5,15 @@
 <hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.Printer" table="printer">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Drucker</meta>
+		
 		<id name="idPrinter" type="int" column="idprinter">
 			<generator class="identity"/>
 		</id>
+		
+		<many-to-one name="device" class="ch.zbw.sysVentorySaas.App.model.Device" fetch="select">
+		<column name="idDevice" not-null="true"/>
+		</many-to-one>
+		
 		<property name="name" column="name" type="string"/>
 		<property name="description" column="description" type="string"/>
 	</class>

@@ -42,5 +42,33 @@
 			<one-to-many class="ch.zbw.sysVentorySaas.App.model.SID"/>
 		</set>
 		
+		<set name="processors" table="processor" inverse="true" fetch="select">
+			<key>
+				<column name="idProcessor" not-null="false"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Processor"/>
+		</set>
+		
+		<set name="printers" table="printer" inverse="true" fetch="select">
+			<key>
+				<column name="idPrinter" not-null="false"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.Printer"/>
+		</set>
+		
+		<set name="networkInterfaces" table="networkinterface" inverse="true" fetch="select">
+			<key>
+				<column name="idNetworkInterface" not-null="false"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.NetworkInterface"/>
+		</set>
+		
+		<set name="printerDrivers" table="printerdriver" inverse="true" fetch="select">
+			<key>
+				<column name="idPrinterDriver" not-null="false"/>
+			</key>
+			<one-to-many class="ch.zbw.sysVentorySaas.App.model.PrinterDriver"/>
+		</set>
+		
 	</class>
 </hibernate-mapping>

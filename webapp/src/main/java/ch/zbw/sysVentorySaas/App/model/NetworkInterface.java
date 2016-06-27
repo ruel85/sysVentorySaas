@@ -9,6 +9,8 @@ public class NetworkInterface {
 	private String gateway;
 	private String macAddress;
 	
+	private Device device;
+	
 	public NetworkInterface(){
 	}
 	
@@ -18,6 +20,14 @@ public class NetworkInterface {
 		this.subnet=subnet;
 		this.gateway=gateway;
 		this.macAddress=macAddress;
+	}
+
+	public Device getDevice() {
+		return device;
+	}
+
+	public void setDevice(Device device) {
+		this.device = device;
 	}
 
 	public String getDhcp() {

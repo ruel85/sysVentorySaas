@@ -5,9 +5,15 @@
 <hibernate-mapping>
 	<class name="ch.zbw.sysVentorySaas.App.model.NetworkInterface" table="networkinterface">
 		<meta attribute="class-description">Diese Klasse enthält sämtliche Details zu einem Netzwerk-Interface</meta>
+		
 		<id name="idNetworkInterface" type="int" column="idnetworkinterface">
 			<generator class="identity"/>
 		</id>
+		
+		<many-to-one name="device" class="ch.zbw.sysVentorySaas.App.model.Device" fetch="select">
+		<column name="idDevice" not-null="true"/>
+		</many-to-one>
+		
 		<property name="name" column="name" type="string"/>
 		<property name="dhcp" column="dhcp" type="string"/>
 		<property name="subnet" column="subnet" type="string"/>
