@@ -34,7 +34,8 @@ public class User {
 			this.uID = uID;
 
 		this.username = username;
-		this.password = passwordEncryptor.encryptPassword(password);
+		//this.password = passwordEncryptor.encryptPassword(password);
+		this.password = password;
 		this.email = email;
 		this.groupType = groupType;
 	}
@@ -88,8 +89,9 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		String encryptedPassword = this.passwordEncryptor.encryptPassword(password);
-		this.password = encryptedPassword;
+		//String encryptedPassword = this.passwordEncryptor.encryptPassword(password);
+		//this.password = encryptedPassword;
+		this.password = password;
 	}
 
 	public String getEmail() {
