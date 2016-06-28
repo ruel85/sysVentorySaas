@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<computers stamp="2016-06-26 23:53:15">
+  <computer>
+    <System>
+      <computername value="WINSERVER2012" />
+      <systemtype value="x64-based PC" />
+      <Memory value="7515721728" />
+      <Betriebssystem value="Microsoft Windows Server 2012 R2 Standard Evaluation" />
+      <Buildnummer value="9600" />
+      <OSArchitektur value="64-bit" />
+    </System>
+    <Peripherie>
+      <Druckers>
+        <Drucker value="Fax (redirected 2)" />
+        <Drucker value="Microsoft XPS Document Writer (redirected 2)" />
+        <Drucker value="Brother DCP-8110DN Printer (redirected 2)" />
+        <Drucker value="Microsoft XPS Document Writer" />
+      </Druckers>
+      <Druckertreibers>
+        <Druckertreiber value="Microsoft XPS Document Writer v4,4,Windows x64" />
+        <Druckertreiber value="Brother Laser Type2 Class Driver,4,Windows x64" />
+        <Druckertreiber value="Remote Desktop Easy Print,3,Windows x64" />
+        <Druckertreiber value="Microsoft Shared Fax Driver,3,Windows x64" />
+        <Druckertreiber value="Microsoft enhanced Point and Print compatibility driver,3,Windows x64" />
+        <Druckertreiber value="Microsoft enhanced Point and Print compatibility driver,3,Windows NT x86" />
+      </Druckertreibers>
+    </Peripherie>
+    <Netzwerkkonfiguration>
+      <NetzwerkKarte>
+        <Beschreibung value="Intel(R) 82574L Gigabit Network Connection" />
+        <Gateway value="192.168.1.1" />
+        <DHCP value="" />
+        <IPAdresse value="192.168.1.10" />
+        <Subnetz value="255.255.255.0" />
+        <Macadresse value="00:0C:29:9F:B3:A5" />
+      </NetzwerkKarte>
+    </Netzwerkkonfiguration>
+    <Programme>
+      <Programm>
+        <Name value="VMware Tools" />
+        <Version value="10.0.6.3560309" />
+      </Programm>
+      <Programm>
+        <Name value="Java 8 Update 91" />
+        <Version value="8.0.910.15" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x64 9.0.30729.6161" />
+        <Version value="9.0.30729.6161" />
+      </Programm>
+      <Programm>
+        <Name value="Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729.4148" />
+        <Version value="9.0.30729.4148" />
+      </Programm>
+      <Programm>
+        <Name value="Java Auto Updater" />
+        <Version value="2.8.91.15" />
+      </Programm>
+    </Programme>
+    <Prozessoren>
+      <Prozessor>
+        <Name value="Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz" />
+        <Beschreibung value="Intel64 Family 6 Model 94 Stepping 3" />
+        <NoC value="2" />
+        <CCS value="2904" />
+      </Prozessor>
+      <Prozessor>
+        <Name value="Intel(R) Core(TM) i7-6920HQ CPU @ 2.90GHz" />
+        <Beschreibung value="Intel64 Family 6 Model 94 Stepping 3" />
+        <NoC value="2" />
+        <CCS value="2904" />
+      </Prozessor>
+    </Prozessoren>
+    <SIDS>
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-500" />
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-501" />
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-502" />
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-1107" />
+      <SID value="S-1-5-21-2433250565-1671799162-3761771349-1110" />
+    </SIDS>
+  </computer>
+  <computer>
+    <System>
+      <computername value="WINSERVER2012" />
+      <systemtype value="x64-based PC" />
+      <Memory value="7515721728" />
+      <Betriebssystem value="Microsoft Windows Server 2012 R2 Standard Evaluation" />
+      <Buildnummer value="9600" />
+      <OSArchitektur value="64-bit" />
+    </System>
+    <Peripherie>
+      <Druckers />
+      <Druckertreibers />
+    </Peripherie>
+    <Netzwerkkonfiguration />
+    <Programme />
+    <Prozessoren />
+    <SIDS />
+  </computer>
+  <computer>
+    <System>
+      <computername value="WINSERVER2012" />
+      <systemtype value="x64-based PC" />
+      <Memory value="7515721728" />
+      <Betriebssystem value="Microsoft Windows Server 2012 R2 Standard Evaluation" />
+      <Buildnummer value="9600" />
+      <OSArchitektur value="64-bit" />
+    </System>
+    <Peripherie>
+      <Druckers />
+      <Druckertreibers />
+    </Peripherie>
+    <Netzwerkkonfiguration />
+    <Programme />
+    <Prozessoren />
+    <SIDS />
+  </computer>
+  <computer>
+    <System>
+      <computername value="WINSERVER2012" />
+      <systemtype value="x64-based PC" />
+      <Memory value="7515721728" />
+      <Betriebssystem value="Microsoft Windows Server 2012 R2 Standard Evaluation" />
+      <Buildnummer value="9600" />
+      <OSArchitektur value="64-bit" />
+    </System>
+    <Peripherie>
+      <Druckers />
+      <Druckertreibers />
+    </Peripherie>
+    <Netzwerkkonfiguration />
+    <Programme />
+    <Prozessoren />
+    <SIDS />
+  </computer>
+  <computer>
+    <System>
+      <computername value="WINSERVER2012" />
+      <systemtype value="x64-based PC" />
+      <Memory value="7515721728" />
+      <Betriebssystem value="Microsoft Windows Server 2012 R2 Standard Evaluation" />
+      <Buildnummer value="9600" />
+      <OSArchitektur value="64-bit" />
+    </System>
+    <Peripherie>
+      <Druckers />
+      <Druckertreibers />
+    </Peripherie>
+    <Netzwerkkonfiguration />
+    <Programme />
+    <Prozessoren />
+    <SIDS />
+  </computer>
+</computers>

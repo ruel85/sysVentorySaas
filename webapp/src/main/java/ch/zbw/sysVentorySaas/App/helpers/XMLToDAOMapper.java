@@ -5,7 +5,12 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.Timestamp;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -58,11 +63,20 @@ public class XMLToDAOMapper {
 		final JAXBContext jaxbContext= JAXBContext.newInstance(ObjectFactory.class);
 		Unmarshaller jaxbUnmarshaller=jaxbContext.createUnmarshaller();
 		
+		DateTimeFormatter format = DateTimeFormatter
+		        .ofPattern("d MMM yyyy  hh:mm a");
+		ZoneId zone = ZoneId.of("Europe/Paris");
+		LocalDateTime dateTime = LocalDateTime.of(LocalDate.now(zone), LocalTime.now(zone));
+		
 		if(scanSetting != null && scanSetting.getIdCompany() != 0)
 		{
 			scanSetting.setTimeToScan(false);
 			ScanSettingDAO.saveScanSetting(scanSetting);
 		}
+		
+		newScanJob = new ScanJob(dateTime.format(format), "", JobStatus.Erstellt
+				, scanSetting.getNetworkName(), scanSetting.getIpStart(), scanSetting.getIpEnd(), scanSetting.getIntervallMinutes(),scanSetting);
+		newScanJob = ScanJobDAO.saveScanJob(newScanJob);
 		
 		if(i == null)
 			throw new Exception("Kein XML-Daten vorhanden!");
@@ -71,12 +85,10 @@ public class XMLToDAOMapper {
 		List<Computer> comps = comp.getComputer();		
 		if(comps == null || comps.size() == 0)
 			throw new Throwable("Keine Computers vorhanden!");
-
-		newScanJob = new ScanJob(ZonedDateTime.now().toString(),"", JobStatus.InVerarbeitung
-				, scanSetting.getNetworkName(), scanSetting.getIpStart(), scanSetting.getIpEnd(), scanSetting.getIntervallMinutes(),scanSetting);
-		newScanJob = ScanJobDAO.saveScanJob(newScanJob);
 		
 		try {
+			newScanJob.setJobStatus(JobStatus.InVerarbeitung);
+			newScanJob = ScanJobDAO.saveScanJob(newScanJob);
 			for(Computer oneComp : comps)
 			{
 				newDevice = new Device();
@@ -156,11 +168,12 @@ public class XMLToDAOMapper {
 				}
 			}
 			
-			newScanJob.setEndTime(ZonedDateTime.now().toString());
+			newScanJob.setEndTime(dateTime.format(format));
 			newScanJob.setJobStatus(JobStatus.Erledigt);
 			ScanJobDAO.saveScanJob(newScanJob);
 		
 		} catch (Exception e) {
+			newScanJob.setEndTime(dateTime.format(format));
 			newScanJob.setJobStatus(JobStatus.Fehler);
 			ScanJobDAO.saveScanJob(newScanJob);
 			throw new Exception("Fehler beim Einlesen des XML-Results.");

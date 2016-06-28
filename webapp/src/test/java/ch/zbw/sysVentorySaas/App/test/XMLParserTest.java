@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.validation.executable.ValidateOnExecution;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.ParserConfigurationException;
@@ -62,7 +63,7 @@ public static XMLParserDOM xmlParserDOM;
 		
 		File fileXML = new File("Schema/computers2.xml");
 		FileInputStream fi = new FileInputStream(fileXML);
-		ScanSetting scanSetting = ScanSettingDAO.getAllScanSettings().get(0);
+		ScanSetting scanSetting = ScanSettingDAO.getScanSettingById(51);
 		XMLToDAOMapper.importData(fi, scanSetting);
 	}
 	
@@ -71,7 +72,16 @@ public static XMLParserDOM xmlParserDOM;
 		
 		File fileXML = new File("Schema/computers3.xml");
 		FileInputStream fi = new FileInputStream(fileXML);
-		ScanSetting scanSetting = ScanSettingDAO.getAllScanSettings().get(0);
+		ScanSetting scanSetting = ScanSettingDAO.getScanSettingById(51);
 		XMLToDAOMapper.importData(fi, scanSetting);
 	}
+	
+	@Test(expected=Throwable.class)
+	public void TestReadDataWithJaxBUnmarshaller4_Error() throws Throwable	{
+		
+		File fileXML = new File("Schema/computers_error.xml");
+		FileInputStream fi = new FileInputStream(fileXML);
+		ScanSetting scanSetting = ScanSettingDAO.getScanSettingById(51);
+		XMLToDAOMapper.importData(fi, scanSetting);
+	}	
 }
