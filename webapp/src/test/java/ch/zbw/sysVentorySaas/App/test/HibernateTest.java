@@ -228,7 +228,7 @@ public class HibernateTest {
 		
 		User userSelected = userList.get(0);
 		assertEquals("ruel85", userSelected.getUsername());
-		assertTrue(encryptor.checkPassword("12345", userSelected.getPassword()));
+		//assertTrue(encryptor.checkPassword("12345", userSelected.getPassword()));
 		assertEquals("ruel.holderegger@gmx.ch", userSelected.getEmail());
 		assertEquals(GroupType.SysVentoryAdmin, userSelected.getGroupType());
 		
